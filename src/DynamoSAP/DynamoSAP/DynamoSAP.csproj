@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,12 +25,16 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ProtoGeometry">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Dynamo 0.7\ProtoGeometry.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="ProtoInterface">
       <HintPath>..\..\..\..\..\..\..\..\Program Files\Dynamo 0.7\ProtoInterface.dll</HintPath>
       <Private>False</Private>
@@ -45,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Structure\DS_Frame.cs" />
+    <Compile Include="Structure\Frame.cs" />
     <Compile Include="Utilities\SElement.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,7 +57,13 @@
     <Folder Include="Assembly\" />
     <Folder Include="Results\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="DynamoSAP_DynamoCustomization.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(ProjectDir)\DynamoSAP_DynamoCustomization.xml" "$(TargetDir)\DynamoSAP_DynamoCustomization.xml"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

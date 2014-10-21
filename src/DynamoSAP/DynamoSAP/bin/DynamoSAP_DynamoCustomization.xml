@@ -1,0 +1,11 @@
+﻿<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>DynamoSAP</name>
+  </assembly>
+  <namespaces>
+    <namespace name="DynamoSAP">
+      <category>DynamoSAP</category>
+    </namespace>
+  </namespaces>
+</doc>

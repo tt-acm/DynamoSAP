@@ -1,4 +1,5 @@
-C:\Users\eertugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\DynamoSAP\bin\Debug\DynamoSAP.dll
-C:\Users\eertugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\DynamoSAP\bin\Debug\DynamoSAP.pdb
 C:\Users\eertugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\DynamoSAP\obj\Debug\DynamoSAP.dll
 C:\Users\eertugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\DynamoSAP\obj\Debug\DynamoSAP.pdb
+C:\Users\eertugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\DynamoSAP\bin\DynamoSAP.dll
+C:\Users\eertugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\DynamoSAP\bin\DynamoSAP.pdb
+C:\Users\eertugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\DynamoSAP\obj\Debug\DynamoSAP.csprojResolveAssemblyReference.cache
