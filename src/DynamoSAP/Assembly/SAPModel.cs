@@ -40,7 +40,8 @@ namespace DynamoSAP.Assembly
                 f.BaseCrv.EndPoint.Z,
                 ref dummy);
 
-            f.Label = dummy; // 
+            // 
+            f.Label = dummy; // passing the SAP label to Frame label.  
 
         }
 
