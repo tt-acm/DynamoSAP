@@ -47,20 +47,39 @@ namespace DynamoSAP.Assembly
          //DYNAMO NODES
         public static string CreateSAPModel(List<Element> SAPElements)
         {
+            //1. Instantiate SAPModel
+            SAP2000v16.SapObject mySapObject = null;
             SAP2000v16.cSapModel mySapModel = null;
 
-            SAPApplication.Application.LaunchNewSapModel(ref mySapModel);
+            try 
+            {	        
+	            SAPApplication.Application.InitializeSapModel(ref mySapObject, ref mySapModel);
+            }
+            catch (Exception)
+            {
+                SAPApplication.Application.Release(ref mySapObject, ref mySapModel);
+            };
 
-
+            //2. Create Geometry
             foreach (var el in SAPElements)
             {
                 if (el.GetType().ToString().Contains("Frame"))
                 {
                     CreateFrame(el as Frame , ref mySapModel);
                 }
-
             }
-            return "hey";
+
+            // 3. Assigns Constraints to Nodes
+
+            // 4. Define LoadPattern
+
+            // 5. Loads 
+
+            //if can't set to null, will be a hanging process
+            mySapModel = null;
+            mySapObject = null; 
+
+            return "Success";
         }
 
 

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 
 using SAP2000v16;
+// interop.COM services for SAP
+using System.Runtime.InteropServices;
 
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
@@ -14,12 +16,12 @@ namespace SAPApplication
     [SupressImportIntoVM] 
     public class Application
     {
-        public static void LaunchNewSapModel (ref cSapModel mySapModel)
+        public static void InitializeSapModel (ref SapObject mySAPObject, ref cSapModel mySapModel)
         {
+
             long ret = 0;
 
-            SAP2000v16.SapObject mySAPObject;
-            //SAP2000v16.cSapModel mySapModel;
+            //TO DO: Grab open Instance if already open!!!
 
             //Create SAP2000 Object
             mySAPObject = new SAP2000v16.SapObject();
@@ -29,7 +31,6 @@ namespace SAPApplication
 
             //Create SapModel object
             mySapModel = mySAPObject.SapModel;
-            //mySapModel = new cSapModel();
 
             //initialize the model
             ret = mySapModel.InitializeNewModel(eUnits.kip_in_F); // TODO: Pass Eunit as Constructor
@@ -39,7 +40,22 @@ namespace SAPApplication
 
         }
 
-        // TODO: Release Methods
+        public static void Release(ref SapObject SAP, ref cSapModel Model)
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            if (SAP != null)
+            {
+                Marshal.FinalReleaseComObject(SAP);
+            }
+
+            if (Model != null)
+            {
+                Marshal.FinalReleaseComObject(Model);
+            }
+
+        }
 
     }
 }
