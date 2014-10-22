@@ -2,27 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DynamoSAP.Utilities;
 using Autodesk.DesignScript.Geometry;
 
 namespace DynamoSAP.Structure
 {
-    public class Frame
+    public class Frame:Element
     {
         // FIELDS
         // Curve  class that holds nodes ! (vertices)
-        private Line BaseCrv { get; set; }
+        internal Line BaseCrv { get; set; }
 
         //matprop
-        private string MatProp { get; set; }
+        internal string MatProp { get; set; }
         //sectionprop
-        private string SecProp { get; set; }
+        internal string SecProp { get; set; }
         //justification - follow SAP enum for InsertionPoint set default 5
-        private int Just { get; set; } 
+        internal int Just { get; set; } 
         //rotation
-        private double Angle { get; set; }
+        internal double Angle { get; set; }
 
+        //PRIVATE METHODS
 
+ 
+        //DYNAMO NODES
         public static double Rotation (Frame f)
         {
             return f.Angle;
@@ -33,20 +35,24 @@ namespace DynamoSAP.Structure
             return f.BaseCrv;
         }
 
-        public static string getType(object o)
+        public static string Name(Frame f)
         {
-            return o.GetType().ToString();
-        }
-        
-
-        // STATIC CONSTRUCTORS
-
-        public static Frame FromCurve(Line Line, string matProp, string secProp, int just, double angle)
-        {
-            return new Frame(Line,matProp, secProp, just, angle);
+            return f.Label;
         }
 
-        
+
+        // Frame From Curve
+        public static Frame FromLine(Line Line, string MatProp, string SecProp, int Just, double Rot)
+        {
+            return new Frame(Line, MatProp, SecProp, Just, Rot);
+        }
+        // Frame from Nodes
+        public static Frame FromEndPoints(Point i, Point j, string MatProp, string SecProp, int Just, double Rot)
+        {
+            return new Frame(i, j, MatProp, SecProp, Just, Rot);
+        }
+
+         // PRIVATE CONSTRUCTORS
         private Frame(){}
         private Frame(Line line,string matProp, string secProp, int just, double angle)
         {
@@ -54,6 +60,14 @@ namespace DynamoSAP.Structure
             Angle = angle;
             MatProp = matProp;
             SecProp= secProp;
+            Just = just;
+        }
+        private Frame(Point i, Point j, string matProp, string secProp, int just, double angle)
+        {
+            BaseCrv = Line.ByStartPointEndPoint(i, j);
+            Angle = angle;
+            MatProp = matProp;
+            SecProp = secProp;
             Just = just;
         }
 
