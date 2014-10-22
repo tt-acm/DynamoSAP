@@ -9,9 +9,9 @@ namespace DynamoSAP.Structure
     public class Frame:Element
     {
         // FIELDS
-        // Curve  class that holds nodes ! (vertices)
-        internal Line BaseCrv { get; set; }
 
+        // Line
+        internal Line BaseCrv { get; set; }
         //matprop
         internal string MatProp { get; set; }
         //sectionprop
@@ -21,24 +21,55 @@ namespace DynamoSAP.Structure
         //rotation
         internal double Angle { get; set; }
 
+
+        // QUERRY NODES
+
+        public Line BaseCurve
+        {
+            get { return BaseCrv; }
+        }
+
+        public string Material
+        {
+            get { return MatProp; }
+        }
+
+        public string SectionProfile
+        {
+            get { return SecProp; }
+        }
+
+        public int Justification
+        {
+            get { return Just; }
+        }
+
+        public double Rotation
+        { 
+            get{ return Angle;}
+        }
+
         //PRIVATE METHODS
-
+        public override string ToString()
+        {
+            return "Frame";
+        }
  
-        //DYNAMO NODES
-        public static double Rotation (Frame f)
-        {
-            return f.Angle;
-        }
+        ////DYNAMO NODES
+        //public static double RotationTest (Frame f)
+        //{
+        //    return f.Angle;
+        //}
 
-        public static Line BaseCurve (Frame f)
-        {
-            return f.BaseCrv;
-        }
+        //public static Line BaseCurve (Frame f)
+        //{
+        //    return f.BaseCrv;
+        //}
 
-        public static string Name(Frame f)
-        {
-            return f.Label;
-        }
+        //public static string Name(Frame f)
+        //{
+        //    return f.Label;
+        //}
 
 
         // Frame From Curve

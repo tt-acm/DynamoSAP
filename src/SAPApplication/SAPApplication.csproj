@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DynamoSAP">
-      <HintPath>..\DynamoSAP\bin\DynamoSAP.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="ProtoGeometry">
       <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.7\ProtoGeometry.dll</HintPath>
     </Reference>

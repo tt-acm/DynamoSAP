@@ -1,7 +1,7 @@
-<Workspace Version="0.7.2.7096" X="208.077877864947" Y="25.3439306004116" zoom="0.888789228297156" Description="" Category="" Name="Home">
+<Workspace Version="0.7.2.7096" X="-43.6035690651876" Y="-101.857356289272" zoom="1.02422008887428" Description="" Category="" Name="Home">
   <Elements>
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="a6a10044-9bb9-4910-b5de-a85769641153" nickname="Frame.FromEndPoints" x="377.5" y="274" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Structure.Frame.FromEndPoints@Autodesk.DesignScript.Geometry.Point,Autodesk.DesignScript.Geometry.Point,string,string,int,double" />
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="5b290f94-c4bd-4ad1-85d1-12b1a7e4cdd0" nickname="Frame.BaseCurve" x="618.5" y="285" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Structure.Frame.BaseCurve@DynamoSAP.Structure.Frame" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="a6a10044-9bb9-4910-b5de-a85769641153" nickname="Frame.FromEndPoints" x="378.41015643003" y="274.91015643003" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Structure.Frame.FromEndPoints@Autodesk.DesignScript.Geometry.Point,Autodesk.DesignScript.Geometry.Point,string,string,int,double" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="5b290f94-c4bd-4ad1-85d1-12b1a7e4cdd0" nickname="Frame.BaseCurve" x="659.329171451029" y="171.156776098674" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Structure.Frame.BaseCurve@DynamoSAP.Structure.Frame" />
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="a2658f86-20e4-48ee-a228-7ad93b675bc7" nickname="Point.ByCoordinates" x="123.5" y="222" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Point.ByCoordinates@double,double">
       <PortInfo index="0" default="True" />
       <PortInfo index="1" default="True" />
@@ -11,15 +11,15 @@
       <PortInfo index="1" default="True" />
     </Dynamo.Nodes.DSFunction>
     <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="1035c837-aec8-4686-aebf-e33c6ec4cbb7" nickname="Double Slider" x="74.0802177866742" y="608.526743180916" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <System.Double>41.123</System.Double>
+      <System.Double>59.4840314440576</System.Double>
       <Range min="0" max="100" />
     </Dynamo.Nodes.DoubleSlider>
     <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="f510a199-4a3c-4e65-8c7c-f3c6b48a24fd" nickname="Double Slider" x="-58.7921747784999" y="357.275684812494" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <System.Double>47.1188167517208</System.Double>
+      <System.Double>47.119</System.Double>
       <Range min="0" max="100" />
     </Dynamo.Nodes.DoubleSlider>
     <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="4e9344bb-cab6-4c23-a93a-b0e9306db8db" nickname="Double Slider" x="-75.9481833804315" y="476.92233094497" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <System.Double>57.672</System.Double>
+      <System.Double>33.3308398390291</System.Double>
       <Range min="0" max="100" />
     </Dynamo.Nodes.DoubleSlider>
     <Dynamo.Nodes.IntegerSlider type="Dynamo.Nodes.IntegerSlider" guid="22a80cd8-2d09-4e5e-8db6-1200afc38225" nickname="Integer Slider" x="372.5" y="624" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
@@ -27,11 +27,12 @@
       <Range min="0" max="100" />
     </Dynamo.Nodes.IntegerSlider>
     <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="71e77aca-528a-4869-bdab-857d5c7f0c7a" nickname="Code Block" x="163.702316403839" y="324.965687994297" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;test&quot;;" ShouldFocus="false" />
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="10680547-7be1-4c3b-9b7f-df0f00e79e2c" nickname="SAPModel.CreateSAPModel" x="617.742859414776" y="382.854714859466" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.SAPModel.CreateSAPModel@DynamoSAP.Structure.Element[]" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="10680547-7be1-4c3b-9b7f-df0f00e79e2c" nickname="SAPModel.CreateSAPModel" x="735.591813205107" y="391.613758722261" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.SAPModel.CreateSAPModel@DynamoSAP.Structure.Element[]" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="6f0ab6c3-a96b-4c21-b219-23e55ace542b" nickname="Frame.Rotation" x="586.343765756639" y="466.695402340666" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Structure.Frame.Rotation" />
   </Elements>
   <Connectors>
     <Dynamo.Models.ConnectorModel start="a6a10044-9bb9-4910-b5de-a85769641153" start_index="0" end="5b290f94-c4bd-4ad1-85d1-12b1a7e4cdd0" end_index="0" portType="0" />
-    <Dynamo.Models.ConnectorModel start="a6a10044-9bb9-4910-b5de-a85769641153" start_index="0" end="10680547-7be1-4c3b-9b7f-df0f00e79e2c" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="a6a10044-9bb9-4910-b5de-a85769641153" start_index="0" end="6f0ab6c3-a96b-4c21-b219-23e55ace542b" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="a2658f86-20e4-48ee-a228-7ad93b675bc7" start_index="0" end="a6a10044-9bb9-4910-b5de-a85769641153" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="820840d9-68b1-4a69-b2b0-554cd362a2b6" start_index="0" end="a6a10044-9bb9-4910-b5de-a85769641153" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="1035c837-aec8-4686-aebf-e33c6ec4cbb7" start_index="0" end="a6a10044-9bb9-4910-b5de-a85769641153" end_index="5" portType="0" />
