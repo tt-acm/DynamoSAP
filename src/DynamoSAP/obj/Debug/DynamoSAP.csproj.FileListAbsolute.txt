@@ -10,3 +10,9 @@ C:\Users\eertugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\obj\Debug\DynamoSAP.
 C:\Users\EErtugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\obj\Debug\DynamoSAP.csprojResolveAssemblyReference.cache
 C:\Users\EErtugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\SAPApplication.dll
 C:\Users\EErtugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\SAPApplication.pdb
+C:\Users\AGarciaPuyol\Documents\GitHub\DynamoSAP\src\DynamoSAP\obj\Debug\DynamoSAP.pdb
+C:\Users\AGarciaPuyol\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\DynamoSAP.dll
+C:\Users\AGarciaPuyol\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\DynamoSAP.pdb
+C:\Users\AGarciaPuyol\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\SAPApplication.dll
+C:\Users\AGarciaPuyol\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\SAPApplication.pdb
+C:\Users\AGarciaPuyol\Documents\GitHub\DynamoSAP\src\DynamoSAP\obj\Debug\DynamoSAP.dll

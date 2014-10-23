@@ -22,7 +22,7 @@ namespace DynamoSAP.Structure
         internal double Angle { get; set; }
 
 
-        // QUERRY NODES
+        // QUERY NODES
 
         public Line BaseCurve
         {

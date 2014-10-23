@@ -15,18 +15,27 @@
     <DSCoreNodesUI.Formula type="DSCoreNodesUI.Formula" guid="bd2c1550-ac1a-4a6c-8919-44e887d5799f" nickname="LOAD CASE" x="804.290336836321" y="355.220047154281" isVisible="true" isUpstreamVisible="true" lacing="Shortest">
       <FormulaText>pattern+loadName</FormulaText>
     </DSCoreNodesUI.Formula>
-    <DSCoreNodesUI.Formula type="DSCoreNodesUI.Formula" guid="798b3b0c-9429-4ae2-958e-0d8f453c9290" nickname="COLLECTOR" x="1360.62308644604" y="428.646894406571" isVisible="true" isUpstreamVisible="true" lacing="Shortest">
-      <FormulaText>Frame+loadcase+distributedLoad+restraints</FormulaText>
+    <DSCoreNodesUI.Formula type="DSCoreNodesUI.Formula" guid="798b3b0c-9429-4ae2-958e-0d8f453c9290" nickname="COLLECTOR" x="1474.89562085091" y="406.018669771943" isVisible="true" isUpstreamVisible="true" lacing="Shortest">
+      <FormulaText>Frame+loadcase+Loads+restraints</FormulaText>
     </DSCoreNodesUI.Formula>
+    <DSCoreNodesUI.Formula type="DSCoreNodesUI.Formula" guid="1fb0773c-2d09-4d76-88ce-ca0615e668b0" nickname="POINTLOADONFRAME" x="798.162739528768" y="644.604584024978" isVisible="true" isUpstreamVisible="true" lacing="Shortest">
+      <FormulaText>frame+t+vector+amount+pattern</FormulaText>
+    </DSCoreNodesUI.Formula>
+    <DSCoreNodesUI.CreateList type="DSCoreNodesUI.CreateList" guid="bdb0fcd3-c806-455f-ae8e-54113d94e505" nickname="LOADS" x="1242.0242885293" y="588.201613239476" isVisible="true" isUpstreamVisible="true" lacing="Disabled" inputcount="2" />
+    <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="c8d94f1b-e012-4b5a-9f21-3fab0bb89dea" nickname="Code Block" x="294.134445678733" y="777.91987862212" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;Vector as Vector3d&quot;;" ShouldFocus="false" />
   </Elements>
   <Connectors>
     <Dynamo.Models.ConnectorModel start="e5b7c525-5fff-496b-9d32-bae148690fd2" start_index="0" end="b0d98f5b-5829-4ea7-b249-909cf9279599" end_index="3" portType="0" />
     <Dynamo.Models.ConnectorModel start="30dc812e-e4d7-4e4f-a1dc-01d0f9a96300" start_index="0" end="b0d98f5b-5829-4ea7-b249-909cf9279599" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="30dc812e-e4d7-4e4f-a1dc-01d0f9a96300" start_index="0" end="bd2c1550-ac1a-4a6c-8919-44e887d5799f" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="30dc812e-e4d7-4e4f-a1dc-01d0f9a96300" start_index="0" end="798b3b0c-9429-4ae2-958e-0d8f453c9290" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="30dc812e-e4d7-4e4f-a1dc-01d0f9a96300" start_index="0" end="1fb0773c-2d09-4d76-88ce-ca0615e668b0" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="7d3adf2a-9997-42f4-8aa8-df072828e74b" start_index="0" end="798b3b0c-9429-4ae2-958e-0d8f453c9290" end_index="3" portType="0" />
-    <Dynamo.Models.ConnectorModel start="b0d98f5b-5829-4ea7-b249-909cf9279599" start_index="0" end="798b3b0c-9429-4ae2-958e-0d8f453c9290" end_index="2" portType="0" />
+    <Dynamo.Models.ConnectorModel start="b0d98f5b-5829-4ea7-b249-909cf9279599" start_index="0" end="bdb0fcd3-c806-455f-ae8e-54113d94e505" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="bd2c1550-ac1a-4a6c-8919-44e887d5799f" start_index="0" end="798b3b0c-9429-4ae2-958e-0d8f453c9290" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="1fb0773c-2d09-4d76-88ce-ca0615e668b0" start_index="0" end="bdb0fcd3-c806-455f-ae8e-54113d94e505" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="bdb0fcd3-c806-455f-ae8e-54113d94e505" start_index="0" end="798b3b0c-9429-4ae2-958e-0d8f453c9290" end_index="2" portType="0" />
+    <Dynamo.Models.ConnectorModel start="c8d94f1b-e012-4b5a-9f21-3fab0bb89dea" start_index="0" end="1fb0773c-2d09-4d76-88ce-ca0615e668b0" end_index="2" portType="0" />
   </Connectors>
   <Notes />
 </Workspace>
