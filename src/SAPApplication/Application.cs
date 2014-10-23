@@ -39,7 +39,7 @@ namespace SAPApplication
             ret = mySapModel.File.NewBlank();
 
             //SET UP ... SET UP ... SET UP ... SET UP
-            DefineMaterials(ref mySapModel);
+            //DefineMaterials(ref mySapModel);
             
         }
 
@@ -62,7 +62,7 @@ namespace SAPApplication
 
         // METHODS FOR SAP SET UP
         // Add Most Common Materials to SAP
-        public static void DefineMaterials(ref cSapModel SapModel)
+        public static bool DefineMaterials(ref cSapModel SapModel)
         {
             // Add Most Common Standard Materials to SAP Model // call this before or during Create Structure 
             
@@ -106,6 +106,8 @@ namespace SAPApplication
             {
                 ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_CONCRETE, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A992_Fy50, eMatTypeConcrete.MATERIAL_CONCRETE_SUBTYPE_FC4000_NORMALWEIGHT);
             }
+
+            return true;
         }
 
     }

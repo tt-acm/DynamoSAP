@@ -55,21 +55,6 @@ namespace DynamoSAP.Structure
             return "Frame";
         }
  
-        ////DYNAMO NODES
-        //public static double RotationTest (Frame f)
-        //{
-        //    return f.Angle;
-        //}
-
-        //public static Line BaseCurve (Frame f)
-        //{
-        //    return f.BaseCrv;
-        //}
-
-        //public static string Name(Frame f)
-        //{
-        //    return f.Label;
-        //}
 
 
         // Frame From Curve
