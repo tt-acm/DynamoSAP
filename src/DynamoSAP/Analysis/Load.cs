@@ -11,9 +11,10 @@ using SAP2000v16;
 namespace DynamoSAP.Analysis
 {
 
-
-    public class PointLoadOnFrame
+    public class Load
     {
+        //Load Type
+        internal string LoadType;
 
         //Frame Name
         internal string FrameName { get; set; }
@@ -25,24 +26,50 @@ namespace DynamoSAP.Analysis
         internal int Dir { get; set; }
         //Distance
         internal double Dist { get; set; }
+        //Distance2
+        internal double Dist2 { get; set; }
         //Value
         internal double Val { get; set; }
+        //Value2
+        internal double Val2 { get; set; }
 
         //Optional inputs
         internal string CSys = "Global";
         internal bool RelDist = true;
         internal bool Replace = true;
 
-        //using this input from SAP causes an error in the compiler
-        //internal eItemType MyeItemType;
+        //using this input from SAP causes an error in the compiler, it is optional...
+        // internal static eItemType MyeItemType;
 
-        public override string ToString()
+        //DYNAMO QUERY NODES
+        public string LType { get { return LoadType; } }
+        public string Name { get { return FrameName; } }
+        public string Pattern { get { return LoadPat; } }
+        public int FMType { get { return MyType; } }
+        public int Direction { get { return Dir; } }
+        public string Distance1 { get { return Dist.ToString(); } }
+        public string Distance2
         {
-            return "PointLoad";
+            get
+            {
+                string d2 = ""; // if it is a Point Load this should return empty
+                if (LoadType == "DistributedLoad") d2 = Dist2.ToString();  //if it is a Distributed Load
+                return d2;
+            }
+        }
+        public string Value1 { get { return Val.ToString(); } }
+        public string Value2
+        {
+            get
+            {
+                string v2 = "";// if it is a Point Load this should return empty
+                if (LoadType == "DistributedLoad") v2 = Val2.ToString();  //if it is a Distributed Load
+                return v2;
+            }
         }
 
         /// <summary>
-        /// This function assigns point loads to frame objects.
+        /// This function assigns loads to frame objects.
         /// Parameters description below as presented in the SAP CSi OAPI Documentation
         /// </summary>
         /// <param name="FrameName">The name of an existing frame object or group, depending on the value of the ItemType item.</param>
@@ -84,31 +111,57 @@ namespace DynamoSAP.Analysis
         //If this item is Group, the assignment is made to all frame objects in the group specified by the Name item.
         //If this item is SelectedObjects, assignment is made to all selected frame objects, and the Name item is ignored.
 
-        public static PointLoadOnFrame FromFrame(string FrameName, string LoadPat, int MyType, int Dir, double Dist, double Val, string CSys, bool RelDist, bool Replace)
+
+        //DYNAMO CREATE NODES
+        public static Load PointLoadOnFrame(Frame Frame, LoadPattern LoadPat, int MyType, int Dir, double Dist, double Val, string CSys, bool RelDist, bool Replace)
         {
-            return new PointLoadOnFrame(FrameName, LoadPat, MyType, Dir, Dist, Val, CSys, RelDist, Replace);
+
+            Load l = new Load(Frame, LoadPat.Name, MyType, Dir, Dist, Val, CSys, RelDist, Replace);
+            l.LoadType = "PointLoad";
+            return l;
         }
 
-        //PRIVATE CONSTRUCTOR
-        private PointLoadOnFrame(string frameName, string loadPat, int myType, int dir, double dist, double val, string csys, bool relDist, bool replace)
+        public static Load DistributedLoadOnFrame(Frame Frame, LoadPattern LoadPat, int MyType, int Dir, double Dist, double Dist2, double Val, double Val2, string CSys, bool RelDist, bool Replace)
         {
-            FrameName = frameName;
+            Load l = new Load(Frame, LoadPat.Name, MyType, Dir, Dist, Dist2, Val, Val2, CSys, RelDist, Replace);
+            l.LoadType = "DistributedLoad";
+            return l;
+        }
+
+        //PRIVATE CONSTRUCTORS
+        // private Load() { }
+
+        //constructor for PointLoads
+        private Load(Frame frame, string loadPat, int myType, int dir, double dist, double val, string cSys, bool relDist, bool replace)
+        {
+            FrameName = frame.Label;
             LoadPat = loadPat;
             MyType = myType;
             Dir = dir;
             Dist = dist;
             Val = val;
-            CSys = csys;
+            CSys = cSys;
             RelDist = relDist;
             Replace = replace;
-
-            //CALL THIS FROM ASSEMBLY? read the type of load by using the ToString() method
-            //ret = mySapModel.FrameObj.SetLoadPoint(FrameName[1], "7", 1, 2, 0.5, -15, "Local", System.Convert.ToBoolean(-1), System.Convert.ToBoolean(-1), 0);
-
         }
+
+        //constructor for DistributedLoads
+        private Load(Frame frame, string loadPat, int myType, int dir, double dist, double dist2, double val, double val2, string cSys, bool relDist, bool replace)
+        {
+            FrameName = frame.Label;
+            LoadPat = loadPat;
+            MyType = myType;
+            Dir = dir;
+            Dist = dist;
+            Dist2 = dist2;
+            Val = val;
+            Val2 = val2;
+            CSys = cSys;
+            RelDist = relDist;
+            Replace = replace;
+        }
+
+
+
     }
-    public class DistributedLoadOnFrame { }
-
-
-
 }
