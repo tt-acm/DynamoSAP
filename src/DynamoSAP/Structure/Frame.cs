@@ -58,12 +58,12 @@ namespace DynamoSAP.Structure
  
 
         // Frame From Curve
-        public static Frame FromLine(Line Line, string MatProp, string SecProp, int Just, double Rot)
+        public static Frame FromLine(Line Line, string MatProp = "Steel", string SecProp = "W12X14", int Just = 5, double Rot = 0)
         {
             return new Frame(Line, MatProp, SecProp, Just, Rot);
         }
         // Frame from Nodes
-        public static Frame FromEndPoints(Point i, Point j, string MatProp, string SecProp, int Just, double Rot)
+        public static Frame FromEndPoints(Point i, Point j, string MatProp = "Steel", string SecProp = "W12X14", int Just = 5, double Rot = 0)
         {
             return new Frame(i, j, MatProp, SecProp, Just, Rot);
         }
