@@ -48,56 +48,25 @@ namespace DynamoSAP.Assembly
 
 
             /// WHY NOT WORKING ????
-            ////2. Get -Define -Set Section
-            //bool exists = Utilities.ProfileMapper_IsSectionExists(ref mySapModel, f.SectionProfile);
-            //if (!exists) 
-            //{
-            //    string MatProp = Utilities.MaterialMapper_DyanmoToSap(f.Material);
-            //    string SecCatalog = "AISC14.pro"; // US_Imperial
+            //2. Get -Define -Set Section
+            bool exists = SAPApplication.Application.IsSectionExists(f.SectionProfile, ref mySapModel);
+            if (!exists)
+            {
+                string MatProp = SAPApplication.Application.MaterialMapper_DyanmoToSap(f.Material);
+                string SecCatalog = "AISC14.pro"; // US_Imperial
 
-            //    //define new section property
-            //    ret = mySapModel.PropFrame.ImportProp(f.SectionProfile, MatProp, SecCatalog, f.SectionProfile);
-            //}
-            ////Assign section profile toFrame
+                //define new section property
+                //ret = mySapModel.PropFrame.ImportProp(f.SectionProfile, MatProp, SecCatalog, f.SectionProfile);
+            }
+            //Assign section profile toFrame
             //ret = mySapModel.FrameObj.SetSection(dummy, f.SectionProfile);
 
-            //// 3. Set Justification TODO: Vertical & Lateral Justification
-            //Utilities.Justification_DynamoToSAP(ref mySapModel, f.Justification, dummy);
+            // 3. Set Justification TODO: Vertical & Lateral Justification
+            SAPApplication.Application.Justification_DynamoToSAP(ref mySapModel, f.Justification, dummy);
 
-            //// 4. Set Rotation
+            // 4. Set Rotation
             //ret = mySapModel.FrameObj.SetLocalAxes(dummy, f.Rotation);
 
-
-        }
-
-        private static bool IsSectionExists(string SectionProfile)
-        {
-        //    int number = 0;
-        //    string[] SectionNames = null;
-        //    mySapModel.PropFrame.GetNameList(ref number, ref SectionNames);
-
-        //    if (SectionNames.Contains(SectionProfile))
-        //    {
-        //        return false;
-        //    }
-            return true;
-        }
-
-        private static void Justification_DynamoToSAP(int Justification, string FrmId)
-        {
-        //    //int cardinalPoint = 0; // use Just
-        //    double[] offset1 = new double[3];
-        //    double[] offset2 = new double[3];
-
-        //    offset1[1] = 0;
-        //    offset2[1] = 0;
-
-        //    offset1[2] = 0;
-        //    offset2[2] = 0;
-
-        //    //TODO: Mapping Needed  Vertical Justification/ Lateral Justification 1 = bottom left2 = bottom center 3 = bottom right 4 = middle left 5 = middle center 6 = middle right 7 = top left 8 = top center 9 = top right 10 = centroid 11 = shear center
-
-        //    long ret = mySapModel.FrameObj.SetInsertionPoint(FrmId, Justification, false, true, ref offset1, ref offset2);
         }
 
         //CREATE LOAD METHODS
