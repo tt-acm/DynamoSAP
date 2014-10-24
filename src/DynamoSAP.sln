@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamoSAP", "DynamoSAP\DynamoSAP.csproj", "{6DA1EAC6-BAE8-4A05-8880-24CC11EAB491}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAPApplication", "SAPApplication\SAPApplication.csproj", "{374D90E7-0ACF-4A5F-B25A-F559D8897C12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAPConnection", "SAPConnection\SAPConnection.csproj", "{C9658348-ABB5-4369-80B9-EB46F21DF577}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,10 @@ Global
 		{6DA1EAC6-BAE8-4A05-8880-24CC11EAB491}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DA1EAC6-BAE8-4A05-8880-24CC11EAB491}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DA1EAC6-BAE8-4A05-8880-24CC11EAB491}.Release|Any CPU.Build.0 = Release|Any CPU
-		{374D90E7-0ACF-4A5F-B25A-F559D8897C12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{374D90E7-0ACF-4A5F-B25A-F559D8897C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{374D90E7-0ACF-4A5F-B25A-F559D8897C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{374D90E7-0ACF-4A5F-B25A-F559D8897C12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9658348-ABB5-4369-80B9-EB46F21DF577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9658348-ABB5-4369-80B9-EB46F21DF577}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9658348-ABB5-4369-80B9-EB46F21DF577}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9658348-ABB5-4369-80B9-EB46F21DF577}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

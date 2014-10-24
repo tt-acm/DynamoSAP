@@ -11,12 +11,12 @@ using System.Runtime.InteropServices;
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
 
-namespace SAPApplication
+namespace SAPConnection
 {
-    [SupressImportIntoVM] 
-    public class Application
+    [SupressImportIntoVM]
+    public class Initialize
     {
-        public static void InitializeSapModel (ref SapObject mySAPObject, ref cSapModel mySapModel)
+        public static void InitializeSapModel(ref SapObject mySAPObject, ref cSapModel mySapModel)
         {
 
             long ret = 0;
@@ -40,7 +40,7 @@ namespace SAPApplication
 
             //SET UP ... SET UP ... SET UP ... SET UP
             DefineMaterials(ref mySapModel);
-            
+
         }
 
         public static void Release(ref SapObject SAP, ref cSapModel Model)
@@ -65,7 +65,7 @@ namespace SAPApplication
         public static bool DefineMaterials(ref cSapModel SapModel)
         {
             // Add Most Common Standard Materials to SAP Model // call this before or during Create Structure 
-            
+
             long ret = 0;
             string MatName = string.Empty;
 

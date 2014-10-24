@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{374D90E7-0ACF-4A5F-B25A-F559D8897C12}</ProjectGuid>
+    <ProjectGuid>{C9658348-ABB5-4369-80B9-EB46F21DF577}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SAPApplication</RootNamespace>
-    <AssemblyName>SAPApplication</AssemblyName>
+    <RootNamespace>SAPConnection</RootNamespace>
+    <AssemblyName>SAPConnection</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,13 +33,15 @@
   <ItemGroup>
     <Reference Include="ProtoGeometry">
       <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.7\ProtoGeometry.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ProtoInterface">
       <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.7\ProtoInterface.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SAP2000v16">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Computers and Structures\SAP2000 16\SAP2000v16.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,7 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application.cs" />
+    <Compile Include="Initialize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

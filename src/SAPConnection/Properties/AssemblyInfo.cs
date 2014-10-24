@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SAPApplication")]
+[assembly: AssemblyTitle("SAPConnection")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Thornton Tomasetti, Inc.")]
-[assembly: AssemblyProduct("SAPApplication")]
+[assembly: AssemblyProduct("SAPConnection")]
 [assembly: AssemblyCopyright("Copyright © Thornton Tomasetti, Inc. 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c3d19de9-4aee-4959-8153-d152b1bd9d08")]
+[assembly: Guid("a155a92a-5265-4267-b945-4441caa8a192")]
 
 // Version information for an assembly consists of the following four values:
 //
