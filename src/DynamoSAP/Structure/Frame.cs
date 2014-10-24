@@ -49,13 +49,13 @@ namespace DynamoSAP.Structure
             get{ return Angle;}
         }
 
+           
         //PRIVATE METHODS
         public override string ToString()
         {
             return "Frame";
         }
  
-
 
         // Frame From Curve
         public static Frame FromLine(Line Line, string MatProp, string SecProp, int Just, double Rot)

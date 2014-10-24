@@ -12,7 +12,8 @@ namespace DynamoSAP.Structure
     [IsVisibleInDynamoLibrary(false)]
     public class Element
     {
-        public string GUID { get; set; }
+        public string GUID { get {return System.Guid.NewGuid().ToString();}}
+
         public string Label { get; set; }
 
         //internal string getType(object o) // ?

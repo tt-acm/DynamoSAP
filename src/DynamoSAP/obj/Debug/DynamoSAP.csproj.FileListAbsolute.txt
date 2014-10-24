@@ -8,8 +8,6 @@ C:\Users\eertugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\DynamoSAP.pdb
 C:\Users\eertugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\obj\Debug\DynamoSAP.dll
 C:\Users\eertugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\obj\Debug\DynamoSAP.pdb
 C:\Users\EErtugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\obj\Debug\DynamoSAP.csprojResolveAssemblyReference.cache
-C:\Users\EErtugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\SAPApplication.dll
-C:\Users\EErtugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\SAPApplication.pdb
 C:\Users\AGarciaPuyol\Documents\GitHub\DynamoSAP\src\DynamoSAP\obj\Debug\DynamoSAP.csprojResolveAssemblyReference.cache
 C:\Users\AGarciaPuyol\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\DynamoSAP.dll
 C:\Users\AGarciaPuyol\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\DynamoSAP.pdb
@@ -17,3 +15,5 @@ C:\Users\AGarciaPuyol\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\SAPConnection
 C:\Users\AGarciaPuyol\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\SAPConnection.pdb
 C:\Users\AGarciaPuyol\Documents\GitHub\DynamoSAP\src\DynamoSAP\obj\Debug\DynamoSAP.dll
 C:\Users\AGarciaPuyol\Documents\GitHub\DynamoSAP\src\DynamoSAP\obj\Debug\DynamoSAP.pdb
+C:\Users\EErtugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\SAPConnection.dll
+C:\Users\EErtugrul\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\SAPConnection.pdb

@@ -11,7 +11,7 @@ using System.IO;
 using SAPConnection;
 
 using DynamoSAP.Structure;
-using DynamoSAP.Analysis;
+//using DynamoSAP.Analysis;
 
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
@@ -24,7 +24,6 @@ namespace DynamoSAP.Assembly
 {
     public class SAPModel
     {
-        private static int ret;
         private static cSapModel mySapModel;
 
         //// PRIVATE METHODS ////
@@ -32,10 +31,10 @@ namespace DynamoSAP.Assembly
         //CREATE FRAME METHOD
         private static void CreateFrame(Frame f, ref cSapModel mySapModel)
         {
+            // Draw Frm Object return Label
             string dummy = string.Empty;
-            long ret = 0;
             //1. Create Frame
-            ret = mySapModel.FrameObj.AddByCoord(f.BaseCrv.StartPoint.X,
+            SAPConnection.StructureMapper.DrawFrm(ref mySapModel,f.BaseCrv.StartPoint.X,
                 f.BaseCrv.StartPoint.Y,
                 f.BaseCrv.StartPoint.Z,
                 f.BaseCrv.EndPoint.X,
@@ -45,27 +44,27 @@ namespace DynamoSAP.Assembly
 
             // TODO: set custom name !
             f.Label = dummy; // for now passing the SAP label to Frame label!
-
-
             
-            //2. Get -Define -Set Section
-            
-            bool exists = SAPConnection.Initialize.IsSectionExists(f.SectionProfile, ref mySapModel);
-            if (!exists)
+            // 2. Set GUID
+            SAPConnection.StructureMapper.SetGUIDFrm(ref mySapModel, f.Label, f.GUID);
+
+            // 3. Get or Define Section Profile
+            bool exists = SAPConnection.StructureMapper.IsSectionExistsFrm(ref mySapModel, f.SectionProfile);
+            if (!exists) // if doesnot exists define new sec property
             {
-                string MatProp = SAPConnection.Initialize.MaterialMapper_DyanmoToSap(f.Material);
-                string SecCatalog = "AISC14.pro"; // US_Imperial
+                string MatProp = SAPConnection.MaterialMapper.DynamoToSap(f.Material);
+                string SecCatalog = "AISC14.pro"; // US_Imperial TODO: ASK TO USER ?
                 //define new section property
-                ret=SAPConnection.Initialize.DefineSection(ref mySapModel, f.SectionProfile, MatProp, SecCatalog, f.SectionProfile);
+                SAPConnection.StructureMapper.DefinePropFrm(ref mySapModel, f.SectionProfile, MatProp, SecCatalog, f.SectionProfile);
             }
             //Assign section profile toFrame
-            ret = SAPConnection.Initialize.SetSection(ref mySapModel, dummy, f.SectionProfile);
+            SAPConnection.StructureMapper.SetSectionFrm(ref mySapModel, f.Label, f.SectionProfile);
 
             // 3. Set Justification TODO: Vertical & Lateral Justification
-            SAPConnection.Initialize.Justification_DynamoToSAP(ref mySapModel, f.Justification, dummy);
+            SAPConnection.JustificationMapper.DynamoToSAPFrm(ref mySapModel, f.Label, f.Justification); // TO DO: lateral and vertical justificaton
 
             // 4. Set Rotation
-            //ret = mySapModel.FrameObj.SetLocalAxes(dummy, f.Rotation);
+            SAPConnection.JustificationMapper.SetRotationFrm(ref mySapModel, f.Label, f.Rotation);
 
         }
 
@@ -75,11 +74,10 @@ namespace DynamoSAP.Assembly
 
 
         //// DYNAMO NODES ////
-        public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns, List<Load> SAPLoads)
+        public static string CreateSAPModel(List<Element> SAPElements)
         {
             //1. Instantiate SAPModel
             SAP2000v16.SapObject mySapObject = null;
-            //SAP2000v16.cSapModel mySapModel = null;
 
             try
             {
@@ -89,6 +87,7 @@ namespace DynamoSAP.Assembly
             {
                 SAPConnection.Initialize.Release(ref mySapObject, ref mySapModel);
             };
+
 
             //2. Create Geometry
             foreach (var el in SAPElements)
@@ -107,33 +106,33 @@ namespace DynamoSAP.Assembly
 
             // 4. Add Load Patterns
 
-            foreach (LoadPattern loadPat in SAPLoadPatterns)
-            {
-                //Call the AddLoadPattern method
+            //foreach (LoadPattern loadPat in SAPLoadPatterns)
+            //{
+            //    //Call the AddLoadPattern method
                 
-                //AddLoadPattern(loadPat);              
-            }
+            //    //AddLoadPattern(loadPat);              
+            //}
 
             // 5. Define Load Cases
             
 
 
             // 6. Loads 
-            foreach (Load load in SAPLoads)
-            {
-                if (load.LoadType == "PointLoad")
-                {
-                    //Call the CreatePointLoad method
+            //foreach (Load load in SAPLoads)
+            //{
+            //    if (load.LoadType == "PointLoad")
+            //    {
+            //        //Call the CreatePointLoad method
                     
-                    ret=SAPConnection.LoadMapper.CreatePointLoad(ref mySapModel, load.FrameName, load.LoadPat, load.MyType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, load.Replace);
-                }
-                if (load.LoadType == "DistributedLoad")
-                {
-                    //Call the CreateDistributedLoad method
+            //        //ret=SAPConnection.LoadMapper.CreatePointLoad(ref mySapModel, load.FrameName, load.LoadPat, load.MyType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, load.Replace);
+            //    }
+            //    if (load.LoadType == "DistributedLoad")
+            //    {
+            //        //Call the CreateDistributedLoad method
 
-                    ret = SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, load.FrameName, load.LoadPat, load.MyType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, load.Replace);
-                }
-            }
+            //        //ret = SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, load.FrameName, load.LoadPat, load.MyType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, load.Replace);
+            //    }
+            //}
 
             //if can't set to null, will be a hanging process
             mySapModel = null;
@@ -142,6 +141,8 @@ namespace DynamoSAP.Assembly
             return "Success";
         }
 
+        // PRIVATE CONSTRUCTOR
+        private SAPModel() { }
 
     }
 }
