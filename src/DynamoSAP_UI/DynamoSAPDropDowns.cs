@@ -11,10 +11,37 @@ namespace DynamoSAP_UI
 {
     [NodeName("LoadPatternTypeDropDown")]
     [NodeCategory("DynamoSAP.DynamoSAP.Analysis.LoadPattern")]
-    [NodeDescription("Select Load Pattern from the dropdown")]
+    [NodeDescription("Select Load Pattern to use with Set Load Pattern node")]
     [IsDesignScriptCompatible]
     public class LoadPatternTypeDropDown: EnumAsInt<eLoadPatternType>
     {
         public LoadPatternTypeDropDown(WorkspaceModel workspace) : base(workspace) { }
+    }
+
+    [NodeName("JustificationDropDown")]
+    [NodeCategory("DynamoSAP.DynamoSAP.Structure.Frame")]
+    [NodeDescription("Select Justification to use with Create Frame nodes")]
+    [IsDesignScriptCompatible]
+    public class JustificationTypeDropdown : EnumAsInt<Justification>
+    {
+        public JustificationTypeDropdown(WorkspaceModel workspace) : base(workspace) { }
+    
+    }
+
+
+    public enum Justification : int
+    { 
+        BottomLeft = 1,
+        BottomCenter = 2,
+        BottomRight = 3,
+        MiddleLeft = 4,
+        MiddleCenter = 5,
+        MiddleRight = 6,
+        TopLeft = 7,
+        TopCenter = 8,
+        TopRight = 9,
+        Centroid = 10,
+        ShearCenter = 11
+    
     }
 }
