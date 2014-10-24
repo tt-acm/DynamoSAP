@@ -34,7 +34,7 @@ namespace DynamoSAP.Assembly
             // Draw Frm Object return Label
             string dummy = string.Empty;
             //1. Create Frame
-            SAPConnection.StructureMapper.DrawFrm(ref mySapModel,f.BaseCrv.StartPoint.X,
+            SAPConnection.StructureMapper.DrawFrm(ref mySapModel, f.BaseCrv.StartPoint.X,
                 f.BaseCrv.StartPoint.Y,
                 f.BaseCrv.StartPoint.Z,
                 f.BaseCrv.EndPoint.X,
@@ -44,7 +44,7 @@ namespace DynamoSAP.Assembly
 
             // TODO: set custom name !
             f.Label = dummy; // for now passing the SAP label to Frame label!
-            
+
             // 2. Set GUID
             SAPConnection.StructureMapper.SetGUIDFrm(ref mySapModel, f.Label, f.GUID);
 
@@ -68,14 +68,16 @@ namespace DynamoSAP.Assembly
 
         }
 
-        
+
         #endregion
 
 
 
         //// DYNAMO NODES ////
-        public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns )
+        public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns, List<LoadCase> SAPLoadCases)
         {
+            string report = string.Empty;
+
             //1. Instantiate SAPModel
             SAP2000v16.SapObject mySapObject = null;
 
@@ -113,10 +115,37 @@ namespace DynamoSAP.Assembly
             }
 
             // 5. Define Load Cases
-            
 
 
-            // 6. Loads 
+            if (SAPLoadCases != null)
+            {
+                foreach (LoadCase lc in SAPLoadCases)
+                {
+
+                    List<string> types = new List<string>();
+                    List<string> names = new List<string>();
+                    List<double> SFs = new List<double>();
+
+                    for (int i = 0; i < lc.LoadPatterns.Count; i++)
+                    {
+                        types.Add("Load");
+                        names.Add(lc.LoadPatterns[i].Name);
+                        SFs.Add(lc.SFs[i]);
+                    }
+
+                    string[] Dtypes = types.ToArray();
+                    string[] Dnames = names.ToArray();
+                    double[] DSFs = SFs.ToArray();
+
+                    SAPConnection.LoadMapper.AddLoadCase(ref mySapModel, lc.Name, types.Count(), ref Dtypes, ref Dnames, ref DSFs);
+                }
+            }
+            else 
+            { 
+
+            }
+
+            // 6. Loads
             //foreach (Load load in SAPLoads)
             //{
             //    if (load.LoadType == "PointLoad")

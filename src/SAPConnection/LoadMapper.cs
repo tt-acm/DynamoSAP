@@ -22,6 +22,12 @@ namespace SAPConnection
             int ret = Model.LoadPatterns.Add(Name, (eLoadPatternType)Type, Multiplier);
         }
 
+        // DEFINE LOAD CASE IN SAP
+        public static void AddLoadCase(ref cSapModel Model, string Name, int LoadCount, ref string[] Loadtype, ref string[] LoadName, ref double []SF){
+            int ret = Model.LoadCases.StaticLinear.SetCase(Name);
+            ret = Model.LoadCases.StaticLinear.SetLoads(Name, LoadCount, ref Loadtype, ref LoadName, ref SF);
+        }
+
         //CREATE LOAD METHODS
         public static int CreatePointLoad(ref cSapModel mySapModel, string FrameName, string LoadPat, int MyType, int Dir, double Dist, double Val, string CSys, bool RelDist, bool Replace)
         {
@@ -32,6 +38,6 @@ namespace SAPConnection
             return mySapModel.FrameObj.SetLoadDistributed(FrameName, LoadPat, MyType, Dir, Dist, Dist2, Val, Val2, CSys, RelDist, Replace);
         }
 
-
+        
     }
 }

@@ -72,7 +72,7 @@ namespace DynamoSAP.Analysis
         /// <param name="Multiplier">The self weight multiplier for the new load pattern.</param>
         /// <returns></returns>
         //public static LoadPattern SetLoadPattern(string Name, eLoadPatternType LoadPatternType, double Multiplier)
-        public static LoadPattern SetLoadPattern(string Name, int LType, double Multiplier = 0)
+        public static LoadPattern SetLoadPattern(string Name, int LType, double Multiplier = 1)
         {
             return new LoadPattern(Name, LType, Multiplier);
         }
