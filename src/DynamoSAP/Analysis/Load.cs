@@ -5,7 +5,6 @@ using System.Text;
 
 using Autodesk.DesignScript.Geometry;
 using DynamoSAP.Structure;
-using SAPApplication;
 using SAP2000v16;
 
 namespace DynamoSAP.Analysis
@@ -129,7 +128,7 @@ namespace DynamoSAP.Analysis
         }
 
         //PRIVATE CONSTRUCTORS
-        // private Load() { }
+        private Load() { }
 
         //constructor for PointLoads
         private Load(Frame frame, string loadPat, int myType, int dir, double dist, double val, string cSys, bool relDist, bool replace)

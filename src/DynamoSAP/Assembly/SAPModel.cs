@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.IO;
 
-using SAPApplication;
+using SAPConnection;
 
 using DynamoSAP.Structure;
 using DynamoSAP.Analysis;
@@ -47,44 +47,29 @@ namespace DynamoSAP.Assembly
             f.Label = dummy; // for now passing the SAP label to Frame label!
 
 
-            /// WHY NOT WORKING ????
+            
             //2. Get -Define -Set Section
-            bool exists = SAPApplication.Application.IsSectionExists(f.SectionProfile, ref mySapModel);
+            
+            bool exists = SAPConnection.Initialize.IsSectionExists(f.SectionProfile, ref mySapModel);
             if (!exists)
             {
-                string MatProp = SAPApplication.Application.MaterialMapper_DyanmoToSap(f.Material);
+                string MatProp = SAPConnection.Initialize.MaterialMapper_DyanmoToSap(f.Material);
                 string SecCatalog = "AISC14.pro"; // US_Imperial
-
                 //define new section property
-                //ret = mySapModel.PropFrame.ImportProp(f.SectionProfile, MatProp, SecCatalog, f.SectionProfile);
+                ret=SAPConnection.Initialize.DefineSection(ref mySapModel, f.SectionProfile, MatProp, SecCatalog, f.SectionProfile);
             }
             //Assign section profile toFrame
-            //ret = mySapModel.FrameObj.SetSection(dummy, f.SectionProfile);
+            ret = SAPConnection.Initialize.SetSection(ref mySapModel, dummy, f.SectionProfile);
 
             // 3. Set Justification TODO: Vertical & Lateral Justification
-            SAPApplication.Application.Justification_DynamoToSAP(ref mySapModel, f.Justification, dummy);
+            SAPConnection.Initialize.Justification_DynamoToSAP(ref mySapModel, f.Justification, dummy);
 
             // 4. Set Rotation
             //ret = mySapModel.FrameObj.SetLocalAxes(dummy, f.Rotation);
 
         }
 
-        //CREATE LOAD METHODS
-        private static void CreatePointLoad(Load load)
-        {
-           // ret = mySapModel.FrameObj.SetLoadPoint(load.FrameName, load.LoadPat, load.MyType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, load.Replace);
-        }
-        private static void CreateDistributedLoad(Load load)
-        {
-           // ret = mySapModel.FrameObj.SetLoadDistributed(load.FrameName, load.LoadPat, load.MyType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, load.Replace);
-        }
-
-        //DEFINE LOAD PATTERN METHOD
-        private static void AddLoadPattern(LoadPattern loadPat)
-        { 
-            //ret = mySapModel.LoadPatterns.Add(loadPat.Name,loadPat.LoadPatternType,loadPat.Multiplier);
-        }
-
+        
         #endregion
 
 
@@ -98,11 +83,11 @@ namespace DynamoSAP.Assembly
 
             try
             {
-                SAPApplication.Application.InitializeSapModel(ref mySapObject, ref mySapModel);
+                SAPConnection.Initialize.InitializeSapModel(ref mySapObject, ref mySapModel);
             }
             catch (Exception)
             {
-                SAPApplication.Application.Release(ref mySapObject, ref mySapModel);
+                SAPConnection.Initialize.Release(ref mySapObject, ref mySapModel);
             };
 
             //2. Create Geometry
@@ -126,7 +111,7 @@ namespace DynamoSAP.Assembly
             {
                 //Call the AddLoadPattern method
                 
-                AddLoadPattern(loadPat);              
+                //AddLoadPattern(loadPat);              
             }
 
             // 5. Define Load Cases
@@ -140,13 +125,13 @@ namespace DynamoSAP.Assembly
                 {
                     //Call the CreatePointLoad method
                     
-                    CreatePointLoad(load);
+                    ret=SAPConnection.LoadMapper.CreatePointLoad(ref mySapModel, load.FrameName, load.LoadPat, load.MyType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, load.Replace);
                 }
                 if (load.LoadType == "DistributedLoad")
                 {
                     //Call the CreateDistributedLoad method
-                   
-                    CreateDistributedLoad(load);
+
+                    ret = SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, load.FrameName, load.LoadPat, load.MyType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, load.Replace);
                 }
             }
 

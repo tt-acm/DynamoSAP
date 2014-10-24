@@ -11,8 +11,8 @@ namespace DynamoSAP.Analysis
         //Load Pattern Name
         internal string Name { get; set; }
         
-        // Type of Load Pattern - THIS THROWS AN EXCEPTION AS IT IS USING THE SAP LIBRARY. THIS IS NOT OPTIONAL!
-        internal eLoadPatternType LoadPatternType { get; set; }
+        // Type of Load Pattern
+        internal int LoadPatternType { get; set; }
         
         // Multiplier
         internal double Multiplier = 1.0;
@@ -71,18 +71,17 @@ namespace DynamoSAP.Analysis
         /// <param name="Multiplier">The self weight multiplier for the new load pattern.</param>
         /// <returns></returns>
         //public static LoadPattern SetLoadPattern(string Name, eLoadPatternType LoadPatternType, double Multiplier)
-            public static LoadPattern SetLoadPattern(string Name, double Multiplier)
+            public static LoadPattern SetLoadPattern(string Name, int LoadPatternType, double Multiplier)
         {
-            //return new LoadPattern(Name,eLoadPatternType LoadPatternType, Multiplier);
-             return new LoadPattern(Name, Multiplier);
-        }
+            return new LoadPattern(Name, LoadPatternType, Multiplier);
+            }
 
         //PRIVATE CONSTRUCTOR
-       // private LoadPattern(string name, eLoadPatternType loadPatternType, double multiplier)
-             private LoadPattern(string name, double multiplier)
+       private LoadPattern(string name, int loadPatternType, double multiplier)
+            
         {
             Name = name;
-            //LoadPatternType = loadPatternType;
+            LoadPatternType = loadPatternType;
             Multiplier = multiplier;
         }
     }

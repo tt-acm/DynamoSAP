@@ -163,8 +163,7 @@ namespace SAPConnection
 
             return "A992Fy50"; // Default
         }
-
-
+        //Check if Section exists
         public static bool IsSectionExists(string DSection, ref cSapModel mySapModel)
         {
             int number = 0;
@@ -192,11 +191,20 @@ namespace SAPConnection
 
             //TODO: Mapping Needed  Vertical Justification/ Lateral Justification 1 = bottom left2 = bottom center 3 = bottom right 4 = middle left 5 = middle center 6 = middle right 7 = top left 8 = top center 9 = top right 10 = centroid 11 = shear center
 
-            long ret = mySapModel.FrameObj.SetInsertionPoint(FrmId, Just, false, true, ref offset1, ref offset2);
+            int ret = mySapModel.FrameObj.SetInsertionPoint(FrmId, Just, false, true, ref offset1, ref offset2);
 
             return true;
         }
 
+        public static int DefineSection(ref cSapModel mySapModel, string SectionName, string MatProp, string SecCatalog, string SectionProfile)
+        {
+            return mySapModel.PropFrame.ImportProp(SectionName, MatProp, SecCatalog, SectionProfile);
+        }
+        
+        public static int SetSection(ref cSapModel mySapModel, string Name, string SectionProfile)
+        {
+            return mySapModel.FrameObj.SetSection(Name, SectionProfile);           
+        }
 
     }
 }
