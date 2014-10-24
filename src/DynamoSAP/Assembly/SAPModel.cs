@@ -11,7 +11,7 @@ using System.IO;
 using SAPConnection;
 
 using DynamoSAP.Structure;
-//using DynamoSAP.Analysis;
+using DynamoSAP.Analysis;
 
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
@@ -74,7 +74,7 @@ namespace DynamoSAP.Assembly
 
 
         //// DYNAMO NODES ////
-        public static string CreateSAPModel(List<Element> SAPElements)
+        public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns )
         {
             //1. Instantiate SAPModel
             SAP2000v16.SapObject mySapObject = null;
@@ -106,12 +106,11 @@ namespace DynamoSAP.Assembly
 
             // 4. Add Load Patterns
 
-            //foreach (LoadPattern loadPat in SAPLoadPatterns)
-            //{
-            //    //Call the AddLoadPattern method
-                
-            //    //AddLoadPattern(loadPat);              
-            //}
+            foreach (LoadPattern lp in SAPLoadPatterns)
+            {
+                //Call the AddLoadPattern method
+                SAPConnection.LoadMapper.AddLoadPattern(ref mySapModel, lp.Name, lp.Type, lp.Multiplier);          
+            }
 
             // 5. Define Load Cases
             
