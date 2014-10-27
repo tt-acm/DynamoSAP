@@ -67,14 +67,12 @@ namespace DynamoSAP.Assembly
             SAPConnection.JustificationMapper.SetRotationFrm(ref mySapModel, f.Label, f.Rotation);
 
         }
-
-
         #endregion
 
 
 
         //// DYNAMO NODES ////
-        public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns, List<LoadCase> SAPLoadCases)
+        public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns, List<LoadCase> SAPLoadCases, List<Restraint> SAPRestraints)
         {
             string report = string.Empty;
 
@@ -103,7 +101,14 @@ namespace DynamoSAP.Assembly
 
 
             // 3. Assigns Restraints to Nodes
+            foreach (var rest in SAPRestraints)
+            {
+                List<bool> restraints = new List<bool>();
+                restraints.Add(rest.U1); restraints.Add(rest.U2); restraints.Add(rest.U3);
+                restraints.Add(rest.R1); restraints.Add(rest.R2); restraints.Add(rest.R3);
 
+                SAPConnection.RestraintMapper.SetRestaints(ref mySapModel, rest.Pt, restraints.ToArray());
+            }
 
 
             // 4. Add Load Patterns
@@ -137,7 +142,7 @@ namespace DynamoSAP.Assembly
                     string[] Dnames = names.ToArray();
                     double[] DSFs = SFs.ToArray();
 
-                    SAPConnection.LoadMapper.AddLoadCase(ref mySapModel, lc.Name, types.Count(), ref Dtypes, ref Dnames, ref DSFs);
+                    SAPConnection.LoadMapper.AddLoadCase(ref mySapModel, lc.Name, types.Count(), ref Dtypes, ref Dnames, ref DSFs, lc.Type);
                 }
             }
             else 

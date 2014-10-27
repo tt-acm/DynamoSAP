@@ -50,7 +50,7 @@ namespace DynamoSAP.Structure
         }
 
            
-        //PRIVATE METHODS
+        //PUBLIC METHODS
         public override string ToString()
         {
             return "Frame";

@@ -64,15 +64,14 @@
     <Compile Include="Analysis\Load.cs" />
     <Compile Include="Analysis\LoadCase.cs" />
     <Compile Include="Analysis\LoadPattern.cs" />
+    <Compile Include="Analysis\Restraint.cs" />
     <Compile Include="Assembly\SAPModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structure\Element.cs" />
     <Compile Include="Structure\Frame.cs" />
-    <Compile Include="Structure\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Results\" />
-    <Folder Include="Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DynamoSAP_DynamoCustomization.xml" />

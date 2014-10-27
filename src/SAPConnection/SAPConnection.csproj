@@ -57,6 +57,7 @@
     <Compile Include="LoadMapper.cs" />
     <Compile Include="MaterialMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RestraintMapper.cs" />
     <Compile Include="StructureMapper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

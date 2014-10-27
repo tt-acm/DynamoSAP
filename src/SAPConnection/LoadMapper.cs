@@ -24,9 +24,66 @@ namespace SAPConnection
         }
 
         // DEFINE LOAD CASE IN SAP
-        public static void AddLoadCase(ref cSapModel Model, string Name, int LoadCount, ref string[] Loadtype, ref string[] LoadName, ref double []SF){
-            int ret = Model.LoadCases.StaticLinear.SetCase(Name);
-            ret = Model.LoadCases.StaticLinear.SetLoads(Name, LoadCount, ref Loadtype, ref LoadName, ref SF);
+        public static void AddLoadCase(ref cSapModel Model, string Name, int LoadCount, ref string[] Loadtype, ref string[] LoadName, ref double []SF, string LCType)
+        {
+            if (LCType == eLoadCaseType.CASE_LINEAR_STATIC.ToString())
+            {
+                int ret = Model.LoadCases.StaticLinear.SetCase(Name);
+                ret = Model.LoadCases.StaticLinear.SetLoads(Name, LoadCount, ref Loadtype, ref LoadName, ref SF);
+            }
+            else if (LCType == eLoadCaseType.CASE_NONLINEAR_STATIC.ToString())
+            {
+                
+            }
+            else if (LCType == eLoadCaseType.CASE_MODAL.ToString())
+            {
+                
+            }
+            else if (LCType == eLoadCaseType.CASE_RESPONSE_SPECTRUM.ToString())
+            {
+                
+            }
+            else if (LCType == eLoadCaseType.CASE_LINEAR_HISTORY.ToString())
+            {
+                
+            }
+            else if (LCType == eLoadCaseType.CASE_NONLINEAR_HISTORY.ToString())
+            {
+                
+            }
+            else if (LCType == eLoadCaseType.CASE_LINEAR_DYNAMIC.ToString())
+            {
+                
+            }
+            else if (LCType == eLoadCaseType.CASE_NONLINEAR_DYNAMIC.ToString())
+            {
+                
+            }
+            else if (LCType == eLoadCaseType.CASE_MOVING_LOAD.ToString() )
+            {
+                
+            }
+            else if (LCType == eLoadCaseType.CASE_BUCKLING.ToString())
+            {
+                
+            }
+            else if (LCType == eLoadCaseType.CASE_STEADY_STATE.ToString())
+            { 
+
+            }
+            else if (LCType == eLoadCaseType.CASE_POWER_SPECTRAL_DENSITY.ToString())
+            {
+                
+            }
+            else if (LCType == eLoadCaseType.CASE_LINEAR_STATIC_MULTISTEP.ToString())
+            {
+                
+            }
+            else if (LCType == eLoadCaseType.CASE_HYPERSTATIC.ToString())
+            {
+                
+            }
+
         }
 
         //CREATE LOAD METHODS
