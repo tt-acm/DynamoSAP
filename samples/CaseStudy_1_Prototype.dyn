@@ -1,4 +1,4 @@
-<Workspace Version="0.7.2.2921" X="172.790942194773" Y="162.821861446654" zoom="0.743169520565793" Description="" Category="" Name="Home">
+<Workspace Version="0.7.2.2921" X="-334.069277470171" Y="-101.636829181901" zoom="0.516014581053519" Description="" Category="" Name="Home">
   <Elements>
     <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="1035c837-aec8-4686-aebf-e33c6ec4cbb7" nickname="Double Slider" x="29.7277986100731" y="629.542639365685" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Double>30</System.Double>
@@ -15,7 +15,7 @@
     <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="71e77aca-528a-4869-bdab-857d5c7f0c7a" nickname="Code Block" x="139.11766394123" y="322.525932764784" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;Steel&quot;;" ShouldFocus="false" />
     <Dynamo.Nodes.Watch type="Dynamo.Nodes.Watch" guid="ea3c7eea-0d6d-4cc1-8b40-b9de4b4c2b76" nickname="Watch" x="1537.46882050798" y="395.550921683096" isVisible="true" isUpstreamVisible="true" lacing="Disabled" />
     <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="d72bf644-f03e-4d5e-8327-ed64c75ae88a" nickname="Code Block" x="136.059914754923" y="416.300064082861" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;W12x16&quot;;" ShouldFocus="false" />
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="bdcb8984-1cd0-4e6c-82f1-acccdbd0d409" nickname="SAPModel.CreateSAPModel" x="1264.9400556155" y="391.721707608502" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.SAPModel.CreateSAPModel@DynamoSAP.Structure.Element[],DynamoSAP.Analysis.LoadPattern[],DynamoSAP.Analysis.LoadCase[],DynamoSAP.Analysis.Restraint[]" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="bdcb8984-1cd0-4e6c-82f1-acccdbd0d409" nickname="SAPModel.CreateSAPModel" x="1264.9400556155" y="391.721707608502" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.SAPModel.CreateSAPModel@DynamoSAP.Structure.Element[],DynamoSAP.Analysis.LoadPattern[],DynamoSAP.Analysis.LoadCase[],DynamoSAP.Analysis.Restraint[],DynamoSAP.Analysis.Load[]" />
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="6d6903b2-403a-430d-8fb1-cd7f31fc24f6" nickname="LoadPattern.Name" x="282.240487513696" y="1010.20240510812" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Analysis.LoadPattern.Name" />
     <DSCoreNodesUI.CreateList type="DSCoreNodesUI.CreateList" guid="81966e27-aecd-4de7-a3f3-9236b6c4833a" nickname="List.Create" x="297.383931838629" y="1168.2524919" isVisible="true" isUpstreamVisible="true" lacing="Disabled" inputcount="2" />
     <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="1e506717-f89c-4bc0-8692-753ceb354d2e" nickname="Code Block" x="-347.473507882296" y="1038.80182517715" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;Ana_LiveLoad&quot;;" ShouldFocus="false" />
@@ -23,8 +23,8 @@
     <Dynamo.Nodes.DoubleInput type="Dynamo.Nodes.DoubleInput" guid="1fc24964-2520-4e5e-9a43-43fff411f228" nickname="LType" x="-581.302910505416" y="1203.28907892753" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Double value="3" />
     </Dynamo.Nodes.DoubleInput>
-    <Dynamo.Nodes.DoubleInput type="Dynamo.Nodes.DoubleInput" guid="9b7f6168-0fad-4e15-862e-1efe17171e13" nickname="Number" x="-545.837717217553" y="1453.99646372859" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <System.Double value="1" />
+    <Dynamo.Nodes.DoubleInput type="Dynamo.Nodes.DoubleInput" guid="9b7f6168-0fad-4e15-862e-1efe17171e13" nickname="Load Direction 4 = X, 5 = Y, 6=Z" x="1809.75544225744" y="957.547706603709" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <System.Double value="5" />
     </Dynamo.Nodes.DoubleInput>
     <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="c8f46380-e42d-45f5-9b40-27ba24a74586" nickname="Multiplier" x="-673.247011519025" y="1264.24651867331" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Double>2</System.Double>
@@ -89,20 +89,39 @@
     <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="c4b323a7-4293-4dbb-a3c9-3872111e9817" nickname="Boolean" x="676.761036064621" y="-264.434800792562" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Boolean>True</System.Boolean>
     </DSCoreNodesUI.BoolSelector>
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="a57e4440-3f1b-4210-a666-45f6464538d0" nickname="Point.ByCoordinates" x="854.460818748828" y="41.0212541531533" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Point.ByCoordinates@double,double,double">
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="a57e4440-3f1b-4210-a666-45f6464538d0" nickname="Point.ByCoordinates" x="753.005024515523" y="-39.1996064034134" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Point.ByCoordinates@double,double,double">
       <PortInfo index="0" default="True" />
       <PortInfo index="1" default="True" />
       <PortInfo index="2" default="True" />
     </Dynamo.Nodes.DSFunction>
-    <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="b2fa1adf-6a48-4f96-994d-b0a995301d90" nickname="Double Slider" x="642.438449627674" y="-0.799752747317655" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="b2fa1adf-6a48-4f96-994d-b0a995301d90" nickname="Double Slider" x="540.982655394369" y="-81.0206133038843" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Double>100</System.Double>
       <Range min="0" max="100" />
     </Dynamo.Nodes.DoubleSlider>
-    <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="3a8f18bf-7ef9-40f8-8717-7f4f974a032a" nickname="Double Slider" x="638.425511977512" y="103.513310608093" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="3a8f18bf-7ef9-40f8-8717-7f4f974a032a" nickname="Double Slider" x="536.969717744207" y="23.2924500515263" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Double>100</System.Double>
       <Range min="0" max="100" />
     </Dynamo.Nodes.DoubleSlider>
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="0456f355-2241-4aca-a3d1-4f056e0be19f" nickname="Restraint.Roller" x="1020.75739168666" y="43.4678025172113" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Analysis.Restraint.Roller@Autodesk.DesignScript.Geometry.Point" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="0456f355-2241-4aca-a3d1-4f056e0be19f" nickname="Restraint.Roller" x="919.301597453355" y="-36.7530580393554" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Analysis.Restraint.Roller@Autodesk.DesignScript.Geometry.Point" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="74da66ca-c980-48dd-8ede-ad6f1125b278" nickname="Load.PointLoadOnFrame" x="2086.83265538928" y="821.745636742346" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Analysis.Load.PointLoadOnFrame@DynamoSAP.Structure.Frame,DynamoSAP.Analysis.LoadPattern,int,int,double,double,string,bool,bool">
+      <PortInfo index="6" default="True" />
+      <PortInfo index="7" default="True" />
+      <PortInfo index="8" default="True" />
+    </Dynamo.Nodes.DSFunction>
+    <Dynamo.Nodes.DoubleInput type="Dynamo.Nodes.DoubleInput" guid="f273b2da-bb62-4b41-a2ea-1bdbc9e6e8d4" nickname="Number" x="-645.837717217553" y="1453.99646372859" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <System.Double value="1" />
+    </Dynamo.Nodes.DoubleInput>
+    <Dynamo.Nodes.DoubleInput type="Dynamo.Nodes.DoubleInput" guid="140e94cb-4d88-4bc8-b956-ffbe3cfc7373" nickname="Type 1= Force, 2 = Moment" x="1831.62843506973" y="898.230775416866" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <System.Double value="1" />
+    </Dynamo.Nodes.DoubleInput>
+    <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="d22d9a3e-372a-4f86-9da5-b85f35345b8d" nickname="Double Slider" x="1833.62425728815" y="1018.59482681831" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <System.Double>0.3</System.Double>
+      <Range min="0" max="1" />
+    </Dynamo.Nodes.DoubleSlider>
+    <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="316792bc-5664-4f19-a12b-11b12417e82e" nickname="Double Slider" x="1835.17579783622" y="1120.4844723016" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <System.Double>50</System.Double>
+      <Range min="0" max="100" />
+    </Dynamo.Nodes.DoubleSlider>
   </Elements>
   <Connectors>
     <Dynamo.Models.ConnectorModel start="f510a199-4a3c-4e65-8c7c-f3c6b48a24fd" start_index="0" end="f7c10649-5489-4cf1-8947-4b4744dfccfd" end_index="0" portType="0" />
@@ -113,6 +132,7 @@
     <Dynamo.Models.ConnectorModel start="81966e27-aecd-4de7-a3f3-9236b6c4833a" start_index="0" end="bdcb8984-1cd0-4e6c-82f1-acccdbd0d409" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="1e506717-f89c-4bc0-8692-753ceb354d2e" start_index="0" end="fd9029bc-3dd4-4bdf-af01-536dd6d68b7c" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="45fd4a9f-e50a-4584-9e23-57e1d0f30373" start_index="0" end="5ca5bdaf-4ee9-4b0a-962d-e5f0a7116b6c" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="9b7f6168-0fad-4e15-862e-1efe17171e13" start_index="0" end="74da66ca-c980-48dd-8ede-ad6f1125b278" end_index="3" portType="0" />
     <Dynamo.Models.ConnectorModel start="526e942b-f0a7-47d5-8f60-859dd8966d80" start_index="0" end="a2cfc6be-e094-4713-af70-d8928d36fdef" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="98dd8b3a-69b3-44e1-bdee-52ab33b18f0b" start_index="0" end="526e942b-f0a7-47d5-8f60-859dd8966d80" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="546fe8b1-ad84-475c-ae85-4711b4cc3ecc" start_index="0" end="cbfe2d3d-7600-42fc-9494-4d56efbab0db" end_index="0" portType="0" />
@@ -129,6 +149,7 @@
     <Dynamo.Models.ConnectorModel start="5ca5bdaf-4ee9-4b0a-962d-e5f0a7116b6c" start_index="0" end="81966e27-aecd-4de7-a3f3-9236b6c4833a" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="fd9029bc-3dd4-4bdf-af01-536dd6d68b7c" start_index="0" end="6d6903b2-403a-430d-8fb1-cd7f31fc24f6" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="fd9029bc-3dd4-4bdf-af01-536dd6d68b7c" start_index="0" end="81966e27-aecd-4de7-a3f3-9236b6c4833a" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="fd9029bc-3dd4-4bdf-af01-536dd6d68b7c" start_index="0" end="74da66ca-c980-48dd-8ede-ad6f1125b278" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="565c8907-152c-4524-be37-2b7d4dfbe1f6" start_index="0" end="526e942b-f0a7-47d5-8f60-859dd8966d80" end_index="3" portType="0" />
     <Dynamo.Models.ConnectorModel start="9ac6b0d0-874a-434e-9ebc-55d620e3445e" start_index="0" end="b0f20b5d-c413-4c81-86a7-a512b54a8cd1" end_index="3" portType="0" />
     <Dynamo.Models.ConnectorModel start="28033618-e1e3-4851-b803-0ae4afbe7a9b" start_index="0" end="752c5efd-183d-461e-a08a-2755e1292c99" end_index="1" portType="0" />
@@ -138,6 +159,7 @@
     <Dynamo.Models.ConnectorModel start="f7c10649-5489-4cf1-8947-4b4744dfccfd" start_index="0" end="d4c8e73e-4f1a-4c0a-b306-66e894493b83" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="11dce258-4ee4-4f7b-aeb8-41d1d7794e82" start_index="0" end="752c5efd-183d-461e-a08a-2755e1292c99" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="d4c8e73e-4f1a-4c0a-b306-66e894493b83" start_index="0" end="bdcb8984-1cd0-4e6c-82f1-acccdbd0d409" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="d4c8e73e-4f1a-4c0a-b306-66e894493b83" start_index="0" end="74da66ca-c980-48dd-8ede-ad6f1125b278" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="752c5efd-183d-461e-a08a-2755e1292c99" start_index="0" end="bdcb8984-1cd0-4e6c-82f1-acccdbd0d409" end_index="3" portType="0" />
     <Dynamo.Models.ConnectorModel start="f8962557-af9b-451e-b4c8-4dc01c91f199" start_index="0" end="11dce258-4ee4-4f7b-aeb8-41d1d7794e82" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="f8962557-af9b-451e-b4c8-4dc01c91f199" start_index="0" end="11dce258-4ee4-4f7b-aeb8-41d1d7794e82" end_index="2" portType="0" />
@@ -149,6 +171,10 @@
     <Dynamo.Models.ConnectorModel start="b2fa1adf-6a48-4f96-994d-b0a995301d90" start_index="0" end="a57e4440-3f1b-4210-a666-45f6464538d0" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="3a8f18bf-7ef9-40f8-8717-7f4f974a032a" start_index="0" end="a57e4440-3f1b-4210-a666-45f6464538d0" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="0456f355-2241-4aca-a3d1-4f056e0be19f" start_index="0" end="752c5efd-183d-461e-a08a-2755e1292c99" end_index="2" portType="0" />
+    <Dynamo.Models.ConnectorModel start="74da66ca-c980-48dd-8ede-ad6f1125b278" start_index="0" end="bdcb8984-1cd0-4e6c-82f1-acccdbd0d409" end_index="4" portType="0" />
+    <Dynamo.Models.ConnectorModel start="140e94cb-4d88-4bc8-b956-ffbe3cfc7373" start_index="0" end="74da66ca-c980-48dd-8ede-ad6f1125b278" end_index="2" portType="0" />
+    <Dynamo.Models.ConnectorModel start="d22d9a3e-372a-4f86-9da5-b85f35345b8d" start_index="0" end="74da66ca-c980-48dd-8ede-ad6f1125b278" end_index="4" portType="0" />
+    <Dynamo.Models.ConnectorModel start="316792bc-5664-4f19-a12b-11b12417e82e" start_index="0" end="74da66ca-c980-48dd-8ede-ad6f1125b278" end_index="5" portType="0" />
   </Connectors>
   <Notes>
     <Dynamo.Models.NoteModel text="Create Load Patterns" x="144.215004219524" y="941.305383650335" />
@@ -156,5 +182,6 @@
     <Dynamo.Models.NoteModel text="Create Load case" x="851.354527646138" y="937.216219603899" />
     <Dynamo.Models.NoteModel text="Assemble the Sap Model" x="1280.75512224891" y="321.411079392868" />
     <Dynamo.Models.NoteModel text="Set Restaints" x="903.887159438098" y="-478.906224457515" />
+    <Dynamo.Models.NoteModel text="Set Point Load" x="2122.83293004309" y="762.548658135543" />
   </Notes>
 </Workspace>

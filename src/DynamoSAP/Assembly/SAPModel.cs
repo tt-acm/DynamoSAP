@@ -72,7 +72,7 @@ namespace DynamoSAP.Assembly
 
 
         //// DYNAMO NODES ////
-        public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns, List<LoadCase> SAPLoadCases, List<Restraint> SAPRestraints)
+        public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns, List<LoadCase> SAPLoadCases, List<Restraint> SAPRestraints, List<Load>SAPLoads)
         {
             string report = string.Empty;
 
@@ -88,6 +88,8 @@ namespace DynamoSAP.Assembly
                 SAPConnection.Initialize.Release(ref mySapObject, ref mySapModel);
             };
 
+            // Dictionary to hold Structure Frames on <string, string> <GUID,Label>
+            Dictionary<string, string> SapModelFrmDict = new Dictionary<string, string>();
 
             //2. Create Geometry
             foreach (var el in SAPElements)
@@ -95,9 +97,9 @@ namespace DynamoSAP.Assembly
                 if (el.GetType().ToString().Contains("Frame"))
                 {
                     CreateFrame(el as Frame, ref mySapModel);
+                    SapModelFrmDict.Add(el.GUID, el.Label);
                 }
             }
-
 
 
             // 3. Assigns Restraints to Nodes
@@ -112,7 +114,6 @@ namespace DynamoSAP.Assembly
 
 
             // 4. Add Load Patterns
-
             foreach (LoadPattern lp in SAPLoadPatterns)
             {
                 //Call the AddLoadPattern method
@@ -120,7 +121,6 @@ namespace DynamoSAP.Assembly
             }
 
             // 5. Define Load Cases
-
 
             if (SAPLoadCases != null)
             {
@@ -151,21 +151,27 @@ namespace DynamoSAP.Assembly
             }
 
             // 6. Loads
-            //foreach (Load load in SAPLoads)
-            //{
-            //    if (load.LoadType == "PointLoad")
-            //    {
-            //        //Call the CreatePointLoad method
-                    
-            //        //ret=SAPConnection.LoadMapper.CreatePointLoad(ref mySapModel, load.FrameName, load.LoadPat, load.MyType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, load.Replace);
-            //    }
-            //    if (load.LoadType == "DistributedLoad")
-            //    {
-            //        //Call the CreateDistributedLoad method
+            foreach (Load load in SAPLoads)
+            {
+                // get Frame Label
+                string frmId = string.Empty;
+                //string frmId = SapModelFrmDict[load.Frame.GUID];
+                bool get = SapModelFrmDict.TryGetValue(load.Frame.GUID, out frmId);
 
-            //        //ret = SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, load.FrameName, load.LoadPat, load.MyType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, load.Replace);
-            //    }
-            //}
+                if (!string.IsNullOrEmpty(frmId))
+                {
+                    if (load.LoadType == "PointLoad")
+                    {
+                        //Call the CreatePointLoad method
+                        SAPConnection.LoadMapper.CreatePointLoad(ref mySapModel, frmId, load.lPattern.Name, load.MyType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, load.Replace);
+                    }
+                    if (load.LoadType == "DistributedLoad")
+                    {
+                        //Call the CreateDistributedLoad method
+                        SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, frmId, load.lPattern.Name, load.MyType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, load.Replace);
+                    } 
+                }
+            }
 
             //if can't set to null, will be a hanging process
             mySapModel = null;

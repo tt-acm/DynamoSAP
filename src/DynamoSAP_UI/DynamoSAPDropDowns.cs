@@ -27,6 +27,8 @@ namespace DynamoSAP_UI
         public LoadCaseTypeDropDown(WorkspaceModel workspace) : base(workspace) { }
     }
 
+    // TODO: Add LoadDirectionDropDown Global or Local CS
+
     [NodeName("JustificationDropDown")]
     [NodeCategory("DynamoSAP.DynamoSAP.Structure.Frame")]
     [NodeDescription("Select Justification to use with Create Frame nodes")]
@@ -36,7 +38,7 @@ namespace DynamoSAP_UI
         public JustificationTypeDropdown(WorkspaceModel workspace) : base(workspace) { }
     }
 
-    public enum Justification :int // Dynamo change the order, ans starts at 0
+    public enum Justification // Dynamo change the order, ans starts at 0
     {
         BottomLeft = 1,
         BottomCenter = 2,
