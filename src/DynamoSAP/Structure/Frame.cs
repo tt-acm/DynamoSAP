@@ -17,7 +17,7 @@ namespace DynamoSAP.Structure
         //sectionprop
         internal string SecProp { get; set; }
         //justification - follow SAP enum for InsertionPoint set default 5
-        internal int Just { get; set; } 
+        internal string Just { get; set; } 
         //rotation
         internal double Angle { get; set; }
 
@@ -39,7 +39,7 @@ namespace DynamoSAP.Structure
             get { return SecProp; }
         }
 
-        public int Justification
+        public string Justification
         {
             get { return Just; }
         }
@@ -58,19 +58,19 @@ namespace DynamoSAP.Structure
  
 
         // Frame From Curve
-        public static Frame FromLine(Line Line, string MatProp = "Steel", string SecProp = "W12X14", int Just = 5, double Rot = 0)
+        public static Frame FromLine(Line Line, string MatProp = "Steel", string SecProp = "W12X14", string Just = "MiddleCenter", double Rot = 0)
         {
             return new Frame(Line, MatProp, SecProp, Just, Rot);
         }
         // Frame from Nodes
-        public static Frame FromEndPoints(Point i, Point j, string MatProp = "Steel", string SecProp = "W12X14", int Just = 5, double Rot = 0)
+        public static Frame FromEndPoints(Point i, Point j, string MatProp = "Steel", string SecProp = "W12X14", string Just = "MiddleCenter", double Rot = 0)
         {
             return new Frame(i, j, MatProp, SecProp, Just, Rot);
         }
 
          // PRIVATE CONSTRUCTORS
         private Frame(){}
-        private Frame(Line line,string matProp, string secProp, int just, double angle)
+        private Frame(Line line,string matProp, string secProp, string just, double angle)
         {
             BaseCrv = line;
             Angle = angle;
@@ -78,7 +78,7 @@ namespace DynamoSAP.Structure
             SecProp= secProp;
             Just = just;
         }
-        private Frame(Point i, Point j, string matProp, string secProp, int just, double angle)
+        private Frame(Point i, Point j, string matProp, string secProp, string just, double angle)
         {
             BaseCrv = Line.ByStartPointEndPoint(i, j);
             Angle = angle;

@@ -27,7 +27,6 @@ namespace DynamoSAP.Analysis
             }
 
                 return new LoadCase(Name, LoadPatterns, SFs);
-
         }
 
         //PRIVATE CONSTRUCTOR
@@ -37,7 +36,6 @@ namespace DynamoSAP.Analysis
             name = Name;
             loadPatterns = LoadPatterns;
             sFs = SFs;
-
         }
 
     }

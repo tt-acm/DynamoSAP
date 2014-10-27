@@ -13,7 +13,7 @@ namespace DynamoSAP_UI
     [NodeCategory("DynamoSAP.DynamoSAP.Analysis.LoadPattern")]
     [NodeDescription("Select Load Pattern to use with Set Load Pattern node")]
     [IsDesignScriptCompatible]
-    public class LoadPatternTypeDropDown: EnumAsInt<eLoadPatternType>
+    public class LoadPatternTypeDropDown: EnumAsString<eLoadPatternType>
     {
         public LoadPatternTypeDropDown(WorkspaceModel workspace) : base(workspace) { }
     }
@@ -22,15 +22,15 @@ namespace DynamoSAP_UI
     [NodeCategory("DynamoSAP.DynamoSAP.Structure.Frame")]
     [NodeDescription("Select Justification to use with Create Frame nodes")]
     [IsDesignScriptCompatible]
-    public class JustificationTypeDropdown : EnumAsInt<Justification>
+    public class JustificationTypeDropdown : EnumAsString<Justification>
     {
         public JustificationTypeDropdown(WorkspaceModel workspace) : base(workspace) { }
     
     }
 
 
-    public enum Justification : int
-    { 
+    public enum Justification :int // Dynamo change the order, ans starts at 0
+    {
         BottomLeft = 1,
         BottomCenter = 2,
         BottomRight = 3,
@@ -41,7 +41,6 @@ namespace DynamoSAP_UI
         TopCenter = 8,
         TopRight = 9,
         Centroid = 10,
-        ShearCenter = 11
-    
+        ShearCenter = 11    
     }
 }

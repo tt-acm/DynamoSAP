@@ -17,9 +17,10 @@ namespace SAPConnection
     public class LoadMapper
     {
         // DEFINE LOAD PATTERN In SAPMODEL METHOD
-        public static void AddLoadPattern(ref cSapModel Model, string Name, int Type, double Multiplier)
+        public static void AddLoadPattern(ref cSapModel Model, string Name, string Type, double Multiplier)
         {
-            int ret = Model.LoadPatterns.Add(Name, (eLoadPatternType)Type, Multiplier);
+            eLoadPatternType type = (eLoadPatternType)Enum.Parse(typeof(eLoadPatternType), Type);
+            int ret = Model.LoadPatterns.Add(Name, type, Multiplier);  
         }
 
         // DEFINE LOAD CASE IN SAP

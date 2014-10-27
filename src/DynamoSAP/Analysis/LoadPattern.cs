@@ -13,7 +13,7 @@ namespace DynamoSAP.Analysis
         private string name { get; set; }
 
         // Type of Load Pattern
-        private int type { get; set; }
+        private string type { get; set; }
 
         // Multiplier
         private double multiplier { get; set; }
@@ -21,7 +21,7 @@ namespace DynamoSAP.Analysis
 
         //QUERY NODES
         public string Name { get { return name; } }
-        public int Type { get { return type; } }
+        public string Type { get { return type; } }
         public double Multiplier { get { return multiplier; } }
 
         //DYNAMO NODE
@@ -72,13 +72,13 @@ namespace DynamoSAP.Analysis
         /// <param name="Multiplier">The self weight multiplier for the new load pattern.</param>
         /// <returns></returns>
         //public static LoadPattern SetLoadPattern(string Name, eLoadPatternType LoadPatternType, double Multiplier)
-        public static LoadPattern SetLoadPattern(string Name, int LType, double Multiplier = 1)
+        public static LoadPattern SetLoadPattern(string Name, string LType, double Multiplier = 1)
         {
             return new LoadPattern(Name, LType, Multiplier);
         }
 
         //PRIVATE CONSTRUCTOR
-        private LoadPattern(string Name, int LoadPatternType, double Multiplier)
+        private LoadPattern(string Name, string LoadPatternType, double Multiplier)
         {
             name = Name;
             type = LoadPatternType;
