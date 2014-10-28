@@ -110,19 +110,30 @@ namespace DynamoSAP.Analysis
         //If this item is Group, the assignment is made to all frame objects in the group specified by the Name item.
         //If this item is SelectedObjects, assignment is made to all selected frame objects, and the Name item is ignored.
 
+        //PUBLIC METHODS
+        public override string ToString()
+        {
+            if (LoadType == "DistributedLoad")
+            {
+                return "DistributedLoad";
+            }
+            else
+            {
+                return "PointLoad";
+            }  
+        }
 
         //DYNAMO CREATE NODES
-
-        public static Load PointLoadOnFrame(ref Frame Frame, LoadPattern LPattern, int Type, int Dir, double Dist, double Val, string CSys = "Global", bool RelDist = true, bool Replace = true)
+        public static Load PointLoadOnFrame(Frame Frame, LoadPattern LPattern, int Type, int Dir, double Dist, double Val, string CSys = "Global", bool RelDist = true, bool Replace = true)
         {
-            Load l = new Load(ref Frame, LPattern, Type, Dir, Dist, Val, CSys, RelDist, Replace);
+            Load l = new Load(Frame, LPattern, Type, Dir, Dist, Val, CSys, RelDist, Replace);
             l.LoadType = "PointLoad";
             return l;
         }
 
-        public static Load DistributedLoadOnFrame(ref Frame Frame, LoadPattern LPattern, int Type, int Dir, double Dist, double Dist2, double Val, double Val2, string CSys = "Global", bool RelDist = true, bool Replace = true)
+        public static Load DistributedLoadOnFrame(Frame Frame, LoadPattern LPattern, int Type, int Dir, double Dist, double Dist2, double Val, double Val2, string CSys = "Global", bool RelDist = true, bool Replace = true)
         {
-            Load l = new Load(ref Frame, LPattern, Type, Dir, Dist, Dist2, Val, Val2, CSys, RelDist, Replace);
+            Load l = new Load(Frame, LPattern, Type, Dir, Dist, Dist2, Val, Val2, CSys, RelDist, Replace);
             l.LoadType = "DistributedLoad";
             return l;
         }
@@ -131,7 +142,7 @@ namespace DynamoSAP.Analysis
         private Load() { }
 
         //constructor for PointLoads
-        private Load(ref Frame frame,LoadPattern loadPat, int myType, int dir, double dist, double val, string cSys, bool relDist, bool replace)
+        private Load(Frame frame,LoadPattern loadPat, int myType, int dir, double dist, double val, string cSys, bool relDist, bool replace)
         {
             frm = frame;
             lPattern = loadPat;
@@ -145,7 +156,7 @@ namespace DynamoSAP.Analysis
         }
 
         //constructor for DistributedLoads
-        private Load(ref Frame frame, LoadPattern loadPat, int myType, int dir, double dist, double dist2, double val, double val2, string cSys, bool relDist, bool replace)
+        private Load(Frame frame, LoadPattern loadPat, int myType, int dir, double dist, double dist2, double val, double val2, string cSys, bool relDist, bool replace)
         {
             frm= frame;
             lPattern = loadPat;

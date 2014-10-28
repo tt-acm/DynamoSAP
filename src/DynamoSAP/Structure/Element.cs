@@ -12,7 +12,9 @@ namespace DynamoSAP.Structure
     [IsVisibleInDynamoLibrary(false)]
     public class Element
     {
-        public string GUID { get {return System.Guid.NewGuid().ToString();}}
+        private string guid = System.Guid.NewGuid().ToString();
+
+        public string GUID { get { return guid; } }
 
         public string Label { get; set; }
 

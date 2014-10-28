@@ -48,7 +48,6 @@ namespace DynamoSAP.Structure
         { 
             get{ return Angle;}
         }
-
            
         //PUBLIC METHODS
         public override string ToString()
