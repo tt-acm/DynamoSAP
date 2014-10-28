@@ -48,7 +48,12 @@ namespace DynamoSAP.Structure
         { 
             get{ return Angle;}
         }
-           
+
+        public string guid
+        {
+            get { return GUID; }
+        }
+
         //PUBLIC METHODS
         public override string ToString()
         {
