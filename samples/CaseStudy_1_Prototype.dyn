@@ -1,4 +1,4 @@
-<Workspace Version="0.7.2.2921" X="-1293.21979476477" Y="-291.163893664038" zoom="0.842161062980077" Description="" Category="" Name="Home">
+<Workspace Version="0.7.2.2921" X="-253.487680658915" Y="366.743580502976" zoom="0.899635299018135" Description="" Category="" Name="Home">
   <Elements>
     <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="1035c837-aec8-4686-aebf-e33c6ec4cbb7" nickname="Double Slider" x="76.9796364635698" y="602.792248649365" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Double>30</System.Double>
@@ -64,7 +64,7 @@
     </Dynamo.Nodes.DSFunction>
     <DynamoSAP_UI.LoadCaseTypeDropDown type="DynamoSAP_UI.LoadCaseTypeDropDown" guid="565c8907-152c-4524-be37-2b7d4dfbe1f6" nickname="LoadCaseTypeDropDown" x="720.912681324813" y="1365.5634979922" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="0:CASE_BUCKLING" />
     <DynamoSAP_UI.LoadCaseTypeDropDown type="DynamoSAP_UI.LoadCaseTypeDropDown" guid="9ac6b0d0-874a-434e-9ebc-55d620e3445e" nickname="LoadCaseTypeDropDown" x="704.571260848615" y="1893.0095804826" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="0:CASE_BUCKLING" />
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="28033618-e1e3-4851-b803-0ae4afbe7a9b" nickname="Restraint.Fixed" x="915.396859917744" y="-144.678020755471" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Analysis.Restraint.Fixed@Autodesk.DesignScript.Geometry.Point" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="28033618-e1e3-4851-b803-0ae4afbe7a9b" nickname="Restraint.Fixed" x="996.281006214862" y="-98.7794948128019" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Analysis.Restraint.Fixed@Autodesk.DesignScript.Geometry.Point" />
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="5bdb0eeb-29a2-419f-a5b1-8fe03a7fb25a" nickname="Point.ByCoordinates" x="41.2339639710826" y="11.8552616191861" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Point.ByCoordinates@double,double,double">
       <PortInfo index="0" default="True" />
       <PortInfo index="1" default="True" />
@@ -75,34 +75,20 @@
       <PortInfo index="1" default="True" />
       <PortInfo index="2" default="True" />
     </Dynamo.Nodes.DSFunction>
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="11dce258-4ee4-4f7b-aeb8-41d1d7794e82" nickname="Restraint.SetRestraint" x="915.567018211054" y="-401.624143590563" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Analysis.Restraint.SetRestraint@Autodesk.DesignScript.Geometry.Point,bool,bool,bool,bool,bool,bool" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="11dce258-4ee4-4f7b-aeb8-41d1d7794e82" nickname="Restraint.SetRestraint" x="996.451164508172" y="-355.725617647894" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Analysis.Restraint.SetRestraint@Autodesk.DesignScript.Geometry.Point,bool,bool,bool,bool,bool,bool" />
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="d4c8e73e-4f1a-4c0a-b306-66e894493b83" nickname="Frame.FromEndPoints" x="427.4231537403" y="283.033289856985" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Structure.Frame.FromEndPoints@Autodesk.DesignScript.Geometry.Point,Autodesk.DesignScript.Geometry.Point,string,string,string,double">
       <PortInfo index="2" default="True" />
       <PortInfo index="3" default="True" />
       <PortInfo index="4" default="True" />
       <PortInfo index="5" default="True" />
     </Dynamo.Nodes.DSFunction>
-    <DSCoreNodesUI.CreateList type="DSCoreNodesUI.CreateList" guid="752c5efd-183d-461e-a08a-2755e1292c99" nickname="List.Create" x="1170.20951415517" y="-156.719965393237" isVisible="true" isUpstreamVisible="true" lacing="Disabled" inputcount="3" />
-    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="f8962557-af9b-451e-b4c8-4dc01c91f199" nickname="Boolean" x="678.154991543955" y="-370.980478516248" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    <DSCoreNodesUI.CreateList type="DSCoreNodesUI.CreateList" guid="752c5efd-183d-461e-a08a-2755e1292c99" nickname="List.Create" x="1252.33086697352" y="-141.751602481258" isVisible="true" isUpstreamVisible="true" lacing="Disabled" inputcount="2" />
+    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="f8962557-af9b-451e-b4c8-4dc01c91f199" nickname="Boolean" x="759.039137841073" y="-325.081952573579" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Boolean>False</System.Boolean>
     </DSCoreNodesUI.BoolSelector>
-    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="c4b323a7-4293-4dbb-a3c9-3872111e9817" nickname="Boolean" x="676.761036064621" y="-264.434800792562" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="c4b323a7-4293-4dbb-a3c9-3872111e9817" nickname="Boolean" x="757.645182361739" y="-218.536274849893" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Boolean>True</System.Boolean>
     </DSCoreNodesUI.BoolSelector>
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="a57e4440-3f1b-4210-a666-45f6464538d0" nickname="Point.ByCoordinates" x="753.005024515523" y="-39.1996064034134" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Point.ByCoordinates@double,double,double">
-      <PortInfo index="0" default="True" />
-      <PortInfo index="1" default="True" />
-      <PortInfo index="2" default="True" />
-    </Dynamo.Nodes.DSFunction>
-    <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="b2fa1adf-6a48-4f96-994d-b0a995301d90" nickname="Double Slider" x="540.982655394369" y="-81.0206133038843" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <System.Double>100</System.Double>
-      <Range min="0" max="100" />
-    </Dynamo.Nodes.DoubleSlider>
-    <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="3a8f18bf-7ef9-40f8-8717-7f4f974a032a" nickname="Double Slider" x="536.969717744207" y="23.2924500515263" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <System.Double>100</System.Double>
-      <Range min="0" max="100" />
-    </Dynamo.Nodes.DoubleSlider>
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="0456f355-2241-4aca-a3d1-4f056e0be19f" nickname="Restraint.Roller" x="919.301597453355" y="-36.7530580393554" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Analysis.Restraint.Roller@Autodesk.DesignScript.Geometry.Point" />
     <Dynamo.Nodes.DoubleInput type="Dynamo.Nodes.DoubleInput" guid="f273b2da-bb62-4b41-a2ea-1bdbc9e6e8d4" nickname="Number" x="-645.837717217553" y="1453.99646372859" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Double value="1" />
     </Dynamo.Nodes.DoubleInput>
@@ -210,10 +196,6 @@
     <Dynamo.Models.ConnectorModel start="c4b323a7-4293-4dbb-a3c9-3872111e9817" start_index="0" end="11dce258-4ee4-4f7b-aeb8-41d1d7794e82" end_index="4" portType="0" />
     <Dynamo.Models.ConnectorModel start="c4b323a7-4293-4dbb-a3c9-3872111e9817" start_index="0" end="11dce258-4ee4-4f7b-aeb8-41d1d7794e82" end_index="5" portType="0" />
     <Dynamo.Models.ConnectorModel start="c4b323a7-4293-4dbb-a3c9-3872111e9817" start_index="0" end="11dce258-4ee4-4f7b-aeb8-41d1d7794e82" end_index="6" portType="0" />
-    <Dynamo.Models.ConnectorModel start="a57e4440-3f1b-4210-a666-45f6464538d0" start_index="0" end="0456f355-2241-4aca-a3d1-4f056e0be19f" end_index="0" portType="0" />
-    <Dynamo.Models.ConnectorModel start="b2fa1adf-6a48-4f96-994d-b0a995301d90" start_index="0" end="a57e4440-3f1b-4210-a666-45f6464538d0" end_index="0" portType="0" />
-    <Dynamo.Models.ConnectorModel start="3a8f18bf-7ef9-40f8-8717-7f4f974a032a" start_index="0" end="a57e4440-3f1b-4210-a666-45f6464538d0" end_index="1" portType="0" />
-    <Dynamo.Models.ConnectorModel start="0456f355-2241-4aca-a3d1-4f056e0be19f" start_index="0" end="752c5efd-183d-461e-a08a-2755e1292c99" end_index="2" portType="0" />
     <Dynamo.Models.ConnectorModel start="140e94cb-4d88-4bc8-b956-ffbe3cfc7373" start_index="0" end="a77bd109-367c-4f16-a6dd-42c3869deb3d" end_index="2" portType="0" />
     <Dynamo.Models.ConnectorModel start="140e94cb-4d88-4bc8-b956-ffbe3cfc7373" start_index="0" end="9bcfd997-06e0-48af-b776-69327de4f1e1" end_index="2" portType="0" />
     <Dynamo.Models.ConnectorModel start="d22d9a3e-372a-4f86-9da5-b85f35345b8d" start_index="0" end="a77bd109-367c-4f16-a6dd-42c3869deb3d" end_index="4" portType="0" />
@@ -238,7 +220,7 @@
     <Dynamo.Models.NoteModel text="Create Frame" x="247.136067157424" y="-64.9963292091894" />
     <Dynamo.Models.NoteModel text="Create Load case" x="851.354527646138" y="937.216219603899" />
     <Dynamo.Models.NoteModel text="Assemble the Sap Model" x="1280.75512224891" y="321.411079392868" />
-    <Dynamo.Models.NoteModel text="Set Restaints" x="903.887159438098" y="-478.906224457515" />
+    <Dynamo.Models.NoteModel text="Set Restaints" x="1029.31074049941" y="-414.449600696432" />
     <Dynamo.Models.NoteModel text="Set Point Load" x="2122.83293004309" y="762.548658135543" />
     <Dynamo.Models.NoteModel text="Set Distributed Load" x="2649.46717266104" y="771.057672318182" />
   </Notes>
