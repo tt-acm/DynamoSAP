@@ -33,9 +33,9 @@ namespace DynamoSAP.Analysis
         internal double Val2 { get; set; }
 
         //Optional inputs
-        internal string CSys = "Global";
-        internal bool RelDist = true;
-        internal bool Replace = true;
+        internal string CSys;
+        internal bool RelDist;
+        internal bool Replace;
 
         //using this input from SAP causes an error in the compiler, it is optional...
         // internal static eItemType MyeItemType;

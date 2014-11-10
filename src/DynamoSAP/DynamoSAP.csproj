@@ -64,6 +64,7 @@
     <Compile Include="Analysis\Load.cs" />
     <Compile Include="Analysis\LoadCase.cs" />
     <Compile Include="Analysis\LoadPattern.cs" />
+    <Compile Include="Analysis\Release.cs" />
     <Compile Include="Analysis\Restraint.cs" />
     <Compile Include="Assembly\SAPModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

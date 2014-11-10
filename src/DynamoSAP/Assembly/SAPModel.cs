@@ -68,11 +68,10 @@ namespace DynamoSAP.Assembly
 
         }
         #endregion
-
-
+       
 
         //// DYNAMO NODES ////
-        public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns, List<LoadCase> SAPLoadCases, List<Restraint> SAPRestraints, List<Load>SAPLoads)
+        public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns, List<LoadCase> SAPLoadCases, List<Restraint> SAPRestraints, List<Load> SAPLoads)
         {
             string report = string.Empty;
 
@@ -103,21 +102,27 @@ namespace DynamoSAP.Assembly
 
 
             // 3. Assigns Restraints to Nodes
-            foreach (var rest in SAPRestraints)
+            if (SAPRestraints != null)
             {
-                List<bool> restraints = new List<bool>();
-                restraints.Add(rest.U1); restraints.Add(rest.U2); restraints.Add(rest.U3);
-                restraints.Add(rest.R1); restraints.Add(rest.R2); restraints.Add(rest.R3);
+                foreach (var rest in SAPRestraints)
+                {
+                    List<bool> restraints = new List<bool>();
+                    restraints.Add(rest.U1); restraints.Add(rest.U2); restraints.Add(rest.U3);
+                    restraints.Add(rest.R1); restraints.Add(rest.R2); restraints.Add(rest.R3);
 
-                SAPConnection.RestraintMapper.SetRestaints(ref mySapModel, rest.Pt, restraints.ToArray());
+                    SAPConnection.RestraintMapper.SetRestaints(ref mySapModel, rest.Pt, restraints.ToArray());
+                }
             }
 
 
             // 4. Add Load Patterns
-            foreach (LoadPattern lp in SAPLoadPatterns)
+            if (SAPLoadPatterns != null)
             {
-                //Call the AddLoadPattern method
-                SAPConnection.LoadMapper.AddLoadPattern(ref mySapModel, lp.Name, lp.Type, lp.Multiplier);          
+                foreach (LoadPattern lp in SAPLoadPatterns)
+                {
+                    //Call the AddLoadPattern method
+                    SAPConnection.LoadMapper.AddLoadPattern(ref mySapModel, lp.Name, lp.Type, lp.Multiplier);
+                }
             }
 
             // 5. Define Load Cases
@@ -145,33 +150,40 @@ namespace DynamoSAP.Assembly
                     SAPConnection.LoadMapper.AddLoadCase(ref mySapModel, lc.Name, types.Count(), ref Dtypes, ref Dnames, ref DSFs, lc.Type);
                 }
             }
-            else 
-            { 
 
-            }
 
             // 6. Loads
-            foreach (Load load in SAPLoads)
+            if (SAPLoads != null)
             {
-                // get Frame Label
-                string frmId = string.Empty;
-                //string frmId = SapModelFrmDict[load.Frame.GUID];
-                bool get = SapModelFrmDict.TryGetValue(load.Frame.GUID, out frmId);
-
-                if (!string.IsNullOrEmpty(frmId))
+                foreach (Load load in SAPLoads)
                 {
-                    if (load.LoadType == "PointLoad")
+                    // get Frame Label
+                    string frmId = string.Empty;
+                    //string frmId = SapModelFrmDict[load.Frame.GUID];
+                    bool get = SapModelFrmDict.TryGetValue(load.Frame.GUID, out frmId);
+
+                    if (!string.IsNullOrEmpty(frmId))
                     {
-                        //Call the CreatePointLoad method
-                        SAPConnection.LoadMapper.CreatePointLoad(ref mySapModel, frmId, load.lPattern.Name, load.MyType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, load.Replace);
+                        if (load.LoadType == "PointLoad")
+                        {
+                            //Call the CreatePointLoad method
+                            SAPConnection.LoadMapper.CreatePointLoad(ref mySapModel, frmId, load.lPattern.Name, load.MyType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, load.Replace);
+                        }
+                        if (load.LoadType == "DistributedLoad")
+                        {
+                            //Call the CreateDistributedLoad method
+                            SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, frmId, load.lPattern.Name, load.MyType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, load.Replace);
+                        }
                     }
-                    if (load.LoadType == "DistributedLoad")
-                    {
-                        //Call the CreateDistributedLoad method
-                        SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, frmId, load.lPattern.Name, load.MyType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, load.Replace);
-                    } 
                 }
             }
+
+            // 7. Releases
+            //foreach (var rel in SAPReleases)
+            //{
+            //    List<bool> releases = new List<bool>();
+            //    release.Add(rest.U1ii);
+            //}
 
             //if can't set to null, will be a hanging process
             mySapModel = null;
