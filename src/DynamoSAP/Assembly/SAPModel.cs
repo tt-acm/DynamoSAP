@@ -71,7 +71,7 @@ namespace DynamoSAP.Assembly
        
 
         //// DYNAMO NODES ////
-        public static string CreateSAPModel(List<Element> SAPElements, List<Release> SAPReleases, List<LoadPattern> SAPLoadPatterns = null , List<LoadCase> SAPLoadCases = null, List<Restraint> SAPRestraints = null, List<Load> SAPLoads = null)
+        public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns, List<LoadCase> SAPLoadCases, List<Restraint> SAPRestraints, List<Load> SAPLoads, List<Release> SAPReleases)
         {
             string report = string.Empty;
 
@@ -178,13 +178,13 @@ namespace DynamoSAP.Assembly
                 }
             }
 
-            // 7. Releases
+            //// 7. Releases
             if (SAPReleases != null)
             {
                 foreach (Release rel in SAPReleases)
                 {
                     // get Frame Label
-                    string frmId = string.Empty;                    
+                    string frmId = string.Empty;
                     bool get = SapModelFrmDict.TryGetValue(rel.Frame.GUID, out frmId);
 
                     if (!string.IsNullOrEmpty(frmId))
@@ -197,8 +197,10 @@ namespace DynamoSAP.Assembly
                         jreleases.Add(rel.U1j); jreleases.Add(rel.U2j); jreleases.Add(rel.u3j);
                         jreleases.Add(rel.R1j); jreleases.Add(rel.R2j); jreleases.Add(rel.R3j);
 
-                        ireleases.ToArray();
-                        jreleases.ToArray();
+                        bool[] iireleases = ireleases.ToArray();
+                        bool[] jjreleases = jreleases.ToArray();
+
+                        SAPConnection.ReleaseMapper.SetReleases(ref mySapModel, frmId, iireleases, jjreleases);
                     }
                 }
             }

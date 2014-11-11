@@ -14,26 +14,27 @@ using Autodesk.DesignScript.Runtime;
 namespace SAPConnection
 {
     [SupressImportIntoVM]
-    class ReleaseMapper
+    public class ReleaseMapper
     {
         public static void SetReleases(ref cSapModel Model, string name, bool[] ireleases, bool[] jreleases)
         {
             //not sure how this works or if this approach even makes sense...
             
-            double[] StartValue=new double[6];
+            double[] StartValue = new double[6];
             double[] EndValue = new double[6];
-            
-            for (int i = 0; i < 6; i++)
-            {
-                if (ireleases[i] == true) { 
-                    StartValue[i] = 0;
-                }
-                if (jreleases[i] == true)
-                {
-                    EndValue[i] = 0;
-                }
-                
-            }
+
+            //for (int i = 0; i < 6; i++)
+            //{
+            //    if (ireleases[i] == true)
+            //    {
+            //        StartValue[i] = 10;
+            //    }
+            //    if (jreleases[i] == true)
+            //    {
+            //        EndValue[i] = 10;
+            //    }
+
+            //}
             
             int ret = Model.FrameObj.SetReleases (name, ireleases, jreleases,StartValue, EndValue);
 
