@@ -71,7 +71,7 @@ namespace DynamoSAP.Assembly
        
 
         //// DYNAMO NODES ////
-        public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns, List<LoadCase> SAPLoadCases, List<Restraint> SAPRestraints, List<Load> SAPLoads)
+        public static string CreateSAPModel(List<Element> SAPElements, List<Release> SAPReleases, List<LoadPattern> SAPLoadPatterns = null , List<LoadCase> SAPLoadCases = null, List<Restraint> SAPRestraints = null, List<Load> SAPLoads = null)
         {
             string report = string.Empty;
 
@@ -179,11 +179,29 @@ namespace DynamoSAP.Assembly
             }
 
             // 7. Releases
-            //foreach (var rel in SAPReleases)
-            //{
-            //    List<bool> releases = new List<bool>();
-            //    release.Add(rest.U1ii);
-            //}
+            if (SAPReleases != null)
+            {
+                foreach (Release rel in SAPReleases)
+                {
+                    // get Frame Label
+                    string frmId = string.Empty;                    
+                    bool get = SapModelFrmDict.TryGetValue(rel.Frame.GUID, out frmId);
+
+                    if (!string.IsNullOrEmpty(frmId))
+                    {
+                        List<bool> ireleases = new List<bool>();
+                        ireleases.Add(rel.U1i); ireleases.Add(rel.U2i); ireleases.Add(rel.u3i);
+                        ireleases.Add(rel.R1i); ireleases.Add(rel.R2i); ireleases.Add(rel.R3i);
+
+                        List<bool> jreleases = new List<bool>();
+                        jreleases.Add(rel.U1j); jreleases.Add(rel.U2j); jreleases.Add(rel.u3j);
+                        jreleases.Add(rel.R1j); jreleases.Add(rel.R2j); jreleases.Add(rel.R3j);
+
+                        ireleases.ToArray();
+                        jreleases.ToArray();
+                    }
+                }
+            }
 
             //if can't set to null, will be a hanging process
             mySapModel = null;

@@ -8,62 +8,72 @@ using DynamoSAP.Structure;
 
 namespace DynamoSAP.Analysis
 {
-    class Release
+    public class Release
     {
 
         //FIELDS
 
-        internal string name;
-        internal bool u1ii;
-        internal bool u1jj;
-        internal bool u2ii;
-        internal bool u2jj;
-        internal bool u3ii;
-        internal bool u3jj;
-        internal bool r1ii;
-        internal bool r1jj;
-        internal bool r2ii;
-        internal bool r2jj;
-        internal bool r3ii;
-        internal bool r3jj;
+        //Frame Name
+        internal Frame frm { get; set; }
+        
+        //U1 Releases
+        internal bool u1i;
+        internal bool u1j;
+        //U2 Releases
+        internal bool u2i;
+        internal bool u2j;
+        //U3 Releases
+        internal bool u3i;
+        internal bool u3j;
+        //R1 Releases
+        internal bool r1i;
+        internal bool r1j;
+        //R2 Releases
+        internal bool r2i;
+        internal bool r2j;
+        //R3 Releases
+        internal bool r3i;
+        internal bool r3j;
 
         //QUERY NODES
-        public string Name {get { return name; }}
-        public bool U1ii {get { return u1ii; }}
-        public bool U1jj {get { return u1jj; }}
-        public bool U2ii {get { return u2ii; }}
-        public bool U2jj { get { return u2jj; } }
-        public bool U3ii { get { return u3ii; } }
-        public bool U3jj { get { return u3jj; } }
-        public bool R1ii { get { return r1ii; } }
-        public bool R1jj { get { return r1jj; } }
-        public bool R2ii { get { return r2ii; } }
-        public bool R2jj { get { return r2jj; } }
-        public bool R3ii { get { return r3ii; } }
-        public bool R3jj { get { return r3jj; } }
+        
+        public Frame Frame { get { return frm; } }
+        public bool U1i {get { return u1i; }}
+        public bool U1j {get { return u1j; }}
+        public bool U2i {get { return u2i; }}
+        public bool U2j { get { return u2j; } }
+        public bool U3i { get { return u3i; } }
+        public bool U3j { get { return u3j; } }
+        public bool R1i { get { return r1i; } }
+        public bool R1j { get { return r1j; } }
+        public bool R2i { get { return r2i; } }
+        public bool R2j { get { return r2j; } }
+        public bool R3i { get { return r3i; } }
+        public bool R3j { get { return r3j; } }
         
         // PUBLIC METHODS
-        public static Release SetRelease(Frame F, bool U1ii, bool U1jj, bool U2ii, bool U2jj, bool U3ii,bool U3jj, bool R1ii,bool R1jj,bool R2ii, bool R2jj, bool R3ii,bool R3jj ){
-            return new Release(F,  U1ii,  U1jj,  U2ii,  U2jj, U3ii, U3jj, R1ii, R1jj, R2ii, R2jj, R3ii, R3jj);
+        public static Release SetRelease(Frame F, bool U1i = false, bool U1j = false, bool U2i = false, bool U2j = false, bool U3i = false, bool U3j = false, bool R1i = false, bool R1j = false, bool R2i = false, bool R2j = false, bool R3i = false, bool R3j = false)
+        {
+            return new Release(F,  U1i,  U1j,  U2i,  U2j, U3i, U3j, R1i, R1j, R2i, R2j, R3i, R3j);
         }
 
         // PRIVATE CONSTRUCTOR
         private Release() { }
-        private Release(Frame f, bool U1ii, bool U1jj, bool U2ii, bool U2jj, bool U3ii,bool U3jj, bool R1ii,bool R1jj,bool R2ii, bool R2jj, bool R3ii,bool R3jj )
+        private Release(Frame f, bool U1i, bool U1j, bool U2i, bool U2j, bool U3i,bool U3j, bool R1i,bool R1j,bool R2i, bool R2j, bool R3i,bool R3j)
         {
-            name = f.Label;
-            u1ii = U1ii;
-            u1jj = U1jj;
-            u2ii = U2ii;
-            u2jj = U2jj;
-            u3ii = U3ii;
-            u3jj = U3jj;
-            r1ii = R1ii;
-            r1jj = R1jj;
-            r2ii = R2ii;
-            r2jj = R2jj;
-            r3ii = R3ii;
-            r3jj = R3jj;
+            frm = f;
+            u1i = U1i;
+            u1j = U1j;
+            u2i = U2i;
+            u2j = U2j;
+            u3i = U3i;
+            u3j = U3j;
+            r1i = R1i;
+            r1j = R1j;
+            r2i = R2i;
+            r2j = R2j;
+            r3i = R3i;
+            r3j = R3j;
             
         }
     }

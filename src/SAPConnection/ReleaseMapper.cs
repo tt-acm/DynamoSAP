@@ -16,26 +16,26 @@ namespace SAPConnection
     [SupressImportIntoVM]
     class ReleaseMapper
     {
-        public static void SetReleases(ref cSapModel Model, string name, bool[] iireleases, bool[] jjreleases)
+        public static void SetReleases(ref cSapModel Model, string name, bool[] ireleases, bool[] jreleases)
         {
             //not sure how this works or if this approach even makes sense...
             
-            double[] StartValue=new double[5];
-            double[] EndValue = new double[5];
+            double[] StartValue=new double[6];
+            double[] EndValue = new double[6];
             
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
-                if (iireleases[i] == true) { 
+                if (ireleases[i] == true) { 
                     StartValue[i] = 0;
                 }
-                if (jjreleases[i] == true)
+                if (jreleases[i] == true)
                 {
                     EndValue[i] = 0;
                 }
                 
             }
             
-            int ret = Model.FrameObj.SetReleases (name, iireleases, jjreleases,StartValue, EndValue);
+            int ret = Model.FrameObj.SetReleases (name, ireleases, jreleases,StartValue, EndValue);
 
         }
     }
