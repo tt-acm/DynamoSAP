@@ -43,6 +43,20 @@ namespace SAPConnection
 
         }
 
+        public static void OpenSAPModel(string filePath, ref cSapModel mySapModel)
+        {
+            long ret = 0;
+            //Create SAP2000 Object
+            SapObject mySAPObject = new SAP2000v16.SapObject();
+            //Start Application
+            mySAPObject.ApplicationStart();
+            //Create SapModel object
+            mySapModel = mySAPObject.SapModel;
+            ret = mySapModel.InitializeNewModel();
+
+            ret = mySapModel.File.OpenFile(filePath); 
+        }
+
         public static void Release(ref SapObject SAP, ref cSapModel Model)
         {
             GC.Collect();
@@ -125,7 +139,7 @@ namespace SAPConnection
             return true;
         }
 
-
+        
 
 
 

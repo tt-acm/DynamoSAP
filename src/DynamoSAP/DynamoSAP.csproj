@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="AnalysisDataTypes.cs" />
     <Compile Include="Analysis\RunAnalysis.cs" />
+    <Compile Include="Assembly\Read.cs" />
     <Compile Include="Structure\Load.cs" />
     <Compile Include="Structure\LoadCase.cs" />
     <Compile Include="Structure\LoadPattern.cs" />
