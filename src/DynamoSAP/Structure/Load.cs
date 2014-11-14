@@ -7,7 +7,7 @@ using Autodesk.DesignScript.Geometry;
 using DynamoSAP.Structure;
 
 
-namespace DynamoSAP.Analysis
+namespace DynamoSAP.Structure
 {
 
     public class Load

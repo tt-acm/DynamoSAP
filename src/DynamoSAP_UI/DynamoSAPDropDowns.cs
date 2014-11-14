@@ -10,7 +10,7 @@ using SAP2000v16;
 namespace DynamoSAP_UI
 {
     [NodeName("LoadPatternTypeDropDown")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Analysis.LoadPattern")]
+    [NodeCategory("DynamoSAP.DynamoSAP.Structure.LoadPattern")]
     [NodeDescription("Select Load Pattern to use with Set Load Pattern node")]
     [IsDesignScriptCompatible]
     public class LoadPatternTypeDropDown: EnumAsString<eLoadPatternType>
@@ -19,7 +19,7 @@ namespace DynamoSAP_UI
     }
 
     [NodeName("LoadCaseTypeDropDown")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Analysis.LoadCase")]
+    [NodeCategory("DynamoSAP.DynamoSAP.Structure.LoadCase")]
     [NodeDescription("Select Load Case to use with Set Load Case node")]
     [IsDesignScriptCompatible]
     public class LoadCaseTypeDropDown : EnumAsString<eLoadCaseType>

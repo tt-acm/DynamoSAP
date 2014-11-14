@@ -61,11 +61,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analysis\Load.cs" />
-    <Compile Include="Analysis\LoadCase.cs" />
-    <Compile Include="Analysis\LoadPattern.cs" />
-    <Compile Include="Analysis\Release.cs" />
-    <Compile Include="Analysis\Restraint.cs" />
+    <Compile Include="AnalysisDataTypes.cs" />
+    <Compile Include="Analysis\RunAnalysis.cs" />
+    <Compile Include="Structure\Load.cs" />
+    <Compile Include="Structure\LoadCase.cs" />
+    <Compile Include="Structure\LoadPattern.cs" />
+    <Compile Include="Structure\Release.cs" />
+    <Compile Include="Structure\Restraint.cs" />
     <Compile Include="Assembly\Bake.cs" />
     <Compile Include="Assembly\SAPModel.cs" />
     <Compile Include="Assembly\Model.cs" />
@@ -74,9 +76,7 @@
     <Compile Include="Structure\Element.cs" />
     <Compile Include="Structure\Frame.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Results\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="DynamoSAP_DynamoCustomization.xml" />
   </ItemGroup>

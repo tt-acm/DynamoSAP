@@ -5,7 +5,7 @@ using System.Text;
 using Autodesk.DesignScript.Geometry;
 
 
-namespace DynamoSAP.Analysis
+namespace DynamoSAP.Structure
 {
     public class Restraint
     {

@@ -11,7 +11,7 @@ using System.IO;
 using SAPConnection;
 
 using DynamoSAP.Structure;
-using DynamoSAP.Analysis;
+using DynamoSAP.Structure;
 
 //DYNAMO
 using Autodesk.DesignScript.Geometry;

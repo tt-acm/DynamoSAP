@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using DynamoSAP.Structure;
-using DynamoSAP.Analysis;
+using DynamoSAP.Structure;
 
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
