@@ -11,7 +11,6 @@ using System.IO;
 using SAPConnection;
 
 using DynamoSAP.Structure;
-using DynamoSAP.Structure;
 
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
@@ -24,13 +23,14 @@ namespace DynamoSAP.Assembly
 {
     public class Bake
     {
-        //private static cSapModel mySapModel;
-
         //// DYNAMO NODES ////
-        public static string ToSAP (StructuralModel model, bool Run)
+        public static StructuralModel ToSAP(StructuralModel Model, bool Run)
         {
-            SAPModel.CreateSAPModel(model.Frames, model.LoadPatterns, model.LoadCases, model.Restraints, model.Loads, model.Releases);
-            return "heyoo";
+            if (Run)
+            {
+             SAPModel.CreateSAPModel(ref Model);
+            }
+                return Model;
         }
 
         private Bake() {}
