@@ -28,9 +28,13 @@ namespace DynamoSAP.Assembly
         {
             if (Run)
             {
-             SAPModel.CreateSAPModel(ref Model);
+                SAPModel.CreateSAPModel(ref Model);
             }
-                return Model;
+            else 
+            {
+                throw new Exception("Set boolean True !");
+            }
+            return Model;
         }
 
         private Bake() {}

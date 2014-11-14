@@ -14,7 +14,7 @@ namespace DynamoSAP.Structure
     {
         private string guid = System.Guid.NewGuid().ToString();
 
-        public string GUID { get { return guid; } }
+        public string GUID { get { return guid; } set { guid = value; } }
 
         public string Label { get; set; }
 

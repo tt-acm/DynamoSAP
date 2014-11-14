@@ -37,7 +37,7 @@ namespace DynamoSAP.Assembly
             return new StructuralModel(frames, loadPatterns, loadCases, restraints, loads, releases);
         }
 
-        private StructuralModel() { }
+        internal StructuralModel() { }
 
         private StructuralModel(List<Element> frames, List<LoadPattern> loadPatterns, List<LoadCase> loadCases, List<Restraint> restraints, List<Load> loads, List<Release> releases)
         {
