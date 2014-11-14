@@ -5,6 +5,6 @@
     <StartProgram>C:\Program Files\Dynamo 0.7\DynamoSandbox.exe</StartProgram>
   </PropertyGroup>
   <PropertyGroup>
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
 </Project>

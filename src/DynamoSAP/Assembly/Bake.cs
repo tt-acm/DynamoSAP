@@ -9,8 +9,6 @@ using System.Runtime.CompilerServices;
 using System.IO;
 
 using SAPConnection;
-
-using DynamoSAP.Structure;
 using DynamoSAP.Structure;
 
 //DYNAMO

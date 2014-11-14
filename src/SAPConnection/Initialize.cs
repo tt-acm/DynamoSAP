@@ -60,6 +60,21 @@ namespace SAPConnection
 
         }
 
+        public static void OpenModel(ref SapObject mySAPObject, ref cSapModel mySapModel, string filepath, bool RunIt)
+        {
+            mySAPObject = new SAP2000v16.SapObject();
+
+            //Start Application
+            mySAPObject.ApplicationStart(SAP2000v16.eUnits.kip_in_F, true); //TODO: Pass E_unit as constructor
+
+            //Create SapModel object
+            mySapModel = mySAPObject.SapModel;
+                       
+            int ret = mySapModel.InitializeNewModel();
+            ret = mySapModel.File.OpenFile(filepath);
+
+        }
+
         // METHODS FOR SAP SET UP
         // Add Most Common Materials to SAP
         public static bool DefineMaterials(ref cSapModel SapModel)

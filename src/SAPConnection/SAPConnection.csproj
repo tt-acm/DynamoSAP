@@ -52,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnalysisMapper.cs" />
+    <Compile Include="FrameForces.cs" />
     <Compile Include="Initialize.cs" />
     <Compile Include="JusticationMapper.cs" />
     <Compile Include="LoadMapper.cs" />
