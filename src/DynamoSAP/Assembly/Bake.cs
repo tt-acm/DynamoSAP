@@ -27,7 +27,7 @@ namespace DynamoSAP.Assembly
         //private static cSapModel mySapModel;
 
         //// DYNAMO NODES ////
-        public static string ToSAP (Model model, bool Run)
+        public static string ToSAP (StructuralModel model, bool Run)
         {
             SAPModel.CreateSAPModel(model.Frames, model.LoadPatterns, model.LoadCases, model.Restraints, model.Loads, model.Releases);
             return "heyoo";

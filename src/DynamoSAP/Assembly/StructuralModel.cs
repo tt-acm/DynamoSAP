@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 
 using DynamoSAP.Structure;
-using DynamoSAP.Structure;
 
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
@@ -12,9 +11,8 @@ using Autodesk.DesignScript.Runtime;
 
 namespace DynamoSAP.Assembly
 {
-    public class Model : IModel
+    public class StructuralModel : IModel
     {
-
         public List<Element> Frames { get; set; }
 
         public List<LoadPattern> LoadPatterns { get; set; }
@@ -27,21 +25,21 @@ namespace DynamoSAP.Assembly
 
         public List<Release> Releases { get; set; }
 
-        public static Model Collector_Frames(List<Element> frames)
+        public static StructuralModel Collector_Frames(List<Element> frames)
         {
-            Model mySt = new Model();
+            StructuralModel mySt = new StructuralModel();
             mySt.Frames = frames;
             return mySt;
         }
 
-        public static Model Collector(List<Element> frames, List<LoadPattern> loadPatterns, List<LoadCase> loadCases, List<Restraint> restraints, List<Load> loads, List<Release> releases)
+        public static StructuralModel Collector(List<Element> frames, List<LoadPattern> loadPatterns, List<LoadCase> loadCases, List<Restraint> restraints, List<Load> loads, List<Release> releases)
         {
-            return new Model(frames, loadPatterns, loadCases, restraints, loads, releases);
+            return new StructuralModel(frames, loadPatterns, loadCases, restraints, loads, releases);
         }
 
-        private Model() { }
+        private StructuralModel() { }
 
-        private Model(List<Element> frames, List<LoadPattern> loadPatterns, List<LoadCase> loadCases, List<Restraint> restraints, List<Load> loads, List<Release> releases)
+        private StructuralModel(List<Element> frames, List<LoadPattern> loadPatterns, List<LoadCase> loadCases, List<Restraint> restraints, List<Load> loads, List<Release> releases)
         {
             Frames = frames;
             LoadPatterns = loadPatterns;
