@@ -46,6 +46,7 @@ namespace DynamoSAP.Analysis
 
         public static List<double> DecomposeResults(Analysis AnalysisResults, string ForceType, string loadcase, int FrameID)
         {
+
             FrameID -= 1; // SAP starts numbering elements by 1, but the first dictionary in the list is in index 0
 
             List<double> Forces = new List<double>();
@@ -82,14 +83,55 @@ namespace DynamoSAP.Analysis
             return Forces;
         }
 
+        public static List<PolySurface> VisualizeResults(StructuralModel Model, Analysis AnalysisResults, string ForceType, string loadcase, List<int> FrameIDs)
+        {
+            List<PolySurface> myVizSurfaces = new List<PolySurface>();
+            foreach (int id in FrameIDs)
+            {
+                int fid = id - 1; // SAP starts numbering elements by 1, but the first dictionary in the list is in index 0
+
+                List<Curve> crossSections = new List<Curve>();
+                // get the frame's curve specified by the frameID
+                Frame f = (Frame)Model.Frames[fid];
+                Curve c = f.BaseCrv;
+
+
+                foreach (double t in AnalysisResults.FrameResults[fid].Results[loadcase].Keys)
+                {
+                    List<Point> crossSectionPoints = new List<Point>();
+                    Point fp = c.PointAtParameter(t);
+                    Point vp = null;
+                   
+                    if (ForceType == "Moment33") // Get Moment M3
+                    {
+                         vp = fp.Add(Vector.ByCoordinates(0.0, 0.0, AnalysisResults.FrameResults[fid].Results[loadcase][t].M3 / -2000)); // Add options according to force type. Axial, add in the X/Y direction?
+                    }
+                    
+                    crossSectionPoints.Add(fp);
+                    crossSectionPoints.Add(vp);
+
+                    PolyCurve cc = PolyCurve.ByPoints(crossSectionPoints);
+
+                    crossSections.Add(cc);
+                }
+
+                PolySurface loftSurface = PolySurface.ByLoft(crossSections);
+                myVizSurfaces.Add(loftSurface);
+            }
+            return myVizSurfaces;
+        }
+
         //Results private methods
         private Analysis() { }
         private Analysis(List<FrameResults> fresults)
         {
             FrameResults = fresults;
+
         }
 
 
 
     }
+
+
 }

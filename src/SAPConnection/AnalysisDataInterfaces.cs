@@ -23,7 +23,7 @@ namespace DynamoSAP
         public interface IFrameResults
         {
             string ID { get; }
-            Dictionary<string, Dictionary<int, FrameAnalysisData>> Results { get; }  // string = LoadCase Name, int station range 0-1
+            Dictionary<string, Dictionary<double, FrameAnalysisData>> Results { get; }  // string = LoadCase Name, int station range 0-1
 
         }
 

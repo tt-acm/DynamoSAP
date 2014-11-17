@@ -39,9 +39,9 @@ namespace DynamoSAP
     public class FrameResults : IFrameResults
     {
         public string ID { get; set; }
-        public Dictionary<string, Dictionary<int, FrameAnalysisData>> Results { get; set; } // string LC, and analysis data
+        public Dictionary<string, Dictionary<double, FrameAnalysisData>> Results { get; set; } // string LC, and analysis data
 
-        public FrameResults (string id, Dictionary<string, Dictionary<int, FrameAnalysisData>> results)
+        public FrameResults (string id, Dictionary<string, Dictionary<double, FrameAnalysisData>> results)
         {
             ID = id;
             Results = results;
