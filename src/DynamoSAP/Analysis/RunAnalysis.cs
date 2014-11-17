@@ -19,38 +19,39 @@ namespace DynamoSAP.Analysis
         public List<FrameResults> FrameResults { get; set; }
         private static cSapModel mySapModel;
 
-        //public static Dictionary<string, FrameForces> Run(string filepath, string loadcase, bool runIt)
-        public static FrameForces Run(string filepath, string loadcase, bool runIt)
+        public static StructuralModel RunAnalysis(StructuralModel Model, string Filepath, bool Run)
         {
-            Dictionary<string, FrameForces> myFrameForces = new Dictionary<string, FrameForces>();
-           // if (runIt)
-           // { // if the boolean is set to true                 
-                SAP2000v16.SapObject mySapObject = null;
+          
+            if (Run)
+            { // if the boolean is set to true                 
+
                 // open sap     
-                SAPConnection.Initialize.OpenModel(ref mySapObject, ref mySapModel, filepath, runIt);
+                SAPConnection.Initialize.OpenSAPModel(Filepath, ref mySapModel);
 
                 // run analysis
-                SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, filepath, runIt);
+                SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, Filepath);
+               
+            }
+            return Model;
+                       
+        }
 
-                // loop over frames get results and populate to dictionary
-                Dictionary<string, string> minMaxString = new Dictionary<string, string>();
-                List<double> forceValues = new List<double>();
-                
-            myFrameForces = SAPConnection.AnalysisMapper.GetFrameForces(ref mySapModel, loadcase, ref minMaxString, ref forceValues);
+        public static string GetResults(StructuralModel Model, string loadcase, bool Run){
+            if (Run) { 
+            // loop over frames get results and populate to dictionary
+            List<FrameResults> frameResults = null; 
 
-            List<FrameResults> fresults=new List<FrameResults>();
+            frameResults = SAPConnection.AnalysisMapper.GetFrameForces(ref mySapModel, loadcase);
 
-          //      FrameAnalysisData fAnalysisData = new FrameAnalysisData(forceValues[0], forceValues[1], forceValues[2], forceValues[3], forceValues[4], forceValues[5]);
-          //  FrameResults fres=new FrameResults(minMaxString.Keys, )
+            Results structureResult = new Results(frameResults);
 
-            Results rr = new Results(fresults);
-            
-                return myFrameForces["1"]; //Return Analysis
+            return "Results"; //return results
 
-           // }
-
-            
-
+             }
+            else
+            {
+                return "Run set to False";
+            }
         }
 
         private Results() { }

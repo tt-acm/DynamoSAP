@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using DynamoSAP.Structure;
-
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;

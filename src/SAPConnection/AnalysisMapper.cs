@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
 
+using DynamoSAP;
 
 
 
@@ -20,16 +21,18 @@ namespace SAPConnection
     [SupressImportIntoVM]
     public class AnalysisMapper
     {
-        public static void RunAnalysis(ref cSapModel mySapModel, string filepath, bool RunIt)
+        public static void RunAnalysis(ref cSapModel mySapModel, string filepath)
         {
             int ret = mySapModel.File.Save(filepath);
             ret = mySapModel.Analyze.RunAnalysis();
         }
 
-        public static Dictionary<string, FrameForces> GetFrameForces(ref cSapModel mySapModel, string lcase, ref Dictionary<string, string> minMaxString, ref List<double> forceValues)
+        public static List<FrameResults> GetFrameForces(ref cSapModel mySapModel, string lcase)
         {
-            Dictionary<string, FrameForces> myFrameJointForces = new Dictionary<string, FrameForces>();
-
+                      
+            
+            List<FrameResults> fresults = new List<FrameResults>();
+           
             string[] ID = null;
             int NumbOfFrames = 0;
 
@@ -37,6 +40,8 @@ namespace SAPConnection
 
             for (int i = 0; i < NumbOfFrames; i++)
             {
+                Dictionary<string, Dictionary<int, FrameAnalysisData>> FrameAnalysis = new Dictionary<string, Dictionary<int, FrameAnalysisData>>();
+                Dictionary<int, FrameAnalysisData> myFrameStationResults = new Dictionary<int, FrameAnalysisData>();
 
                 // frame objectid
                 string frameid = ID.GetValue(i).ToString();
@@ -129,48 +134,24 @@ namespace SAPConnection
                     Mminor[0] = M2[index];
                     Mminor[1] = M2[endindex];
 
-                    // instantiate new 
-                    FrameForces myForces = new FrameForces(Axial, Vmajor, Vminor, Torsion, Mminor, Mmajor);
-
-                    // add to dictionary
-                    myFrameJointForces.Add(frameid, myForces);
-
-                    // Add an Attribute to store min max on the element
-                    // attribute name: ElemForces, (mIn, maX)  "PI,PM,V2I,V2X,V3I,V3X,TI,TX,M2I,M2X,M3I,M3X"
-                    double[] Elem_P = new double[endindex - index + 1];
-                    double[] Elem_V2 = new double[endindex - index + 1];
-                    double[] Elem_V3 = new double[endindex - index + 1];
-                    double[] Elem_T = new double[endindex - index + 1];
-                    double[] Elem_M2 = new double[endindex - index + 1];
-                    double[] Elem_M3 = new double[endindex - index + 1];
-
-                    int counter = 0;
-                    for (int j = index; j <= endindex; j++)
+                    
+                  
+                    //for (int j = index; j <= endindex; j++)
+                        for (int j = 0; j <= 2; j++)
                     {
-                        //FrameAnalysisData
-                        Elem_P[counter] = P[j];
-                        Elem_V2[counter] = V2[j];
-                        Elem_V3[counter] = V3[j];
-                        Elem_T[counter] = T[j];
-                        Elem_M2[counter] = M2[j];
-                        Elem_M3[counter] = M3[j];
-                        counter++;
-                        
-                        forceValues.Add(P[j]);
-                        forceValues.Add(V2[j]);
-                        forceValues.Add(V3[j]);
-                        forceValues.Add(T[j]);
-                        forceValues.Add(M2[j]);
-                        forceValues.Add(M3[j]);
+                        FrameAnalysisData myForces = new FrameAnalysisData(P[j], V2[j], V3[j], T[j], M2[j], M3[j]);
+                        myFrameStationResults.Add(j, myForces);
                     }
-
-                    string att = Elem_P.Min().ToString() + "," + Elem_P.Max().ToString() + "," + Elem_V2.Min().ToString() + "," + Elem_V2.Max().ToString() + "," + Elem_V3.Min().ToString() + "," + Elem_V3.Max().ToString()
-                        + "," + Elem_T.Min().ToString() + "," + Elem_T.Max().ToString() + "," + Elem_M2.Min().ToString() + "," + Elem_M2.Max().ToString() + "," + Elem_M3.Min().ToString() + "," + Elem_M3.Max().ToString();
-
-                    minMaxString.Add(frameid, att);
-                }
+                   
+                }              
+                FrameAnalysis.Add(lcase, myFrameStationResults);
+                
+                FrameResults myFrameResults = new FrameResults(frameid, FrameAnalysis);
+                fresults.Add(myFrameResults);
             }
-            return myFrameJointForces;
+            
+            
+            return fresults;
         }
 
     }
