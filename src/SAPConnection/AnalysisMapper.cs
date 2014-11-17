@@ -28,9 +28,7 @@ namespace SAPConnection
         }
 
         public static List<FrameResults> GetFrameForces(ref cSapModel mySapModel, string lcase)
-        {
-                      
-            
+        {                                 
             List<FrameResults> fresults = new List<FrameResults>();
            
             string[] ID = null;
@@ -68,7 +66,6 @@ namespace SAPConnection
                 //set case and combo output selections
 
                 ret = mySapModel.Results.Setup.SetCaseSelectedForOutput(lcase);
-
 
                 //get frame forces for frame objects      
                 ret = mySapModel.Results.FrameForce(frameid, eItemTypeElm.ObjectElm, ref NumberResults, ref Obj, ref ObjSta, ref Elm, ref ElmSta, ref LoadCase, ref StepType, StepNum, ref P, ref V2, ref V3, ref T, ref M2, ref M3);
@@ -133,16 +130,15 @@ namespace SAPConnection
                     double[] Mminor = new double[2];
                     Mminor[0] = M2[index];
                     Mminor[1] = M2[endindex];
-
-                    
                   
+
+                    //THIS IS NOT WORKING...
                     //for (int j = index; j <= endindex; j++)
                         for (int j = 0; j <= 2; j++)
                     {
                         FrameAnalysisData myForces = new FrameAnalysisData(P[j], V2[j], V3[j], T[j], M2[j], M3[j]);
                         myFrameStationResults.Add(j, myForces);
-                    }
-                   
+                    }                   
                 }              
                 FrameAnalysis.Add(lcase, myFrameStationResults);
                 
@@ -150,12 +146,9 @@ namespace SAPConnection
                 fresults.Add(myFrameResults);
             }
             
-            
             return fresults;
         }
-
     }
 }
 
-//public static string lcase { get; set; }}
 

@@ -52,4 +52,23 @@ namespace DynamoSAP_UI
         Centroid = 10,
         ShearCenter = 11    
     }
+
+    [NodeName("ForceTypeDropDown")]
+    [NodeCategory("DynamoSAP.DynamoSAP.Analysis")]
+    [NodeDescription("Select Force Type to use with Decompose Result component")]
+    [IsDesignScriptCompatible]
+    public class ForceTypeDropdown : EnumAsString<ForceType>
+    {
+        public ForceTypeDropdown(WorkspaceModel workspace) : base(workspace) { }
+    }
+
+    public enum ForceType 
+    {      
+        Axial = 1,
+        Shear22 = 2,
+        Shear33 = 3,
+        Torsion = 4,
+        Moment22 = 5,
+        Moment33 = 6,        
+    }
 }
