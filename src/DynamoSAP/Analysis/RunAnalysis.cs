@@ -83,9 +83,10 @@ namespace DynamoSAP.Analysis
             return Forces;
         }
 
-        public static List<PolySurface> VisualizeResults(StructuralModel Model, Analysis AnalysisResults, string ForceType, string loadcase, List<int> FrameIDs)
+        public static List<PolySurface> VisualizeResults(StructuralModel Model, Analysis AnalysisResults, string ForceType, string loadcase, List<int> FrameIDs, double scale)
         {
             List<PolySurface> myVizSurfaces = new List<PolySurface>();
+            List<Line> myLines = new List<Line>();
             foreach (int id in FrameIDs)
             {
                 int fid = id - 1; // SAP starts numbering elements by 1, but the first dictionary in the list is in index 0
@@ -94,23 +95,74 @@ namespace DynamoSAP.Analysis
                 // get the frame's curve specified by the frameID
                 Frame f = (Frame)Model.Frames[fid];
                 Curve c = f.BaseCrv;
+               
+                //CREATE LOCAL COORDINATE SYSTEM
+                Vector xAxis = c.TangentAtParameter(0.0);
+                Vector yAxis = c.NormalAtParameter(0.0);
+                //This ensures the right axis for the Z direction  
+                CoordinateSystem localCS = CoordinateSystem.ByOriginVectors(c.StartPoint, xAxis, yAxis);
 
+                //TEST TO VISUALIZE NORMALS
+                //Point pt = c.PointAtParameter(0.5);
+                //Line ln = Line.ByStartPointDirectionLength(pt, localCS.ZAxis, 30.0);
+                //myLines.Add(ln);
 
                 foreach (double t in AnalysisResults.FrameResults[fid].Results[loadcase].Keys)
                 {
                     List<Point> crossSectionPoints = new List<Point>();
                     Point fp = c.PointAtParameter(t);
                     Point vp = null;
-                   
-                    if (ForceType == "Moment33") // Get Moment M3
+
+                    double translateCoord = 0.0;
+
+                    if (ForceType == "Axial") // Get Axial P
                     {
-                         vp = fp.Add(Vector.ByCoordinates(0.0, 0.0, AnalysisResults.FrameResults[fid].Results[loadcase][t].M3 / -2000)); // Add options according to force type. Axial, add in the X/Y direction?
+                        translateCoord = AnalysisResults.FrameResults[fid].Results[loadcase][t].P * scale;
                     }
-                    
+
+                    else if (ForceType == "Shear22") // Get Shear V2
+                    {
+                        translateCoord = AnalysisResults.FrameResults[fid].Results[loadcase][t].V2 * scale;
+                    }
+                    else if (ForceType == "Shear33") // Get Shear V3
+                    {
+                        translateCoord = AnalysisResults.FrameResults[fid].Results[loadcase][t].V3 * scale;
+                    }
+
+                    else if (ForceType == "Torsion") // Get Torsion T
+                    {
+                        translateCoord = AnalysisResults.FrameResults[fid].Results[loadcase][t].T * scale;
+                    }
+
+                    else if (ForceType == "Moment22") // Get Moment M2
+                    {
+                        translateCoord = AnalysisResults.FrameResults[fid].Results[loadcase][t].M2 * scale;
+                    }
+
+                    else if (ForceType == "Moment33") // Get Moment M3
+                    {
+                        translateCoord = AnalysisResults.FrameResults[fid].Results[loadcase][t].M3 * scale;
+                    }
+
+
+                    //vp = fp.Add(Vector.ByCoordinates(0.0, 0.0, translateCoord));
+                    vp = (Point)fp.Translate(localCS.ZAxis, translateCoord);
+
+
                     crossSectionPoints.Add(fp);
                     crossSectionPoints.Add(vp);
 
-                    PolyCurve cc = PolyCurve.ByPoints(crossSectionPoints);
+                    PolyCurve cc = null;
+                    try
+                    {
+                        cc= PolyCurve.ByPoints(crossSectionPoints);
+                    }
+                    catch (Exception)
+                    {
+                        
+                        //throw;
+                    }
+                    
 
                     crossSections.Add(cc);
                 }
@@ -119,6 +171,7 @@ namespace DynamoSAP.Analysis
                 myVizSurfaces.Add(loftSurface);
             }
             return myVizSurfaces;
+            
         }
 
         //Results private methods
