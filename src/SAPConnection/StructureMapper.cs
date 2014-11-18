@@ -63,7 +63,7 @@ namespace SAPConnection
         { 
             
             long ret = 0;
-            //Get Geometry
+            // Get Geometry
             // SAP Frame start and end point
             string StartPoint = string.Empty;
             string EndPoint = string.Empty;
@@ -74,7 +74,7 @@ namespace SAPConnection
             Double myEndY = 0;
             Double myEndZ = 0;
 
-            //getting start and end point
+            // getting start and end point
             ret = Model.FrameObj.GetPoints(frmId, ref StartPoint, ref EndPoint);
             //getting coordinates of starting point
             ret = Model.PointObj.GetCoordCartesian(StartPoint, ref myStartX, ref myStartY, ref myStartZ);
@@ -83,6 +83,21 @@ namespace SAPConnection
 
             i = Point.ByCoordinates(myStartX, myStartY, myStartZ);
             j = Point.ByCoordinates(myEndX, myEndY, myEndZ);
+
+            // Section
+            string SAuto = string.Empty;
+            ret = Model.FrameObj.GetSection(frmId, ref SecProp, ref SAuto);
+
+            // MatProp
+            MatProp = MaterialMapper.SapToDynamo(ref Model, SecProp);
+
+            // Justification
+            Just = JustificationMapper.SapToDynamoFrm(ref Model, frmId);
+
+            // Rotation
+            bool ifadvanced = false;
+            ret = Model.FrameObj.GetLocalAxes(frmId, ref Rot, ref ifadvanced);
+
         }
 
         public static void GetGUIDFrm(ref cSapModel Model, string Label, ref string GUID)
