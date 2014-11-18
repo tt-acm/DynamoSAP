@@ -58,7 +58,7 @@ namespace SAPConnection
             {
                 justification = 7;
             }
-            else if (Just == "topcenter")
+            else if (Just == "TopCenter")
             {
                 justification = 8;
             }
@@ -84,5 +84,70 @@ namespace SAPConnection
         {
             int  ret = Model.FrameObj.SetLocalAxes(Label, Angle);
         }
+
+        public static string SapToDynamoFrm(ref cSapModel Model, string frmId)
+        { 
+            int cardinalPoint = 0;
+            bool isMirror2 = false;
+            bool isMirror3 = false;
+            bool isStiffTransform = true;
+            double[] offset1 = null;
+            double[] offset2 = null;
+            string CSys = string.Empty;
+
+            int ret = Model.FrameObj.GetInsertionPoint_1(frmId, ref cardinalPoint, ref isMirror2, ref isMirror3, ref isStiffTransform, ref offset1, ref offset2, ref CSys);
+
+            if (cardinalPoint == 1) // bottom left
+            {
+                return "BottomLeft";
+            }
+            else if (cardinalPoint == 2) //bottom center
+            {
+                return "BottomCenter";
+            }
+            else if (cardinalPoint == 3) //bottom right
+            {
+                return "BottomRight";
+            }
+            else if (cardinalPoint == 4) //middle left
+            {
+                return "MiddleLeft";
+            }
+            else if (cardinalPoint == 5) //middle center
+            {
+                return "MiddleCenter";
+            }
+            else if (cardinalPoint == 6) //middle right
+            {
+                return "MiddleRight";
+            }
+            else if (cardinalPoint == 7) //top left
+            {
+                return "TopLeft";
+            }
+            else if (cardinalPoint == 8) //top center
+            {
+                return "TopCenter";
+            }
+            else if (cardinalPoint == 9) //top right
+            {
+                return "TopRight";
+            }
+            else if (cardinalPoint == 10) //centroid
+            {
+                return "Centroid";
+            }
+            else if (cardinalPoint == 11) //shearcenter
+            {
+                return "ShearCenter";
+            }
+            else
+            {
+                return "MiddleCenter";
+            }
+        
+        }
+
+
     }
 }

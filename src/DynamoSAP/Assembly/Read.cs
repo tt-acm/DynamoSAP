@@ -48,7 +48,6 @@ namespace DynamoSAP.Assembly
                 string guid = string.Empty;
                 StructureMapper.GetGUIDFrm(ref mySapModel, FrmIds[i], ref guid);
                 d_frm.GUID = guid;
-
                 Model.Frames.Add(d_frm);
             }
 
