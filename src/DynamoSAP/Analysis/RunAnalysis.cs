@@ -83,10 +83,11 @@ namespace DynamoSAP.Analysis
             return Forces;
         }
 
-        public static List<List<PolySurface>> VisualizeResults(StructuralModel Model, Analysis AnalysisResults, string ForceType, string loadcase, List<int> FrameIDs, double scale)
+        public static List<Point> VisualizeResults(StructuralModel Model, Analysis AnalysisResults, string ForceType, string loadcase, List<int> FrameIDs, double scale)
         {
-            List<List<PolySurface>> myVizSurfaces = new List<List<PolySurface>>();
+            List<Mesh> myVizMeshes = new List<Mesh>();
             List<Line> myLines = new List<Line>();
+            List<Point> ptTest = new List<Point>();
             foreach (int id in FrameIDs)
             {
                 List<PolySurface> subVizSurface = new List<PolySurface>();
@@ -110,13 +111,18 @@ namespace DynamoSAP.Analysis
 
                 //PolySurface loftSurface = null;
                 List<Point> crossSectionPoints = new List<Point>();
+                List<IndexGroup> indices = new List<IndexGroup>();
+                int count = 0;
                 Mesh m = null;
                 foreach (double t in AnalysisResults.FrameResults[fid].Results[loadcase].Keys)
                 {
-                    int count = 0;
+
+                    IndexGroup ig = null;
                     
-                    Point fp = c.PointAtParameter(t);
-                    Point vp = null;
+                    count += 1;
+
+                    Point cPoint = c.PointAtParameter(t); // curve Point
+                    Point vPoint = null; // value Point
 
                     double translateCoord = 0.0;
 
@@ -149,79 +155,98 @@ namespace DynamoSAP.Analysis
                         translateCoord = AnalysisResults.FrameResults[fid].Results[loadcase][t].M3 * scale;
                     }
 
-                    bool signChange = false;
+                    //bool signChange = false;
+                    double d1 = 0.0;
+                    double d2 = 0.0;
+                    double pZ=0.0;
+
                     if (ForceType == "Moment22")
                     {
-                        vp = (Point)fp.Translate(localCS.YAxis, translateCoord); // Translate in the Y direction to match the visualization of SAP
-
-                        if (crossSectionPoints.Count > 0) // if a previous point has been added
+                        vPoint = (Point)cPoint.Translate(localCS.YAxis, translateCoord); // Translate in the Y direction to match the visualization of SAP
+                        if (crossSectionPoints.Count > 0)
                         {
-                            if ((crossSectionPoints[crossSectionPoints.Count - 1].Y > 0 && vp.Y < 0) || (crossSectionPoints[crossSectionPoints.Count - 1].Y < 0 && vp.Y > 0)) // if there is a change in the force sign
-                            {
-                                signChange = true;
-                            }
+                            d1 = vPoint.Y;
+                            d2 = crossSectionPoints[crossSectionPoints.Count - 1].Y;
+                            pZ = cPoint.Y;
                         }
                     }
                     else
                     {
-                        vp = (Point)fp.Translate(localCS.ZAxis, translateCoord); // All the other types must be translate in the Z direction
-
-                        if (crossSectionPoints.Count > 0) // if a previous point has been added
+                        vPoint = (Point)cPoint.Translate(localCS.ZAxis, translateCoord); // All the other types must be translate in the Z direction} 
+                        if (crossSectionPoints.Count > 0)
                         {
-                            if ((crossSectionPoints[crossSectionPoints.Count - 1].Z > 0 && vp.Z < 0) || (crossSectionPoints[crossSectionPoints.Count - 1].Z > 0)) // if there is a change in the force sign
-                            {
-                                signChange = true;
-                            }
+                            d1 = vPoint.Z;
+                            d2 = crossSectionPoints[crossSectionPoints.Count - 1].Z;
+
+                            pZ = cPoint.Z;
                         }
                     }
 
-                    crossSectionPoints.Add(fp);
-                    crossSectionPoints.Add(vp);
-
-                    //PolyCurve cc = null;
-                    //try
-                    //{
-                    //    cc = PolyCurve.ByPoints(crossSectionPoints);
-                    //}
-                    //catch (Exception)
-                    //{
-                    //    //throw;
-                    //}
-
-                    count += 1;
-                    if (!signChange) // if there has been no change in the sign of the force, then add the section
-                    {                                             
-                       // crossSections.Add(cc);                        
-                    }
-                    else // if there is a change, loft the surface by creating the loft, clear crossSections and then add
+                    if (crossSectionPoints.Count == 0)
                     {
-                        try
-                        {
-                            //loftSurface = PolySurface.ByLoft(crossSections);
-                        }
-                        catch { }
-                        //subVizSurface.Add(loftSurface);
+                        crossSectionPoints.Add(cPoint); //index 0
+                        crossSectionPoints.Add(vPoint); //index 1
 
-                        crossSections.Clear();
-                        //crossSections.Add(cc);
-
-                        if (count == AnalysisResults.FrameResults[fid].Results[loadcase].Keys.Count)// if this is the last force value
-                        {
-                            try
-                            {
-                               // loftSurface = PolySurface.ByLoft(crossSections);
-                            }
-                            catch { }
-                            //subVizSurface.Add(loftSurface);
-                        }
                     }
 
-                   
+                    else// if a previous point has been added
+                    {
+                        if (count != AnalysisResults.FrameResults[fid].Results[loadcase].Keys.Count) // if it's not the end of the list
+                        {
+                            if ((d2 > pZ && d1 < pZ) || (d2 < pZ && d1 > pZ)) // if there is a change in the force sign
+                            {
+                                crossSectionPoints.Add(cPoint); //index 2 
+                                crossSectionPoints.Add(vPoint); //index 3                         
+                                //color change here
+
+                            }
+                            else
+                            {
+                                crossSectionPoints.Add(vPoint); //index 2 (note: vPoint before cPoint)
+                                crossSectionPoints.Add(cPoint); //index 3 
+                            }
+
+                           
+
+                            crossSectionPoints.Add(cPoint); //new face index 0
+                            crossSectionPoints.Add(vPoint); //new face index 1
+
+                            ig = IndexGroup.ByIndices(0, 1, 2, 3);
+                            indices.Add(ig);
+                        }
+                        else
+                        {
+                            crossSectionPoints.Add(vPoint); //index 2 (note: vPoint before cPoint)
+                            crossSectionPoints.Add(cPoint); //index 3 
+
+                        }
+                                               
+                           
+                        
+                        
+                    }
+
+
+
+
+
+
+
+                    
+
                 }
-                
-                myVizSurfaces.Add(subVizSurface);
+
+                try
+                {
+                    m = Mesh.ByPointsFaceIndices(crossSectionPoints, indices);
+                }
+                catch { }
+
+                myVizMeshes.Add(m);
+                ptTest = crossSectionPoints;
+
             }
-            return myVizSurfaces;
+            return ptTest;
 
         }
 
