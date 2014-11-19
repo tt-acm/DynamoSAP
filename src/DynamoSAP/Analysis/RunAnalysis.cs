@@ -83,18 +83,18 @@ namespace DynamoSAP.Analysis
             return Forces;
         }
 
-        public static List<Point> VisualizeResults(StructuralModel Model, Analysis AnalysisResults, string ForceType, string loadcase, List<int> FrameIDs, double scale)
+        public static List<Mesh> VisualizeResults(StructuralModel Model, Analysis AnalysisResults, string ForceType, string loadcase, List<int> FrameIDs, double scale)
         {
-            List<Mesh> myVizMeshes = new List<Mesh>();
+            List<List<Mesh>> myVizMeshes = new List<List<Mesh>>();
+
             List<Line> myLines = new List<Line>();
             List<Point> ptTest = new List<Point>();
+
+            List<Mesh> VizTest = new List<Mesh>();
             foreach (int id in FrameIDs)
             {
-                List<PolySurface> subVizSurface = new List<PolySurface>();
-                int fid = id - 1; // SAP starts numbering elements by 1, but the first dictionary in the list is in index 0
-
-                List<Curve> crossSections = new List<Curve>();
                 // get the frame's curve specified by the frameID
+                int fid = id - 1; // SAP starts numbering elements by 1, but the first dictionary in the list is in index 0
                 Frame f = (Frame)Model.Frames[fid];
                 Curve c = f.BaseCrv;
 
@@ -109,16 +109,17 @@ namespace DynamoSAP.Analysis
                 //Line ln = Line.ByStartPointDirectionLength(pt, localCS.ZAxis, 30.0);
                 //myLines.Add(ln);
 
-                //PolySurface loftSurface = null;
-                List<Point> crossSectionPoints = new List<Point>();
-                List<IndexGroup> indices = new List<IndexGroup>();
+                
+                List<Point> MeshPoints = new List<Point>();
+
                 int count = 0;
-                Mesh m = null;
+
+                List<Mesh> mm = new List<Mesh>();
                 foreach (double t in AnalysisResults.FrameResults[fid].Results[loadcase].Keys)
                 {
-
+                    Mesh m = null;
                     IndexGroup ig = null;
-                    
+
                     count += 1;
 
                     Point cPoint = c.PointAtParameter(t); // curve Point
@@ -158,34 +159,34 @@ namespace DynamoSAP.Analysis
                     //bool signChange = false;
                     double d1 = 0.0;
                     double d2 = 0.0;
-                    double pZ=0.0;
+                    double pZ = 0.0;
 
                     if (ForceType == "Moment22")
                     {
                         vPoint = (Point)cPoint.Translate(localCS.YAxis, translateCoord); // Translate in the Y direction to match the visualization of SAP
-                        if (crossSectionPoints.Count > 0)
+                        if (MeshPoints.Count > 0)
                         {
                             d1 = vPoint.Y;
-                            d2 = crossSectionPoints[crossSectionPoints.Count - 1].Y;
+                            d2 = MeshPoints[MeshPoints.Count - 1].Y;
                             pZ = cPoint.Y;
                         }
                     }
                     else
                     {
                         vPoint = (Point)cPoint.Translate(localCS.ZAxis, translateCoord); // All the other types must be translate in the Z direction} 
-                        if (crossSectionPoints.Count > 0)
+                        if (MeshPoints.Count > 0)
                         {
                             d1 = vPoint.Z;
-                            d2 = crossSectionPoints[crossSectionPoints.Count - 1].Z;
+                            d2 = MeshPoints[MeshPoints.Count - 1].Z;
 
                             pZ = cPoint.Z;
                         }
                     }
 
-                    if (crossSectionPoints.Count == 0)
+                    if (MeshPoints.Count == 0)
                     {
-                        crossSectionPoints.Add(cPoint); //index 0
-                        crossSectionPoints.Add(vPoint); //index 1
+                        MeshPoints.Add(cPoint); //index 0
+                        MeshPoints.Add(vPoint); //index 1
 
                     }
 
@@ -193,60 +194,72 @@ namespace DynamoSAP.Analysis
                     {
                         if (count != AnalysisResults.FrameResults[fid].Results[loadcase].Keys.Count) // if it's not the end of the list
                         {
+                            List<IndexGroup> indices = new List<IndexGroup>();
+                            
                             if ((d2 > pZ && d1 < pZ) || (d2 < pZ && d1 > pZ)) // if there is a change in the force sign
                             {
-                                crossSectionPoints.Add(cPoint); //index 2 
-                                crossSectionPoints.Add(vPoint); //index 3                         
-                                //color change here
+                                MeshPoints.Add(cPoint); //index 2 
+
+                                ig = IndexGroup.ByIndices(0, 1, 2);
+                                indices.Add(ig);
+                                // Color coding here
 
                             }
                             else
                             {
-                                crossSectionPoints.Add(vPoint); //index 2 (note: vPoint before cPoint)
-                                crossSectionPoints.Add(cPoint); //index 3 
+                                MeshPoints.Add(vPoint); //index 2 (note: vPoint before cPoint)
+                                MeshPoints.Add(cPoint); //index 3 
+                                if (MeshPoints.Count == 3)
+                                {
+                                    ig = IndexGroup.ByIndices(0, 1, 2);
+                                    indices.Add(ig);
+                                }
+                                else
+                                {
+                                    ig = IndexGroup.ByIndices(0, 1, 2, 3);
+                                    indices.Add(ig);
+                                }
+                                //color coding here
                             }
 
-                           
+                            // Add face
+                            //append...??
+                            m = Mesh.ByPointsFaceIndices(MeshPoints, indices);
+                            mm.Add(m);
 
-                            crossSectionPoints.Add(cPoint); //new face index 0
-                            crossSectionPoints.Add(vPoint); //new face index 1
-
-                            ig = IndexGroup.ByIndices(0, 1, 2, 3);
-                            indices.Add(ig);
+                            MeshPoints.Clear();
+                            
+                            if ((d2 > pZ && d1 < pZ) || (d2 < pZ && d1 > pZ)) // if there is a change in the force sign
+                            {
+                                MeshPoints.Add(cPoint); //new face index 0
+                            }
+                            else
+                            {
+                                MeshPoints.Add(cPoint); //new face index 0
+                                MeshPoints.Add(vPoint); //new face index 1   
+                            }
                         }
                         else
                         {
-                            crossSectionPoints.Add(vPoint); //index 2 (note: vPoint before cPoint)
-                            crossSectionPoints.Add(cPoint); //index 3 
+                            MeshPoints.Add(vPoint); //index 2 (note: vPoint before cPoint)
+                            MeshPoints.Add(cPoint); //index 3 
 
+                            // Add face
+                            List<IndexGroup> indices = new List<IndexGroup>();
+                            ig = IndexGroup.ByIndices(0, 1, 2, 3);
+                            indices.Add(ig);
+                            //append...??
+                            m = Mesh.ByPointsFaceIndices(MeshPoints, indices);
+                            mm.Add(m);
                         }
-                                               
-                           
-                        
-                        
                     }
-
-
-
-
-
-
-
-                    
-
                 }
-
-                try
-                {
-                    m = Mesh.ByPointsFaceIndices(crossSectionPoints, indices);
-                }
-                catch { }
-
-                myVizMeshes.Add(m);
-                ptTest = crossSectionPoints;
+                VizTest = mm;
+                myVizMeshes.Add(mm);
+                ptTest = MeshPoints;
 
             }
-            return ptTest;
+            return VizTest;
 
         }
 
