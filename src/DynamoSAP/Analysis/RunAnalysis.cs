@@ -85,18 +85,14 @@ namespace DynamoSAP.Analysis
             return Forces;
         }
 
-        public static List<List<Mesh>> VisualizeResults(StructuralModel Model, Analysis AnalysisResults, string ForceType, string loadcase, List<int> FrameIDs, double scale)
+        public static List<Mesh> VisualizeResults(StructuralModel Model, Analysis AnalysisResults, string ForceType, string loadcase, int FrameID, double scale)
         {
-            List<List<Mesh>> myVizMeshes = new List<List<Mesh>>();
+            List<Mesh> myVizMeshes = new List<Mesh>();
 
-            List<Line> myLines = new List<Line>();
-            List<Point> ptTest = new List<Point>();
-
-            List<Mesh> VizTest = new List<Mesh>();
-            foreach (int id in FrameIDs)
-            {
+            //foreach (int id in FrameIDs)
+            //{
                 // get the frame's curve specified by the frameID
-                int fid = id - 1; // SAP starts numbering elements by 1, but the first dictionary in the list is in index 0
+            int fid = FrameID - 1; // SAP starts numbering elements by 1, but the first dictionary in the list is in index 0
                 Frame f = (Frame)Model.Frames[fid];
                 Curve c = f.BaseCrv;
 
@@ -116,7 +112,7 @@ namespace DynamoSAP.Analysis
 
                 int count = 0;
 
-                List<Mesh> mm = new List<Mesh>();
+                
                 double t2=0.0;
                 double t1 = 0.0;
                 foreach (double t in AnalysisResults.FrameResults[fid].Results[loadcase].Keys)
@@ -160,7 +156,7 @@ namespace DynamoSAP.Analysis
                         translateCoord = AnalysisResults.FrameResults[fid].Results[loadcase][t].M3 * scale;
                     }
 
-                    //bool signChange = false;
+                    
                     double d2 = 0.0;
                     double d1 = 0.0;
                     double pZ = 0.0;
@@ -208,7 +204,6 @@ namespace DynamoSAP.Analysis
                             {
                                 
                                 // the function of the line is
-
                                 //y= (t2-t1)tzero/(d2-d1)+d1  This has to be equal to pZ
                                 double ml = (d2 - d1)/ (t2 - t1) ;
                                 tzero = (pZ - d1) / ml; // multiply by the length of the curve and add the X coordinate of the last mesh point
@@ -246,7 +241,7 @@ namespace DynamoSAP.Analysis
                             // Add face
                             //append...??
                             m = Mesh.ByPointsFaceIndices(MeshPoints, indices);
-                            mm.Add(m);
+                            myVizMeshes.Add(m);
 
                             MeshPoints.Clear();
                             
@@ -279,16 +274,12 @@ namespace DynamoSAP.Analysis
                             }
                             //append...??
                             m = Mesh.ByPointsFaceIndices(MeshPoints, indices);
-                            mm.Add(m);
+                            myVizMeshes.Add(m);
                         }
                     }
                     t1 = t*c.Length;
                 }
-                VizTest = mm;
-                myVizMeshes.Add(mm);
-                
-
-            }
+            //}
 
             return myVizMeshes;
 
