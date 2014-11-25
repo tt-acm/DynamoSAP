@@ -98,13 +98,17 @@ namespace SAPConnection
 
                 if (NumberResults != 0)
                 {
-                    
+                    double previoust=0;
                     for (int j = index; j <= endindex; j++)
                    
                     {
                         FrameAnalysisData myForces = new FrameAnalysisData(P[j], V2[j], V3[j], T[j], M2[j], M3[j]);
                         double t = ObjSta[j] / ObjSta[endindex];
+                        if(t ==previoust){
+                            t=-t;
+                        }
                         myFrameStationResults.Add(t, myForces); // instead of j, this should be a parameter t?
+                        previoust=t;
                     }
                 }
                 FrameAnalysis.Add(lcase, myFrameStationResults);

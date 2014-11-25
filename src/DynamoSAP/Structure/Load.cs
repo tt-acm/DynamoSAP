@@ -5,6 +5,7 @@ using System.Text;
 
 using Autodesk.DesignScript.Geometry;
 using DynamoSAP.Structure;
+using DynamoSAP.Assembly;
 
 
 namespace DynamoSAP.Structure
@@ -120,7 +121,7 @@ namespace DynamoSAP.Structure
             else
             {
                 return "PointLoad";
-            }  
+            }
         }
 
         //DYNAMO CREATE NODES
@@ -138,11 +139,127 @@ namespace DynamoSAP.Structure
             return l;
         }
 
+        public static List<List<Object>> Display(StructuralModel StructuralModel, string LPattern="",double scale = 1.0)
+        {
+            List<List<Object>> LoadViz = new List<List<Object>>();
+
+            foreach (Load l in StructuralModel.Loads)
+            {
+                if (LPattern == "")
+                {
+                   //show all
+                }
+                else
+                {
+                    if (l.lPattern.Name != LPattern)
+                    {
+                        continue; // show only the loads whose load pattern is the specified in the node
+                    }
+                }
+                List<Object> lo = new List<Object>();
+                Frame f = l.Frame;
+                Curve c = f.BaseCrv;
+                List<double> dd = new List<double>();
+                bool isDistributed = false;
+                if (l.LoadType == "DistributedLoad")
+                {
+                    isDistributed = true;
+                    //number of arrows to represent a Distributed Load
+                    int n = Convert.ToInt32((l.Dist - l.Dist2) / 0.05);
+                    double step = (l.Dist - l.Dist2) / n;
+
+                    for (double i = l.Dist; i < l.Dist2; i += step)
+                    {
+                        dd.Add(i);
+                    }
+                    dd.Add(l.Dist2);
+                }
+                else
+                {
+                    dd.Add(l.Dist);
+                }
+                Point A = null;
+                Point B = null;
+                for (int i = 0; i < dd.Count; i++)
+                {
+                    List<Point> pps = new List<Point>();
+                    List<IndexGroup> igs = new List<IndexGroup>();
+
+                    Vector xAxis = c.TangentAtParameter(0.0);
+
+                    // Line of the arrow
+                    Point p1 = c.PointAtParameter(dd[i]);
+
+                    Point p2 = null;
+                    Point p3 = null;
+                    Point p4 = null;
+
+                    //MUST ADD SOME CONDITION HERE FOR LOCAL OR GLOBAL COORDINATE SYSTEM
+                    Vector v2=null;
+                    Vector v3 = null;
+                    if (l.Dir == 4) // if it's the X Direction
+                    {
+                        v2 = Vector.ByCoordinates(20.0*scale, 0.0, 0.0);
+                        v3 = Vector.ByCoordinates(5.0 * scale, 0.0, 0.0);
+                        
+                        
+                    }
+
+                    if (l.Dir == 5) // if it's the Y Direction
+                    {
+                        v2 = Vector.ByCoordinates(0.0, 20.0 * scale, 0.0);
+                        v3 = Vector.ByCoordinates(0.0, 5.0 * scale, 0.0);
+
+
+                    }
+                    if (l.Dir == 6) // if it's the Z Direction
+                    {
+                        v2 = Vector.ByCoordinates(0.0, 0.0, 20.0 * scale);
+                        v3=Vector.ByCoordinates(0.0, 0.0, 5.0*scale);
+                    }
+
+                    p2 = (Point)p1.Translate(v2);
+
+                    p3 = (Point)p1.Translate(xAxis, 5.0 * scale);
+                    p3 = (Point)p3.Translate(v3);
+
+                    p4 = (Point)p1.Translate(xAxis, -5.0 * scale);
+                    p4 = (Point)p4.Translate(v3);
+
+                    pps.Add(p1); pps.Add(p3); pps.Add(p4);
+
+                    //Triangle of the arrow
+                    igs.Add(IndexGroup.ByIndices(0, 1, 2));
+                    Mesh m = Mesh.ByPointsFaceIndices(pps, igs);
+
+                    lo.Add(Line.ByStartPointEndPoint(p1, p2));
+                    lo.Add(m);
+                    if (isDistributed)
+                    {
+                        if (i == 0)
+                        {
+                            A = p2;
+                        }
+                        else if (i == dd.Count - 1)
+                        {
+                            B = p2;
+                            //Top line
+                            Line topLine = Line.ByStartPointEndPoint(A, B);
+                            lo.Add(topLine);
+                        }
+                    }
+                }
+                LoadViz.Add(lo);
+            }
+
+            return LoadViz;
+        }
+
         //PRIVATE CONSTRUCTORS
         private Load() { }
 
         //constructor for PointLoads
-        private Load(Frame frame,LoadPattern loadPat, int myType, int dir, double dist, double val, string cSys, bool relDist, bool replace)
+        private Load(Frame frame, LoadPattern loadPat, int myType, int dir, double dist, double val, string cSys, bool relDist, bool replace)
         {
             frm = frame;
             lPattern = loadPat;
@@ -158,7 +275,7 @@ namespace DynamoSAP.Structure
         //constructor for DistributedLoads
         private Load(Frame frame, LoadPattern loadPat, int myType, int dir, double dist, double dist2, double val, double val2, string cSys, bool relDist, bool replace)
         {
-            frm= frame;
+            frm = frame;
             lPattern = loadPat;
             MyType = myType;
             Dir = dir;
@@ -170,6 +287,7 @@ namespace DynamoSAP.Structure
             RelDist = relDist;
             Replace = replace;
         }
+
 
     }
 }

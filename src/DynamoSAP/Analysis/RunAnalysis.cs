@@ -17,12 +17,22 @@ namespace DynamoSAP.Analysis
     public class Analysis : IResults
     {
         public List<FrameResults> FrameResults { get; set; }
-        
+        public string LoadCombination { get; set; }
 
         private static cSapModel mySapModel;
 
-        public static StructuralModel Run(StructuralModel Model, string Filepath, bool RunIt)
+        public static List<string> Run(StructuralModel StructuralModel, string Filepath, bool RunIt)
         {
+            List<string> myCombinations = new List<string>();
+            foreach (LoadCase l in StructuralModel.LoadCases)
+            {
+                myCombinations.Add(l.Name);
+            }
+            foreach (LoadPattern l in StructuralModel.LoadPatterns)
+            {
+                myCombinations.Add(l.Name);
+            }
+
             if (RunIt)
             {
                 // open sap     
@@ -30,70 +40,73 @@ namespace DynamoSAP.Analysis
                 // run analysis
                 SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, Filepath);
             }
-            return Model;
+            return myCombinations;
         }
 
-        public static Analysis GetResults(StructuralModel Model, string LoadCase, bool Run)
+        public static Analysis GetResults(string LoadCombination, bool Run)
         {
             List<FrameResults> frameResults = null;
             Analysis StructureResults = new Analysis();
             if (Run)
             {
                 // loop over frames get results and populate to dictionary
-                frameResults = SAPConnection.AnalysisMapper.GetFrameForces(ref mySapModel, LoadCase);
+                frameResults = SAPConnection.AnalysisMapper.GetFrameForces(ref mySapModel, LoadCombination);
                 StructureResults.FrameResults = frameResults;
+                StructureResults.LoadCombination = LoadCombination;
             }
             return StructureResults;
         }
 
-        public static List<double> DecomposeResults(Analysis AnalysisResults, string ForceType, string loadcase, int FrameID)
+        public static List<List<double>> DecomposeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType)
         {
-
-            FrameID -= 1; // SAP starts numbering elements by 1, but the first dictionary in the list is in index 0
-
-            List<double> Forces = new List<double>();
-            foreach (FrameAnalysisData fad in AnalysisResults.FrameResults[FrameID].Results[loadcase].Values)
+            List<List<double>> Forces = new List<List<double>>();
+            for (int i = 0; i < StructuralModel.Frames.Count; i++)
+            {
+            List<double> ff = new List<double>();
+            foreach (FrameAnalysisData fad in AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Values)
             {
                 if (ForceType == "Axial") //Get Axial Forces P
                 {
-                    Forces.Add(fad.P);
+                    ff.Add(fad.P);
                 }
                 else if (ForceType == "Shear22") // Get Shear V2
                 {
-                    Forces.Add(fad.V2);
+                    ff.Add(fad.V2);
                 }
                 else if (ForceType == "Shear33") // Get Shear V3
                 {
-                    Forces.Add(fad.V3);
+                    ff.Add(fad.V3);
                 }
 
                 else if (ForceType == "Torsion") // Get Torsion T
                 {
-                    Forces.Add(fad.T);
+                    ff.Add(fad.T);
                 }
 
                 else if (ForceType == "Moment22") // Get Moment M2
                 {
-                    Forces.Add(fad.M2);
+                    ff.Add(fad.M2);
                 }
                 else if (ForceType == "Moment33") // Get Moment M3
                 {
-                    Forces.Add(fad.M3);
+                    ff.Add(fad.M3);
                 }
             }
+            Forces.Add(ff);
+        }
 
             return Forces;
         }
 
-        public static List<Mesh> VisualizeResults(StructuralModel Model, Analysis AnalysisResults, string ForceType, string loadcase, int FrameID, double scale)
+        public static List<List<Mesh>> VisualizeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType, double scale)
         {
-            List<Mesh> myVizMeshes = new List<Mesh>();
-
-            //foreach (int id in FrameIDs)
-            //{
+            List<List<Mesh>> myVizMeshes = new List<List<Mesh>>();     
+            for (int i = 0; i < StructuralModel.Frames.Count; i++)
+            {
+                List<Mesh> mm = new List<Mesh>();           
                 // get the frame's curve specified by the frameID
-            int fid = FrameID - 1; // SAP starts numbering elements by 1, but the first dictionary in the list is in index 0
-                Frame f = (Frame)Model.Frames[fid];
+
+                Frame f = (Frame)StructuralModel.Frames[i];
                 Curve c = f.BaseCrv;
 
                 //CREATE LOCAL COORDINATE SYSTEM
@@ -107,56 +120,59 @@ namespace DynamoSAP.Analysis
                 //Line ln = Line.ByStartPointDirectionLength(pt, localCS.ZAxis, 30.0);
                 //myLines.Add(ln);
 
-                
+
                 List<Point> MeshPoints = new List<Point>();
 
                 int count = 0;
 
                 
-                double t2=0.0;
+
+                double t2 = 0.0;
                 double t1 = 0.0;
-                foreach (double t in AnalysisResults.FrameResults[fid].Results[loadcase].Keys)
+                foreach (double t in AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys)
                 {
+                    double newt = t;
+                    if (t < 0) newt = -t;
                     Mesh m = null;
                     IndexGroup ig = null;
 
                     count += 1;
 
-                    Point cPoint = c.PointAtParameter(t); // curve Point
+                    Point cPoint = c.PointAtParameter(newt); // curve Point
                     Point vPoint = null; // value Point
 
                     double translateCoord = 0.0;
 
                     if (ForceType == "Axial") // Get Axial P
                     {
-                        translateCoord = AnalysisResults.FrameResults[fid].Results[loadcase][t].P * -scale;
+                        translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].P * -scale;
                     }
 
                     else if (ForceType == "Shear22") // Get Shear V2
                     {
-                        translateCoord = AnalysisResults.FrameResults[fid].Results[loadcase][t].V2 * -scale;
+                        translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V2 * -scale;
                     }
                     else if (ForceType == "Shear33") // Get Shear V3
                     {
-                        translateCoord = AnalysisResults.FrameResults[fid].Results[loadcase][t].V3 * scale;
+                        translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V3 * scale;
                     }
 
                     else if (ForceType == "Torsion") // Get Torsion T
                     {
-                        translateCoord = AnalysisResults.FrameResults[fid].Results[loadcase][t].T * scale;
+                        translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].T * scale;
                     }
 
                     else if (ForceType == "Moment22") // Get Moment M2
                     {
-                        translateCoord = AnalysisResults.FrameResults[fid].Results[loadcase][t].M2 * scale;
+                        translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M2 * scale;
                     }
 
                     else if (ForceType == "Moment33") // Get Moment M3
                     {
-                        translateCoord = AnalysisResults.FrameResults[fid].Results[loadcase][t].M3 * scale;
+                        translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M3 * scale;
                     }
 
-                    
+
                     double d2 = 0.0;
                     double d1 = 0.0;
                     double pZ = 0.0;
@@ -188,27 +204,26 @@ namespace DynamoSAP.Analysis
                     {
                         MeshPoints.Add(cPoint); //index 0
                         MeshPoints.Add(vPoint); //index 1
-
                     }
-                       
+
                     else// if a previous point has been added
                     {
-                        if (count != AnalysisResults.FrameResults[fid].Results[loadcase].Keys.Count) // if it's not the end of the list
+                        if (count != AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys.Count) // if it's not the end of the list
                         {
                             List<IndexGroup> indices = new List<IndexGroup>();
 
                             double tzero;//parameter at which the value of the forces = pZ
-                            
-                            t2 = t*c.Length; // current t parameter of the point being visualized
+
+                            t2 = newt * c.Length; // current t parameter of the point being visualized
                             if ((d1 > pZ && d2 < pZ) || (d1 < pZ && d2 > pZ)) // if there is a change in the force sign, calculate the intersection point
                             {
-                                
+
                                 // the function of the line is
                                 //y= (t2-t1)tzero/(d2-d1)+d1  This has to be equal to pZ
-                                double ml = (d2 - d1)/ (t2 - t1) ;
+                                double ml = (d2 - d1) / (t2 - t1);
                                 tzero = (pZ - d1) / ml; // multiply by the length of the curve and add the X coordinate of the last mesh point
-                                
-                                
+
+
                                 tzero += t1;
 
                                 //pzero= Point.ByCartesianCoordinates(CoordinateSystem.Identity(), tzero, cPoint.Y, pZ); //CHECK THAT THIS IS CORRECT
@@ -241,10 +256,10 @@ namespace DynamoSAP.Analysis
                             // Add face
                             //append...??
                             m = Mesh.ByPointsFaceIndices(MeshPoints, indices);
-                            myVizMeshes.Add(m);
+                            mm.Add(m);
 
                             MeshPoints.Clear();
-                            
+
                             if ((d1 > pZ && d2 < pZ) || (d1 < pZ && d2 > pZ)) // if there is a change in the force sign
                             {
                                 MeshPoints.Add(pzero); //new face index 0
@@ -274,26 +289,59 @@ namespace DynamoSAP.Analysis
                             }
                             //append...??
                             m = Mesh.ByPointsFaceIndices(MeshPoints, indices);
-                            myVizMeshes.Add(m);
+                            mm.Add(m);
                         }
                     }
-                    t1 = t*c.Length;
+                    t1 = newt * c.Length;
                 }
-            //}
 
+                myVizMeshes.Add(mm);
+                
+            }
             return myVizMeshes;
+        }
 
+        public static List<Mesh> TranslateMesh(Frame f, List<List<Mesh>> AnalysisMeshes, Vector myvector)
+        {
+            List<Mesh> mm= new List<Mesh>();
+            int findex=Convert.ToInt32(f.Label) - 1;
+            
+            foreach(Mesh m in AnalysisMeshes[findex]){
+                Mesh newm = null;
+                Point [] pp=m.VertexPositions;
+                List<Point> mypoints = new List<Point>();
+                foreach (Point ppt in pp)
+                {
+                    Point p = (Point)ppt.Translate(myvector);
+                    mypoints.Add(p);
+                }
+                IndexGroup ig = null;
+                List<IndexGroup> indices = new List<IndexGroup>();
+                if (mypoints.Count == 4)
+                {
+                    ig = IndexGroup.ByIndices(0, 1, 2,3);
+                    
+                }
+                else
+                {
+                    ig = IndexGroup.ByIndices(0, 1, 2);                    
+                }
+                indices.Add(ig);
+
+                newm = Mesh.ByPointsFaceIndices(mypoints, indices);
+                mm.Add(newm);
+            }
+            
+            return mm;
         }
 
         //Results private methods
         private Analysis() { }
-        private Analysis(List<FrameResults> fresults)
+        private Analysis(List<FrameResults> fresults, string loadcombination)
         {
             FrameResults = fresults;
-
+            LoadCombination = loadcombination;
         }
-
-
 
     }
 
