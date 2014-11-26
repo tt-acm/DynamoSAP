@@ -139,83 +139,78 @@ namespace DynamoSAP.Structure
             return l;
         }
 
-        public static List<List<Object>> Display(StructuralModel StructuralModel, string LPattern="",double scale = 1.0)
+        public static List<List<Object>> Display(StructuralModel StructuralModel, string LPattern = "Show All", double scale = 1.0, bool showValues = true, double textSize = 1.0)
         {
             List<List<Object>> LoadViz = new List<List<Object>>();
 
-            foreach (Load l in StructuralModel.Loads)
+            foreach (Load load in StructuralModel.Loads)
             {
-                if (LPattern == "")
+                Point labelLocation = null;
+                if (LPattern == "Show All")
                 {
-                   //show all
+                    //show all
                 }
                 else
                 {
-                    if (l.lPattern.Name != LPattern)
+                    if (load.lPattern.Name != LPattern)
                     {
                         continue; // show only the loads whose load pattern is the specified in the node
                     }
                 }
-                List<Object> lo = new List<Object>();
-                Frame f = l.Frame;
+                List<Object> LoadObjects = new List<Object>();
+                Frame f = load.Frame;
                 Curve c = f.BaseCrv;
-                List<double> dd = new List<double>();
+                List<double> dd = new List<double>(); // parameter values where arrows will be drawn
                 bool isDistributed = false;
-                if (l.LoadType == "DistributedLoad")
+                if (load.LoadType == "DistributedLoad")
                 {
                     isDistributed = true;
                     //number of arrows to represent a Distributed Load
-                    int n = Convert.ToInt32((l.Dist - l.Dist2) / 0.05);
-                    double step = (l.Dist - l.Dist2) / n;
+                    int n = Convert.ToInt32((load.Dist - load.Dist2) / 0.05);
+                    double step = (load.Dist - load.Dist2) / n;
 
-                    for (double i = l.Dist; i < l.Dist2; i += step)
+                    for (double i = load.Dist; i < load.Dist2; i += step)
                     {
                         dd.Add(i);
                     }
-                    dd.Add(l.Dist2);
+                    dd.Add(load.Dist2);
                 }
-                else
+                else // if its a point load
                 {
-                    dd.Add(l.Dist);
+                    dd.Add(load.Dist);
                 }
                 Point A = null;
                 Point B = null;
+                Vector v2 = null;
+                Vector v3 = null;
+                Vector xAxis = c.TangentAtParameter(0.0);
                 for (int i = 0; i < dd.Count; i++)
                 {
                     List<Point> pps = new List<Point>();
                     List<IndexGroup> igs = new List<IndexGroup>();
-
-                    Vector xAxis = c.TangentAtParameter(0.0);
-
                     // Line of the arrow
                     Point p1 = c.PointAtParameter(dd[i]);
-
                     Point p2 = null;
                     Point p3 = null;
                     Point p4 = null;
 
                     //MUST ADD SOME CONDITION HERE FOR LOCAL OR GLOBAL COORDINATE SYSTEM
-                    Vector v2=null;
-                    Vector v3 = null;
-                    if (l.Dir == 4) // if it's the X Direction
+
+                    if (load.Dir == 4) // if it's the X Direction
                     {
-                        v2 = Vector.ByCoordinates(20.0*scale, 0.0, 0.0);
+                        v2 = Vector.ByCoordinates(20.0 * scale, 0.0, 0.0);
                         v3 = Vector.ByCoordinates(5.0 * scale, 0.0, 0.0);
-                        
-                        
                     }
 
-                    if (l.Dir == 5) // if it's the Y Direction
+                    if (load.Dir == 5) // if it's the Y Direction
                     {
                         v2 = Vector.ByCoordinates(0.0, 20.0 * scale, 0.0);
                         v3 = Vector.ByCoordinates(0.0, 5.0 * scale, 0.0);
-
-
                     }
-                    if (l.Dir == 6) // if it's the Z Direction
+                    if (load.Dir == 6) // if it's the Z Direction
                     {
                         v2 = Vector.ByCoordinates(0.0, 0.0, 20.0 * scale);
-                        v3=Vector.ByCoordinates(0.0, 0.0, 5.0*scale);
+                        v3 = Vector.ByCoordinates(0.0, 0.0, 5.0 * scale);
                     }
 
                     p2 = (Point)p1.Translate(v2);
@@ -232,9 +227,9 @@ namespace DynamoSAP.Structure
                     igs.Add(IndexGroup.ByIndices(0, 1, 2));
                     Mesh m = Mesh.ByPointsFaceIndices(pps, igs);
 
-                    lo.Add(Line.ByStartPointEndPoint(p1, p2));
-                    lo.Add(m);
-                    if (isDistributed)
+                    LoadObjects.Add(Line.ByStartPointEndPoint(p1, p2));
+                    LoadObjects.Add(m);
+                    if (isDistributed) // create top line
                     {
                         if (i == 0)
                         {
@@ -243,17 +238,54 @@ namespace DynamoSAP.Structure
                         else if (i == dd.Count - 1)
                         {
                             B = p2;
-                            //Top line
+
                             Line topLine = Line.ByStartPointEndPoint(A, B);
-                            lo.Add(topLine);
+                            LoadObjects.Add(topLine);
+                        }
+                        else if (i == Convert.ToInt32(dd.Count / 2)) // if it is the middle point
+                        {
+                            labelLocation = (Point)p2.Translate(v2.Normalized().Scale(20));
                         }
                     }
+                    else
+                    {
+                        labelLocation = (Point)p2.Translate(v2.Normalized().Scale(20));
+                    }
+
                 }
-                LoadViz.Add(lo);
+                if (showValues)
+                {
+                    //CREATE LABEL
+                    //get the text curves
+                    List<Curve> textCurves = new List<Curve>();
+                    string value = load.Val.ToString(); // value of the load
+
+                    //create ZX Plane to host the text
+                    Plane pl = null;
+                    if (c.StartPoint.Z == c.EndPoint.Z) //if it is a beam
+                    {
+                        pl = Plane.ByOriginXAxisYAxis(labelLocation, xAxis, v2);
+                    }
+                    else //if it is a column or an inclined member
+                    {
+                        pl = Plane.ByOriginXAxisYAxis(labelLocation, v2, CoordinateSystem.Identity().ZAxis);
+                    }
+
+
+                    //call the function to create the text
+                    textCurves = Text.FromStringOriginAndScale(value, pl, textSize).ToList();
+                    foreach (Curve textc in textCurves)
+                    {
+                        LoadObjects.Add(textc);
+                    }
+                }
+
+                LoadViz.Add(LoadObjects);
             }
 
             return LoadViz;
         }
+
 
         //PRIVATE CONSTRUCTORS
         private Load() { }

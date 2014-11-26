@@ -62,48 +62,48 @@ namespace DynamoSAP.Analysis
             List<List<double>> Forces = new List<List<double>>();
             for (int i = 0; i < StructuralModel.Frames.Count; i++)
             {
-            List<double> ff = new List<double>();
-            foreach (FrameAnalysisData fad in AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Values)
-            {
-                if (ForceType == "Axial") //Get Axial Forces P
+                List<double> ff = new List<double>();
+                foreach (FrameAnalysisData fad in AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Values)
                 {
-                    ff.Add(fad.P);
-                }
-                else if (ForceType == "Shear22") // Get Shear V2
-                {
-                    ff.Add(fad.V2);
-                }
-                else if (ForceType == "Shear33") // Get Shear V3
-                {
-                    ff.Add(fad.V3);
-                }
+                    if (ForceType == "Axial") //Get Axial Forces P
+                    {
+                        ff.Add(fad.P);
+                    }
+                    else if (ForceType == "Shear22") // Get Shear V2
+                    {
+                        ff.Add(fad.V2);
+                    }
+                    else if (ForceType == "Shear33") // Get Shear V3
+                    {
+                        ff.Add(fad.V3);
+                    }
 
-                else if (ForceType == "Torsion") // Get Torsion T
-                {
-                    ff.Add(fad.T);
-                }
+                    else if (ForceType == "Torsion") // Get Torsion T
+                    {
+                        ff.Add(fad.T);
+                    }
 
-                else if (ForceType == "Moment22") // Get Moment M2
-                {
-                    ff.Add(fad.M2);
+                    else if (ForceType == "Moment22") // Get Moment M2
+                    {
+                        ff.Add(fad.M2);
+                    }
+                    else if (ForceType == "Moment33") // Get Moment M3
+                    {
+                        ff.Add(fad.M3);
+                    }
                 }
-                else if (ForceType == "Moment33") // Get Moment M3
-                {
-                    ff.Add(fad.M3);
-                }
+                Forces.Add(ff);
             }
-            Forces.Add(ff);
-        }
 
             return Forces;
         }
 
         public static List<List<Mesh>> VisualizeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType, double scale)
         {
-            List<List<Mesh>> myVizMeshes = new List<List<Mesh>>();     
+            List<List<Mesh>> myVizMeshes = new List<List<Mesh>>();
             for (int i = 0; i < StructuralModel.Frames.Count; i++)
             {
-                List<Mesh> mm = new List<Mesh>();           
+                List<Mesh> mm = new List<Mesh>();
                 // get the frame's curve specified by the frameID
 
                 Frame f = (Frame)StructuralModel.Frames[i];
@@ -115,6 +115,7 @@ namespace DynamoSAP.Analysis
                 //This ensures the right axis for the Z direction  
                 CoordinateSystem localCS = CoordinateSystem.ByOriginVectors(c.StartPoint, xAxis, yAxis);
 
+                
                 //TEST TO VISUALIZE NORMALS
                 //Point pt = c.PointAtParameter(0.5);
                 //Line ln = Line.ByStartPointDirectionLength(pt, localCS.ZAxis, 30.0);
@@ -124,8 +125,6 @@ namespace DynamoSAP.Analysis
                 List<Point> MeshPoints = new List<Point>();
 
                 int count = 0;
-
-                
 
                 double t2 = 0.0;
                 double t1 = 0.0;
@@ -296,19 +295,20 @@ namespace DynamoSAP.Analysis
                 }
 
                 myVizMeshes.Add(mm);
-                
+
             }
             return myVizMeshes;
         }
 
-        public static List<Mesh> TranslateMesh(Frame f, List<List<Mesh>> AnalysisMeshes, Vector myvector)
+        public static List<Mesh> TranslateMesh(Frame f, List<Mesh> AnalysisMeshes, Vector myvector)
         {
-            List<Mesh> mm= new List<Mesh>();
-            int findex=Convert.ToInt32(f.Label) - 1;
-            
-            foreach(Mesh m in AnalysisMeshes[findex]){
+            List<Mesh> mm = new List<Mesh>();
+            //int findex=Convert.ToInt32(f.Label) - 1;
+
+            foreach (Mesh m in AnalysisMeshes)
+            {
                 Mesh newm = null;
-                Point [] pp=m.VertexPositions;
+                Point[] pp = m.VertexPositions;
                 List<Point> mypoints = new List<Point>();
                 foreach (Point ppt in pp)
                 {
@@ -319,22 +319,31 @@ namespace DynamoSAP.Analysis
                 List<IndexGroup> indices = new List<IndexGroup>();
                 if (mypoints.Count == 4)
                 {
-                    ig = IndexGroup.ByIndices(0, 1, 2,3);
-                    
+                    ig = IndexGroup.ByIndices(0, 1, 2, 3);
+
                 }
                 else
                 {
-                    ig = IndexGroup.ByIndices(0, 1, 2);                    
+                    ig = IndexGroup.ByIndices(0, 1, 2);
                 }
                 indices.Add(ig);
 
                 newm = Mesh.ByPointsFaceIndices(mypoints, indices);
                 mm.Add(newm);
             }
-            
+
             return mm;
         }
 
+        public static List<List<Curve>> Tags(List<double> values, List<Point> locations, double Scale)
+        {
+            List<List<Curve>> tagCurves = new List<List<Curve>>();
+            for (int i = 0; i < values.Count; i++)
+            {
+                //tagCurves.Add(Text.FromStringOriginAndScale(values[i].ToString(), locations[i], Scale).ToList());
+            }
+            return tagCurves;
+        }
         //Results private methods
         private Analysis() { }
         private Analysis(List<FrameResults> fresults, string loadcombination)
