@@ -139,10 +139,10 @@ namespace DynamoSAP.Structure
             return l;
         }
 
-        public static List<List<Object>> Display(StructuralModel StructuralModel, string LPattern = "Show All", double scale = 1.0, bool showValues = true, double textSize = 1.0)
+        public static List<Object> Display(StructuralModel StructuralModel, string LPattern = "Show All", double scale = 1.0, bool showValues = true, double textSize = 1.0)
         {
-            List<List<Object>> LoadViz = new List<List<Object>>();
-
+            //List<List<Object>> LoadViz = new List<List<Object>>();
+            List<Object> LoadObjects = new List<Object>();
             foreach (Load load in StructuralModel.Loads)
             {
                 Point labelLocation = null;
@@ -157,7 +157,7 @@ namespace DynamoSAP.Structure
                         continue; // show only the loads whose load pattern is the specified in the node
                     }
                 }
-                List<Object> LoadObjects = new List<Object>();
+                
                 Frame f = load.Frame;
                 Curve c = f.BaseCrv;
                 List<double> dd = new List<double>(); // parameter values where arrows will be drawn
@@ -258,7 +258,7 @@ namespace DynamoSAP.Structure
                     //CREATE LABEL
                     //get the text curves
                     List<Curve> textCurves = new List<Curve>();
-                    string value = load.Val.ToString(); // value of the load
+                    string value = Math.Round(load.Val, 2).ToString(); // value of the load rounded to two decimals
 
                     //create ZX Plane to host the text
                     Plane pl = null;
@@ -271,7 +271,6 @@ namespace DynamoSAP.Structure
                         pl = Plane.ByOriginXAxisYAxis(labelLocation, v2, CoordinateSystem.Identity().ZAxis);
                     }
 
-
                     //call the function to create the text
                     textCurves = Text.FromStringOriginAndScale(value, pl, textSize).ToList();
                     foreach (Curve textc in textCurves)
@@ -280,10 +279,10 @@ namespace DynamoSAP.Structure
                     }
                 }
 
-                LoadViz.Add(LoadObjects);
+                //LoadViz.Add(LoadObjects);
             }
 
-            return LoadViz;
+            return LoadObjects;
         }
 
 

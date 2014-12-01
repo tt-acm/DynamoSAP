@@ -115,7 +115,7 @@ namespace DynamoSAP.Analysis
                 //This ensures the right axis for the Z direction  
                 CoordinateSystem localCS = CoordinateSystem.ByOriginVectors(c.StartPoint, xAxis, yAxis);
 
-                
+
                 //TEST TO VISUALIZE NORMALS
                 //Point pt = c.PointAtParameter(0.5);
                 //Line ln = Line.ByStartPointDirectionLength(pt, localCS.ZAxis, 30.0);
@@ -300,50 +300,60 @@ namespace DynamoSAP.Analysis
             return myVizMeshes;
         }
 
-        public static List<Mesh> TranslateMesh(Frame f, List<Mesh> AnalysisMeshes, Vector myvector)
+        public static List<Object> TranslateDisplay(List<Object> AnalysisMeshes, Vector Direction)
         {
-            List<Mesh> mm = new List<Mesh>();
-            //int findex=Convert.ToInt32(f.Label) - 1;
+            List<Object> objs = new List<Object>();
 
-            foreach (Mesh m in AnalysisMeshes)
+            foreach (Object obj in AnalysisMeshes)
             {
-                Mesh newm = null;
-                Point[] pp = m.VertexPositions;
-                List<Point> mypoints = new List<Point>();
-                foreach (Point ppt in pp)
+                try
                 {
-                    Point p = (Point)ppt.Translate(myvector);
-                    mypoints.Add(p);
-                }
-                IndexGroup ig = null;
-                List<IndexGroup> indices = new List<IndexGroup>();
-                if (mypoints.Count == 4)
-                {
-                    ig = IndexGroup.ByIndices(0, 1, 2, 3);
+                    Mesh m = (Mesh)obj;
+                    Mesh newm = null;
+                    Point[] pp = m.VertexPositions;
+                    List<Point> mypoints = new List<Point>();
+                    foreach (Point ppt in pp)
+                    {
+                        Point p = (Point)ppt.Translate(Direction);
+                        mypoints.Add(p);
+                    }
+                    IndexGroup ig = null;
+                    List<IndexGroup> indices = new List<IndexGroup>();
+                    if (mypoints.Count == 4)
+                    {
+                        ig = IndexGroup.ByIndices(0, 1, 2, 3);
 
-                }
-                else
-                {
-                    ig = IndexGroup.ByIndices(0, 1, 2);
-                }
-                indices.Add(ig);
+                    }
+                    else
+                    {
+                        ig = IndexGroup.ByIndices(0, 1, 2);
+                    }
+                    indices.Add(ig);
 
-                newm = Mesh.ByPointsFaceIndices(mypoints, indices);
-                mm.Add(newm);
+                    newm = Mesh.ByPointsFaceIndices(mypoints, indices);
+                    objs.Add(newm);
+                }
+                catch (Exception)
+                {
+
+                    //throw;
+                }
+                try
+                {
+                    Line ln = (Line)obj;
+                    Line lnt = (Line)ln.Translate(Direction);
+                    objs.Add(lnt);
+                }
+                catch (Exception)
+                {
+                    //throw;
+                }
             }
 
-            return mm;
+
+            return objs;
         }
 
-        public static List<List<Curve>> Tags(List<double> values, List<Point> locations, double Scale)
-        {
-            List<List<Curve>> tagCurves = new List<List<Curve>>();
-            for (int i = 0; i < values.Count; i++)
-            {
-                //tagCurves.Add(Text.FromStringOriginAndScale(values[i].ToString(), locations[i], Scale).ToList());
-            }
-            return tagCurves;
-        }
         //Results private methods
         private Analysis() { }
         private Analysis(List<FrameResults> fresults, string loadcombination)
