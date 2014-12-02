@@ -45,7 +45,7 @@ namespace SAPConnection
 
         }
 
-        public static void OpenSAPModel(string filePath, ref cSapModel mySapModel)
+        public static void OpenSAPModel(string filePath, ref cSapModel mySapModel, ref string units)
         {
             long ret = 0;
             //Create SAP2000 Object
@@ -55,11 +55,11 @@ namespace SAPConnection
             //Create SapModel object
             mySapModel = mySAPObject.SapModel;
             ret = mySapModel.InitializeNewModel();
-
-            ret = mySapModel.File.OpenFile(filePath); 
+            ret = mySapModel.File.OpenFile(filePath);
+            units = mySapModel.GetPresentUnits().ToString();
         }
 
-        public static void GrabOpenSAP(ref cSapModel mySapModel)
+        public static void GrabOpenSAP(ref cSapModel mySapModel, ref string units)
         {
             Process[] SapInstances = Process.GetProcessesByName("SAP2000");
 
@@ -70,7 +70,7 @@ namespace SAPConnection
                 object getObj = ROTHelper.GetActiveObject("SAP2000v16.SapObject");
                 SapObject Obj = (SapObject)getObj;
                 mySapModel = Obj.SapModel;
-                eUnits units = mySapModel.GetPresentUnits();
+                units = mySapModel.GetPresentUnits().ToString();
             }
         }
 

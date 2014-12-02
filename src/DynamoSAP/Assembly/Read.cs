@@ -18,13 +18,15 @@ namespace DynamoSAP.Assembly
     public class Read
     {
         //// DYNAMO NODES ////
-        public static StructuralModel SAPModel(string FilePath, bool read)
+        [MultiReturn("StructuralModel", "units")]
+        public static Dictionary<string, object> SAPModel(string FilePath, bool read)
         {
             StructuralModel Model = new StructuralModel();
             Model.Frames = new List<Element>();
             cSapModel mySapModel = null;
+            string units = string.Empty;
             // Open & instantiate SAP file
-            Initialize.OpenSAPModel(FilePath, ref mySapModel);
+            Initialize.OpenSAPModel(FilePath, ref mySapModel, ref units);
 
             // Populate the model's elemets
 
@@ -51,20 +53,26 @@ namespace DynamoSAP.Assembly
                 Model.Frames.Add(d_frm);
             }
 
+            // Return outputs
+            return new Dictionary<string, object>
+            {
+                {"StructuralModel", Model},
+                {"units", units}
+            };
 
-            return Model;
         }
 
-        public static StructuralModel SAPModel(bool read)
+        [MultiReturn("StructuralModel","units")]
+        public static Dictionary<string,object> SAPModel(bool read)
         {
             StructuralModel Model = new StructuralModel();
             Model.Frames = new List<Element>();
             cSapModel mySapModel = null;
+            string units = string.Empty;
             // Open & instantiate SAP file
-            Initialize.GrabOpenSAP(ref mySapModel);
+            Initialize.GrabOpenSAP(ref mySapModel, ref units);
 
             // Populate the model's elemets
-
             //Get Frames          
             string[] FrmIds = null;
             StructureMapper.GetFrameIds(ref FrmIds, ref mySapModel);
@@ -88,8 +96,13 @@ namespace DynamoSAP.Assembly
                 Model.Frames.Add(d_frm);
             }
 
-
-            return Model;
+            // Return outputs
+            return new Dictionary<string, object>
+            {
+                {"StructuralModel", Model},
+                {"units", units}
+            };
+            
         }
 
         private Read() { }
