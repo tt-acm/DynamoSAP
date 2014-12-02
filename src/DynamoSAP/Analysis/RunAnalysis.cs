@@ -35,8 +35,9 @@ namespace DynamoSAP.Analysis
 
             if (RunIt)
             {
+                string units = string.Empty;
                 // open sap     
-                SAPConnection.Initialize.OpenSAPModel(Filepath, ref mySapModel);
+                SAPConnection.Initialize.OpenSAPModel(Filepath, ref mySapModel, ref units);
                 // run analysis
                 SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, Filepath);
             }
