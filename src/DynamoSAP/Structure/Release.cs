@@ -6,9 +6,6 @@ using Autodesk.DesignScript.Geometry;
 
 using DynamoSAP.Structure;
 
-//DYNAMO
-using Autodesk.DesignScript.Geometry;
-using Autodesk.DesignScript.Runtime;
 
 namespace DynamoSAP.Structure
 {
