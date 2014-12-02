@@ -10,6 +10,8 @@ using System.Runtime.InteropServices;
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
+using System.Diagnostics;
+using System.Collections;
 
 namespace SAPConnection
 {
@@ -55,6 +57,21 @@ namespace SAPConnection
             ret = mySapModel.InitializeNewModel();
 
             ret = mySapModel.File.OpenFile(filePath); 
+        }
+
+        public static void GrabOpenSAP(ref cSapModel mySapModel)
+        {
+            Process[] SapInstances = Process.GetProcessesByName("SAP2000");
+
+            if (SapInstances.LongLength >= 1)
+            {
+                // keep contunie
+                //mySapModel = SapInstances[0].CreateObjRef();
+                object getObj = ROTHelper.GetActiveObject("SAP2000v16.SapObject");
+                SapObject Obj = (SapObject)getObj;
+                mySapModel = Obj.SapModel;
+                eUnits units = mySapModel.GetPresentUnits();
+            }
         }
 
         public static void Release(ref SapObject SAP, ref cSapModel Model)
@@ -123,9 +140,6 @@ namespace SAPConnection
 
             return true;
         }
-
-        
-
 
 
     }
