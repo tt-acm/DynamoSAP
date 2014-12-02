@@ -6,6 +6,10 @@ using Autodesk.DesignScript.Geometry;
 
 using DynamoSAP.Structure;
 
+//DYNAMO
+using Autodesk.DesignScript.Geometry;
+using Autodesk.DesignScript.Runtime;
+
 namespace DynamoSAP.Structure
 {
     public class Release
@@ -55,6 +59,23 @@ namespace DynamoSAP.Structure
         public static Release SetRelease(Frame F, bool U1i = false, bool U1j = false, bool U2i = false, bool U2j = false, bool U3i = false, bool U3j = false, bool R1i = false, bool R1j = false, bool R2i = false, bool R2j = false, bool R3i = false, bool R3j = false)
         {
             return new Release(F,  U1i,  U1j,  U2i,  U2j, U3i, U3j, R1i, R1j, R2i, R2j, R3i, R3j);
+        }
+
+        public static List<Sphere> Display(Release R, double radius=10.0)
+        {
+
+            List<Sphere> rSpheres = new List<Sphere>();
+            if (R.U1i == true || R.U2i == true || R.U3i == true || R.R1i == true || R.R2i == true || R.R3i == true)
+            {
+                Sphere s = Sphere.ByCenterPointRadius(R.Frame.BaseCrv.PointAtParameter(0.15), radius);
+                rSpheres.Add(s);
+            }
+            else if (R.U1j == true || R.U2j == true || R.U3j == true || R.R1j == true || R.R2j == true || R.R3j == true)
+            {
+                Sphere s = Sphere.ByCenterPointRadius(R.Frame.BaseCrv.PointAtParameter(0.85), radius);
+                rSpheres.Add(s);
+            }
+            return rSpheres;
         }
 
         // PRIVATE CONSTRUCTOR

@@ -158,7 +158,7 @@ namespace DynamoSAP.Analysis
 
                     else if (ForceType == "Torsion") // Get Torsion T
                     {
-                        translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].T * scale;
+                        translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].T * -scale;
                     }
 
                     else if (ForceType == "Moment22") // Get Moment M2
