@@ -160,6 +160,8 @@ namespace DynamoSAP.Structure
                 
                 Frame f = load.Frame;
                 Curve c = f.BaseCrv;
+                if (load.Val > 0) scale = -scale; // make negative and change the direction of the arrow
+
                 List<double> dd = new List<double>(); // parameter values where arrows will be drawn
                 bool isDistributed = false;
                 if (load.LoadType == "DistributedLoad")
