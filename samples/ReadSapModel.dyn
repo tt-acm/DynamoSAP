@@ -1,0 +1,20 @@
+<Workspace Version="0.7.4.3192" X="148.114714854744" Y="-139.233558620534" zoom="0.894584203790342" Description="" Category="" Name="Home">
+  <Elements>
+    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="322e7343-5ed5-4937-b2af-1b2fd82141eb" nickname="Boolean" x="60.1365142793094" y="328.45994141126" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <System.Boolean>True</System.Boolean>
+    </DSCoreNodesUI.BoolSelector>
+    <DSCore.File.Filename type="DSCore.File.Filename" guid="81593001-4122-427b-98f4-ef5ca2d03210" nickname="File Path" x="-102.935048921163" y="190.008961440501" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <System.String>C:\Users\EErtugrul\Desktop\Wimbledon\2014-11-21-Master Model.sdb</System.String>
+    </DSCore.File.Filename>
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="bdfb2485-86d7-4b17-b4ec-33b79122c3d8" nickname="Read.SAPModel" x="371.599300946443" y="223.316192478086" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.Read.SAPModel@string,bool" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="68ce0ae1-c7ab-46a7-aeb6-37525aaac4a2" nickname="StructuralModel.Frames" x="677.886846421833" y="245.672947622275" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Frames" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="edfc68b2-8dbe-4bf2-ae66-d0417e428d1b" nickname="Frame.BaseCurve" x="951.75709693815" y="254.615649679951" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\Documents\GitHub\DynamoSAP\src\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Structure.Frame.BaseCurve" />
+  </Elements>
+  <Connectors>
+    <Dynamo.Models.ConnectorModel start="322e7343-5ed5-4937-b2af-1b2fd82141eb" start_index="0" end="bdfb2485-86d7-4b17-b4ec-33b79122c3d8" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="81593001-4122-427b-98f4-ef5ca2d03210" start_index="0" end="bdfb2485-86d7-4b17-b4ec-33b79122c3d8" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="bdfb2485-86d7-4b17-b4ec-33b79122c3d8" start_index="0" end="68ce0ae1-c7ab-46a7-aeb6-37525aaac4a2" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="68ce0ae1-c7ab-46a7-aeb6-37525aaac4a2" start_index="0" end="edfc68b2-8dbe-4bf2-ae66-d0417e428d1b" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+</Workspace>

@@ -52,5 +52,62 @@ namespace SAPConnection
             long ret= mySapModel.FrameObj.SetSection(Name, SectionProfile);
         }
 
+        // READ FROM SAPMODEL
+        public static void GetFrameIds(ref string[] Names, ref cSapModel Model)
+        {
+            int number = 0;
+            int ret = Model.FrameObj.GetNameList(ref number, ref Names);
+        }
+
+        public static void GetFrm(ref cSapModel Model, string frmId, ref Point i, ref Point j, ref string MatProp, ref string SecProp, ref string Just, ref double Rot)
+        { 
+            
+            long ret = 0;
+            // Get Geometry
+            // SAP Frame start and end point
+            string StartPoint = string.Empty;
+            string EndPoint = string.Empty;
+            Double myStartX = 0;
+            Double myStartY = 0;
+            Double myStartZ = 0;
+            Double myEndX = 0;
+            Double myEndY = 0;
+            Double myEndZ = 0;
+
+            // getting start and end point
+            ret = Model.FrameObj.GetPoints(frmId, ref StartPoint, ref EndPoint);
+            //getting coordinates of starting point
+            ret = Model.PointObj.GetCoordCartesian(StartPoint, ref myStartX, ref myStartY, ref myStartZ);
+            //getting coordinates of ending point
+            ret = Model.PointObj.GetCoordCartesian(EndPoint, ref myEndX, ref myEndY, ref myEndZ);
+
+            i = Point.ByCoordinates(myStartX, myStartY, myStartZ);
+            j = Point.ByCoordinates(myEndX, myEndY, myEndZ);
+
+            // Section
+            string SAuto = string.Empty;
+            ret = Model.FrameObj.GetSection(frmId, ref SecProp, ref SAuto);
+
+            // MatProp
+            MatProp = MaterialMapper.SapToDynamo(ref Model, SecProp);
+
+            // Justification
+            Just = JustificationMapper.SapToDynamoFrm(ref Model, frmId);
+
+            // Rotation
+            bool ifadvanced = false;
+            ret = Model.FrameObj.GetLocalAxes(frmId, ref Rot, ref ifadvanced);
+
+        }
+
+        public static void GetGUIDFrm(ref cSapModel Model, string Label, ref string GUID)
+        {
+            long ret = Model.FrameObj.GetGUID(Label, ref GUID);
+            if (String.IsNullOrEmpty(GUID))
+            {
+                ret = Model.FrameObj.SetGUID(Label);
+                ret = Model.FrameObj.GetGUID(Label, ref GUID);
+            }
+        }
     }
 }

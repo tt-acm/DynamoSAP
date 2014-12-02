@@ -73,8 +73,8 @@ namespace DynamoSAP.Structure
         }
 
          // PRIVATE CONSTRUCTORS
-        private Frame(){}
-        private Frame(Line line,string matProp, string secProp, string just, double angle)
+        internal Frame(){}
+        internal Frame(Line line,string matProp, string secProp, string just, double angle)
         {
             BaseCrv = line;
             Angle = angle;
@@ -82,7 +82,7 @@ namespace DynamoSAP.Structure
             SecProp= secProp;
             Just = just;
         }
-        private Frame(Point i, Point j, string matProp, string secProp, string just, double angle)
+        internal Frame(Point i, Point j, string matProp, string secProp, string just, double angle)
         {
             BaseCrv = Line.ByStartPointEndPoint(i, j);
             Angle = angle;

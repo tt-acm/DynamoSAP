@@ -11,7 +11,6 @@ using System.IO;
 using SAPConnection;
 
 using DynamoSAP.Structure;
-using DynamoSAP.Analysis;
 
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
@@ -22,6 +21,7 @@ using SAP2000v16;
 
 namespace DynamoSAP.Assembly
 {
+    [SupressImportIntoVM]
     public class SAPModel
     {
         private static cSapModel mySapModel;
@@ -69,9 +69,9 @@ namespace DynamoSAP.Assembly
         }
         #endregion
        
-
         //// DYNAMO NODES ////
-        public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns, List<LoadCase> SAPLoadCases, List<Restraint> SAPRestraints, List<Load> SAPLoads, List<Release> SAPReleases)
+        //public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns, List<LoadCase> SAPLoadCases, List<Restraint> SAPRestraints, List<Load> SAPLoads, List<Release> SAPReleases)
+        public static void CreateSAPModel(ref StructuralModel model)    
         {
             string report = string.Empty;
 
@@ -91,7 +91,7 @@ namespace DynamoSAP.Assembly
             Dictionary<string, string> SapModelFrmDict = new Dictionary<string, string>();
 
             //2. Create Geometry
-            foreach (var el in SAPElements)
+            foreach (var el in model.Frames)
             {
                 if (el.GetType().ToString().Contains("Frame"))
                 {
@@ -102,9 +102,9 @@ namespace DynamoSAP.Assembly
 
 
             // 3. Assigns Restraints to Nodes
-            if (SAPRestraints != null)
+            if (model.Restraints != null)
             {
-                foreach (var rest in SAPRestraints)
+                foreach (var rest in model.Restraints)
                 {
                     List<bool> restraints = new List<bool>();
                     restraints.Add(rest.U1); restraints.Add(rest.U2); restraints.Add(rest.U3);
@@ -116,9 +116,9 @@ namespace DynamoSAP.Assembly
 
 
             // 4. Add Load Patterns
-            if (SAPLoadPatterns != null)
+            if (model.LoadPatterns != null)
             {
-                foreach (LoadPattern lp in SAPLoadPatterns)
+                foreach (LoadPattern lp in model.LoadPatterns)
                 {
                     //Call the AddLoadPattern method
                     SAPConnection.LoadMapper.AddLoadPattern(ref mySapModel, lp.Name, lp.Type, lp.Multiplier);
@@ -127,9 +127,9 @@ namespace DynamoSAP.Assembly
 
             // 5. Define Load Cases
 
-            if (SAPLoadCases != null)
+            if (model.LoadCases != null)
             {
-                foreach (LoadCase lc in SAPLoadCases)
+                foreach (LoadCase lc in model.LoadCases)
                 {
 
                     List<string> types = new List<string>();
@@ -153,9 +153,9 @@ namespace DynamoSAP.Assembly
 
 
             // 6. Loads
-            if (SAPLoads != null)
+            if (model.Loads != null)
             {
-                foreach (Load load in SAPLoads)
+                foreach (Load load in model.Loads)
                 {
                     // get Frame Label
                     string frmId = string.Empty;
@@ -179,9 +179,9 @@ namespace DynamoSAP.Assembly
             }
 
             //// 7. Releases
-            if (SAPReleases != null)
+            if (model.Releases != null)
             {
-                foreach (Release rel in SAPReleases)
+                foreach (Release rel in model.Releases)
                 {
                     // get Frame Label
                     string frmId = string.Empty;
@@ -208,12 +208,6 @@ namespace DynamoSAP.Assembly
             //if can't set to null, will be a hanging process
             mySapModel = null;
             mySapObject = null;
-
-            return "Success";
         }
-
-        // PRIVATE CONSTRUCTOR
-        private SAPModel() { }
-
     }
 }
