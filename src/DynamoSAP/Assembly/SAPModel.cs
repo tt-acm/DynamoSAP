@@ -66,6 +66,27 @@ namespace DynamoSAP.Assembly
             SAPConnection.JustificationMapper.SetRotationFrm(ref mySapModel, f.Label, f.Angle);
 
         }
+
+        // Set releases of a Frame
+        private static void SetReleases(Frame frm, ref cSapModel mySapModel)
+        {
+            if (frm.Releases != null)
+            {
+                        List<bool> ireleases = new List<bool>();
+                        ireleases.Add(frm.Releases.u1i); ireleases.Add(frm.Releases.u2i); ireleases.Add(frm.Releases.u3i);
+                        ireleases.Add(frm.Releases.r1i); ireleases.Add(frm.Releases.r2i); ireleases.Add(frm.Releases.r3i);
+
+                        List<bool> jreleases = new List<bool>();
+                        jreleases.Add(frm.Releases.u1j); jreleases.Add(frm.Releases.u2j); jreleases.Add(frm.Releases.u3j);
+                        jreleases.Add(frm.Releases.r1j); jreleases.Add(frm.Releases.r2j); jreleases.Add(frm.Releases.r3j);
+
+                        bool[] iireleases = ireleases.ToArray();
+                        bool[] jjreleases = jreleases.ToArray();
+
+                        SAPConnection.ReleaseMapper.SetReleases(ref mySapModel, frm.Label, iireleases, jjreleases);
+            }
+        }
+
         #endregion
        
         //// DYNAMO NODES ////
@@ -95,7 +116,7 @@ namespace DynamoSAP.Assembly
                 if (el.GetType().ToString().Contains("Frame"))
                 {
                     CreateFrame(el as Frame, ref mySapModel);
-                    SapModelFrmDict.Add(el.GUID, el.Label);
+                    SetReleases(el as Frame, ref mySapModel); // Set releases
                 }
             }
 
@@ -177,32 +198,6 @@ namespace DynamoSAP.Assembly
                 }
             }
 
-            //// 7. Releases
-            if (model.Releases != null)
-            {
-                foreach (Release rel in model.Releases)
-                {
-                    // get Frame Label
-                    string frmId = string.Empty;
-                    bool get = SapModelFrmDict.TryGetValue(rel.Frame.GUID, out frmId);
-
-                    if (!string.IsNullOrEmpty(frmId))
-                    {
-                        List<bool> ireleases = new List<bool>();
-                        ireleases.Add(rel.U1i); ireleases.Add(rel.U2i); ireleases.Add(rel.u3i);
-                        ireleases.Add(rel.R1i); ireleases.Add(rel.R2i); ireleases.Add(rel.R3i);
-
-                        List<bool> jreleases = new List<bool>();
-                        jreleases.Add(rel.U1j); jreleases.Add(rel.U2j); jreleases.Add(rel.u3j);
-                        jreleases.Add(rel.R1j); jreleases.Add(rel.R2j); jreleases.Add(rel.R3j);
-
-                        bool[] iireleases = ireleases.ToArray();
-                        bool[] jjreleases = jreleases.ToArray();
-
-                        SAPConnection.ReleaseMapper.SetReleases(ref mySapModel, frmId, iireleases, jjreleases);
-                    }
-                }
-            }
 
             //if can't set to null, will be a hanging process
             mySapModel = null;
