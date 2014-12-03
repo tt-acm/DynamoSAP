@@ -70,20 +70,36 @@ namespace DynamoSAP.Assembly
         // Set releases of a Frame
         private static void SetReleases(Frame frm, ref cSapModel mySapModel)
         {
-            if (frm.Releases != null)
+
+            List<bool> ireleases = new List<bool>();
+            ireleases.Add(frm.Releases.u1i); ireleases.Add(frm.Releases.u2i); ireleases.Add(frm.Releases.u3i);
+            ireleases.Add(frm.Releases.r1i); ireleases.Add(frm.Releases.r2i); ireleases.Add(frm.Releases.r3i);
+
+            List<bool> jreleases = new List<bool>();
+            jreleases.Add(frm.Releases.u1j); jreleases.Add(frm.Releases.u2j); jreleases.Add(frm.Releases.u3j);
+            jreleases.Add(frm.Releases.r1j); jreleases.Add(frm.Releases.r2j); jreleases.Add(frm.Releases.r3j);
+
+            bool[] iireleases = ireleases.ToArray();
+            bool[] jjreleases = jreleases.ToArray();
+
+            SAPConnection.ReleaseMapper.SetReleases(ref mySapModel, frm.Label, iireleases, jjreleases);
+        }
+
+        // Set Loads to a frame
+        private static void SetLoads(Frame frm, ref cSapModel mySapModel)
+        {
+            foreach (var load in frm.Loads)
             {
-                        List<bool> ireleases = new List<bool>();
-                        ireleases.Add(frm.Releases.u1i); ireleases.Add(frm.Releases.u2i); ireleases.Add(frm.Releases.u3i);
-                        ireleases.Add(frm.Releases.r1i); ireleases.Add(frm.Releases.r2i); ireleases.Add(frm.Releases.r3i);
-
-                        List<bool> jreleases = new List<bool>();
-                        jreleases.Add(frm.Releases.u1j); jreleases.Add(frm.Releases.u2j); jreleases.Add(frm.Releases.u3j);
-                        jreleases.Add(frm.Releases.r1j); jreleases.Add(frm.Releases.r2j); jreleases.Add(frm.Releases.r3j);
-
-                        bool[] iireleases = ireleases.ToArray();
-                        bool[] jjreleases = jreleases.ToArray();
-
-                        SAPConnection.ReleaseMapper.SetReleases(ref mySapModel, frm.Label, iireleases, jjreleases);
+                if (load.LoadType == "PointLoad")
+                {
+                    //Call the CreatePointLoad method
+                    SAPConnection.LoadMapper.CreatePointLoad(ref mySapModel, frm.Label, load.lPattern.Name, load.MyType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, false);
+                }
+                if (load.LoadType == "DistributedLoad")
+                {
+                    //Call the CreateDistributedLoad method
+                    SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, frm.Label, load.lPattern.Name, load.MyType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, false );
+                } 
             }
         }
 
@@ -111,12 +127,23 @@ namespace DynamoSAP.Assembly
             Dictionary<string, string> SapModelFrmDict = new Dictionary<string, string>();
 
             //2. Create Geometry
-            foreach (var el in model.Frames)
+            foreach (var el in model.StructuralElements)
             {
                 if (el.GetType().ToString().Contains("Frame"))
                 {
                     CreateFrame(el as Frame, ref mySapModel);
-                    SetReleases(el as Frame, ref mySapModel); // Set releases
+                    Frame frm = el as Frame;
+                    // Set Releases
+                    if (frm.Releases != null)
+                    {
+                       SetReleases(el as Frame, ref mySapModel); // Set releases 
+                    }
+                    // Set Loads
+                    if (frm.Loads.Count > 0)
+                    {
+                        SetLoads(el as Frame, ref mySapModel);
+                    }
+                    
                 }
             }
 
@@ -130,6 +157,7 @@ namespace DynamoSAP.Assembly
                     restraints.Add(rest.U1); restraints.Add(rest.U2); restraints.Add(rest.U3);
                     restraints.Add(rest.R1); restraints.Add(rest.R2); restraints.Add(rest.R3);
 
+                    // Set restaints
                     SAPConnection.RestraintMapper.SetRestaints(ref mySapModel, rest.Pt, restraints.ToArray());
                 }
             }
@@ -170,34 +198,6 @@ namespace DynamoSAP.Assembly
                     SAPConnection.LoadMapper.AddLoadCase(ref mySapModel, lc.Name, types.Count(), ref Dtypes, ref Dnames, ref DSFs, lc.Type);
                 }
             }
-
-
-            // 6. Loads
-            if (model.Loads != null)
-            {
-                foreach (Load load in model.Loads)
-                {
-                    // get Frame Label
-                    string frmId = string.Empty;
-                    //string frmId = SapModelFrmDict[load.Frame.GUID];
-                    bool get = SapModelFrmDict.TryGetValue(load.Frame.GUID, out frmId);
-
-                    if (!string.IsNullOrEmpty(frmId))
-                    {
-                        if (load.LoadType == "PointLoad")
-                        {
-                            //Call the CreatePointLoad method
-                            SAPConnection.LoadMapper.CreatePointLoad(ref mySapModel, frmId, load.lPattern.Name, load.MyType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, load.Replace);
-                        }
-                        if (load.LoadType == "DistributedLoad")
-                        {
-                            //Call the CreateDistributedLoad method
-                            SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, frmId, load.lPattern.Name, load.MyType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, load.Replace);
-                        }
-                    }
-                }
-            }
-
 
             //if can't set to null, will be a hanging process
             mySapModel = null;

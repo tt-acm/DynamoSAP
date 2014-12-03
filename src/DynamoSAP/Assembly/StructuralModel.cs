@@ -13,7 +13,7 @@ namespace DynamoSAP.Assembly
 {
     public class StructuralModel : IModel
     {
-        public List<Element> Frames { get; set; }
+        public List<Element> StructuralElements { get; set; }
 
         public List<LoadPattern> LoadPatterns { get; set; }
 
@@ -21,32 +21,28 @@ namespace DynamoSAP.Assembly
 
         public List<Restraint> Restraints { get; set; }
 
-        public List<Load> Loads { get; set; }
 
-        public List<Release> Releases { get; set; }
-
-        public static StructuralModel Collector_Frames(List<Element> frames)
+        public static StructuralModel Collector_Frames(List<Element> StructuralElements)
         {
             StructuralModel mySt = new StructuralModel();
-            mySt.Frames = frames;
+            mySt.StructuralElements = StructuralElements;
             return mySt;
         }
 
-        public static StructuralModel Collector(List<Element> frames, List<LoadPattern> loadPatterns, List<LoadCase> loadCases, List<Restraint> restraints, List<Load> loads, List<Release> releases)
+        public static StructuralModel Collector(List<Element> StructuralElements, List<LoadPattern> LoadPatterns, List<LoadCase> LoadCases, List<Restraint> Restraints)
         {
-            return new StructuralModel(frames, loadPatterns, loadCases, restraints, loads, releases);
+            return new StructuralModel(StructuralElements, LoadPatterns, LoadCases, Restraints);
         }
 
         internal StructuralModel() { }
 
-        private StructuralModel(List<Element> frames, List<LoadPattern> loadPatterns, List<LoadCase> loadCases, List<Restraint> restraints, List<Load> loads, List<Release> releases)
+        private StructuralModel(List<Element> Elements, List<LoadPattern> loadPatterns, List<LoadCase> loadCases, List<Restraint> restraints)
         {
-            Frames = frames;
+            StructuralElements = Elements;
             LoadPatterns = loadPatterns;
             LoadCases = loadCases;
             Restraints = restraints;
-            Loads = loads;
-            Releases = releases;
+
         }
     }
 }

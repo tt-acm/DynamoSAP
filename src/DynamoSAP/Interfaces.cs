@@ -14,7 +14,7 @@ namespace DynamoSAP
     [SupressImportIntoVM]
     public interface IModel
     {
-        List<Element> Frames { get; }
+        List<Element> StructuralElements { get; }
         List<LoadPattern> LoadPatterns { get; }
         List<LoadCase> LoadCases { get; }
         List<Restraint> Restraints { get; }

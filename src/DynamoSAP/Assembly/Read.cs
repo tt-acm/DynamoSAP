@@ -22,7 +22,7 @@ namespace DynamoSAP.Assembly
         public static Dictionary<string, object> SAPModel(string FilePath, bool read)
         {
             StructuralModel Model = new StructuralModel();
-            Model.Frames = new List<Element>();
+            Model.StructuralElements = new List<Element>();
             cSapModel mySapModel = null;
             string units = string.Empty;
             // Open & instantiate SAP file
@@ -52,7 +52,7 @@ namespace DynamoSAP.Assembly
                 string guid = string.Empty;
                 StructureMapper.GetGUIDFrm(ref mySapModel, FrmIds[i], ref guid);
                 d_frm.GUID = guid;
-                Model.Frames.Add(d_frm);
+                Model.StructuralElements.Add(d_frm);
             }
 
             // Return outputs
@@ -68,7 +68,7 @@ namespace DynamoSAP.Assembly
         public static Dictionary<string,object> SAPModel(bool read)
         {
             StructuralModel Model = new StructuralModel();
-            Model.Frames = new List<Element>();
+            Model.StructuralElements = new List<Element>();
             cSapModel mySapModel = null;
             string units = string.Empty;
 
@@ -99,7 +99,7 @@ namespace DynamoSAP.Assembly
                     string guid = string.Empty;
                     StructureMapper.GetGUIDFrm(ref mySapModel, FrmIds[i], ref guid);
                     d_frm.GUID = guid;
-                    Model.Frames.Add(d_frm);
+                    Model.StructuralElements.Add(d_frm);
                 }
             }
             else 

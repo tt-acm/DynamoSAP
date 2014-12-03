@@ -25,8 +25,10 @@ namespace DynamoSAP.Structure
         internal string Just { get; set; } 
         //rotation
         internal double Angle { get; set; }
-
+        // Releases if not set SAP draws as no releases
         internal Release Releases { get; set; }
+
+        internal List<Load> Loads { get; set; }
 
         // QUERY NODES
 
@@ -54,10 +56,25 @@ namespace DynamoSAP.Structure
         }
 
         // Set Custom Releases to Frame
-        public static Frame SetReleases(Frame frm, Release Release)
+        public static Frame SetReleases(Frame frame, Release Release)
         {
-            frm.Releases = Release;
-            return frm;
+            frame.Releases = Release;
+            return frame;
+        }
+
+        // Set Loads to Frame
+        public static Frame SetLoad(Frame frame, Load Load, bool replaceExisting = false)
+        {
+            if (replaceExisting) // if true delete the list and add the new Load
+            {
+                frame.Loads.Clear();
+                frame.Loads.Add(Load);
+            }
+            else 
+            {
+                frame.Loads.Add(Load);
+            }
+            return frame;
         }
 
         // Display Nodes

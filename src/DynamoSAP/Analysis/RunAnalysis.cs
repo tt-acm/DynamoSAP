@@ -61,7 +61,7 @@ namespace DynamoSAP.Analysis
         public static List<List<double>> DecomposeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType)
         {
             List<List<double>> Forces = new List<List<double>>();
-            for (int i = 0; i < StructuralModel.Frames.Count; i++)
+            for (int i = 0; i < StructuralModel.StructuralElements.Count; i++)
             {
                 List<double> ff = new List<double>();
                 foreach (FrameAnalysisData fad in AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Values)
@@ -102,12 +102,12 @@ namespace DynamoSAP.Analysis
         public static List<List<Mesh>> VisualizeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType, double scale)
         {
             List<List<Mesh>> myVizMeshes = new List<List<Mesh>>();
-            for (int i = 0; i < StructuralModel.Frames.Count; i++)
+            for (int i = 0; i < StructuralModel.StructuralElements.Count; i++)
             {
                 List<Mesh> mm = new List<Mesh>();
                 // get the frame's curve specified by the frameID
 
-                Frame f = (Frame)StructuralModel.Frames[i];
+                Frame f = (Frame)StructuralModel.StructuralElements[i];
                 Curve c = f.BaseCrv;
 
                 //CREATE LOCAL COORDINATE SYSTEM

@@ -16,8 +16,6 @@ namespace DynamoSAP.Structure
         //Load Type
         internal string LoadType;
 
-        //Frame Name
-        internal Frame frm { get; set; }
         //Load Pattern
         internal LoadPattern lPattern { get; set; }
         //My Type
@@ -42,31 +40,31 @@ namespace DynamoSAP.Structure
         // internal static eItemType MyeItemType;
 
         //DYNAMO QUERY NODES
-        public string LType { get { return LoadType; } }
-        public Frame Frame { get { return frm; } }
-        public LoadPattern Pattern { get { return lPattern; } }
-        public int FMType { get { return MyType; } }
-        public int Direction { get { return Dir; } }
-        public string Distance1 { get { return Dist.ToString(); } }
-        public string Distance2
-        {
-            get
-            {
-                string d2 = ""; // if it is a Point Load this should return empty
-                if (LoadType == "DistributedLoad") d2 = Dist2.ToString();  //if it is a Distributed Load
-                return d2;
-            }
-        }
-        public string Value1 { get { return Val.ToString(); } }
-        public string Value2
-        {
-            get
-            {
-                string v2 = "";// if it is a Point Load this should return empty
-                if (LoadType == "DistributedLoad") v2 = Val2.ToString();  //if it is a Distributed Load
-                return v2;
-            }
-        }
+
+        //public string LType { get { return LoadType; } }
+        //public LoadPattern Pattern { get { return lPattern; } }
+        //public int FMType { get { return MyType; } }
+        //public int Direction { get { return Dir; } }
+        //public string Distance1 { get { return Dist.ToString(); } }
+        //public string Distance2
+        //{
+        //    get
+        //    {
+        //        string d2 = ""; // if it is a Point Load this should return empty
+        //        if (LoadType == "DistributedLoad") d2 = Dist2.ToString();  //if it is a Distributed Load
+        //        return d2;
+        //    }
+        //}
+        //public string Value1 { get { return Val.ToString(); } }
+        //public string Value2
+        //{
+        //    get
+        //    {
+        //        string v2 = "";// if it is a Point Load this should return empty
+        //        if (LoadType == "DistributedLoad") v2 = Val2.ToString();  //if it is a Distributed Load
+        //        return v2;
+        //    }
+        //}
 
         /// <summary>
         /// This function assigns loads to frame objects.
@@ -125,176 +123,176 @@ namespace DynamoSAP.Structure
         }
 
         //DYNAMO CREATE NODES
-        public static Load PointLoadOnFrame(Frame Frame, LoadPattern LPattern, int Type, int Dir, double Dist, double Val, string CSys = "Global", bool RelDist = true, bool Replace = true)
+        public static Load PointLoadOnFrame( LoadPattern LPattern, int Type, int Dir, double Dist, double Val, string CSys = "Global", bool RelDist = true)
         {
-            Load l = new Load(Frame, LPattern, Type, Dir, Dist, Val, CSys, RelDist, Replace);
+            Load l = new Load(LPattern, Type, Dir, Dist, Val, CSys, RelDist);
             l.LoadType = "PointLoad";
             return l;
         }
 
-        public static Load DistributedLoadOnFrame(Frame Frame, LoadPattern LPattern, int Type, int Dir, double Dist, double Dist2, double Val, double Val2, string CSys = "Global", bool RelDist = true, bool Replace = true)
+        public static Load DistributedLoadOnFrame( LoadPattern LPattern, int Type, int Dir, double Dist, double Dist2, double Val, double Val2, string CSys = "Global", bool RelDist = true)
         {
-            Load l = new Load(Frame, LPattern, Type, Dir, Dist, Dist2, Val, Val2, CSys, RelDist, Replace);
+            Load l = new Load(LPattern, Type, Dir, Dist, Dist2, Val, Val2, CSys, RelDist);
             l.LoadType = "DistributedLoad";
             return l;
         }
 
-        public static List<Object> Display(StructuralModel StructuralModel, string LPattern = "Show All", double scale = 1.0, bool showValues = true, double textSize = 1.0)
-        {
-            //List<List<Object>> LoadViz = new List<List<Object>>();
-            List<Object> LoadObjects = new List<Object>();
-            foreach (Load load in StructuralModel.Loads)
-            {
-                Point labelLocation = null;
-                if (LPattern == "Show All")
-                {
-                    //show all
-                }
-                else
-                {
-                    if (load.lPattern.Name != LPattern)
-                    {
-                        continue; // show only the loads whose load pattern is the specified in the node
-                    }
-                }
+        //public static List<Object> Display(StructuralModel StructuralModel, string LPattern = "Show All", double scale = 1.0, bool showValues = true, double textSize = 1.0)
+        //{
+        //    //List<List<Object>> LoadViz = new List<List<Object>>();
+        //    List<Object> LoadObjects = new List<Object>();
+        //    foreach (Load load in StructuralModel.Loads)
+        //    {
+        //        Point labelLocation = null;
+        //        if (LPattern == "Show All")
+        //        {
+        //            //show all
+        //        }
+        //        else
+        //        {
+        //            if (load.lPattern.Name != LPattern)
+        //            {
+        //                continue; // show only the loads whose load pattern is the specified in the node
+        //            }
+        //        }
                 
-                Frame f = load.Frame;
-                Curve c = f.BaseCrv;
-                if (load.Val > 0) scale = -scale; // make negative and change the direction of the arrow
+        //        Frame f = load.Frame;
+        //        Curve c = f.BaseCrv;
+        //        if (load.Val > 0) scale = -scale; // make negative and change the direction of the arrow
 
-                List<double> dd = new List<double>(); // parameter values where arrows will be drawn
-                bool isDistributed = false;
-                if (load.LoadType == "DistributedLoad")
-                {
-                    isDistributed = true;
-                    //number of arrows to represent a Distributed Load
-                    int n = Convert.ToInt32((load.Dist - load.Dist2) / 0.05);
-                    double step = (load.Dist - load.Dist2) / n;
+        //        List<double> dd = new List<double>(); // parameter values where arrows will be drawn
+        //        bool isDistributed = false;
+        //        if (load.LoadType == "DistributedLoad")
+        //        {
+        //            isDistributed = true;
+        //            //number of arrows to represent a Distributed Load
+        //            int n = Convert.ToInt32((load.Dist - load.Dist2) / 0.05);
+        //            double step = (load.Dist - load.Dist2) / n;
 
-                    for (double i = load.Dist; i < load.Dist2; i += step)
-                    {
-                        dd.Add(i);
-                    }
-                    dd.Add(load.Dist2);
-                }
-                else // if its a point load
-                {
-                    dd.Add(load.Dist);
-                }
-                Point A = null;
-                Point B = null;
-                Vector v2 = null;
-                Vector v3 = null;
-                Vector xAxis = c.TangentAtParameter(0.0);
-                for (int i = 0; i < dd.Count; i++)
-                {
-                    List<Point> pps = new List<Point>();
-                    List<IndexGroup> igs = new List<IndexGroup>();
-                    // Line of the arrow
-                    Point p1 = c.PointAtParameter(dd[i]);
-                    Point p2 = null;
-                    Point p3 = null;
-                    Point p4 = null;
+        //            for (double i = load.Dist; i < load.Dist2; i += step)
+        //            {
+        //                dd.Add(i);
+        //            }
+        //            dd.Add(load.Dist2);
+        //        }
+        //        else // if its a point load
+        //        {
+        //            dd.Add(load.Dist);
+        //        }
+        //        Point A = null;
+        //        Point B = null;
+        //        Vector v2 = null;
+        //        Vector v3 = null;
+        //        Vector xAxis = c.TangentAtParameter(0.0);
+        //        for (int i = 0; i < dd.Count; i++)
+        //        {
+        //            List<Point> pps = new List<Point>();
+        //            List<IndexGroup> igs = new List<IndexGroup>();
+        //            // Line of the arrow
+        //            Point p1 = c.PointAtParameter(dd[i]);
+        //            Point p2 = null;
+        //            Point p3 = null;
+        //            Point p4 = null;
 
-                    //MUST ADD SOME CONDITION HERE FOR LOCAL OR GLOBAL COORDINATE SYSTEM
+        //            //MUST ADD SOME CONDITION HERE FOR LOCAL OR GLOBAL COORDINATE SYSTEM
 
-                    if (load.Dir == 4) // if it's the X Direction
-                    {
-                        v2 = Vector.ByCoordinates(20.0 * scale, 0.0, 0.0);
-                        v3 = Vector.ByCoordinates(5.0 * scale, 0.0, 0.0);
-                    }
+        //            if (load.Dir == 4) // if it's the X Direction
+        //            {
+        //                v2 = Vector.ByCoordinates(20.0 * scale, 0.0, 0.0);
+        //                v3 = Vector.ByCoordinates(5.0 * scale, 0.0, 0.0);
+        //            }
 
-                    if (load.Dir == 5) // if it's the Y Direction
-                    {
-                        v2 = Vector.ByCoordinates(0.0, 20.0 * scale, 0.0);
-                        v3 = Vector.ByCoordinates(0.0, 5.0 * scale, 0.0);
-                    }
-                    if (load.Dir == 6) // if it's the Z Direction
-                    {
-                        v2 = Vector.ByCoordinates(0.0, 0.0, 20.0 * scale);
-                        v3 = Vector.ByCoordinates(0.0, 0.0, 5.0 * scale);
-                    }
+        //            if (load.Dir == 5) // if it's the Y Direction
+        //            {
+        //                v2 = Vector.ByCoordinates(0.0, 20.0 * scale, 0.0);
+        //                v3 = Vector.ByCoordinates(0.0, 5.0 * scale, 0.0);
+        //            }
+        //            if (load.Dir == 6) // if it's the Z Direction
+        //            {
+        //                v2 = Vector.ByCoordinates(0.0, 0.0, 20.0 * scale);
+        //                v3 = Vector.ByCoordinates(0.0, 0.0, 5.0 * scale);
+        //            }
 
-                    p2 = (Point)p1.Translate(v2);
+        //            p2 = (Point)p1.Translate(v2);
 
-                    p3 = (Point)p1.Translate(xAxis, 5.0 * scale);
-                    p3 = (Point)p3.Translate(v3);
+        //            p3 = (Point)p1.Translate(xAxis, 5.0 * scale);
+        //            p3 = (Point)p3.Translate(v3);
 
-                    p4 = (Point)p1.Translate(xAxis, -5.0 * scale);
-                    p4 = (Point)p4.Translate(v3);
+        //            p4 = (Point)p1.Translate(xAxis, -5.0 * scale);
+        //            p4 = (Point)p4.Translate(v3);
 
-                    pps.Add(p1); pps.Add(p3); pps.Add(p4);
+        //            pps.Add(p1); pps.Add(p3); pps.Add(p4);
 
-                    //Triangle of the arrow
-                    igs.Add(IndexGroup.ByIndices(0, 1, 2));
-                    Mesh m = Mesh.ByPointsFaceIndices(pps, igs);
+        //            //Triangle of the arrow
+        //            igs.Add(IndexGroup.ByIndices(0, 1, 2));
+        //            Mesh m = Mesh.ByPointsFaceIndices(pps, igs);
 
-                    LoadObjects.Add(Line.ByStartPointEndPoint(p1, p2));
-                    LoadObjects.Add(m);
-                    if (isDistributed) // create top line
-                    {
-                        if (i == 0)
-                        {
-                            A = p2;
-                        }
-                        else if (i == dd.Count - 1)
-                        {
-                            B = p2;
+        //            LoadObjects.Add(Line.ByStartPointEndPoint(p1, p2));
+        //            LoadObjects.Add(m);
+        //            if (isDistributed) // create top line
+        //            {
+        //                if (i == 0)
+        //                {
+        //                    A = p2;
+        //                }
+        //                else if (i == dd.Count - 1)
+        //                {
+        //                    B = p2;
 
-                            Line topLine = Line.ByStartPointEndPoint(A, B);
-                            LoadObjects.Add(topLine);
-                        }
-                        else if (i == Convert.ToInt32(dd.Count / 2)) // if it is the middle point
-                        {
-                            labelLocation = (Point)p2.Translate(v2.Normalized().Scale(20));
-                        }
-                    }
-                    else
-                    {
-                        labelLocation = (Point)p2.Translate(v2.Normalized().Scale(20));
-                    }
+        //                    Line topLine = Line.ByStartPointEndPoint(A, B);
+        //                    LoadObjects.Add(topLine);
+        //                }
+        //                else if (i == Convert.ToInt32(dd.Count / 2)) // if it is the middle point
+        //                {
+        //                    labelLocation = (Point)p2.Translate(v2.Normalized().Scale(20));
+        //                }
+        //            }
+        //            else
+        //            {
+        //                labelLocation = (Point)p2.Translate(v2.Normalized().Scale(20));
+        //            }
 
-                }
-                if (showValues)
-                {
-                    //CREATE LABEL
-                    //get the text curves
-                    List<Curve> textCurves = new List<Curve>();
-                    string value = Math.Round(load.Val, 2).ToString(); // value of the load rounded to two decimals
+        //        }
+        //        if (showValues)
+        //        {
+        //            //CREATE LABEL
+        //            //get the text curves
+        //            List<Curve> textCurves = new List<Curve>();
+        //            string value = Math.Round(load.Val, 2).ToString(); // value of the load rounded to two decimals
 
-                    //create ZX Plane to host the text
-                    Plane pl = null;
-                    if (c.StartPoint.Z == c.EndPoint.Z) //if it is a beam
-                    {
-                        pl = Plane.ByOriginXAxisYAxis(labelLocation, xAxis, v2);
-                    }
-                    else //if it is a column or an inclined member
-                    {
-                        pl = Plane.ByOriginXAxisYAxis(labelLocation, v2, CoordinateSystem.Identity().ZAxis);
-                    }
+        //            //create ZX Plane to host the text
+        //            Plane pl = null;
+        //            if (c.StartPoint.Z == c.EndPoint.Z) //if it is a beam
+        //            {
+        //                pl = Plane.ByOriginXAxisYAxis(labelLocation, xAxis, v2);
+        //            }
+        //            else //if it is a column or an inclined member
+        //            {
+        //                pl = Plane.ByOriginXAxisYAxis(labelLocation, v2, CoordinateSystem.Identity().ZAxis);
+        //            }
 
-                    //call the function to create the text
-                    textCurves = Text.FromStringOriginAndScale(value, pl, textSize).ToList();
-                    foreach (Curve textc in textCurves)
-                    {
-                        LoadObjects.Add(textc);
-                    }
-                }
+        //            //call the function to create the text
+        //            textCurves = Text.FromStringOriginAndScale(value, pl, textSize).ToList();
+        //            foreach (Curve textc in textCurves)
+        //            {
+        //                LoadObjects.Add(textc);
+        //            }
+        //        }
 
-                //LoadViz.Add(LoadObjects);
-            }
+        //        //LoadViz.Add(LoadObjects);
+        //    }
 
-            return LoadObjects;
-        }
+        //    return LoadObjects;
+        //}
 
 
         //PRIVATE CONSTRUCTORS
+        
         private Load() { }
 
         //constructor for PointLoads
-        private Load(Frame frame, LoadPattern loadPat, int myType, int dir, double dist, double val, string cSys, bool relDist, bool replace)
+        private Load( LoadPattern loadPat, int myType, int dir, double dist, double val, string cSys, bool relDist)
         {
-            frm = frame;
             lPattern = loadPat;
             MyType = myType;
             Dir = dir;
@@ -302,13 +300,11 @@ namespace DynamoSAP.Structure
             Val = val;
             CSys = cSys;
             RelDist = relDist;
-            Replace = replace;
         }
 
         //constructor for DistributedLoads
-        private Load(Frame frame, LoadPattern loadPat, int myType, int dir, double dist, double dist2, double val, double val2, string cSys, bool relDist, bool replace)
+        private Load( LoadPattern loadPat, int myType, int dir, double dist, double dist2, double val, double val2, string cSys, bool relDist)
         {
-            frm = frame;
             lPattern = loadPat;
             MyType = myType;
             Dir = dir;
@@ -318,9 +314,7 @@ namespace DynamoSAP.Structure
             Val2 = val2;
             CSys = cSys;
             RelDist = relDist;
-            Replace = replace;
         }
-
 
     }
 }
