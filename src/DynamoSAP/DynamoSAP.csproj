@@ -65,13 +65,13 @@
   <ItemGroup>
     <Compile Include="Analysis\RunAnalysis.cs" />
     <Compile Include="Assembly\Read.cs" />
+    <Compile Include="Assembly\SAPModel.cs" />
     <Compile Include="Structure\Load.cs" />
     <Compile Include="Structure\LoadCase.cs" />
     <Compile Include="Structure\LoadPattern.cs" />
     <Compile Include="Structure\Release.cs" />
     <Compile Include="Structure\Restraint.cs" />
     <Compile Include="Assembly\Bake.cs" />
-    <Compile Include="Assembly\SAPModel.cs" />
     <Compile Include="Assembly\StructuralModel.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

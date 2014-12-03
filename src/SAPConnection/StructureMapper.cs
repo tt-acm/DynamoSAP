@@ -52,6 +52,14 @@ namespace SAPConnection
             long ret= mySapModel.FrameObj.SetSection(Name, SectionProfile);
         }
 
+        // to extract the Section Names on Specific Section Catalog
+        public static void GetSectionsfromCatalog(ref cSapModel Model, string SC, ref string[] Names)
+        { 
+            int number = 0;
+            eFramePropType[] PropType = null;
+            long ret = Model.PropFrame.GetPropFileNameList(SC, ref number, ref Names, ref PropType); 
+        }
+
         // READ FROM SAPMODEL
         public static void GetFrameIds(ref string[] Names, ref cSapModel Model)
         {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Autodesk.DesignScript.Geometry;
+using SAP2000v16;
+using SAPConnection;
 
 namespace DynamoSAP.Structure
 {
@@ -70,6 +72,21 @@ namespace DynamoSAP.Structure
         public static Frame FromEndPoints(Point i, Point j, string MatProp = "Steel", string SecProp = "W12X14", string Just = "MiddleCenter", double Rot = 0)
         {
             return new Frame(i, j, MatProp, SecProp, Just, Rot);
+        }
+
+        // create a SectProp class to hold the the filename(Section catalog) and section name
+        public static List<string> Sections (string catalog)
+        { 
+            List<string> sectionsnames = new List<string>();
+            cSapModel mySapModel = null;
+            string units = string.Empty;
+            // Open & instantiate SAP file
+            string sc = catalog + ".PRO";
+            Initialize.GrabOpenSAP(ref mySapModel, ref units);
+            string[] Names = null;
+            StructureMapper.GetSectionsfromCatalog(ref mySapModel, sc, ref Names);
+            sectionsnames = Names.ToList();
+            return sectionsnames;
         }
 
          // PRIVATE CONSTRUCTORS

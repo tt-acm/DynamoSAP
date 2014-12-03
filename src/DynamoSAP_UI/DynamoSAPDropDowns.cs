@@ -71,4 +71,26 @@ namespace DynamoSAP_UI
         Moment22 = 5,
         Moment33 = 6,        
     }
+
+
+    [NodeName("SectionCatalogDropDown")]
+    [NodeCategory("DynamoSAP.DynamoSAP.Structure.Frame")]
+    [NodeDescription("Select Section Catalog to retrive the section names")]
+    [IsDesignScriptCompatible]
+    public class SectionCatalogDropdown : EnumAsString<SectionCatalog>
+    {
+        public SectionCatalogDropdown(WorkspaceModel workspace) : base(workspace) { }
+    }
+    public enum SectionCatalog
+    { 
+        SECTIONS8,
+        SECTIONS,
+        EURO,
+        BSShapes,
+        AISC14M,
+        AISC14,
+        AISC13M,
+        AISC13
+    }
+
 }
