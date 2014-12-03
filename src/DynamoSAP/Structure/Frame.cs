@@ -14,10 +14,8 @@ namespace DynamoSAP.Structure
 
         // Line
         internal Line BaseCrv { get; set; }
-        //matprop
-        internal string MatProp { get; set; }
         //sectionprop
-        internal string SecProp { get; set; }
+        internal SectionProp SecProp { get; set; }
         //justification - follow SAP enum for InsertionPoint set default 5
         internal string Just { get; set; } 
         //rotation
@@ -29,16 +27,6 @@ namespace DynamoSAP.Structure
         public Line BaseCurve
         {
             get { return BaseCrv; }
-        }
-
-        public string Material
-        {
-            get { return MatProp; }
-        }
-
-        public string SectionProfile
-        {
-            get { return SecProp; }
         }
 
         public string Justification
@@ -64,46 +52,31 @@ namespace DynamoSAP.Structure
  
 
         // Frame From Curve
-        public static Frame FromLine(Line Line, string MatProp = "Steel", string SecProp = "W12X14", string Just = "MiddleCenter", double Rot = 0)
+        public static Frame FromLine(Line Line, SectionProp SecProp , string Just = "MiddleCenter", double Rot = 0)
         {
-            return new Frame(Line, MatProp, SecProp, Just, Rot);
+            return new Frame(Line, SecProp, Just, Rot);
         }
         // Frame from Nodes
-        public static Frame FromEndPoints(Point i, Point j, string MatProp = "Steel", string SecProp = "W12X14", string Just = "MiddleCenter", double Rot = 0)
+        public static Frame FromEndPoints(Point i, Point j, SectionProp SecProp, string Just = "MiddleCenter", double Rot = 0)
         {
-            return new Frame(i, j, MatProp, SecProp, Just, Rot);
+            return new Frame(i, j, SecProp, Just, Rot);
         }
 
-        // create a SectProp class to hold the the filename(Section catalog) and section name
-        public static List<string> Sections (string catalog)
-        { 
-            List<string> sectionsnames = new List<string>();
-            cSapModel mySapModel = null;
-            string units = string.Empty;
-            // Open & instantiate SAP file
-            string sc = catalog + ".PRO";
-            Initialize.GrabOpenSAP(ref mySapModel, ref units);
-            string[] Names = null;
-            StructureMapper.GetSectionsfromCatalog(ref mySapModel, sc, ref Names);
-            sectionsnames = Names.ToList();
-            return sectionsnames;
-        }
+
 
          // PRIVATE CONSTRUCTORS
         internal Frame(){}
-        internal Frame(Line line,string matProp, string secProp, string just, double angle)
+        internal Frame(Line line, SectionProp secProp, string just, double angle)
         {
             BaseCrv = line;
             Angle = angle;
-            MatProp = matProp;
             SecProp= secProp;
             Just = just;
         }
-        internal Frame(Point i, Point j, string matProp, string secProp, string just, double angle)
+        internal Frame(Point i, Point j, SectionProp secProp, string just, double angle)
         {
             BaseCrv = Line.ByStartPointEndPoint(i, j);
             Angle = angle;
-            MatProp = matProp;
             SecProp = secProp;
             Just = just;
         }

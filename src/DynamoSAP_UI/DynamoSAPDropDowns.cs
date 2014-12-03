@@ -74,7 +74,7 @@ namespace DynamoSAP_UI
 
 
     [NodeName("SectionCatalogDropDown")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Structure.Frame")]
+    [NodeCategory("DynamoSAP.DynamoSAP.Structure.SectionProp")]
     [NodeDescription("Select Section Catalog to retrive the section names")]
     [IsDesignScriptCompatible]
     public class SectionCatalogDropdown : EnumAsString<SectionCatalog>
@@ -83,14 +83,30 @@ namespace DynamoSAP_UI
     }
     public enum SectionCatalog
     { 
-        SECTIONS8,
-        SECTIONS,
-        EURO,
-        BSShapes,
-        AISC14M,
-        AISC14,
+        AISC,
+        AISC3,
+        AISC13,
         AISC13M,
-        AISC13
+        AISC14,
+        AISC14M,
+        AISCASD9,
+        AISCLRFD1,
+        AISCLRFD2,
+        AISCLRFD3,
+        Aluminum,
+        AusNZV8,
+        BSShapes,
+        BSShapes2006,
+        Chinese,
+        ChineseGB08,
+        CISC,
+        CISC9,
+        CISC10,
+        EURO,
+        Indian,
+        joists,
+        SECTIONS,
+        SECTIONS8
     }
 
 }

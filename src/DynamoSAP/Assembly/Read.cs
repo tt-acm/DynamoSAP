@@ -38,13 +38,15 @@ namespace DynamoSAP.Assembly
                 Point s = null;
                 Point e = null;
                 string matProp = "Steel"; // default value
-                string secProp = "W12X14"; // default value
+                string secName = "W12X14"; // default value
+                string secCatalog = "A992Fy50"; // default value
                 string Just = "MiddleCenter"; // default value
                 double Rot = 0; // default value
 
-                StructureMapper.GetFrm(ref mySapModel, FrmIds[i], ref s, ref e, ref matProp, ref secProp, ref Just, ref Rot);
+                StructureMapper.GetFrm(ref mySapModel, FrmIds[i], ref s, ref e, ref matProp, ref secName, ref Just, ref Rot);
+                SectionProp secProp = new SectionProp(secName, secCatalog, matProp);
+                Frame d_frm = new Frame(s, e, secProp, Just, Rot);
 
-                Frame d_frm = new Frame(s, e, matProp, secProp, Just, Rot);
                 d_frm.Label = FrmIds[i];
                 // get Guid
                 string guid = string.Empty;
@@ -81,13 +83,14 @@ namespace DynamoSAP.Assembly
                 Point s = null;
                 Point e = null;
                 string matProp = "Steel"; // default value
-                string secProp = "W12X14"; // default value
+                string secName = "W12X14"; // default value
+                string secCatalog = "A992Fy50"; // default value
                 string Just = "MiddleCenter"; // default value
                 double Rot = 0; // default value
 
-                StructureMapper.GetFrm(ref mySapModel, FrmIds[i], ref s, ref e, ref matProp, ref secProp, ref Just, ref Rot);
-
-                Frame d_frm = new Frame(s, e, matProp, secProp, Just, Rot);
+                StructureMapper.GetFrm(ref mySapModel, FrmIds[i], ref s, ref e, ref matProp, ref secName, ref Just, ref Rot);
+                SectionProp secProp = new SectionProp(secName, secCatalog, matProp);
+                Frame d_frm = new Frame(s, e, secProp, Just, Rot);
                 d_frm.Label = FrmIds[i];
                 // get Guid
                 string guid = string.Empty;

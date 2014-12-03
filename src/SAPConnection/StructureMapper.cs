@@ -42,9 +42,9 @@ namespace SAPConnection
             return false;
         }
 
-        public static void DefinePropFrm(ref cSapModel mySapModel, string SectionName, string MatProp, string SecCatalog, string SectionProfile)
+        public static void ImportPropFrm(ref cSapModel mySapModel, string SectionName, string MatProp, string SecCatalog)
         {
-           long ret= mySapModel.PropFrame.ImportProp(SectionName, MatProp, SecCatalog, SectionProfile);
+            long ret = mySapModel.PropFrame.ImportProp(SectionName, MatProp, SecCatalog, SectionName);
         }
 
         public static void SetSectionFrm(ref cSapModel mySapModel, string Name, string SectionProfile)

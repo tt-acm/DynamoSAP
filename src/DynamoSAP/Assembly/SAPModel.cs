@@ -49,16 +49,15 @@ namespace DynamoSAP.Assembly
             SAPConnection.StructureMapper.SetGUIDFrm(ref mySapModel, f.Label, f.GUID);
 
             // 3. Get or Define Section Profile
-            bool exists = SAPConnection.StructureMapper.IsSectionExistsFrm(ref mySapModel, f.SectionProfile);
+            bool exists = SAPConnection.StructureMapper.IsSectionExistsFrm(ref mySapModel, f.SecProp.SectName);
             if (!exists) // if doesnot exists define new sec property
             {
-                string MatProp = SAPConnection.MaterialMapper.DynamoToSap(f.Material);
-                string SecCatalog = "AISC14.pro"; // US_Imperial TODO: ASK TO USER ?
-                //define new section property
-                SAPConnection.StructureMapper.DefinePropFrm(ref mySapModel, f.SectionProfile, MatProp, SecCatalog, f.SectionProfile);
+                string MatProp = SAPConnection.MaterialMapper.DynamoToSap(f.SecProp.MatProp);
+                //Import new section property
+                SAPConnection.StructureMapper.ImportPropFrm(ref mySapModel, f.SecProp.SectName, MatProp,  f.SecProp.SectCatalog);
             }
             //Assign section profile toFrame
-            SAPConnection.StructureMapper.SetSectionFrm(ref mySapModel, f.Label, f.SectionProfile);
+            SAPConnection.StructureMapper.SetSectionFrm(ref mySapModel, f.Label, f.SecProp.SectName);
 
             // 3. Set Justification TODO: Vertical & Lateral Justification
             SAPConnection.JustificationMapper.DynamoToSAPFrm(ref mySapModel, f.Label, f.Justification); // TO DO: lateral and vertical justificaton
