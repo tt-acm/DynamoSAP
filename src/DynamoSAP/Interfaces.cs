@@ -18,8 +18,6 @@ namespace DynamoSAP
         List<LoadPattern> LoadPatterns { get; }
         List<LoadCase> LoadCases { get; }
         List<Restraint> Restraints { get; }
-        List<Load> Loads { get; }
-        List<Release> Releases { get; }
     }
 
     

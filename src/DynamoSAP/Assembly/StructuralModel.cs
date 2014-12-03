@@ -22,7 +22,7 @@ namespace DynamoSAP.Assembly
         public List<Restraint> Restraints { get; set; }
 
 
-        public static StructuralModel Collector_Frames(List<Element> StructuralElements)
+        public static StructuralModel Collector(List<Element> StructuralElements)
         {
             StructuralModel mySt = new StructuralModel();
             mySt.StructuralElements = StructuralElements;
