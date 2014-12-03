@@ -97,7 +97,7 @@ namespace SAPConnection
             ret = Model.FrameObj.GetSection(frmId, ref SecName, ref SAuto);
 
             // MatProp
-            MatProp = MaterialMapper.SapToDynamo(ref Model, SecName, ref SecCatalog);
+            MaterialMapper.SapToDynamo(ref Model, SecName, ref MatProp, ref SecCatalog);
 
             // Justification
             Just = JustificationMapper.SapToDynamoFrm(ref Model, frmId);

@@ -63,7 +63,7 @@ namespace DynamoSAP.Structure
 
         // PRIVATE CONSTRUCTORS
         internal SectionProp() { }
-        internal SectionProp(string _name, string _seccatalog, string _matprop)
+        internal SectionProp(string _name, string _matprop , string _seccatalog)
         {
             SectName = _name;
             SectCatalog = _seccatalog;

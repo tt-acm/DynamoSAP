@@ -70,14 +70,13 @@ namespace SAPConnection
             return "A992Fy50"; // Default
         }
 
-        public static string SapToDynamo(ref cSapModel Model, string SecName, ref string filename)
+        public static void SapToDynamo(ref cSapModel Model, string SecName, ref string MatProp, ref string filename)
         {
             long ret = 0;
             eFramePropType PropType = new eFramePropType();
             ret = Model.PropFrame.GetType(SecName, ref PropType);
 
-            string nameinfile = string.Empty;
-            string MatProp = string.Empty; // If the section property was imported from a property file, this is the name of that file. If the section property was not imported, this item is blank.
+            string nameinfile = string.Empty; // If the section property was imported from a property file, this is the name of that file. If the section property was not imported, this item is blank.
             int color = 0;
             string notes = string.Empty;
             string Guid = string.Empty;
@@ -120,7 +119,6 @@ namespace SAPConnection
                 ret = Model.PropFrame.GetNameInPropFile(SecName, ref nameinfile, ref filename, ref MatProp, ref PropType);
             }
 
-            return MatProp;
         }
     }
 }

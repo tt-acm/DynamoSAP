@@ -37,14 +37,14 @@ namespace DynamoSAP.Assembly
             {
                 Point s = null;
                 Point e = null;
-                string matProp = "Steel"; // default value
+                string matProp = "A992Fy50"; // default value
                 string secName = "W12X14"; // default value
-                string secCatalog = "A992Fy50"; // default value
+                string secCatalog = "AISC14"; // default value
                 string Just = "MiddleCenter"; // default value
                 double Rot = 0; // default value
 
                 StructureMapper.GetFrm(ref mySapModel, FrmIds[i], ref s, ref e, ref matProp, ref secName, ref Just, ref Rot, ref secCatalog);
-                SectionProp secProp = new SectionProp(secName, secCatalog, matProp);
+                SectionProp secProp = new SectionProp(secName,  matProp , secCatalog);
                 Frame d_frm = new Frame(s, e, secProp, Just, Rot);
 
                 d_frm.Label = FrmIds[i];
@@ -85,14 +85,14 @@ namespace DynamoSAP.Assembly
                 {
                     Point s = null;
                     Point e = null;
-                    string matProp = "Steel"; // default value
+                    string matProp = "A992Fy50"; // default value
                     string secName = "W12X14"; // default value
-                    string secCatalog = "A992Fy50"; // default value
+                    string secCatalog = "AISC14"; // default value
                     string Just = "MiddleCenter"; // default value
                     double Rot = 0; // default value
 
                     StructureMapper.GetFrm(ref mySapModel, FrmIds[i], ref s, ref e, ref matProp, ref secName, ref Just, ref Rot, ref secCatalog);
-                    SectionProp secProp = new SectionProp(secName, secCatalog, matProp);
+                    SectionProp secProp = new SectionProp(secName, matProp, secCatalog);
                     Frame d_frm = new Frame(s, e, secProp, Just, Rot);
                     d_frm.Label = FrmIds[i];
                     // get Guid
