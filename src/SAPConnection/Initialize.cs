@@ -68,9 +68,12 @@ namespace SAPConnection
                 // keep contunie
                 //mySapModel = SapInstances[0].CreateObjRef();
                 object getObj = ROTHelper.GetActiveObject("SAP2000v16.SapObject");
-                SapObject Obj = (SapObject)getObj;
-                mySapModel = Obj.SapModel;
-                units = mySapModel.GetPresentUnits().ToString();
+                if (getObj != null)
+                {
+                    SapObject Obj = (SapObject)getObj;
+                    mySapModel = Obj.SapModel;
+                    units = mySapModel.GetPresentUnits().ToString();
+                }
             }
         }
 

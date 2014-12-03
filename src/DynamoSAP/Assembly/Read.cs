@@ -43,7 +43,7 @@ namespace DynamoSAP.Assembly
                 string Just = "MiddleCenter"; // default value
                 double Rot = 0; // default value
 
-                StructureMapper.GetFrm(ref mySapModel, FrmIds[i], ref s, ref e, ref matProp, ref secName, ref Just, ref Rot);
+                StructureMapper.GetFrm(ref mySapModel, FrmIds[i], ref s, ref e, ref matProp, ref secName, ref Just, ref Rot, ref secCatalog);
                 SectionProp secProp = new SectionProp(secName, secCatalog, matProp);
                 Frame d_frm = new Frame(s, e, secProp, Just, Rot);
 
@@ -71,32 +71,40 @@ namespace DynamoSAP.Assembly
             Model.Frames = new List<Element>();
             cSapModel mySapModel = null;
             string units = string.Empty;
+
             // Open & instantiate SAP file
             Initialize.GrabOpenSAP(ref mySapModel, ref units);
 
-            // Populate the model's elemets
-            //Get Frames          
-            string[] FrmIds = null;
-            StructureMapper.GetFrameIds(ref FrmIds, ref mySapModel);
-            for (int i = 0; i < FrmIds.Length; i++)
+            if (mySapModel != null)
             {
-                Point s = null;
-                Point e = null;
-                string matProp = "Steel"; // default value
-                string secName = "W12X14"; // default value
-                string secCatalog = "A992Fy50"; // default value
-                string Just = "MiddleCenter"; // default value
-                double Rot = 0; // default value
+                // Populate the model's elemets
+                //Get Frames          
+                string[] FrmIds = null;
+                StructureMapper.GetFrameIds(ref FrmIds, ref mySapModel);
+                for (int i = 0; i < FrmIds.Length; i++)
+                {
+                    Point s = null;
+                    Point e = null;
+                    string matProp = "Steel"; // default value
+                    string secName = "W12X14"; // default value
+                    string secCatalog = "A992Fy50"; // default value
+                    string Just = "MiddleCenter"; // default value
+                    double Rot = 0; // default value
 
-                StructureMapper.GetFrm(ref mySapModel, FrmIds[i], ref s, ref e, ref matProp, ref secName, ref Just, ref Rot);
-                SectionProp secProp = new SectionProp(secName, secCatalog, matProp);
-                Frame d_frm = new Frame(s, e, secProp, Just, Rot);
-                d_frm.Label = FrmIds[i];
-                // get Guid
-                string guid = string.Empty;
-                StructureMapper.GetGUIDFrm(ref mySapModel, FrmIds[i], ref guid);
-                d_frm.GUID = guid;
-                Model.Frames.Add(d_frm);
+                    StructureMapper.GetFrm(ref mySapModel, FrmIds[i], ref s, ref e, ref matProp, ref secName, ref Just, ref Rot, ref secCatalog);
+                    SectionProp secProp = new SectionProp(secName, secCatalog, matProp);
+                    Frame d_frm = new Frame(s, e, secProp, Just, Rot);
+                    d_frm.Label = FrmIds[i];
+                    // get Guid
+                    string guid = string.Empty;
+                    StructureMapper.GetGUIDFrm(ref mySapModel, FrmIds[i], ref guid);
+                    d_frm.GUID = guid;
+                    Model.Frames.Add(d_frm);
+                }
+            }
+            else 
+            {
+                throw new Exception("Make sure SAP Model is open!");
             }
 
             // Return outputs

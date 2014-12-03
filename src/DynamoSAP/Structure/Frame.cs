@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+//DYNAMO
 using Autodesk.DesignScript.Geometry;
+using Autodesk.DesignScript.Runtime;
+
+//SAP
 using SAP2000v16;
 using SAPConnection;
 
@@ -29,20 +34,16 @@ namespace DynamoSAP.Structure
             get { return BaseCrv; }
         }
 
-        public string Justification
-        {
-            get { return Just; }
-        }
+        //public string Justification
+        //{
+        //    get { return Just; }
+        //}
 
-        public double Rotation
-        { 
-            get{ return Angle;}
-        }
+        //public double Rotation
+        //{ 
+        //    get{ return Angle;}
+        //}
 
-        public string guid
-        {
-            get { return GUID; }
-        }
 
         //PUBLIC METHODS
         public override string ToString()
@@ -50,7 +51,6 @@ namespace DynamoSAP.Structure
             return "Frame";
         }
  
-
         // Frame From Curve
         public static Frame FromLine(Line Line, SectionProp SecProp , string Just = "MiddleCenter", double Rot = 0)
         {
@@ -62,7 +62,19 @@ namespace DynamoSAP.Structure
             return new Frame(i, j, SecProp, Just, Rot);
         }
 
-
+        // Decompose
+        [MultiReturn("BaseCurve", "SectionProp", "Justification", "Rotation")]
+        public static Dictionary<string, object> Decompose(Frame frm)
+        {
+            // Return outputs
+            return new Dictionary<string, object>
+            {
+                {"BaseCurve", frm.BaseCrv},
+                {"SectionProp", frm.SecProp},
+                {"Justification", frm.Just},
+                {"Rotation", frm.Angle}
+            };    
+        }
 
          // PRIVATE CONSTRUCTORS
         internal Frame(){}

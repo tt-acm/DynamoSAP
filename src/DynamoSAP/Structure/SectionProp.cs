@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+//DYNAMO
 using Autodesk.DesignScript.Geometry;
+using Autodesk.DesignScript.Runtime;
+
+//SAP
 using SAP2000v16;
 using SAPConnection;
 
@@ -41,6 +46,19 @@ namespace DynamoSAP.Structure
         public static SectionProp Define(string Name = "W12X14", string Material = "A992Fy50", string SectionCatalog = "AISC14")
         {
             return new SectionProp(Name, Material, SectionCatalog);
+        }
+
+        [MultiReturn("Name", "Material", "Catalog")]
+        public static Dictionary<string,string> Decompose(SectionProp SectProp)
+        {
+            // Return outputs
+            return new Dictionary<string, string>
+            {
+                {"Name", SectProp.SectName},
+                {"Material", SectProp.MatProp},
+                {"Catalog", SectProp.SectCatalog}
+            };
+
         }
 
         // PRIVATE CONSTRUCTORS

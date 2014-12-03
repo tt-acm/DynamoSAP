@@ -67,7 +67,7 @@ namespace SAPConnection
             int ret = Model.FrameObj.GetNameList(ref number, ref Names);
         }
 
-        public static void GetFrm(ref cSapModel Model, string frmId, ref Point i, ref Point j, ref string MatProp, ref string SecProp, ref string Just, ref double Rot)
+        public static void GetFrm(ref cSapModel Model, string frmId, ref Point i, ref Point j, ref string MatProp, ref string SecName, ref string Just, ref double Rot, ref string SecCatalog)
         { 
             
             long ret = 0;
@@ -94,10 +94,10 @@ namespace SAPConnection
 
             // Section
             string SAuto = string.Empty;
-            ret = Model.FrameObj.GetSection(frmId, ref SecProp, ref SAuto);
+            ret = Model.FrameObj.GetSection(frmId, ref SecName, ref SAuto);
 
             // MatProp
-            MatProp = MaterialMapper.SapToDynamo(ref Model, SecProp);
+            MatProp = MaterialMapper.SapToDynamo(ref Model, SecName, ref SecCatalog);
 
             // Justification
             Just = JustificationMapper.SapToDynamoFrm(ref Model, frmId);

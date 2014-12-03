@@ -60,10 +60,10 @@ namespace DynamoSAP.Assembly
             SAPConnection.StructureMapper.SetSectionFrm(ref mySapModel, f.Label, f.SecProp.SectName);
 
             // 3. Set Justification TODO: Vertical & Lateral Justification
-            SAPConnection.JustificationMapper.DynamoToSAPFrm(ref mySapModel, f.Label, f.Justification); // TO DO: lateral and vertical justificaton
+            SAPConnection.JustificationMapper.DynamoToSAPFrm(ref mySapModel, f.Label, f.Just); // TO DO: lateral and vertical justificaton
 
             // 4. Set Rotation
-            SAPConnection.JustificationMapper.SetRotationFrm(ref mySapModel, f.Label, f.Rotation);
+            SAPConnection.JustificationMapper.SetRotationFrm(ref mySapModel, f.Label, f.Angle);
 
         }
         #endregion
