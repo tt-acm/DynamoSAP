@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -117,6 +118,11 @@ namespace SAPConnection
             else
             {
                 ret = Model.PropFrame.GetNameInPropFile(SecName, ref nameinfile, ref filename, ref MatProp, ref PropType);
+            }
+
+            if (!String.IsNullOrEmpty(filename))
+            {
+                filename = Path.GetFileNameWithoutExtension(filename);
             }
 
         }
