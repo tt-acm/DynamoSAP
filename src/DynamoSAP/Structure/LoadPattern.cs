@@ -2,27 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Autodesk.DesignScript.Runtime;
 
 namespace DynamoSAP.Structure
 {
     public class LoadPattern
     {
-
         //Load Pattern Name
-        private string name { get; set; }
-
+        internal string name { get; set; }
         // Type of Load Pattern
-        private string type { get; set; }
-
+        internal string type { get; set; }
         // Multiplier
-        private double multiplier { get; set; }
+        internal double multiplier { get; set; }
 
-
-        //QUERY NODES
-        public string Name { get { return name; } }
-        public string Type { get { return type; } }
-        public double Multiplier { get { return multiplier; } }
 
         //DYNAMO NODE
         /// <summary>
@@ -75,6 +67,20 @@ namespace DynamoSAP.Structure
         public static LoadPattern SetLoadPattern(string Name, string LType, double Multiplier = 1)
         {
             return new LoadPattern(Name, LType, Multiplier);
+        }
+
+
+        // Decompose
+        [MultiReturn("Name", "Type", "Multiplier")]
+        public static Dictionary<string, object> Decompose(LoadPattern loadPattern)
+        {
+            // Return outputs
+            return new Dictionary<string, object>
+            {
+                {"Name", loadPattern.name},
+                {"Type", loadPattern.type},
+                {"Multiplier", loadPattern.multiplier}
+            };
         }
 
         //PRIVATE CONSTRUCTOR

@@ -84,7 +84,7 @@ namespace DynamoSAP.Structure
             return new Dictionary<string, object>
             {
                 {"Load Type", Load.LoadType},
-                {"Load Pattern", Load.lPattern.Name},
+                {"Load Pattern", Load.lPattern.name},
                 {"Force/Moment Type", forceOrMoment},
                 {"Direction", axisDir},
                 {"Distance", Load.Dist},

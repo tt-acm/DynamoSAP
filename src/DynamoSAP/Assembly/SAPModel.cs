@@ -93,12 +93,12 @@ namespace DynamoSAP.Assembly
                 if (load.LoadType == "PointLoad")
                 {
                     //Call the CreatePointLoad method
-                    SAPConnection.LoadMapper.CreatePointLoad(ref mySapModel, frm.Label, load.lPattern.Name, load.FMType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, false);
+                    SAPConnection.LoadMapper.CreatePointLoad(ref mySapModel, frm.Label, load.lPattern.name, load.FMType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, false);
                 }
                 if (load.LoadType == "DistributedLoad")
                 {
                     //Call the CreateDistributedLoad method
-                    SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, frm.Label, load.lPattern.Name, load.FMType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, false);
+                    SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, frm.Label, load.lPattern.name, load.FMType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, false);
                 }
             }
         }
@@ -153,11 +153,11 @@ namespace DynamoSAP.Assembly
                 foreach (var rest in model.Restraints)
                 {
                     List<bool> restraints = new List<bool>();
-                    restraints.Add(rest.U1); restraints.Add(rest.U2); restraints.Add(rest.U3);
-                    restraints.Add(rest.R1); restraints.Add(rest.R2); restraints.Add(rest.R3);
+                    restraints.Add(rest.u1); restraints.Add(rest.u2); restraints.Add(rest.u3);
+                    restraints.Add(rest.r1); restraints.Add(rest.r2); restraints.Add(rest.r3);
 
                     // Set restaints
-                    SAPConnection.RestraintMapper.SetRestaints(ref mySapModel, rest.Pt, restraints.ToArray());
+                    SAPConnection.RestraintMapper.SetRestaints(ref mySapModel, rest.pt, restraints.ToArray());
                 }
             }
 
@@ -168,7 +168,7 @@ namespace DynamoSAP.Assembly
                 foreach (LoadPattern lp in model.LoadPatterns)
                 {
                     //Call the AddLoadPattern method
-                    SAPConnection.LoadMapper.AddLoadPattern(ref mySapModel, lp.Name, lp.Type, lp.Multiplier);
+                    SAPConnection.LoadMapper.AddLoadPattern(ref mySapModel, lp.name, lp.type, lp.multiplier);
                 }
             }
 
@@ -186,7 +186,7 @@ namespace DynamoSAP.Assembly
                     for (int i = 0; i < lc.LoadPatterns.Count; i++)
                     {
                         types.Add("Load");
-                        names.Add(lc.LoadPatterns[i].Name);
+                        names.Add(lc.LoadPatterns[i].name);
                         SFs.Add(lc.SFs[i]);
                     }
 

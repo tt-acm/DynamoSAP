@@ -13,13 +13,15 @@ namespace DynamoSAP.Assembly
 {
     public class StructuralModel : IModel
     {
+        [SupressImportIntoVMAttribute]
         public List<Element> StructuralElements { get; set; }
-
+        [SupressImportIntoVMAttribute]
         public List<LoadPattern> LoadPatterns { get; set; }
-
+        [SupressImportIntoVMAttribute]
         public List<LoadCase> LoadCases { get; set; }
-
+        [SupressImportIntoVMAttribute]
         public List<Restraint> Restraints { get; set; }
+        
 
         // Check that GUID does not exist, users must add the same frame twice
         private static void CheckDuplicateFrame(List<Element> StructEl)
@@ -52,6 +54,21 @@ namespace DynamoSAP.Assembly
         {
             CheckDuplicateFrame(StructuralElements);
             return new StructuralModel(StructuralElements, LoadPatterns, LoadCases, Restraints);
+        }
+
+        // Decompose
+        [MultiReturn("Structural Elements", "Load Patterns", "Load Cases", "Restraints","Filepath")]
+        public static Dictionary<string, object> Decompose(StructuralModel structuralModel)
+        {
+            // Return outputs
+            return new Dictionary<string, object>
+            {
+                {"Structural Elements", structuralModel.StructuralElements},
+                {"Load Patterns", structuralModel.LoadPatterns},
+                {"Load Cases", structuralModel.LoadCases},
+                {"Restraints", structuralModel.Restraints}
+               
+            };
         }
 
         internal StructuralModel() { }

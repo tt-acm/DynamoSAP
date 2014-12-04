@@ -19,10 +19,21 @@ namespace SAPConnection
     [SupressImportIntoVM]
     public class AnalysisMapper
     {
-        public static void RunAnalysis(ref cSapModel mySapModel, string filepath)
+        public static void RunAnalysis(ref cSapModel mySapModel, string filepath, ref List<string> LoadCaseNames, ref List<string> LoadCasePatterns)
         {
             int ret = mySapModel.File.Save(filepath);
-            ret = mySapModel.Analyze.RunAnalysis();
+             ret = mySapModel.Analyze.RunAnalysis();
+            int lcnumber = 0;
+            int lpnumber=0;
+            string[] LCNames = null;
+            string [] LPNames=null;
+
+            ret = mySapModel.LoadCases.GetNameList(ref lcnumber, ref LCNames);
+            LoadCaseNames = LCNames.ToList();
+            ret = mySapModel.LoadPatterns.GetNameList(ref lpnumber, ref LPNames);
+            LoadCaseNames = LCNames.ToList();
+            LoadCasePatterns = LPNames.ToList();
+                
         }
 
         public static List<FrameResults> GetFrameForces(ref cSapModel mySapModel, string lcase)

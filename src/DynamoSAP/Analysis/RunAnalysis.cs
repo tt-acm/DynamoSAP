@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
@@ -21,34 +22,76 @@ namespace DynamoSAP.Analysis
 
         private static cSapModel mySapModel;
 
-        public static List<string> Run(StructuralModel StructuralModel, string Filepath, bool RunIt)
+        [MultiReturn("Load Cases", "Load Patterns", "FilePath")]
+        public static Dictionary<string, object> RunOpenInstance(bool Run, string FilePath = "")
         {
-            List<string> myCombinations = new List<string>();
-            foreach (LoadCase l in StructuralModel.LoadCases)
+            List<string> LoadCaseNames = new List<string>();
+            List<string> LoadPatternNames = new List<string>();
+            
+            if (Run)
             {
-                myCombinations.Add(l.Name);
-            }
-            foreach (LoadPattern l in StructuralModel.LoadPatterns)
-            {
-                myCombinations.Add(l.Name);
-            }
+                if (FilePath == "") // if the file name is not provided, create one
+                {
+                    FilePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DynamoSAP");
+                    if (!Directory.Exists(FilePath))//Needs to be created
+                    {
+                        System.IO.Directory.CreateDirectory(FilePath); //folder created
 
-            if (RunIt)
+                    }
+                    DateTime time = DateTime.Now;              // Use current time
+                    string format = "yyyyMMdd";    // Use this format
+
+                    string fileName = "DynamoSAP_" + time.ToString(format) + ".sdb";
+                    FilePath = System.IO.Path.Combine(FilePath, fileName);
+                }
+
+                string units = string.Empty;
+
+                SAPConnection.Initialize.GrabOpenSAP(ref mySapModel, ref units);
+                if (mySapModel == null)
+                {
+                    throw new Exception("SAP Model was not grabbed. Use run analysis with filepath");
+                }
+
+                else
+                {// run analysis
+                    SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, FilePath, ref LoadCaseNames, ref LoadPatternNames);
+                }
+            }
+            return new Dictionary<string, object>
+            {
+                {"Load Cases", LoadCaseNames},
+                {"Load Patterns", LoadPatternNames},
+                {"File Path", FilePath}
+            };
+        }
+        [MultiReturn("Load Cases", "Load Patterns")]
+        public static Dictionary<string, object> RunFromFile(bool Run, string FilePath)
+        {
+            List<string> LoadCaseNames = new List<string>();
+            List<string> LoadPatternNames = new List<string>();
+
+            if (Run)
             {
                 string units = string.Empty;
-                // open sap     
-                SAPConnection.Initialize.OpenSAPModel(Filepath, ref mySapModel, ref units);
+
+                SAPConnection.Initialize.OpenSAPModel(FilePath, ref mySapModel, ref units);
+
                 // run analysis
-                SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, Filepath);
+                SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, FilePath, ref LoadCaseNames, ref LoadPatternNames);
             }
-            return myCombinations;
+            return new Dictionary<string, object>
+            {
+                {"Load Cases", LoadCaseNames},
+                {"Load Patterns", LoadPatternNames}
+            };
         }
 
-        public static Analysis GetResults(string LoadCombination, bool Run)
+        public static Analysis GetResults(string LoadCombination, bool Get)
         {
             List<FrameResults> frameResults = null;
             Analysis StructureResults = new Analysis();
-            if (Run)
+            if (Get)
             {
                 // loop over frames get results and populate to dictionary
                 frameResults = SAPConnection.AnalysisMapper.GetFrameForces(ref mySapModel, LoadCombination);
@@ -61,11 +104,19 @@ namespace DynamoSAP.Analysis
         public static List<List<double>> DecomposeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType)
         {
             List<List<double>> Forces = new List<List<double>>();
+
+
             for (int i = 0; i < StructuralModel.StructuralElements.Count; i++)
             {
                 List<double> ff = new List<double>();
-                foreach (FrameAnalysisData fad in AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Values)
+                // linq inqury
+                FrameResults frmresult = (from frm in AnalysisResults.FrameResults
+                                          where frm.ID == StructuralModel.StructuralElements[i].Label
+                                          select frm).First();
+
+                foreach (FrameAnalysisData fad in frmresult.Results[AnalysisResults.LoadCombination].Values)
                 {
+
                     if (ForceType == "Axial") //Get Axial Forces P
                     {
                         ff.Add(fad.P);

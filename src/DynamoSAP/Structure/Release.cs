@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Autodesk.DesignScript.Geometry;
+using Autodesk.DesignScript.Runtime;
 
 using DynamoSAP.Structure;
 
@@ -13,7 +14,7 @@ namespace DynamoSAP.Structure
     {
 
         //FIELDS
-        
+
         //U1 Releases
         internal bool u1i;
         internal bool u1j;
@@ -35,17 +36,39 @@ namespace DynamoSAP.Structure
 
         //QUERY NODES
 
-        
+
         // PUBLIC METHODS
-        public static Release SetRelease( bool U1i = false, bool U1j = false, bool U2i = false, bool U2j = false, bool U3i = false, bool U3j = false, bool R1i = false, bool R1j = false, bool R2i = false, bool R2j = false, bool R3i = false, bool R3j = false)
+        public static Release SetRelease(bool U1i = false, bool U1j = false, bool U2i = false, bool U2j = false, bool U3i = false, bool U3j = false, bool R1i = false, bool R1j = false, bool R2i = false, bool R2j = false, bool R3i = false, bool R3j = false)
         {
-            return new Release(U1i,  U1j,  U2i,  U2j, U3i, U3j, R1i, R1j, R2i, R2j, R3i, R3j);
+            return new Release(U1i, U1j, U2i, U2j, U3i, U3j, R1i, R1j, R2i, R2j, R3i, R3j);
         }
 
 
+        // Decompose
+        [MultiReturn("U1i", "U1j", "U2i", "U2j", "U3i", "U3j", "R1i", "R1j", "R2i", "R2j", "R3i", "R3j")]
+        public static Dictionary<string, object> Decompose(Release release)
+        {
+            // Return outputs
+            return new Dictionary<string, object>
+            {
+                {"U1i", release.u1i},
+                {"U1j", release.u1j},
+                {"U2i", release.u2i},
+                {"U2j", release.u2j},
+                {"U3i", release.u3i},
+                {"U3j", release.u3j},
+                {"R1i", release.r1i},
+                {"R1j", release.r1j},
+                {"R2i", release.r2i},
+                {"R2j", release.r2j},
+                {"R3i", release.r3i},
+                {"R3j", release.r3j}
+            };
+        }
+
         // PRIVATE CONSTRUCTOR
         private Release() { }
-        private Release( bool U1i, bool U1j, bool U2i, bool U2j, bool U3i,bool U3j, bool R1i,bool R1j,bool R2i, bool R2j, bool R3i,bool R3j)
+        private Release(bool U1i, bool U1j, bool U2i, bool U2j, bool U3i, bool U3j, bool R1i, bool R1j, bool R2i, bool R2j, bool R3i, bool R3j)
         {
             u1i = U1i;
             u1j = U1j;

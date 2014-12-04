@@ -27,7 +27,6 @@ namespace DynamoSAP.Structure
         internal double Angle { get; set; }
         // Releases if not set SAP draws as no releases
         internal Release Releases { get; set; }
-
         internal List<Load> Loads { get; set; }
 
         // QUERY NODES
@@ -109,7 +108,7 @@ namespace DynamoSAP.Structure
                 }
                 else
                 {
-                    if (load.lPattern.Name != LPattern)
+                    if (load.lPattern.name != LPattern)
                     {
                         continue; // show only the loads whose load pattern is the specified in the node
                     }
@@ -244,11 +243,10 @@ namespace DynamoSAP.Structure
         }
 
 
-       // PRIVATE CONSTRUCTORS
 
 
         // Decompose
-        [MultiReturn("BaseCurve", "SectionProp", "Justification", "Rotation")]
+        [MultiReturn("BaseCurve", "SectionProp", "Justification", "Rotation", "Loads", "Releases")]
         public static Dictionary<string, object> Decompose(Frame frame)
         {
             // Return outputs
@@ -257,7 +255,9 @@ namespace DynamoSAP.Structure
                 {"BaseCurve", frame.BaseCrv},
                 {"SectionProp", frame.SecProp},
                 {"Justification", frame.Just},
-                {"Rotation", frame.Angle}
+                {"Rotation", frame.Angle},
+                {"Loads", frame.Loads},
+                {"Releases", frame.Releases}
             };    
         }
 

@@ -24,9 +24,9 @@ namespace DynamoSAP.Assembly
     {
         
         //// DYNAMO NODES ////
-        public static StructuralModel ToSAP (StructuralModel Model, bool Run)
+        public static StructuralModel ToSAP (StructuralModel Model, bool Bake)
         {
-            if (Run)
+            if (Bake)
             {
                 SAPModel.CreateSAPModel(ref Model);                
             }

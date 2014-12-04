@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Autodesk.DesignScript.Geometry;
-
+using Autodesk.DesignScript.Runtime;
 
 namespace DynamoSAP.Structure
 {
@@ -18,17 +18,6 @@ namespace DynamoSAP.Structure
         internal bool r1;
         internal bool r2;
         internal bool r3;
-
-        //QUERY NODE
-        public Point Pt {get { return pt; }}
-        //Translations
-        public bool U1 { get { return u1; } }
-        public bool U2 { get { return u2; } }
-        public bool U3 { get { return u3; } }
-        //Rotations
-        public bool R1 { get { return r1; } }
-        public bool R2 { get { return r2; } }
-        public bool R3 { get { return r3; } }
 
         // PUBLIC METHODS
         /// <summary>
@@ -66,6 +55,23 @@ namespace DynamoSAP.Structure
         public static Restraint Simple(Point Point)
         {
             return new Restraint(Point, false, false, false, false, false, false);
+        }
+
+        // Decompose
+        [MultiReturn("Point", "U1", "U2","U3","R1","R2","R3")]
+        public static Dictionary<string, object> Decompose(Restraint restraint)
+        {
+            // Return outputs
+            return new Dictionary<string, object>
+            {
+                {"Point", restraint.pt},
+                {"U1", restraint.u1},
+                {"U2", restraint.u2},
+                {"U3", restraint.u3},
+                {"R1", restraint.r1},
+                {"R2", restraint.r2},
+                {"R3", restraint.r3}
+            };
         }
 
         // PRIVATE CONSTRUCTOR

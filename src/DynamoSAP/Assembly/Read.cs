@@ -77,7 +77,7 @@ namespace DynamoSAP.Assembly
 
             if (mySapModel != null)
             {
-                // Populate the model's elemets
+                // Populate the model's elements
                 //Get Frames          
                 string[] FrmIds = null;
                 StructureMapper.GetFrameIds(ref FrmIds, ref mySapModel);
