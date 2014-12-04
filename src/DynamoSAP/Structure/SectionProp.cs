@@ -35,7 +35,7 @@ namespace DynamoSAP.Structure
             Initialize.GrabOpenSAP(ref mySapModel, ref units);
             if (mySapModel == null)
             {
-                throw new Exception("Make sure a SAP Model is open !");
+                throw new Exception("Make sure a SAP Model is open!");
             }
             string[] Names = null;
             StructureMapper.GetSectionsfromCatalog(ref mySapModel, sc, ref Names);

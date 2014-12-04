@@ -93,12 +93,12 @@ namespace DynamoSAP.Assembly
                 if (load.LoadType == "PointLoad")
                 {
                     //Call the CreatePointLoad method
-                    SAPConnection.LoadMapper.CreatePointLoad(ref mySapModel, frm.Label, load.lPattern.Name, load.MyType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, false);
+                    SAPConnection.LoadMapper.CreatePointLoad(ref mySapModel, frm.Label, load.lPattern.Name, load.FMType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, false);
                 }
                 if (load.LoadType == "DistributedLoad")
                 {
                     //Call the CreateDistributedLoad method
-                    SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, frm.Label, load.lPattern.Name, load.MyType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, false);
+                    SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, frm.Label, load.lPattern.Name, load.FMType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, false);
                 }
             }
         }
@@ -123,7 +123,6 @@ namespace DynamoSAP.Assembly
                 SAPConnection.Initialize.Release(ref mySapObject, ref mySapModel);
             };
 
-            
 
             //2. Create Geometry
             foreach (var el in model.StructuralElements)
@@ -144,7 +143,6 @@ namespace DynamoSAP.Assembly
                             SetLoads(el as Frame, ref mySapModel);
                         }
 
-                        
                 }
             }
 
