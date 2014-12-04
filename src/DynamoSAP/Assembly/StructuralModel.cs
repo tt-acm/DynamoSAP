@@ -21,9 +21,28 @@ namespace DynamoSAP.Assembly
 
         public List<Restraint> Restraints { get; set; }
 
+        // Check that GUID does not exist, users must add the same frame twice
+        private static void CheckDuplicateFrame(List<Element> StructEl)
+        {
+            // Dictionary to hold Structure Frames on <string, string> <GUID,Label>
+            Dictionary<string, string> SapModelFrmDict = new Dictionary<string, string>();
+            foreach (Element el in StructEl)
+            {
+                if (!SapModelFrmDict.Keys.Contains(el.GUID))
+                {
+                    SapModelFrmDict.Add(el.GUID, el.Label);
+                }
+                // If the key exists, throw an error in the collector
+                else
+                {
+                    throw new Exception("A structural element has been added twice. Please, make sure you do not have duplicate elements");
+                }
+            }
+        }
 
         public static StructuralModel Collector(List<Element> StructuralElements)
         {
+            CheckDuplicateFrame(StructuralElements);
             StructuralModel mySt = new StructuralModel();
             mySt.StructuralElements = StructuralElements;
             return mySt;
@@ -31,6 +50,7 @@ namespace DynamoSAP.Assembly
 
         public static StructuralModel Collector(List<Element> StructuralElements, List<LoadPattern> LoadPatterns, List<LoadCase> LoadCases, List<Restraint> Restraints)
         {
+            CheckDuplicateFrame(StructuralElements);
             return new StructuralModel(StructuralElements, LoadPatterns, LoadCases, Restraints);
         }
 

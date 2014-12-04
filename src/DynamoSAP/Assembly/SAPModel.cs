@@ -54,7 +54,7 @@ namespace DynamoSAP.Assembly
             {
                 string MatProp = SAPConnection.MaterialMapper.DynamoToSap(f.SecProp.MatProp);
                 //Import new section property
-                SAPConnection.StructureMapper.ImportPropFrm(ref mySapModel, f.SecProp.SectName, MatProp,  f.SecProp.SectCatalog);
+                SAPConnection.StructureMapper.ImportPropFrm(ref mySapModel, f.SecProp.SectName, MatProp, f.SecProp.SectCatalog);
             }
             //Assign section profile toFrame
             SAPConnection.StructureMapper.SetSectionFrm(ref mySapModel, f.Label, f.SecProp.SectName);
@@ -98,16 +98,16 @@ namespace DynamoSAP.Assembly
                 if (load.LoadType == "DistributedLoad")
                 {
                     //Call the CreateDistributedLoad method
-                    SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, frm.Label, load.lPattern.Name, load.MyType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, false );
-                } 
+                    SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, frm.Label, load.lPattern.Name, load.MyType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, false);
+                }
             }
         }
 
         #endregion
-       
+
         //// DYNAMO NODES ////
         //public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns, List<LoadCase> SAPLoadCases, List<Restraint> SAPRestraints, List<Load> SAPLoads, List<Release> SAPReleases)
-        public static void CreateSAPModel(ref StructuralModel model)    
+        public static void CreateSAPModel(ref StructuralModel model)
         {
             string report = string.Empty;
 
@@ -123,27 +123,28 @@ namespace DynamoSAP.Assembly
                 SAPConnection.Initialize.Release(ref mySapObject, ref mySapModel);
             };
 
-            // Dictionary to hold Structure Frames on <string, string> <GUID,Label>
-            Dictionary<string, string> SapModelFrmDict = new Dictionary<string, string>();
+            
 
             //2. Create Geometry
             foreach (var el in model.StructuralElements)
             {
                 if (el.GetType().ToString().Contains("Frame"))
                 {
-                    CreateFrame(el as Frame, ref mySapModel);
-                    Frame frm = el as Frame;
-                    // Set Releases
-                    if (frm.Releases != null)
-                    {
-                       SetReleases(el as Frame, ref mySapModel); // Set releases 
-                    }
-                    // Set Loads
-                    if (frm.Loads.Count > 0)
-                    {
-                        SetLoads(el as Frame, ref mySapModel);
-                    }
-                    
+                        CreateFrame(el as Frame, ref mySapModel);
+                        Frame frm = el as Frame;
+
+                        // Set Releases
+                        if (frm.Releases != null)
+                        {
+                            SetReleases(el as Frame, ref mySapModel); // Set releases 
+                        }
+                        // Set Loads
+                        if (frm.Loads.Count > 0)
+                        {
+                            SetLoads(el as Frame, ref mySapModel);
+                        }
+
+                        
                 }
             }
 

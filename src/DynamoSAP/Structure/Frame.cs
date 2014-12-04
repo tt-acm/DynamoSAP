@@ -65,15 +65,14 @@ namespace DynamoSAP.Structure
         // Set Loads to Frame
         public static Frame SetLoad(Frame frame, Load Load, bool replaceExisting = false)
         {
+            List<Load> frameLoads = new List<Load>();
             if (replaceExisting) // if true delete the list and add the new Load
             {
                 frame.Loads.Clear();
-                frame.Loads.Add(Load);
             }
-            else 
-            {
-                frame.Loads.Add(Load);
-            }
+            frameLoads.Add(Load);
+            frame.Loads = frameLoads;
+            
             return frame;
         }
 
