@@ -21,6 +21,7 @@ using SAP2000v16;
 
 namespace DynamoSAP.Assembly
 {
+    ///
     [SupressImportIntoVM]
     public class SAPModel
     {
@@ -106,8 +107,11 @@ namespace DynamoSAP.Assembly
         #endregion
 
         //// DYNAMO NODES ////
-        //public static string CreateSAPModel(List<Element> SAPElements, List<LoadPattern> SAPLoadPatterns, List<LoadCase> SAPLoadCases, List<Restraint> SAPRestraints, List<Load> SAPLoads, List<Release> SAPReleases)
-        public static void CreateSAPModel(ref StructuralModel model)
+        /// <summary>
+        /// Create a SAP model from a structural model in Dynamo
+        /// </summary>
+        /// <param name="StructuralModel"></param>
+        public static void CreateSAPModel(ref StructuralModel StructuralModel)
         {
             string report = string.Empty;
 
@@ -125,7 +129,7 @@ namespace DynamoSAP.Assembly
 
 
             //2. Create Geometry
-            foreach (var el in model.StructuralElements)
+            foreach (var el in StructuralModel.StructuralElements)
             {
                 if (el.GetType().ToString().Contains("Frame"))
                 {
@@ -148,9 +152,9 @@ namespace DynamoSAP.Assembly
 
 
             // 3. Assigns Restraints to Nodes
-            if (model.Restraints != null)
+            if (StructuralModel.Restraints != null)
             {
-                foreach (var rest in model.Restraints)
+                foreach (var rest in StructuralModel.Restraints)
                 {
                     List<bool> restraints = new List<bool>();
                     restraints.Add(rest.u1); restraints.Add(rest.u2); restraints.Add(rest.u3);
@@ -163,9 +167,9 @@ namespace DynamoSAP.Assembly
 
 
             // 4. Add Load Patterns
-            if (model.LoadPatterns != null)
+            if (StructuralModel.LoadPatterns != null)
             {
-                foreach (LoadPattern lp in model.LoadPatterns)
+                foreach (LoadPattern lp in StructuralModel.LoadPatterns)
                 {
                     //Call the AddLoadPattern method
                     SAPConnection.LoadMapper.AddLoadPattern(ref mySapModel, lp.name, lp.type, lp.multiplier);
@@ -174,9 +178,9 @@ namespace DynamoSAP.Assembly
 
             // 5. Define Load Cases
 
-            if (model.LoadCases != null)
+            if (StructuralModel.LoadCases != null)
             {
-                foreach (LoadCase lc in model.LoadCases)
+                foreach (LoadCase lc in StructuralModel.LoadCases)
                 {
 
                     List<string> types = new List<string>();

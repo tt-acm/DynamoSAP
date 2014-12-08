@@ -15,14 +15,32 @@ using DynamoSAP.Structure;
 
 namespace DynamoSAP.Analysis
 {
+    /// <summary>
+    /// Nodes to Run analysis and get and visualize results
+    /// </summary>
     public class Analysis : IResults
     {
+        /// <summary>
+        /// Analysis results for each frame
+        /// </summary>
         public List<FrameResults> FrameResults { get; set; }
+        /// <summary>
+        /// Load combination of the analysis results
+        /// </summary>
         public string LoadCombination { get; set; }
 
         private static cSapModel mySapModel;
 
-        [MultiReturn("Structural Model", "Load Cases", "Load Patterns", "FilePath")]
+
+        /// <summary>
+        /// Run analysis in an open instance of SAP2000
+        /// </summary>
+        /// <param name="Run">Set Boolean to True to run the analysis</param>
+        /// <returns name ="Structural Model"> Structural Model that has been analyzed</returns>
+        /// <returns name ="Load Cases"> Load Cases in the project</returns>
+        /// <returns name ="Load Patterns"> Load Patterns in the project</returns>
+        /// <returns name ="Filepath"> Filepath where the SAP2000 model is saved</returns>
+        [MultiReturn("Structural Model", "Load Cases", "Load Patterns", "Filepath")]
         public static Dictionary<string, object> Run(bool Run)
         {
             List<string> LoadCaseNames = new List<string>();
@@ -31,17 +49,14 @@ namespace DynamoSAP.Analysis
             string SaveAs = "";
             if (Run)
             {
-               
-
                 string units = string.Empty;
 
                 SAPConnection.Initialize.GrabOpenSAP(ref mySapModel, ref units);
 
                 Read.StructuralModelFromSapFile(ref mySapModel, ref Model);
 
-                SaveAs = mySapModel.GetModelFilename();
+                SaveAs = SAPConnection.Initialize.GetModelFilename(ref mySapModel);
 
-                // add defense for an untitled file
                 if (SaveAs == "")
                 {
                     throw new Exception("File has not been saved before. Please, go to SAP and save the file");
@@ -50,9 +65,9 @@ namespace DynamoSAP.Analysis
                 {
                     throw new Exception("SAP Model was not grabbed. Use run analysis with filepath");
                 }
-
                 else
-                {// run analysis
+                {
+                    // run analysis
                     SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, SaveAs, ref LoadCaseNames, ref LoadPatternNames);
                 }
             }
@@ -61,9 +76,19 @@ namespace DynamoSAP.Analysis
                 {"Structural Model", Model},
                 {"Load Cases", LoadCaseNames},
                 {"Load Patterns", LoadPatternNames},
-                {"File Path", SaveAs}
+                {"Filepath", SaveAs}
             };
         }
+
+
+        /// <summary>
+        /// Run analysis from an existing SAP2000 project. 
+        /// </summary>
+        /// <param name="FilePath">Filepath of the file to read from</param>
+        /// <param name="Run">Set Boolean to True to run the analysis</param>
+        /// <returns name ="Structural Model"> Structural Model that has been analyzed</returns>
+        /// <returns name ="Load Cases"> Load Cases in the project</returns>
+        /// <returns name ="Load Patterns"> Load Patterns in the project</returns>
         [MultiReturn("Structural Model", "Load Cases", "Load Patterns")]
         public static Dictionary<string, object> Run(string FilePath, bool Run)
         {
@@ -87,20 +112,33 @@ namespace DynamoSAP.Analysis
             };
         }
 
+        /// <summary>
+        /// Get the results from the analysis run with the Analysis.Run component
+        /// </summary>
+        /// <param name="LoadCombination">Choose a load case, load pattern or load combination</param>
+        /// <param name="Get">Set Boolean to True to get the specified case;s analysis results </param>
+        /// <returns></returns>
         public static Analysis GetResults(string LoadCombination, bool Get)
         {
             List<FrameResults> frameResults = null;
-            Analysis StructureResults = new Analysis();
+            Analysis AnalysisResults = new Analysis();
             if (Get)
             {
                 // loop over frames get results and populate to dictionary
                 frameResults = SAPConnection.AnalysisMapper.GetFrameForces(ref mySapModel, LoadCombination);
-                StructureResults.FrameResults = frameResults;
-                StructureResults.LoadCombination = LoadCombination;
+                AnalysisResults.FrameResults = frameResults;
+                AnalysisResults.LoadCombination = LoadCombination;
             }
-            return StructureResults;
+            return AnalysisResults;
         }
 
+        /// <summary>
+        /// Decompose forces and moments in the model for a specific case
+        /// </summary>
+        /// <param name="StructuralModel">Structural model to get results from</param>
+        /// <param name="AnalysisResults">Use Analysis.Run and Analysis.GetResults to select a specific case to decompose</param>
+        /// <param name="ForceType">Use Force Type dropdown</param>
+        /// <returns>Numerical values of forces and moments for each station in each structural member in the model </returns>
         public static List<List<double>> DecomposeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType)
         {
             List<List<double>> Forces = new List<List<double>>();
@@ -149,8 +187,17 @@ namespace DynamoSAP.Analysis
 
             return Forces;
         }
-
-        public static List<List<Mesh>> VisualizeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType, double scale, bool Visualize)
+        
+        /// <summary>
+        /// Visualize forces and moments in the model for a specific case
+        /// </summary>
+        /// <param name="StructuralModel">Structural model to visualize results on</param>
+        /// <param name="AnalysisResults">Use Analysis.Run and Analysis.GetResults to select a specific case to decompose</param>
+        /// <param name="ForceType">Use Force Type dropdown</param>
+        /// <param name="Scale">Scale of the visualization</param>
+        /// <param name="Visualize">Set Boolean to True to draw the meshes</param>
+        /// <returns>Forces and moments  in the form of meshes for each station in each structural member in the model</returns>
+        public static List<List<Mesh>> VisualizeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType, double Scale, bool Visualize)
         {
             List<List<Mesh>> myVizMeshes = new List<List<Mesh>>();
             if (Visualize)
@@ -199,31 +246,31 @@ namespace DynamoSAP.Analysis
 
                         if (ForceType == "Axial") // Get Axial P
                         {
-                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].P * -scale;
+                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].P * -Scale;
                         }
 
                         else if (ForceType == "Shear22") // Get Shear V2
                         {
-                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V2 * -scale;
+                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V2 * -Scale;
                         }
                         else if (ForceType == "Shear33") // Get Shear V3
                         {
-                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V3 * scale;
+                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V3 * Scale;
                         }
 
                         else if (ForceType == "Torsion") // Get Torsion T
                         {
-                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].T * -scale;
+                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].T * -Scale;
                         }
 
                         else if (ForceType == "Moment22") // Get Moment M2
                         {
-                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M2 * scale;
+                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M2 * Scale;
                         }
 
                         else if (ForceType == "Moment33") // Get Moment M3
                         {
-                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M3 * scale;
+                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M3 * Scale;
                         }
 
                         // if there is no value for the force (it is zero), add one to the count
@@ -365,61 +412,63 @@ namespace DynamoSAP.Analysis
             return myVizMeshes;
         }
 
-        public static List<Object> TranslateDisplay(List<Object> AnalysisMeshes, Vector Direction)
-        {
-            List<Object> objs = new List<Object>();
 
-            foreach (Object obj in AnalysisMeshes)
-            {
-                try
-                {
-                    Mesh m = (Mesh)obj;
-                    Mesh newm = null;
-                    Point[] pp = m.VertexPositions;
-                    List<Point> mypoints = new List<Point>();
-                    foreach (Point ppt in pp)
-                    {
-                        Point p = (Point)ppt.Translate(Direction);
-                        mypoints.Add(p);
-                    }
-                    IndexGroup ig = null;
-                    List<IndexGroup> indices = new List<IndexGroup>();
-                    if (mypoints.Count == 4)
-                    {
-                        ig = IndexGroup.ByIndices(0, 1, 2, 3);
+        //public static List<Object> TranslateDisplay(List<Object> AnalysisMeshes, Vector Direction)
+        //{
+        //    List<Object> objs = new List<Object>();
 
-                    }
-                    else
-                    {
-                        ig = IndexGroup.ByIndices(0, 1, 2);
-                    }
-                    indices.Add(ig);
+        //    foreach (Object obj in AnalysisMeshes)
+        //    {
+        //        try
+        //        {
+        //            Mesh m = (Mesh)obj;
+        //            Mesh newm = null;
+        //            Point[] pp = m.VertexPositions;
+        //            List<Point> mypoints = new List<Point>();
+        //            foreach (Point ppt in pp)
+        //            {
+        //                Point p = (Point)ppt.Translate(Direction);
+        //                mypoints.Add(p);
+        //            }
+        //            IndexGroup ig = null;
+        //            List<IndexGroup> indices = new List<IndexGroup>();
+        //            if (mypoints.Count == 4)
+        //            {
+        //                ig = IndexGroup.ByIndices(0, 1, 2, 3);
 
-                    newm = Mesh.ByPointsFaceIndices(mypoints, indices);
-                    objs.Add(newm);
-                }
-                catch (Exception)
-                {
+        //            }
+        //            else
+        //            {
+        //                ig = IndexGroup.ByIndices(0, 1, 2);
+        //            }
+        //            indices.Add(ig);
 
-                    //throw;
-                }
-                try
-                {
-                    Line ln = (Line)obj;
-                    Line lnt = (Line)ln.Translate(Direction);
-                    objs.Add(lnt);
-                }
-                catch (Exception)
-                {
-                    //throw;
-                }
-            }
+        //            newm = Mesh.ByPointsFaceIndices(mypoints, indices);
+        //            objs.Add(newm);
+        //        }
+        //        catch (Exception)
+        //        {
+
+        //            //throw;
+        //        }
+        //        try
+        //        {
+        //            Line ln = (Line)obj;
+        //            Line lnt = (Line)ln.Translate(Direction);
+        //            objs.Add(lnt);
+        //        }
+        //        catch (Exception)
+        //        {
+        //            //throw;
+        //        }
+        //    }
 
 
-            return objs;
-        }
+        //    return objs;
+        //}
 
         //Results private methods
+        
         private Analysis() { }
         private Analysis(List<FrameResults> fresults, string loadcombination)
         {

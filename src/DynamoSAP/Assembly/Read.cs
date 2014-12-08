@@ -18,6 +18,13 @@ namespace DynamoSAP.Assembly
     public class Read
     {
         //// DYNAMO NODES ////
+
+        /// <summary>
+        /// Read a SAP project from a filepath
+        /// </summary>
+        /// <param name="FilePath">Filepath of the project to read</param>
+        /// <param name="read">Set Boolean to True to open and readthe project</param>
+        /// <returns>Structural Model</returns>
         [MultiReturn("StructuralModel", "units")]
         public static Dictionary<string, object> SAPModel(string FilePath, bool read)
         {
@@ -64,6 +71,11 @@ namespace DynamoSAP.Assembly
 
         }
 
+        /// <summary>
+        /// Read a SAP project from an open instance
+        /// </summary>
+        /// <param name="read">Set Boolean to True to read the open project</param>
+        /// <returns>Structural Model</returns>
         [MultiReturn("StructuralModel","units")]
         public static Dictionary<string,object> SAPModel(bool read)
         {

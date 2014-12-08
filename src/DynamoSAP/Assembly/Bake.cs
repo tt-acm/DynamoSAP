@@ -24,6 +24,13 @@ namespace DynamoSAP.Assembly
     {
 
         //// DYNAMO NODES ////
+
+        /// <summary>
+        /// Export the Dynamo Structural Project to SAP2000
+        /// </summary>
+        /// <param name="StructuralModel">Structural Model to bake</param>
+        /// <param name="Bake">Set Boolean to True to bake the model</param>
+        /// <returns>Structural Model</returns>
         public static StructuralModel ToSAP(StructuralModel StructuralModel, bool Bake)
         {
             if (StructuralModel != null)

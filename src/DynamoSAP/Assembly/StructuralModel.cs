@@ -42,6 +42,11 @@ namespace DynamoSAP.Assembly
             }
         }
 
+        /// <summary>
+        /// Collects Structural Elements into a Structural Model
+        /// </summary>
+        /// <param name="StructuralElements">Structural elements in the project. Please, input as a flat list</param>
+        /// <returns>Structural Model consisting of the structural elements provided</returns>
         public static StructuralModel Collector(List<Element> StructuralElements)
         {
             CheckDuplicateFrame(StructuralElements);
@@ -50,14 +55,26 @@ namespace DynamoSAP.Assembly
             return mySt;
         }
 
+        /// <summary>
+        /// Collects Structural Elements, Load Patterns, Load Cases and Restraints into a Structural Model
+        /// </summary>
+        /// <param name="StructuralElements">Structural elements in the project. Please, input as a flat list</param>
+        /// <param name="LoadPatterns">Load Patterns in the project. Please, input as a flat list</param>
+        /// <param name="LoadCases">Load Cases in the project. Please, input as a flat list</param>
+        /// <param name="Restraints">Restraints in the project. Please, input as a flat list</param>
+        /// <returns>Structural Model consisting of all the elements provided</returns>
         public static StructuralModel Collector(List<Element> StructuralElements, List<LoadPattern> LoadPatterns, List<LoadCase> LoadCases, List<Restraint> Restraints)
         {
             CheckDuplicateFrame(StructuralElements);
             return new StructuralModel(StructuralElements, LoadPatterns, LoadCases, Restraints);
         }
 
-        // Decompose
-        [MultiReturn("Structural Elements", "Load Patterns", "Load Cases", "Restraints","Filepath")]
+        /// <summary>
+        /// Decomposes a Structural Model into its geometry and structural settings
+        /// </summary>
+        /// <param name="structuralModel">Structural Model to decompose </param>
+        /// <returns>Structural Elements, Load Patterns, Load Cases and Restraints of the project </returns>
+        [MultiReturn("Structural Elements", "Load Patterns", "Load Cases", "Restraints")]
         public static Dictionary<string, object> Decompose(StructuralModel structuralModel)
         {
             // Return outputs
