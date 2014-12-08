@@ -44,7 +44,7 @@ namespace SAPConnection
             DefineMaterials(ref mySapModel);
 
         }
-
+        
         public static void OpenSAPModel(string filePath, ref cSapModel mySapModel, ref string units)
         {
             long ret = 0;

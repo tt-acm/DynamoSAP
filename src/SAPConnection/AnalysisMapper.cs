@@ -21,8 +21,14 @@ namespace SAPConnection
     {
         public static void RunAnalysis(ref cSapModel mySapModel, string filepath, ref List<string> LoadCaseNames, ref List<string> LoadCasePatterns)
         {
-            int ret = mySapModel.File.Save(filepath);
-             ret = mySapModel.Analyze.RunAnalysis();
+            bool isLocked = mySapModel.GetModelIsLocked();
+
+            int ret = 0;
+            if (!isLocked)
+            {
+                ret = mySapModel.File.Save(filepath);
+                ret = mySapModel.Analyze.RunAnalysis();
+            }
             int lcnumber = 0;
             int lpnumber=0;
             string[] LCNames = null;

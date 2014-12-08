@@ -23,33 +23,29 @@ namespace DynamoSAP.Analysis
         private static cSapModel mySapModel;
 
         [MultiReturn("Structural Model", "Load Cases", "Load Patterns", "FilePath")]
-        public static Dictionary<string, object> RunOpenInstance(bool Run, string SaveAs = "")
+        public static Dictionary<string, object> Run(bool Run)
         {
             List<string> LoadCaseNames = new List<string>();
             List<string> LoadPatternNames = new List<string>();
             StructuralModel Model = new StructuralModel();
+            string SaveAs = "";
             if (Run)
             {
-                if (SaveAs == "") // if the file name is not provided, create one
-                {
-                    SaveAs = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DynamoSAP");
-                    if (!Directory.Exists(SaveAs))//Needs to be created
-                    {
-                        System.IO.Directory.CreateDirectory(SaveAs); //folder created
-
-                    }
-                    DateTime time = DateTime.Now;              // Use current time
-                    string format = "yyyyMMdd";    // Use this format
-
-                    string fileName = "DynamoSAP_" + time.ToString(format) + ".sdb";
-                    SaveAs = System.IO.Path.Combine(SaveAs, fileName);
-                }
+               
 
                 string units = string.Empty;
 
                 SAPConnection.Initialize.GrabOpenSAP(ref mySapModel, ref units);
-                
+
                 Read.StructuralModelFromSapFile(ref mySapModel, ref Model);
+
+                SaveAs = mySapModel.GetModelFilename();
+
+                // add defense for an untitled file
+                if (SaveAs == "")
+                {
+                    throw new Exception("File has not been saved before. Please, go to SAP and save the file");
+                }
                 if (mySapModel == null)
                 {
                     throw new Exception("SAP Model was not grabbed. Use run analysis with filepath");
@@ -69,7 +65,7 @@ namespace DynamoSAP.Analysis
             };
         }
         [MultiReturn("Structural Model", "Load Cases", "Load Patterns")]
-        public static Dictionary<string, object> RunFromFile(bool Run, string FilePath)
+        public static Dictionary<string, object> Run(string FilePath, bool Run)
         {
             List<string> LoadCaseNames = new List<string>();
             List<string> LoadPatternNames = new List<string>();
@@ -154,150 +150,189 @@ namespace DynamoSAP.Analysis
             return Forces;
         }
 
-        public static List<List<Mesh>> VisualizeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType, double scale)
+        public static List<List<Mesh>> VisualizeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType, double scale, bool Visualize)
         {
             List<List<Mesh>> myVizMeshes = new List<List<Mesh>>();
-            for (int i = 0; i < StructuralModel.StructuralElements.Count; i++)
+            if (Visualize)
             {
-                List<Mesh> mm = new List<Mesh>();
-                // get the frame's curve specified by the frameID
-
-                Frame f = (Frame)StructuralModel.StructuralElements[i];
-                Curve c = f.BaseCrv;
-
-                //CREATE LOCAL COORDINATE SYSTEM
-                Vector xAxis = c.TangentAtParameter(0.0);
-                Vector yAxis = c.NormalAtParameter(0.0);
-                //This ensures the right axis for the Z direction  
-                CoordinateSystem localCS = CoordinateSystem.ByOriginVectors(c.StartPoint, xAxis, yAxis);
-
-
-                //TEST TO VISUALIZE NORMALS
-                //Point pt = c.PointAtParameter(0.5);
-                //Line ln = Line.ByStartPointDirectionLength(pt, localCS.ZAxis, 30.0);
-                //myLines.Add(ln);
-
-
-                List<Point> MeshPoints = new List<Point>();
-
-                int count = 0;
-
-                double t2 = 0.0;
-                double t1 = 0.0;
-                int zeroCount = 0;
-                foreach (double t in AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys)
+                for (int i = 0; i < StructuralModel.StructuralElements.Count; i++)
                 {
-                    double newt = t;
-                    if (t < 0) newt = -t;
-                    Mesh m = null;
-                    IndexGroup ig = null;
+                    List<Mesh> mm = new List<Mesh>();
+                    // get the frame's curve specified by the frameID
 
-                    count += 1;
+                    Frame f = (Frame)StructuralModel.StructuralElements[i];
+                    Curve c = f.BaseCrv;
 
-                    Point cPoint = c.PointAtParameter(newt); // curve Point
-                    Point vPoint = null; // value Point
+                    //CREATE LOCAL COORDINATE SYSTEM
+                    Vector xAxis = c.TangentAtParameter(0.0);
+                    Vector yAxis = c.NormalAtParameter(0.0);
+                    //This ensures the right axis for the Z direction  
+                    CoordinateSystem localCS = CoordinateSystem.ByOriginVectors(c.StartPoint, xAxis, yAxis);
 
-                    double translateCoord = 0.0;
 
-                    if (ForceType == "Axial") // Get Axial P
+                    //TEST TO VISUALIZE NORMALS
+                    //Point pt = c.PointAtParameter(0.5);
+                    //Line ln = Line.ByStartPointDirectionLength(pt, localCS.ZAxis, 30.0);
+                    //myLines.Add(ln);
+
+
+                    List<Point> MeshPoints = new List<Point>();
+
+                    int count = 0;
+
+                    double t2 = 0.0;
+                    double t1 = 0.0;
+                    int zeroCount = 0;
+                    foreach (double t in AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys)
                     {
-                        translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].P * -scale;
-                    }
+                        double newt = t;
+                        if (t < 0) newt = -t;
+                        Mesh m = null;
+                        IndexGroup ig = null;
 
-                    else if (ForceType == "Shear22") // Get Shear V2
-                    {
-                        translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V2 * -scale;
-                    }
-                    else if (ForceType == "Shear33") // Get Shear V3
-                    {
-                        translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V3 * scale;
-                    }
+                        count += 1;
 
-                    else if (ForceType == "Torsion") // Get Torsion T
-                    {
-                        translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].T * -scale;
-                    }
+                        Point cPoint = c.PointAtParameter(newt); // curve Point
+                        Point vPoint = null; // value Point
 
-                    else if (ForceType == "Moment22") // Get Moment M2
-                    {
-                        translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M2 * scale;
-                    }
+                        double translateCoord = 0.0;
 
-                    else if (ForceType == "Moment33") // Get Moment M3
-                    {
-                        translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M3 * scale;
-                    }
-                    
-                    // if there is no value for the force (it is zero), add one to the count
-                    if (translateCoord == 0.0) zeroCount++; 
-                    
-                    double d2 = 0.0;
-                    double d1 = 0.0;
-                    double pZ = 0.0;
-
-                    if (ForceType == "Moment22")
-                    {
-                        vPoint = (Point)cPoint.Translate(localCS.YAxis, translateCoord); // Translate in the Y direction to match the visualization of SAP
-                        if (MeshPoints.Count > 0)
+                        if (ForceType == "Axial") // Get Axial P
                         {
-                            d2 = vPoint.Y;
-                            d1 = MeshPoints[MeshPoints.Count - 1].Y;
-                            pZ = cPoint.Y;
+                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].P * -scale;
                         }
-                    }
-                    else
-                    {
-                        vPoint = (Point)cPoint.Translate(localCS.ZAxis, translateCoord); // All the other types must be translate in the Z direction} 
-                        if (MeshPoints.Count > 0)
-                        {
-                            d2 = vPoint.Z;
-                            d1 = MeshPoints[MeshPoints.Count - 1].Z;
 
-                            pZ = cPoint.Z;// Z value of the point being visualized
+                        else if (ForceType == "Shear22") // Get Shear V2
+                        {
+                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V2 * -scale;
                         }
-                    }
-
-                    Point pzero = null;
-                    if (MeshPoints.Count == 0)
-                    {
-                        MeshPoints.Add(cPoint); //index 0
-                        MeshPoints.Add(vPoint); //index 1
-                    }
-
-                    else// if a previous point has been added
-                    {
-                        if (count != AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys.Count) // if it's not the end of the list
+                        else if (ForceType == "Shear33") // Get Shear V3
                         {
-                            List<IndexGroup> indices = new List<IndexGroup>();
+                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V3 * scale;
+                        }
 
-                            double tzero;//parameter at which the value of the forces = pZ
+                        else if (ForceType == "Torsion") // Get Torsion T
+                        {
+                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].T * -scale;
+                        }
 
-                            t2 = newt * c.Length; // current t parameter of the point being visualized
-                            if ((d1 > pZ && d2 < pZ) || (d1 < pZ && d2 > pZ)) // if there is a change in the force sign, calculate the intersection point
+                        else if (ForceType == "Moment22") // Get Moment M2
+                        {
+                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M2 * scale;
+                        }
+
+                        else if (ForceType == "Moment33") // Get Moment M3
+                        {
+                            translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M3 * scale;
+                        }
+
+                        // if there is no value for the force (it is zero), add one to the count
+                        if (translateCoord == 0.0) zeroCount++;
+
+                        double d2 = 0.0;
+                        double d1 = 0.0;
+                        double pZ = 0.0;
+
+                        if (ForceType == "Moment22")
+                        {
+                            vPoint = (Point)cPoint.Translate(localCS.YAxis, translateCoord); // Translate in the Y direction to match the visualization of SAP
+                            if (MeshPoints.Count > 0)
                             {
+                                d2 = vPoint.Y;
+                                d1 = MeshPoints[MeshPoints.Count - 1].Y;
+                                pZ = cPoint.Y;
+                            }
+                        }
+                        else
+                        {
+                            vPoint = (Point)cPoint.Translate(localCS.ZAxis, translateCoord); // All the other types must be translate in the Z direction} 
+                            if (MeshPoints.Count > 0)
+                            {
+                                d2 = vPoint.Z;
+                                d1 = MeshPoints[MeshPoints.Count - 1].Z;
 
-                                // the function of the line is
-                                //y= (t2-t1)tzero/(d2-d1)+d1  This has to be equal to pZ
-                                double ml = (d2 - d1) / (t2 - t1);
-                                tzero = (pZ - d1) / ml; // multiply by the length of the curve and add the X coordinate of the last mesh point
+                                pZ = cPoint.Z;// Z value of the point being visualized
+                            }
+                        }
+
+                        Point pzero = null;
+                        if (MeshPoints.Count == 0)
+                        {
+                            MeshPoints.Add(cPoint); //index 0
+                            MeshPoints.Add(vPoint); //index 1
+                        }
+
+                        else// if a previous point has been added
+                        {
+                            if (count != AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys.Count) // if it's not the end of the list
+                            {
+                                List<IndexGroup> indices = new List<IndexGroup>();
+
+                                double tzero;//parameter at which the value of the forces = pZ
+
+                                t2 = newt * c.Length; // current t parameter of the point being visualized
+                                if ((d1 > pZ && d2 < pZ) || (d1 < pZ && d2 > pZ)) // if there is a change in the force sign, calculate the intersection point
+                                {
+
+                                    // the function of the line is
+                                    //y= (t2-t1)tzero/(d2-d1)+d1  This has to be equal to pZ
+                                    double ml = (d2 - d1) / (t2 - t1);
+                                    tzero = (pZ - d1) / ml; // multiply by the length of the curve and add the X coordinate of the last mesh point
 
 
-                                tzero += t1;
+                                    tzero += t1;
 
-                                //pzero= Point.ByCartesianCoordinates(CoordinateSystem.Identity(), tzero, cPoint.Y, pZ); //CHECK THAT THIS IS CORRECT
+                                    //pzero= Point.ByCartesianCoordinates(CoordinateSystem.Identity(), tzero, cPoint.Y, pZ); //CHECK THAT THIS IS CORRECT
 
-                                pzero = Point.ByCartesianCoordinates(localCS, tzero, 0.0, 0.0); //CHECK THAT THIS IS CORRECT
-                                MeshPoints.Add(pzero); //index 2 
+                                    pzero = Point.ByCartesianCoordinates(localCS, tzero, 0.0, 0.0); //CHECK THAT THIS IS CORRECT
+                                    MeshPoints.Add(pzero); //index 2 
 
-                                ig = IndexGroup.ByIndices(0, 1, 2);
-                                indices.Add(ig);
-                                // Color coding here
+                                    ig = IndexGroup.ByIndices(0, 1, 2);
+                                    indices.Add(ig);
+                                    // Color coding here
 
+                                }
+                                else
+                                {
+                                    MeshPoints.Add(vPoint); //index 2 (note: vPoint before cPoint)
+                                    MeshPoints.Add(cPoint); //index 3 
+                                    if (MeshPoints.Count == 3)
+                                    {
+                                        ig = IndexGroup.ByIndices(0, 1, 2);
+                                        indices.Add(ig);
+                                    }
+                                    else
+                                    {
+                                        ig = IndexGroup.ByIndices(0, 1, 2, 3);
+                                        indices.Add(ig);
+                                    }
+                                    //color coding here
+                                }
+
+                                // Add face
+                                //append...??
+                                m = Mesh.ByPointsFaceIndices(MeshPoints, indices);
+                                mm.Add(m);
+
+                                MeshPoints.Clear();
+
+                                if ((d1 > pZ && d2 < pZ) || (d1 < pZ && d2 > pZ)) // if there is a change in the force sign
+                                {
+                                    MeshPoints.Add(pzero); //new face index 0
+                                }
+                                else
+                                {
+                                    MeshPoints.Add(cPoint); //new face index 0
+                                    MeshPoints.Add(vPoint); //new face index 1   
+                                }
                             }
                             else
                             {
                                 MeshPoints.Add(vPoint); //index 2 (note: vPoint before cPoint)
                                 MeshPoints.Add(cPoint); //index 3 
+
+                                // Add face
+                                List<IndexGroup> indices = new List<IndexGroup>();
                                 if (MeshPoints.Count == 3)
                                 {
                                     ig = IndexGroup.ByIndices(0, 1, 2);
@@ -308,60 +343,24 @@ namespace DynamoSAP.Analysis
                                     ig = IndexGroup.ByIndices(0, 1, 2, 3);
                                     indices.Add(ig);
                                 }
-                                //color coding here
-                            }
-
-                            // Add face
-                            //append...??
-                            m = Mesh.ByPointsFaceIndices(MeshPoints, indices);
-                            mm.Add(m);
-
-                            MeshPoints.Clear();
-
-                            if ((d1 > pZ && d2 < pZ) || (d1 < pZ && d2 > pZ)) // if there is a change in the force sign
-                            {
-                                MeshPoints.Add(pzero); //new face index 0
-                            }
-                            else
-                            {
-                                MeshPoints.Add(cPoint); //new face index 0
-                                MeshPoints.Add(vPoint); //new face index 1   
+                                //append...??
+                                m = Mesh.ByPointsFaceIndices(MeshPoints, indices);
+                                mm.Add(m);
                             }
                         }
-                        else
-                        {
-                            MeshPoints.Add(vPoint); //index 2 (note: vPoint before cPoint)
-                            MeshPoints.Add(cPoint); //index 3 
-
-                            // Add face
-                            List<IndexGroup> indices = new List<IndexGroup>();
-                            if (MeshPoints.Count == 3)
-                            {
-                                ig = IndexGroup.ByIndices(0, 1, 2);
-                                indices.Add(ig);
-                            }
-                            else
-                            {
-                                ig = IndexGroup.ByIndices(0, 1, 2, 3);
-                                indices.Add(ig);
-                            }
-                            //append...??
-                            m = Mesh.ByPointsFaceIndices(MeshPoints, indices);
-                            mm.Add(m);
-                        }
+                        t1 = newt * c.Length;
                     }
-                    t1 = newt * c.Length;
-                }
-                // if all the values were zero, do not add the mesh
-                if (zeroCount == AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys.Count)
-                {
-                    continue;
-                }
-                else
-                {
-                    myVizMeshes.Add(mm);
-                }
+                    // if all the values were zero, do not add the mesh
+                    if (zeroCount == AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys.Count)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        myVizMeshes.Add(mm);
+                    }
 
+                }
             }
             return myVizMeshes;
         }
