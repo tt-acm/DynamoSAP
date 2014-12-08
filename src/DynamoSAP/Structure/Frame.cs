@@ -30,7 +30,9 @@ namespace DynamoSAP.Structure
         internal List<Load> Loads { get; set; }
 
         // QUERY NODES
-
+        /// <summary>
+        /// Curve representing the frame
+        /// </summary>
         public Line BaseCurve
         {
             get { return BaseCrv; }
@@ -38,17 +40,38 @@ namespace DynamoSAP.Structure
 
 
         //PUBLIC METHODS
+        /// <summary>
+        /// Type of the structural element
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return "Frame";
         }
 
-        // Frame From Curve
+
+        /// <summary>
+        /// Create a Frame from a line
+        /// </summary>
+        /// <param name="Line">Line to create a frame</param>
+        /// <param name="SectionProp">Section properties of the frame</param>
+        /// <param name="Justification">Justification of the frame</param>
+        /// <param name="Rotation">Angle rotation of the frame</param>
+        /// <returns>Frame with all the properties set up by the inputs</returns>
         public static Frame FromLine(Line Line, SectionProp SectionProp, string Justification = "MiddleCenter", double Rotation = 0)
         {
             return new Frame(Line, SectionProp, Justification, Rotation);
         }
-        // Frame from Nodes
+        
+        /// <summary>
+        /// Create a Frame from the end points
+        /// </summary>
+        /// <param name="i">Start Point</param>
+        /// <param name="j">End Point</param>
+        /// <param name="SectionProp">Section properties of the frame</param>
+        /// <param name="Justification">Justification of the frame</param>
+        /// <param name="Rotation">Angle rotation of the frame</param>
+        /// <returns>Frame with all the properties set up by the inputs</returns>
         public static Frame FromEndPoints(Point i, Point j, SectionProp SectionProp, string Justification = "MiddleCenter", double Rotation = 0)
         {
             return new Frame(i, j, SectionProp, Justification, Rotation);
