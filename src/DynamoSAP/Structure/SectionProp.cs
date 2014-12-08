@@ -24,7 +24,11 @@ namespace DynamoSAP.Structure
         // Material Property
         internal string MatProp { get; set; }
 
-        // Returns the Section Names of a selected catalog
+        /// <summary>
+        /// Returns the Section Names of a selected catalog
+        /// </summary>
+        /// <param name="catalog">Catalog to read</param>
+        /// <returns>Section Names</returns>
         public static List<string> Sections (string catalog)
         {
             List<string> sectionsnames = new List<string>();
@@ -42,12 +46,23 @@ namespace DynamoSAP.Structure
             sectionsnames = Names.ToList();
             return sectionsnames;
         }
-
+        /// <summary>
+        /// Define a Section property
+        /// </summary>
+        /// <param name="Name">Name of the section property</param>
+        /// <param name="Material">Material of the section</param>
+        /// <param name="SectionCatalog">Section Catalog</param>
+        /// <returns>Section Property</returns>
         public static SectionProp Define(string Name = "W12X14", string Material = "A992Fy50", string SectionCatalog = "AISC14")
         {
             return new SectionProp(Name, Material, SectionCatalog);
         }
 
+        /// <summary>
+        /// Decompose a Section Property
+        /// </summary>
+        /// <param name="SectProp">Section Property to decompose</param>
+        /// <returns>Name, Material, Catalog</returns>
         [MultiReturn("Name", "Material", "Catalog")]
         public static Dictionary<string,string> Decompose(SectionProp SectProp)
         {

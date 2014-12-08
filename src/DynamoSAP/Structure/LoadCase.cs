@@ -3,32 +3,54 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Autodesk.DesignScript.Runtime;
+
 namespace DynamoSAP.Structure
 {
     public class LoadCase
     {
         //FIELDS
-        private string name { get; set; }
-        private string type { get; set; }
-        private List<LoadPattern> loadPatterns = new List<LoadPattern>();
-        private List<double> sFs = new List<double>();
-
-        //QUERY NODES
-        public string Name { get { return name; } }
-        public string Type { get { return type; } }
-        public List<LoadPattern> LoadPatterns { get { return loadPatterns; } }
-        public List<double> SFs { get { return sFs; } }
+        internal string name { get; set; }
+        internal string type { get; set; }
+        internal List<LoadPattern> loadPatterns = new List<LoadPattern>();
+        internal List<double> sFs = new List<double>();
 
         //CREATE NODE
-        public static LoadCase SetLoadCase(string Name, List<LoadPattern> LoadPatterns, List<double> SFs, string Type)
+        /// <summary>
+        /// Set a Load Case
+        /// </summary>
+        /// <param name="Name">Name of the Load Case</param>
+        /// <param name="LoadPatterns">Load Patterns</param>
+        /// <param name="ScaleFactors">Scale factor of each load assigned to the load case</param>
+        /// <param name="Type"> Type of Load Case. Use the  Load Case Type Dropdown</param>
+        /// <returns>New Load Case</returns>
+        public static LoadCase SetLoadCase(string Name, List<LoadPattern> LoadPatterns, List<double> ScaleFactors, string Type)
         {
             // Check if the number of Patterms are equal to SF
-            if (LoadPatterns.Count() != SFs.Count())
+            if (LoadPatterns.Count() != ScaleFactors.Count())
             {
-                throw new Exception("Make sure number of Scae factors is the same with number of  Load patterns");
+                throw new Exception("Make sure the number of Scale factors is the same as the number of Load patterns");
             }
 
-                return new LoadCase(Name, LoadPatterns, SFs, Type);
+                return new LoadCase(Name, LoadPatterns, ScaleFactors, Type);
+        }
+
+        /// <summary>
+        /// Decompose a Load Case
+        /// </summary>
+        /// <param name="LoadCase">Load case to decompose</param>
+        /// <returns>Name, Type, Load Patterns and Scale Factors of the Load Case</returns>
+        [MultiReturn("Name", "Type", "Load Patterns", "Scale Factors")]
+        public static Dictionary<string, object> Decompose(LoadCase LoadCase)
+        {
+            // Return outputs
+            return new Dictionary<string, object>
+            {
+                {"Name", LoadCase.name},
+                {"Type", LoadCase.type},
+                {"Load Patterns", LoadCase.loadPatterns},
+                {"SFs", LoadCase.sFs},
+            };
         }
 
         //PRIVATE CONSTRUCTOR

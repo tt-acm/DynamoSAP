@@ -18,51 +18,12 @@ namespace DynamoSAP.Structure
 
         //DYNAMO NODE
         /// <summary>
-        /// This node creates a Load Pattern
+        /// Create a Load Pattern
         /// </summary>
         /// <param name="Name">The name for the new load pattern</param>
-        /// <param name="LoadPatternType">This is one of the following items in the eLoadPatternType enumeration:
-        /// LTYPE_DEAD = 1
-        /// LTYPE_SUPERDEAD = 2
-        /// LTYPE_LIVE = 3
-        /// LTYPE_REDUCELIVE = 4
-        /// LTYPE_QUAKE = 5
-        /// LTYPE_WIND= 6
-        /// LTYPE_SNOW = 7
-        /// LTYPE_OTHER = 8
-        /// LTYPE_MOVE = 9
-        /// LTYPE_TEMPERATURE = 10
-        /// LTYPE_ROOFLIVE = 11
-        /// LTYPE_NOTIONAL = 12
-        /// LTYPE_PATTERNLIVE = 13
-        /// LTYPE_WAVE= 14
-        /// LTYPE_BRAKING = 15
-        /// LTYPE_CENTRIFUGAL = 16
-        /// LTYPE_FRICTION = 17
-        /// LTYPE_ICE = 18
-        /// LTYPE_WINDONLIVELOAD = 19
-        /// LTYPE_HORIZONTALEARTHPRESSURE = 20
-        /// LTYPE_VERTICALEARTHPRESSURE = 21
-        /// LTYPE_EARTHSURCHARGE = 22
-        /// LTYPE_DOWNDRAG = 23
-        /// LTYPE_VEHICLECOLLISION = 24
-        /// LTYPE_VESSELCOLLISION = 25
-        /// LTYPE_TEMPERATUREGRADIENT = 26
-        /// LTYPE_SETTLEMENT = 27
-        /// LTYPE_SHRINKAGE = 28
-        /// LTYPE_CREEP = 29
-        /// LTYPE_WATERLOADPRESSURE = 30
-        /// LTYPE_LIVELOADSURCHARGE = 31
-        /// LTYPE_LOCKEDINFORCES = 32
-        /// LTYPE_PEDESTRIANLL = 33
-        /// LTYPE_PRESTRESS = 34
-        /// LTYPE_HYPERSTATIC = 35
-        /// LTYPE_BOUYANCY = 36
-        /// LTYPE_STREAMFLOW = 37
-        /// LTYPE_IMPACT = 38
-        /// LTYPE_CONSTRUCTION = 39</param>
+        /// <param name="LType">Load PAttern Type. Use the Load Pattern Type Dropdown</param>
         /// <param name="Multiplier">The self weight multiplier for the new load pattern.</param>
-        /// <returns></returns>
+        /// <returns>Load Pattern</returns>
         //public static LoadPattern SetLoadPattern(string Name, eLoadPatternType LoadPatternType, double Multiplier)
         public static LoadPattern SetLoadPattern(string Name, string LType, double Multiplier = 1)
         {
@@ -71,15 +32,21 @@ namespace DynamoSAP.Structure
 
 
         // Decompose
+
+       /// <summary>
+       /// Decompose a Load Pattern
+       /// </summary>
+       /// <param name="LoadPattern">Load Pattern to Decompose</param>
+       /// <returns>Name, Type and Multiplier of the Load Pattern</returns>
         [MultiReturn("Name", "Type", "Multiplier")]
-        public static Dictionary<string, object> Decompose(LoadPattern loadPattern)
+        public static Dictionary<string, object> Decompose(LoadPattern LoadPattern)
         {
             // Return outputs
             return new Dictionary<string, object>
             {
-                {"Name", loadPattern.name},
-                {"Type", loadPattern.type},
-                {"Multiplier", loadPattern.multiplier}
+                {"Name", LoadPattern.name},
+                {"Type", LoadPattern.type},
+                {"Multiplier", LoadPattern.multiplier}
             };
         }
 

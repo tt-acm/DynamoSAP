@@ -20,6 +20,9 @@ using SAP2000v16;
 
 namespace DynamoSAP.Assembly
 {
+    /// <summary>
+    /// Create a structural model in SAP
+    /// </summary>
     public class Bake
     {
         private static cSapModel mySapModel;
@@ -196,18 +199,18 @@ namespace DynamoSAP.Assembly
                     List<string> names = new List<string>();
                     List<double> SFs = new List<double>();
 
-                    for (int i = 0; i < lc.LoadPatterns.Count; i++)
+                    for (int i = 0; i < lc.loadPatterns.Count; i++)
                     {
                         types.Add("Load");
-                        names.Add(lc.LoadPatterns[i].name);
-                        SFs.Add(lc.SFs[i]);
+                        names.Add(lc.loadPatterns[i].name);
+                        SFs.Add(lc.sFs[i]);
                     }
 
                     string[] Dtypes = types.ToArray();
                     string[] Dnames = names.ToArray();
                     double[] DSFs = SFs.ToArray();
 
-                    SAPConnection.LoadMapper.AddLoadCase(ref mySapModel, lc.Name, types.Count(), ref Dtypes, ref Dnames, ref DSFs, lc.Type);
+                    SAPConnection.LoadMapper.AddLoadCase(ref mySapModel, lc.name, types.Count(), ref Dtypes, ref Dnames, ref DSFs, lc.type);
                 }
             }
 

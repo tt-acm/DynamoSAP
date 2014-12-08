@@ -11,7 +11,9 @@ using Autodesk.DesignScript.Runtime;
 
 namespace DynamoSAP.Structure
 {
-
+    /// <summary>
+    /// Load
+    /// </summary>
     public class Load
     {
         //Load Type
@@ -35,10 +37,19 @@ namespace DynamoSAP.Structure
         //Optional inputs
         internal string CSys;
         internal bool RelDist;
-        internal bool Replace;
+       
 
-        //DYNAMO QUERY NODE
-
+        //PUBLIC METHODS
+        public override string ToString()
+        {
+            if (LoadType == "DistributedLoad") return "DistributedLoad";
+            else return "PointLoad";
+        }
+        /// <summary>
+        /// Decompose a Load
+        /// </summary>
+        /// <param name="Load">Load to decompose</param>
+        /// <returns>Load Type, Load Pattern, Force or Moment, Direction, Distance 1, Distance 2, Value 1, Value 2, Coordinate System, Relative Distance</returns>
         [MultiReturn("Load Type", "Load Pattern", "Force/Moment Type", "Direction", "Distance", "Distance 2", "Value", "Value 2", "Coordinate System", "Relative Distance")]
         public static Dictionary<string, object> Decompose(Load Load)
         {
@@ -101,7 +112,7 @@ namespace DynamoSAP.Structure
         /// Parameters description below as presented in the SAP CSi OAPI Documentation
         /// </summary>
         /// <param name="LoadPattern">The name of a defined load pattern.</param>
-        /// <param name="FMType">This is 1 or 2, indicating the type of point load.
+        /// <param name="ForceMomentType">This is 1 or 2, indicating the type of point load.
         /// 1 = Force
         /// 2 = Moment</param>
         /// <param name="Direction">This is an integer between 1 and 11, indicating the direction of the load.
@@ -127,23 +138,9 @@ namespace DynamoSAP.Structure
         /// otherwise it is an actual distance.</param>
         /// <param name="Replace">If this item is True, all previous loads, if any, assigned to the specified frame object(s), 
         /// in the specified load pattern, are deleted before making the new assignment.</param>
-        /// <returns></returns>
-
-        //PUBLIC METHODS
-        public override string ToString()
-        {
-            if (LoadType == "DistributedLoad")
-            {
-                return "DistributedLoad";
-            }
-            else
-            {
-                return "PointLoad";
-            }
-        }
-
+        /// <returns>Load at a point along a Frame</returns>
         //DYNAMO CREATE NODES
-        public static Load PointLoadOnFrame(LoadPattern LoadPattern, int ForceMomentType, int Direction, double Distance, double Value, string CoordSystem = "Global", bool RelativeDistance = true)
+        public static Load PointLoadOnFrame(LoadPattern LoadPattern, int ForceMomentType, int Direction, double Distance, double Value, string CoordSystem = "Global", bool RelativeDistance = true, bool Replace = true)
         {
             CheckCoordSysAndDir(Direction,CoordSystem);
             Load l = new Load(LoadPattern, ForceMomentType, Direction, Distance, Value, CoordSystem, RelativeDistance);
@@ -151,6 +148,38 @@ namespace DynamoSAP.Structure
             return l;
         }
 
+        /// <summary>
+        /// This function assigns distributed loads to frame objects.
+        /// Parameters description below as presented in the SAP CSi OAPI Documentation
+        /// </summary>
+        /// <param name="LoadPattern">The name of a defined load pattern</param>
+        /// <param name="ForceMomentType">This is 1 or 2, indicating the type of distributed load.
+        /// 1 = Force per unit length
+        /// 2 = Moment per unit length</param>
+        ///<param name="Direction">This is an integer between 1 and 11, indicating the direction of the load.
+        /// 1 = Local 1 axis (only applies when CSys is Local)
+        /// 2 = Local 2 axis (only applies when CSys is Local)
+        /// 3 = Local 3 axis (only applies when CSys is Local)
+        /// 4 = X direction (does not apply when CSys is Local)
+        /// 5 = Y direction (does not apply when CSys is Local)
+        /// 6 = Z direction (does not apply when CSys is Local)
+        /// 7 = Projected X direction (does not apply when CSys is Local)
+        /// 8 = Projected Y direction (does not apply when CSys is Local)
+        /// 9 = Projected Z direction (does not apply when CSys is Local)
+        /// 10 = Gravity direction (only applies when CSys is Global)
+        /// 11 = Projected Gravity direction (only applies when CSys is Global)
+        /// The positive gravity direction (see Dir = 10 and 11) is in the negative Global Z direction.</param>
+        /// <param name="Distance">This is the distance from the I-End of the frame object to the load location. 
+        /// This may be a relative distance (0 less or equal to Dist less or equal to 1) or an actual distance, 
+        /// depending on the value of the RelDist item. [L] when RelDist is False</param>
+        /// <param name="Distance2">This is the distance from the I-End of the frame object to the load location. 
+        /// This may be a relative distance (0 less or equal to Dist2 less or equal to 1) or an actual distance, 
+        /// depending on the value of the RelDist item. [L] when RelDist is False</param>
+        /// <param name="Value">This is the load value at the start of the distributed load. [F] when MyType is 1 and [FL] when MyType is 2</param>
+        /// <param name="Value2">This is the load value at the end of the distributed load. [F] when MyType is 1 and [FL] when MyType is 2</param>
+        /// <param name="CoordSystem">This is Local or the name of a defined coordinate system. It is the coordinate system in which the loads are specified.</param>
+        /// <param name="RelativeDistance">If this item is True, the specified Dist item is a relative distance, otherwise it is an actual distance.</param>
+        /// <returns></returns>
         public static Load DistributedLoadOnFrame(LoadPattern LoadPattern, int ForceMomentType, int Direction, double Distance, double Distance2, double Value, double Value2, string CoordSystem = "Global", bool RelativeDistance = true)
         {
             CheckCoordSysAndDir(Direction,CoordSystem);
@@ -170,6 +199,7 @@ namespace DynamoSAP.Structure
             Val = val;
             CSys = cSys;
             RelDist = relDist;
+           
         }
 
         //constructor for DistributedLoads
@@ -184,6 +214,7 @@ namespace DynamoSAP.Structure
             Val2 = val2;
             CSys = cSys;
             RelDist = relDist;
+            
         }
 
         //Private method

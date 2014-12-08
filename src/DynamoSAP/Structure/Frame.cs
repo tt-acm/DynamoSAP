@@ -77,44 +77,55 @@ namespace DynamoSAP.Structure
             return new Frame(i, j, SectionProp, Justification, Rotation);
         }
 
-        // Set Custom Releases to Frame
-        public static Frame SetReleases(Frame frame, Release Release)
+        /// <summary>
+        /// Set the Releases of a frame
+        /// </summary>
+        /// <param name="Frame">Frame to set up releases of</param>
+        /// <param name="Release">Use the Release node</param>
+        /// <returns>The frame with the new releases</returns>
+        public static Frame SetReleases(Frame Frame, Release Release)
         {
             // Create a new Frame using the properties of the input frame
-            Frame newFrame = Frame.FromLine(frame.BaseCurve, frame.SecProp, frame.Just, frame.Angle);
+            Frame newFrame = Frame.FromLine(Frame.BaseCurve, Frame.SecProp, Frame.Just, Frame.Angle);
             // Pass the GUID of the existing frame to override it
             // The collector will check if there are duplicate GUIDs
-            newFrame.GUID = frame.GUID;
+            newFrame.GUID = Frame.GUID;
             // Add any loads the frame already has
-            newFrame.Loads = frame.Loads;
+            newFrame.Loads = Frame.Loads;
             // Set the release in the node
             newFrame.Releases = Release;
             return newFrame;
 
         }
 
-        // Set Loads to Frame
-        public static Frame SetLoad(Frame frame, Load Load, bool replaceExisting = false)
+        /// <summary>
+        /// Set a Load on a Frame
+        /// </summary>
+        /// <param name="Frame">Frame to set up loads on</param>
+        /// <param name="Load">Load to apply to the frame</param>
+        /// <param name="replaceExisting">Set Boolean to True to replace existing Loads on the Frame</param>
+        /// <returns>The frame with the new loads(and the previous ones, if it applies)</returns>
+        public static Frame SetLoad(Frame Frame, Load Load, bool replaceExisting = false)
         {
             // Create a new Frame using the properties of the input frame
-            Frame newFrame = Frame.FromLine(frame.BaseCurve, frame.SecProp, frame.Just, frame.Angle);
+            Frame newFrame = Frame.FromLine(Frame.BaseCurve, Frame.SecProp, Frame.Just, Frame.Angle);
             // Pass the GUID of the existing frame to override it
             // The collector will check if there are duplicate GUIDs
-            newFrame.GUID = frame.GUID;
+            newFrame.GUID = Frame.GUID;
             // Add any releases the frame already has
-            newFrame.Releases = frame.Releases;
+            newFrame.Releases = Frame.Releases;
             
             //Set the load in the node
             List<Load> frameLoads = new List<Load>();
-            if (frame.Loads != null)
+            if (Frame.Loads != null)
             {
                 if (replaceExisting) // if true, delete the list and add the new Load
                 {
-                    frame.Loads.Clear();
+                    Frame.Loads.Clear();
                 }
                 else
                 {
-                    foreach (Load l in frame.Loads)
+                    foreach (Load l in Frame.Loads)
                     {
                         frameLoads.Add(l);
                     }
@@ -128,7 +139,12 @@ namespace DynamoSAP.Structure
 
         // DYNAMO DISPLAY NODES
 
-        // Display Releases
+       /// <summary>
+       /// Display the Releases of a Frame
+       /// </summary>
+       /// <param name="frame">Frame to display the releases on (if any)</param>
+       /// <param name="radius">Radius of the spheres </param>
+        /// <returns>Spheres representing the Releases</returns>
         public static List<Sphere> DisplayReleases(Frame frame, double radius = 10.0)
         {
             List<Sphere> rSpheres = new List<Sphere>();
@@ -145,8 +161,16 @@ namespace DynamoSAP.Structure
             return rSpheres;
         }
 
-        // Display Loads
-        public static List<Object> DisplayLoads(Frame Frame, string LPattern = "Show All", double scale = 1.0, bool showValues = true, double textSize = 1.0)
+        /// <summary>
+        /// Display the Loads on a Frame
+        /// </summary>
+        /// <param name="Frame">Frame to display Loads on</param>
+        /// <param name="LPattern">Load Pattern to display</param>
+        /// <param name="Size">Size of the arrows</param>
+        /// <param name="ShowValues">Set Boolean to True to show the tags of the numeric values</param>
+        /// <param name="TextSize">Size of the tags</param>
+        /// <returns>Arrows and tags representing the loads</returns>
+        public static List<Object> DisplayLoads(Frame Frame, string LPattern = "Show All", double Size = 1.0, bool ShowValues = true, double TextSize = 1.0)
         {
             //List<List<Object>> LoadViz = new List<List<Object>>();
             List<Object> LoadObjects = new List<Object>();
@@ -166,7 +190,7 @@ namespace DynamoSAP.Structure
                 }
 
                 Curve c = Frame.BaseCrv;
-                if (load.Val > 0) scale = -scale; // make negative and change the direction of the arrow
+                if (load.Val > 0) Size = -Size; // make negative and change the direction of the arrow
 
                 List<double> dd = new List<double>(); // parameter values where arrows will be drawn
                 bool isDistributed = false;
@@ -206,27 +230,27 @@ namespace DynamoSAP.Structure
 
                     if (load.Dir == 4) // if it's the X Direction
                     {
-                        v2 = Vector.ByCoordinates(20.0 * scale, 0.0, 0.0);
-                        v3 = Vector.ByCoordinates(5.0 * scale, 0.0, 0.0);
+                        v2 = Vector.ByCoordinates(20.0 * Size, 0.0, 0.0);
+                        v3 = Vector.ByCoordinates(5.0 * Size, 0.0, 0.0);
                     }
 
                     if (load.Dir == 5) // if it's the Y Direction
                     {
-                        v2 = Vector.ByCoordinates(0.0, 20.0 * scale, 0.0);
-                        v3 = Vector.ByCoordinates(0.0, 5.0 * scale, 0.0);
+                        v2 = Vector.ByCoordinates(0.0, 20.0 * Size, 0.0);
+                        v3 = Vector.ByCoordinates(0.0, 5.0 * Size, 0.0);
                     }
                     if (load.Dir == 6) // if it's the Z Direction
                     {
-                        v2 = Vector.ByCoordinates(0.0, 0.0, 20.0 * scale);
-                        v3 = Vector.ByCoordinates(0.0, 0.0, 5.0 * scale);
+                        v2 = Vector.ByCoordinates(0.0, 0.0, 20.0 * Size);
+                        v3 = Vector.ByCoordinates(0.0, 0.0, 5.0 * Size);
                     }
 
                     p2 = (Point)p1.Translate(v2);
 
-                    p3 = (Point)p1.Translate(xAxis, 5.0 * scale);
+                    p3 = (Point)p1.Translate(xAxis, 5.0 * Size);
                     p3 = (Point)p3.Translate(v3);
 
-                    p4 = (Point)p1.Translate(xAxis, -5.0 * scale);
+                    p4 = (Point)p1.Translate(xAxis, -5.0 * Size);
                     p4 = (Point)p4.Translate(v3);
 
                     pps.Add(p1); pps.Add(p3); pps.Add(p4);
@@ -261,7 +285,7 @@ namespace DynamoSAP.Structure
                     }
 
                 }
-                if (showValues)
+                if (ShowValues)
                 {
                     //CREATE LABEL
                     //get the text curves
@@ -280,7 +304,7 @@ namespace DynamoSAP.Structure
                     }
 
                     //call the function to create the text
-                    textCurves = Text.FromStringOriginAndScale(value, pl, textSize).ToList();
+                    textCurves = Text.FromStringOriginAndScale(value, pl, TextSize).ToList();
                     foreach (Curve textc in textCurves)
                     {
                         LoadObjects.Add(textc);
@@ -296,19 +320,23 @@ namespace DynamoSAP.Structure
 
 
 
-        // Decompose
+        /// <summary>
+        /// Decompose a Frame into its geometry and settings
+        /// </summary>
+        /// <param name="Frame">Frame to decompose</param>
+        /// <returns>Base Curve, Section Properties, Justification, Angle Roation, Loads and Releases of a Frame</returns>
         [MultiReturn("BaseCurve", "SectionProp", "Justification", "Rotation", "Loads", "Releases")]
-        public static Dictionary<string, object> Decompose(Frame frame)
+        public static Dictionary<string, object> Decompose(Frame Frame)
         {
             // Return outputs
             return new Dictionary<string, object>
             {
-                {"BaseCurve", frame.BaseCrv},
-                {"SectionProp", frame.SecProp},
-                {"Justification", frame.Just},
-                {"Rotation", frame.Angle},
-                {"Loads", frame.Loads},
-                {"Releases", frame.Releases}
+                {"BaseCurve", Frame.BaseCrv},
+                {"SectionProp", Frame.SecProp},
+                {"Justification", Frame.Just},
+                {"Rotation", Frame.Angle},
+                {"Loads", Frame.Loads},
+                {"Releases", Frame.Releases}
             };
         }
 

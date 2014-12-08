@@ -38,13 +38,33 @@ namespace DynamoSAP.Structure
 
 
         // PUBLIC METHODS
+        /// <summary>
+        /// Set a Release
+        /// </summary>
+        /// <param name="U1i">U1 Start value</param>
+        /// <param name="U1j">U1 End value</param>
+        /// <param name="U2i">U2 Start value</param>
+        /// <param name="U2j">U2 End value</param>
+        /// <param name="U3i">U3 Start value</param>
+        /// <param name="U3j">U3 End value</param>
+        /// <param name="R1i">R1 Start value</param>
+        /// <param name="R1j">R1 End value</param>
+        /// <param name="R2i">R2 Start value</param>
+        /// <param name="R2j">R2 End value</param>
+        /// <param name="R3i">R3 Start value</param>
+        /// <param name="R3j">R4 End value</param>
+        /// <returns>Release</returns>
         public static Release Set(bool U1i = false, bool U1j = false, bool U2i = false, bool U2j = false, bool U3i = false, bool U3j = false, bool R1i = false, bool R1j = false, bool R2i = false, bool R2j = false, bool R3i = false, bool R3j = false)
         {
             return new Release(U1i, U1j, U2i, U2j, U3i, U3j, R1i, R1j, R2i, R2j, R3i, R3j);
         }
 
 
-        // Decompose
+        /// <summary>
+        /// Decompose a Release
+        /// </summary>
+        /// <param name="release">Release to decompose</param>
+        /// <returns>End releases</returns>
         [MultiReturn("U1i", "U1j", "U2i", "U2j", "U3i", "U3j", "R1i", "R1j", "R2i", "R2j", "R3i", "R3j")]
         public static Dictionary<string, object> Decompose(Release release)
         {
