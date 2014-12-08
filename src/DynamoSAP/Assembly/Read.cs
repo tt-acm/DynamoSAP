@@ -68,44 +68,14 @@ namespace DynamoSAP.Assembly
         public static Dictionary<string,object> SAPModel(bool read)
         {
             StructuralModel Model = new StructuralModel();
-            Model.StructuralElements = new List<Element>();
+            
             cSapModel mySapModel = null;
             string units = string.Empty;
 
             // Open & instantiate SAP file
             Initialize.GrabOpenSAP(ref mySapModel, ref units);
 
-            if (mySapModel != null)
-            {
-                // Populate the model's elements
-                //Get Frames          
-                string[] FrmIds = null;
-                StructureMapper.GetFrameIds(ref FrmIds, ref mySapModel);
-                for (int i = 0; i < FrmIds.Length; i++)
-                {
-                    Point s = null;
-                    Point e = null;
-                    string matProp = "A992Fy50"; // default value
-                    string secName = "W12X14"; // default value
-                    string secCatalog = "AISC14"; // default value
-                    string Just = "MiddleCenter"; // default value
-                    double Rot = 0; // default value
-
-                    StructureMapper.GetFrm(ref mySapModel, FrmIds[i], ref s, ref e, ref matProp, ref secName, ref Just, ref Rot, ref secCatalog);
-                    SectionProp secProp = new SectionProp(secName, matProp, secCatalog);
-                    Frame d_frm = new Frame(s, e, secProp, Just, Rot);
-                    d_frm.Label = FrmIds[i];
-                    // get Guid
-                    string guid = string.Empty;
-                    StructureMapper.GetGUIDFrm(ref mySapModel, FrmIds[i], ref guid);
-                    d_frm.GUID = guid;
-                    Model.StructuralElements.Add(d_frm);
-                }
-            }
-            else 
-            {
-                throw new Exception("Make sure SAP Model is open!");
-            }
+            StructuralModelFromSapFile(ref mySapModel, ref Model);
 
             // Return outputs
             return new Dictionary<string, object>
@@ -117,5 +87,41 @@ namespace DynamoSAP.Assembly
         }
 
         private Read() { }
+
+        internal static void StructuralModelFromSapFile(ref cSapModel SapModel, ref StructuralModel model)
+        {
+            model.StructuralElements = new List<Element>();
+            if (SapModel != null)
+            {
+                // Populate the model's elements
+                //Get Frames          
+                string[] FrmIds = null;
+                StructureMapper.GetFrameIds(ref FrmIds, ref SapModel);
+                for (int i = 0; i < FrmIds.Length; i++)
+                {
+                    Point s = null;
+                    Point e = null;
+                    string matProp = "A992Fy50"; // default value
+                    string secName = "W12X14"; // default value
+                    string secCatalog = "AISC14"; // default value
+                    string Just = "MiddleCenter"; // default value
+                    double Rot = 0; // default value
+
+                    StructureMapper.GetFrm(ref SapModel, FrmIds[i], ref s, ref e, ref matProp, ref secName, ref Just, ref Rot, ref secCatalog);
+                    SectionProp secProp = new SectionProp(secName, matProp, secCatalog);
+                    Frame d_frm = new Frame(s, e, secProp, Just, Rot);
+                    d_frm.Label = FrmIds[i];
+                    // get Guid
+                    string guid = string.Empty;
+                    StructureMapper.GetGUIDFrm(ref SapModel, FrmIds[i], ref guid);
+                    d_frm.GUID = guid;
+                    model.StructuralElements.Add(d_frm);
+                }
+            }
+            else 
+            {
+                throw new Exception("Make sure SAP Model is open!");
+            }
+        }
     }
 }

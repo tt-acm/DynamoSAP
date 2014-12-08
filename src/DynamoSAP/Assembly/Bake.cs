@@ -22,19 +22,22 @@ namespace DynamoSAP.Assembly
 {
     public class Bake
     {
-        
+
         //// DYNAMO NODES ////
-        public static StructuralModel ToSAP (StructuralModel Model, bool Bake)
+        public static StructuralModel ToSAP(StructuralModel StructuralModel, bool Bake)
         {
-            if (Bake)
+            if (StructuralModel != null)
             {
-                SAPModel.CreateSAPModel(ref Model);                
+                if (Bake)
+                {
+                    SAPModel.CreateSAPModel(ref StructuralModel);
+                }
             }
 
-            return Model;
-           
+            return StructuralModel;
+
         }
 
-        private Bake() {}
+        private Bake() { }
     }
 }

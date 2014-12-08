@@ -22,32 +22,34 @@ namespace DynamoSAP.Analysis
 
         private static cSapModel mySapModel;
 
-        [MultiReturn("Load Cases", "Load Patterns", "FilePath")]
-        public static Dictionary<string, object> RunOpenInstance(bool Run, string FilePath = "")
+        [MultiReturn("Structural Model", "Load Cases", "Load Patterns", "FilePath")]
+        public static Dictionary<string, object> RunOpenInstance(bool Run, string SaveAs = "")
         {
             List<string> LoadCaseNames = new List<string>();
             List<string> LoadPatternNames = new List<string>();
-            
+            StructuralModel Model = new StructuralModel();
             if (Run)
             {
-                if (FilePath == "") // if the file name is not provided, create one
+                if (SaveAs == "") // if the file name is not provided, create one
                 {
-                    FilePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DynamoSAP");
-                    if (!Directory.Exists(FilePath))//Needs to be created
+                    SaveAs = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DynamoSAP");
+                    if (!Directory.Exists(SaveAs))//Needs to be created
                     {
-                        System.IO.Directory.CreateDirectory(FilePath); //folder created
+                        System.IO.Directory.CreateDirectory(SaveAs); //folder created
 
                     }
                     DateTime time = DateTime.Now;              // Use current time
                     string format = "yyyyMMdd";    // Use this format
 
                     string fileName = "DynamoSAP_" + time.ToString(format) + ".sdb";
-                    FilePath = System.IO.Path.Combine(FilePath, fileName);
+                    SaveAs = System.IO.Path.Combine(SaveAs, fileName);
                 }
 
                 string units = string.Empty;
 
                 SAPConnection.Initialize.GrabOpenSAP(ref mySapModel, ref units);
+                
+                Read.StructuralModelFromSapFile(ref mySapModel, ref Model);
                 if (mySapModel == null)
                 {
                     throw new Exception("SAP Model was not grabbed. Use run analysis with filepath");
@@ -55,33 +57,35 @@ namespace DynamoSAP.Analysis
 
                 else
                 {// run analysis
-                    SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, FilePath, ref LoadCaseNames, ref LoadPatternNames);
+                    SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, SaveAs, ref LoadCaseNames, ref LoadPatternNames);
                 }
             }
             return new Dictionary<string, object>
             {
+                {"Structural Model", Model},
                 {"Load Cases", LoadCaseNames},
                 {"Load Patterns", LoadPatternNames},
-                {"File Path", FilePath}
+                {"File Path", SaveAs}
             };
         }
-        [MultiReturn("Load Cases", "Load Patterns")]
+        [MultiReturn("Structural Model", "Load Cases", "Load Patterns")]
         public static Dictionary<string, object> RunFromFile(bool Run, string FilePath)
         {
             List<string> LoadCaseNames = new List<string>();
             List<string> LoadPatternNames = new List<string>();
-
+            StructuralModel Model = new StructuralModel();
             if (Run)
             {
                 string units = string.Empty;
 
                 SAPConnection.Initialize.OpenSAPModel(FilePath, ref mySapModel, ref units);
-
+                Read.StructuralModelFromSapFile(ref mySapModel, ref Model);
                 // run analysis
                 SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, FilePath, ref LoadCaseNames, ref LoadPatternNames);
             }
             return new Dictionary<string, object>
             {
+                {"Structural Model", Model},
                 {"Load Cases", LoadCaseNames},
                 {"Load Patterns", LoadPatternNames}
             };
@@ -180,6 +184,7 @@ namespace DynamoSAP.Analysis
 
                 double t2 = 0.0;
                 double t1 = 0.0;
+                int zeroCount = 0;
                 foreach (double t in AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys)
                 {
                     double newt = t;
@@ -222,8 +227,10 @@ namespace DynamoSAP.Analysis
                     {
                         translateCoord = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M3 * scale;
                     }
-
-
+                    
+                    // if there is no value for the force (it is zero), add one to the count
+                    if (translateCoord == 0.0) zeroCount++; 
+                    
                     double d2 = 0.0;
                     double d1 = 0.0;
                     double pZ = 0.0;
@@ -345,8 +352,15 @@ namespace DynamoSAP.Analysis
                     }
                     t1 = newt * c.Length;
                 }
-
-                myVizMeshes.Add(mm);
+                // if all the values were zero, do not add the mesh
+                if (zeroCount == AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys.Count)
+                {
+                    continue;
+                }
+                else
+                {
+                    myVizMeshes.Add(mm);
+                }
 
             }
             return myVizMeshes;
