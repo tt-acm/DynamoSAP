@@ -23,7 +23,7 @@ namespace DynamoSAP.Assembly
         public List<Restraint> Restraints { get; set; }
         
 
-        // Check that GUID does not exist, users must add the same frame twice
+        // Check that the GUID does not exist, in case users added the same element twice
         private static void CheckDuplicateFrame(List<Element> StructEl)
         {
             // Dictionary to hold Structure Frames on <string, string> <GUID,Label>

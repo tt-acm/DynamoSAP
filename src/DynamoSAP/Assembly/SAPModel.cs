@@ -138,7 +138,7 @@ namespace DynamoSAP.Assembly
                             SetReleases(el as Frame, ref mySapModel); // Set releases 
                         }
                         // Set Loads
-                        if (frm.Loads.Count > 0)
+                        if (frm.Loads!=null)
                         {
                             SetLoads(el as Frame, ref mySapModel);
                         }

@@ -13,7 +13,7 @@ using SAPConnection;
 
 namespace DynamoSAP.Structure
 {
-    public class Frame:Element
+    public class Frame : Element
     {
         // FIELDS
 
@@ -22,7 +22,7 @@ namespace DynamoSAP.Structure
         //sectionprop
         internal SectionProp SecProp { get; set; }
         //justification - follow SAP enum for InsertionPoint set default 5
-        internal string Just { get; set; } 
+        internal string Just { get; set; }
         //rotation
         internal double Angle { get; set; }
         // Releases if not set SAP draws as no releases
@@ -42,11 +42,11 @@ namespace DynamoSAP.Structure
         {
             return "Frame";
         }
- 
+
         // Frame From Curve
-        public static Frame FromLine(Line Line, SectionProp SectionProp , string Justification = "MiddleCenter", double Rotation = 0)
+        public static Frame FromLine(Line Line, SectionProp SectionProp, string Justification = "MiddleCenter", double Rotation = 0)
         {
-            return new Frame(Line, SectionProp, Justification , Rotation);
+            return new Frame(Line, SectionProp, Justification, Rotation);
         }
         // Frame from Nodes
         public static Frame FromEndPoints(Point i, Point j, SectionProp SectionProp, string Justification = "MiddleCenter", double Rotation = 0)
@@ -57,22 +57,50 @@ namespace DynamoSAP.Structure
         // Set Custom Releases to Frame
         public static Frame SetReleases(Frame frame, Release Release)
         {
-            frame.Releases = Release;
-            return frame;
+            // Create a new Frame using the properties of the input frame
+            Frame newFrame = Frame.FromLine(frame.BaseCurve, frame.SecProp, frame.Just, frame.Angle);
+            // Pass the GUID of the existing frame to override it
+            // The collector will check if there are duplicate GUIDs
+            newFrame.GUID = frame.GUID;
+            // Add any loads the frame already has
+            newFrame.Loads = frame.Loads;
+            // Set the release in the node
+            newFrame.Releases = Release;
+            return newFrame;
+
         }
 
         // Set Loads to Frame
         public static Frame SetLoad(Frame frame, Load Load, bool replaceExisting = false)
         {
+            // Create a new Frame using the properties of the input frame
+            Frame newFrame = Frame.FromLine(frame.BaseCurve, frame.SecProp, frame.Just, frame.Angle);
+            // Pass the GUID of the existing frame to override it
+            // The collector will check if there are duplicate GUIDs
+            newFrame.GUID = frame.GUID;
+            // Add any releases the frame already has
+            newFrame.Releases = frame.Releases;
+            
+            //Set the load in the node
             List<Load> frameLoads = new List<Load>();
-            if (replaceExisting) // if true delete the list and add the new Load
+            if (frame.Loads != null)
             {
-                frame.Loads.Clear();
+                if (replaceExisting) // if true, delete the list and add the new Load
+                {
+                    frame.Loads.Clear();
+                }
+                else
+                {
+                    foreach (Load l in frame.Loads)
+                    {
+                        frameLoads.Add(l);
+                    }
+                }
             }
             frameLoads.Add(Load);
-            frame.Loads = frameLoads;
-            
-            return frame;
+            newFrame.Loads = frameLoads;
+
+            return newFrame;
         }
 
         // DYNAMO DISPLAY NODES
@@ -258,16 +286,16 @@ namespace DynamoSAP.Structure
                 {"Rotation", frame.Angle},
                 {"Loads", frame.Loads},
                 {"Releases", frame.Releases}
-            };    
+            };
         }
 
-         // PRIVATE CONSTRUCTORS
-        internal Frame(){}
+        // PRIVATE CONSTRUCTORS
+        internal Frame() { }
         internal Frame(Line line, SectionProp secProp, string just, double angle)
         {
             BaseCrv = line;
             Angle = angle;
-            SecProp= secProp;
+            SecProp = secProp;
             Just = just;
         }
         internal Frame(Point i, Point j, SectionProp secProp, string just, double angle)

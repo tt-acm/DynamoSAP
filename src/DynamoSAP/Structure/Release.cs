@@ -38,7 +38,7 @@ namespace DynamoSAP.Structure
 
 
         // PUBLIC METHODS
-        public static Release SetRelease(bool U1i = false, bool U1j = false, bool U2i = false, bool U2j = false, bool U3i = false, bool U3j = false, bool R1i = false, bool R1j = false, bool R2i = false, bool R2j = false, bool R3i = false, bool R3j = false)
+        public static Release Set(bool U1i = false, bool U1j = false, bool U2i = false, bool U2j = false, bool U3i = false, bool U3j = false, bool R1i = false, bool R1j = false, bool R2i = false, bool R2j = false, bool R3i = false, bool R3j = false)
         {
             return new Release(U1i, U1j, U2i, U2j, U3i, U3j, R1i, R1j, R2i, R2j, R3i, R3j);
         }
