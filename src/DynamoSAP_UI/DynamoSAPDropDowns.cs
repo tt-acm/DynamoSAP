@@ -75,7 +75,7 @@ namespace DynamoSAP_UI
 
     [NodeName("SectionCatalogDropDown")]
     [NodeCategory("DynamoSAP.DynamoSAP.Structure.SectionProp")]
-    [NodeDescription("Select Section Catalog to retrive the section names")]
+    [NodeDescription("Select Section Catalog as input Sections Node to retrive the section names of selected catalog")]
     [IsDesignScriptCompatible]
     public class SectionCatalogDropdown : EnumAsString<SectionCatalog>
     {
@@ -107,6 +107,27 @@ namespace DynamoSAP_UI
         joists,
         SECTIONS,
         SECTIONS8
+    }
+
+    [NodeName("SectionCatalogDropDown")]
+    [NodeCategory("DynamoSAP.DynamoSAP.Structure.SectionProp")]
+    [NodeDescription("Select Materials to set Section Property")]
+    [IsDesignScriptCompatible]
+    public class MaterialDropDown : EnumAsString<Materials>
+    {
+        public MaterialDropDown(WorkspaceModel workspace) : base(workspace) { }
+    }
+
+    public enum Materials
+    { 
+        A36,
+        A53GrB,
+        A500GrB42,
+        A500GrB46,
+        A572Gr50,
+        A913Gr50,
+        A992Fy50,
+        Concrete_4000Psi
     }
 
 }
