@@ -68,20 +68,19 @@ namespace SAPConnection
         {
             Process[] SapInstances = Process.GetProcessesByName("SAP2000");
 
-            //Test Test
-            // Iterate through all the objects in the ROT
-            Hashtable runningObjects = ROTHelper.GetActiveObjectList(null);
-            // Display the object ids
-            foreach (DictionaryEntry de in runningObjects)
-            {
-                string progId = de.Key.ToString();
-                if (progId.IndexOf("{") != -1)
-                {
-                    // Convert a class id into a friendly prog Id
-                    progId = ROTHelper.ConvertClassIdToProgId(de.Key.ToString());
-                }
-            }
-
+            ////Test Test
+            //// Iterate through all the objects in the ROT
+            //Hashtable runningObjects = ROTHelper.GetActiveObjectList(null);
+            //// Display the object ids
+            //foreach (DictionaryEntry de in runningObjects)
+            //{
+            //    string progId = de.Key.ToString();
+            //    if (progId.IndexOf("{") != -1)
+            //    {
+            //        // Convert a class id into a friendly prog Id
+            //        progId = ROTHelper.ConvertClassIdToProgId(de.Key.ToString());
+            //    }
+            //}
 
             if (SapInstances.LongLength >= 1)
             {

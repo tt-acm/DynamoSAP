@@ -73,7 +73,7 @@ namespace DynamoSAP_UI
     }
 
 
-    [NodeName("SectionCatalogs")]
+    [NodeName("SectionCatalogDropdown")]
     [NodeCategory("DynamoSAP.DynamoSAP.Structure.SectionProp")]
     [NodeDescription("Select Section Catalog as input Sections Node to retrive the section names of selected catalog")]
     [IsDesignScriptCompatible]
@@ -109,7 +109,7 @@ namespace DynamoSAP_UI
         SECTIONS8
     }
 
-    [NodeName("Materials")]
+    [NodeName("MaterialDropDown")]
     [NodeCategory("DynamoSAP.DynamoSAP.Structure.SectionProp")]
     [NodeDescription("Select Materials to set Section Property")]
     [IsDesignScriptCompatible]
