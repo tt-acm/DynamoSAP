@@ -28,22 +28,29 @@ namespace DynamoSAP.Assembly
         [MultiReturn("StructuralModel", "units")]
         public static Dictionary<string, object> SAPModel(string FilePath, bool read)
         {
-            StructuralModel Model = new StructuralModel();
-            Model.StructuralElements = new List<Element>();
-            cSapModel mySapModel = null;
-            string units = string.Empty;
-            // Open & instantiate SAP file
-            Initialize.OpenSAPModel(FilePath, ref mySapModel, ref units);
-
-            // Populate the model's elemets
-            StructuralModelFromSapFile(ref mySapModel, ref Model);
-
-            // Return outputs
-            return new Dictionary<string, object>
+            if (read)
             {
-                {"StructuralModel", Model},
-                {"units", units}
-            };
+                StructuralModel Model = new StructuralModel();
+                Model.StructuralElements = new List<Element>();
+                cSapModel mySapModel = null;
+                string units = string.Empty;
+                // Open & instantiate SAP file
+                Initialize.OpenSAPModel(FilePath, ref mySapModel, ref units);
+
+                // Populate the model's elemets
+                StructuralModelFromSapFile(ref mySapModel, ref Model);
+
+                // Return outputs
+                return new Dictionary<string, object>
+                {
+                    {"StructuralModel", Model},
+                    {"units", units}
+                };
+            }
+            else
+            {
+                throw new Exception("Set boolean True to read!");
+            }
 
         }
 
@@ -55,23 +62,30 @@ namespace DynamoSAP.Assembly
         [MultiReturn("StructuralModel","units")]
         public static Dictionary<string,object> SAPModel(bool read)
         {
-            StructuralModel Model = new StructuralModel();
-            
-            cSapModel mySapModel = null;
-            string units = string.Empty;
-
-            // Open & instantiate SAP file
-            Initialize.GrabOpenSAP(ref mySapModel, ref units);
-
-            StructuralModelFromSapFile(ref mySapModel, ref Model);
-
-            // Return outputs
-            return new Dictionary<string, object>
+            if (read)
             {
-                {"StructuralModel", Model},
-                {"units", units}
-            };
+                StructuralModel Model = new StructuralModel();
             
+                cSapModel mySapModel = null;
+                string units = string.Empty;
+
+                // Open & instantiate SAP file
+                Initialize.GrabOpenSAP(ref mySapModel, ref units);
+
+                StructuralModelFromSapFile(ref mySapModel, ref Model);
+
+                // Return outputs
+                return new Dictionary<string, object>
+                {
+                    {"StructuralModel", Model},
+                    {"units", units}
+                };
+            }
+            else 
+            {
+                throw new Exception("Set boolean True to read!");
+            }
+
         }
 
         private Read() { }

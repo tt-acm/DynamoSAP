@@ -68,20 +68,6 @@ namespace SAPConnection
         {
             Process[] SapInstances = Process.GetProcessesByName("SAP2000");
 
-            //Test Test
-            // Iterate through all the objects in the ROT
-            Hashtable runningObjects = ROTHelper.GetActiveObjectList(null);
-            // Display the object ids
-            foreach (DictionaryEntry de in runningObjects)
-            {
-                string progId = de.Key.ToString();
-                if (progId.IndexOf("{") != -1)
-                {
-                    // Convert a class id into a friendly prog Id
-                    progId = ROTHelper.ConvertClassIdToProgId(de.Key.ToString());
-                }
-            }
-
             //http://docs.csiamerica.com/help-files/sap2000-oapi/SAP2000_API_Fuctions/General_Functions/SetAsActiveObject.htm
             if (SapInstances.LongLength >= 1)
             {
