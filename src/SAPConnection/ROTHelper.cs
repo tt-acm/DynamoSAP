@@ -6,10 +6,12 @@ using System.Linq;
 using System.Text;
 
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 
 //DYNAMO
 using Autodesk.DesignScript.Runtime;
 using System.Collections;
+
 
 namespace SAPConnection
 {
@@ -20,12 +22,12 @@ namespace SAPConnection
         #region APIs
 
         [DllImport("ole32.dll")]
-        private static extern int GetRunningObjectTable(int reserved,
-            out UCOMIRunningObjectTable prot);
+        private static extern int GetRunningObjectTable(uint reserved,
+            out IRunningObjectTable prot);
 
         [DllImport("ole32.dll")]
-        private static extern int CreateBindCtx(int reserved,
-            out UCOMIBindCtx ppbc);
+        private static extern int CreateBindCtx(uint reserved,
+            out IBindCtx ppbc);
 
         [DllImport("ole32.dll", PreserveSig = false)]
         private static extern void CLSIDFromProgIDEx([MarshalAs(UnmanagedType.LPWStr)] string progId, out Guid clsid);
@@ -96,18 +98,18 @@ namespace SAPConnection
         {
             Hashtable result = new Hashtable();
 
-            int numFetched;
-            UCOMIRunningObjectTable runningObjectTable;
-            UCOMIEnumMoniker monikerEnumerator;
-            UCOMIMoniker[] monikers = new UCOMIMoniker[1];
+            IntPtr pNumFetched = new IntPtr();
+            IRunningObjectTable runningObjectTable;
+            IEnumMoniker monikerEnumerator;
+            IMoniker[] monikers = new IMoniker[1];
 
             GetRunningObjectTable(0, out runningObjectTable);
             runningObjectTable.EnumRunning(out monikerEnumerator);
             monikerEnumerator.Reset();
 
-            while (monikerEnumerator.Next(1, monikers, out numFetched) == 0)
+            while (monikerEnumerator.Next(1, monikers, pNumFetched) == 0)
             {
-                UCOMIBindCtx ctx;
+                IBindCtx ctx;
                 CreateBindCtx(0, out ctx);
 
                 string runningObjectName;
@@ -134,21 +136,21 @@ namespace SAPConnection
             // Convert the prog id into a class id
             string classId = ConvertProgIdToClassId(progId);
 
-            UCOMIRunningObjectTable prot = null;
-            UCOMIEnumMoniker pMonkEnum = null;
+            IRunningObjectTable prot = null;
+            IEnumMoniker pMonkEnum = null;
             try
             {
-                int Fetched = 0;
+                IntPtr pNumFetched = new IntPtr();
                 // Open the running objects table.
                 GetRunningObjectTable(0, out prot);
                 prot.EnumRunning(out pMonkEnum);
                 pMonkEnum.Reset();
-                UCOMIMoniker[] pmon = new UCOMIMoniker[1];
+                IMoniker[] pmon = new IMoniker[1];
 
                 // Iterate through the results
-                while (pMonkEnum.Next(1, pmon, out Fetched) == 0)
+                while (pMonkEnum.Next(1, pmon, pNumFetched) == 0)
                 {
-                    UCOMIBindCtx pCtx;
+                    IBindCtx pCtx;
 
                     CreateBindCtx(0, out pCtx);
 
@@ -175,6 +177,60 @@ namespace SAPConnection
             }
         }
 
+        // Test this
+        // http://adndevblog.typepad.com/autocad/2013/12/accessing-com-applications-from-the-running-object-table.html
+        public static object GetRunningInstance(string progId)
+        {
+            // get the app clsid
+            string clsId = string.Empty;
+            Type type = Type.GetTypeFromProgID(progId);
+            if (type != null)
+            {
+                clsId = type.GUID.ToString().ToUpper();
+            }
+
+            // get Running Object Table
+            IRunningObjectTable Rot = null;
+            GetRunningObjectTable(0, out Rot);
+            if (Rot == null) return null;
+
+            // get enumerator for ROT entries
+            IEnumMoniker monikerEnumerator = null;
+            Rot.EnumRunning(out monikerEnumerator);
+
+            if (monikerEnumerator == null) return null;
+            monikerEnumerator.Reset();
+
+            object instance = null;
+
+            IntPtr pNumFetched = new IntPtr();
+            IMoniker[] monikers = new IMoniker[1];
+
+            while (monikerEnumerator.Next(1, monikers, pNumFetched) == 0)
+            {
+                IBindCtx bindCtx;
+                CreateBindCtx(0, out bindCtx);
+                if (bindCtx == null)
+                    continue;
+
+                string displayName;
+                monikers[0].GetDisplayName(bindCtx, null, out displayName);
+                if (displayName.ToUpper().IndexOf(clsId) > 0)
+                {
+                    object ComObject;
+                    Rot.GetObject(monikers[0], out ComObject);
+
+                    if (ComObject == null)
+                        continue;
+
+                    instance =ComObject;
+                    break;
+                }
+            }
+
+            return instance;
+
+        }
         #endregion
 
 

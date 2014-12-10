@@ -82,17 +82,24 @@ namespace SAPConnection
                 }
             }
 
-
+            //http://docs.csiamerica.com/help-files/sap2000-oapi/SAP2000_API_Fuctions/General_Functions/SetAsActiveObject.htm
             if (SapInstances.LongLength >= 1)
             {
+                SapObject Obj;
                 object getObj = ROTHelper.GetActiveObject("SAP2000v16.SapObject");
+                if (getObj == null)
+                {
+                    Obj = new SapObject();
+                    getObj = ROTHelper.GetActiveObject("SAP2000v16.SapObject");
+                }
                 if (getObj != null)
                 {
-                    SapObject Obj = (SapObject)getObj;
+                    Obj = (SapObject)getObj;
                     mySapModel = Obj.SapModel;
                     units = mySapModel.GetPresentUnits().ToString();
                 }
             }
+
         }
 
         public static void Release(ref SapObject SAP, ref cSapModel Model)
