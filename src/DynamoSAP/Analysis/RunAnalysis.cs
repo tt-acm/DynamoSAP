@@ -206,11 +206,24 @@ namespace DynamoSAP.Analysis
             {
                 for (int i = 0; i < StructuralModel.StructuralElements.Count; i++)
                 {
+
+
+                    // Linq inqury
+                    FrameResults frmresult = (from frm in AnalysisResults.FrameResults
+                                              where frm.ID == StructuralModel.StructuralElements[i].Label
+                                              select frm).First();
+
+
+
                     //List of meshes per structural element in the model
                     List<Mesh> frameResultsMesh = new List<Mesh>();
 
                     // Get the frame's curve specified by the frameID
-                    Frame f = (Frame)StructuralModel.StructuralElements[i];
+                    // Frame f = (Frame)StructuralModel.StructuralElements[i];
+                    Frame f = (Frame)(from frame in StructuralModel.StructuralElements
+                                      where frame.Label == frmresult.ID
+                                      select frame).First();
+
                     Curve c = f.BaseCrv;
 
                     //LOCAL COORDINATE SYSTEM
@@ -238,10 +251,13 @@ namespace DynamoSAP.Analysis
                     // Integer to count the number of times there are stations with value=0 (no force)
                     int zeroCount = 0;
 
-                    // Loop through each station (t value) in the analysis results dictionary
-                    foreach (double t in AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys)
-                    {
 
+
+                    // Loop through each station (t value) in the analysis results dictionary
+                    //foreach (double t in AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys)
+                    //{
+                    foreach (double t in frmresult.Results[AnalysisResults.LoadCombination].Keys)
+                    {
                         double newt = t;
                         if (t < 0) newt = -t;
                         Mesh m = null;
@@ -286,9 +302,9 @@ namespace DynamoSAP.Analysis
                             v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M3;
                             translateCoord = v2 * Scale;
                         }
-                        
+
                         v2 = Math.Round(v2, 4, MidpointRounding.AwayFromZero);
-                        
+
                         // if there is no value for the force (it is zero), add one to the count
                         if (translateCoord == 0.0) zeroCount++;
 
@@ -300,7 +316,7 @@ namespace DynamoSAP.Analysis
                         {
                             vPoint = (Point)tPoint.Translate(localCS.ZAxis, translateCoord); // All the other types must be translate in the Z direction} 
                         }
-                        
+
                         //Point that results from the intersection of the line between two value Points and the frame curve
                         Point pzero = null;
 
@@ -313,7 +329,7 @@ namespace DynamoSAP.Analysis
                             MeshPoints.Add(tPoint); //index 0
 
                             // if the first value is not 0
-                            
+
                             if (v2 != 0.0)
                             {
                                 MeshPoints.Add(vPoint); //index 1
@@ -404,9 +420,9 @@ namespace DynamoSAP.Analysis
                     {
                         frameResultsMesh.Clear();
                     }
-                    
-                        VizMeshes.Add(frameResultsMesh);
-                    
+
+                    VizMeshes.Add(frameResultsMesh);
+
 
                 }
             }
