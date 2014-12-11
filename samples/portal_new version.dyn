@@ -1,4 +1,4 @@
-<Workspace Version="0.7.6.3423" X="-4147.49872917392" Y="1086.68294241401" zoom="0.672368670951967" Description="" Category="" Name="Home">
+<Workspace Version="0.7.6.3423" X="-4792.49872917392" Y="1149.68294241401" zoom="0.672368670951967" Description="" Category="" Name="Home">
   <Elements>
     <Dynamo.Nodes.DoubleInput type="Dynamo.Nodes.DoubleInput" guid="730d9f92-f37a-407d-8748-6e364c17b109" nickname="Number" x="-3413.44173896849" y="-65.124266518106" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Double value="4" />
@@ -318,9 +318,9 @@
       <Range min="0" max="100" />
     </Dynamo.Nodes.IntegerSlider>
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="80e7a42a-1418-471f-b368-551fd3752e8d" nickname="Analysis.DecomposeResults" x="7667.98748895579" y="-1050.6760532875" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Analysis.Analysis.DecomposeResults@DynamoSAP.Assembly.StructuralModel,DynamoSAP.Analysis.Analysis,string" />
-    <DynamoSAP_UI.ForceTypeDropdown type="DynamoSAP_UI.ForceTypeDropdown" guid="4e0ca56b-4c8e-472d-a181-848b82346d6f" nickname="ForceTypeDropDown" x="7290.66394139735" y="-797.041068596953" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="2:Moment33" />
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="982cd2d8-aa2a-473b-9d6b-ed6f11ed29c4" nickname="Analysis.VisualizeResults" x="7666.59040341265" y="-1264.40759162654" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Analysis.Analysis.VisualizeResults@DynamoSAP.Assembly.StructuralModel,DynamoSAP.Analysis.Analysis,string,double,bool" />
-    <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="2d3a0f92-0e3c-4596-b5d2-e61b63b01c0c" nickname="Code Block" x="7443.15570096617" y="-1182.25556284236" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="4;" ShouldFocus="false" />
+    <DynamoSAP_UI.ForceTypeDropdown type="DynamoSAP_UI.ForceTypeDropdown" guid="4e0ca56b-4c8e-472d-a181-848b82346d6f" nickname="ForceTypeDropDown" x="7290.66394139735" y="-797.041068596953" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="5:Torsion" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="982cd2d8-aa2a-473b-9d6b-ed6f11ed29c4" nickname="Analysis.VisualizeResults" x="7666.59040341265" y="-1512.78323316789" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Analysis.Analysis.VisualizeResults@DynamoSAP.Assembly.StructuralModel,DynamoSAP.Analysis.Analysis,string,double,bool" />
+    <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="2d3a0f92-0e3c-4596-b5d2-e61b63b01c0c" nickname="Code Block" x="7443.15570096617" y="-1182.25556284236" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="4000;" ShouldFocus="false" />
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="a682041d-f2bd-43aa-a3ed-c5bb9ff743e2" nickname="Frame.FromLine" x="5564.10130413744" y="-494.113619811004" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Structure.Frame.FromLine@Autodesk.DesignScript.Geometry.Line,DynamoSAP.Structure.SectionProp,string,double">
       <PortInfo index="2" default="True" />
       <PortInfo index="3" default="True" />

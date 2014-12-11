@@ -200,211 +200,221 @@ namespace DynamoSAP.Analysis
         [MultiReturn("Meshes", "Normals")]
         public static Dictionary<string, object> VisualizeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType, double Scale, bool Visualize)
         {
-            List<List<Mesh>> myVizMeshes = new List<List<Mesh>>();
-            List<Line> myLines = new List<Line>();
+            List<List<Mesh>> VizMeshes = new List<List<Mesh>>();
+            List<Line> frameNormals = new List<Line>();
             if (Visualize)
             {
                 for (int i = 0; i < StructuralModel.StructuralElements.Count; i++)
                 {
-                    List<Mesh> mm = new List<Mesh>();
-                    // get the frame's curve specified by the frameID
+                    //List of meshes per structural element in the model
+                    List<Mesh> frameResultsMesh = new List<Mesh>();
 
+                    // Get the frame's curve specified by the frameID
                     Frame f = (Frame)StructuralModel.StructuralElements[i];
                     Curve c = f.BaseCrv;
 
-                    //CREATE LOCAL COORDINATE SYSTEM
+                    //LOCAL COORDINATE SYSTEM
                     Vector xAxis = c.TangentAtParameter(0.0);
                     Vector yAxis = c.NormalAtParameter(0.0);
                     //This ensures the right axis for the Z direction  
                     CoordinateSystem localCS = CoordinateSystem.ByOriginVectors(c.StartPoint, xAxis, yAxis);
 
+                    //LINES TO VISUALIZE THE NORMALS OF THE FRAME CURVES
+                    Point middlePt = c.PointAtParameter(0.5);
+                    Line ln = Line.ByStartPointDirectionLength(middlePt, localCS.ZAxis, 30.0);
+                    frameNormals.Add(ln);
 
-                    //TEST TO VISUALIZE NORMALS
-                    Point pt = c.PointAtParameter(0.5);
-                    Line ln = Line.ByStartPointDirectionLength(pt, localCS.ZAxis, 30.0);
-                    myLines.Add(ln);
-
-
+                    //List to hold the points to make a mesh face
                     List<Point> MeshPoints = new List<Point>();
 
-                    int count = 0;
-
-                    double t2 = 0.0;
+                    // t value of the previous station
                     double t1 = 0.0;
+                    // t value of the current station
+                    double t2 = 0.0;
+                    // Local Z value of the previous station
+                    double v1 = 0.0;
+                    // Local Z value of the current station
+                    double v2 = 0;
+                    // Integer to count the number of times there are stations with value=0 (no force)
                     int zeroCount = 0;
 
-                    double d2 = 0;
-                    //local Z value of the previous station
-                    double d1 = 0.0;
-                    
-
-
+                    // Loop through each station (t value) in the analysis results dictionary
                     foreach (double t in AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys)
                     {
+
                         double newt = t;
                         if (t < 0) newt = -t;
                         Mesh m = null;
-                        IndexGroup ig = null;
 
-                        count += 1;
+                        Point tPoint = c.PointAtParameter(newt); // Point on the curve at the specified t2
+                        Point vPoint = null; // Point that is translated from the cPoint according to the value v2
 
-                        Point cPoint = c.PointAtParameter(newt); // curve Point
-                        Point vPoint = null; // value Point
-
+                        // Double to hold the local Z value of the station multiplied by the scale factor
                         double translateCoord = 0.0;
-                        //local Z value of the current station
-
-
 
                         if (ForceType == "Axial") // Get Axial P
                         {
-                            d2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].P;
-                            translateCoord = d2 * (-Scale);
+                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].P;
+                            translateCoord = v2 * (-Scale);
                         }
 
                         else if (ForceType == "Shear22") // Get Shear V2
                         {
-                            d2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V2;
-                            translateCoord = d2 * (-Scale);
+                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V2;
+                            translateCoord = v2 * (-Scale);
                         }
                         else if (ForceType == "Shear33") // Get Shear V3
                         {
-                            d2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V3;
-                            translateCoord = d2 * Scale;
+                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V3;
+                            translateCoord = v2 * Scale;
                         }
 
                         else if (ForceType == "Torsion") // Get Torsion T
                         {
-                            d2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].T;
-                            translateCoord = d2 * (-Scale);
+                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].T;
+                            translateCoord = v2 * (-Scale);
                         }
 
                         else if (ForceType == "Moment22") // Get Moment M2
                         {
-                            d2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M2;
-                            translateCoord = d2 * Scale;
+                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M2;
+                            translateCoord = v2 * Scale;
                         }
 
                         else if (ForceType == "Moment33") // Get Moment M3
                         {
-                            d2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M3;
-                            translateCoord = d2 * Scale;
+                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M3;
+                            translateCoord = v2 * Scale;
                         }
-
+                        
+                        v2 = Math.Round(v2, 4, MidpointRounding.AwayFromZero);
+                        
                         // if there is no value for the force (it is zero), add one to the count
                         if (translateCoord == 0.0) zeroCount++;
 
-
-
                         if (ForceType == "Moment22")
                         {
-                            vPoint = (Point)cPoint.Translate(localCS.YAxis, translateCoord); // Translate in the Y direction to match the visualization of SAP
-                      
+                            vPoint = (Point)tPoint.Translate(localCS.YAxis, translateCoord); // Translate in the Y direction to match the visualization of SAP
                         }
                         else
                         {
-                            vPoint = (Point)cPoint.Translate(localCS.ZAxis, translateCoord); // All the other types must be translate in the Z direction} 
-                          
+                            vPoint = (Point)tPoint.Translate(localCS.ZAxis, translateCoord); // All the other types must be translate in the Z direction} 
                         }
-
+                        
+                        //Point that results from the intersection of the line between two value Points and the frame curve
                         Point pzero = null;
+
+                        IndexGroup ig3 = IndexGroup.ByIndices(0, 1, 2);
+                        IndexGroup ig4 = IndexGroup.ByIndices(0, 1, 2, 3);
+
+                        //if no points have been added yet, add the point on the curve and then the point representing the value
                         if (MeshPoints.Count == 0)
                         {
-                            MeshPoints.Add(cPoint); //index 0
-                            MeshPoints.Add(vPoint); //index 1
+                            MeshPoints.Add(tPoint); //index 0
+
+                            // if the first value is not 0
+                            
+                            if (v2 != 0.0)
+                            {
+                                MeshPoints.Add(vPoint); //index 1
+                            }
                         }
 
-                        else// if a previous point has been added
+                         // if a previous point(s) has been added
+                        else
                         {
-                            
+                            // List to hold the indices for the mesh face
                             List<IndexGroup> indices = new List<IndexGroup>();
 
-                            double tzero;//parameter at which the value of the forces = pZ
+                            //Parameter at which the value of the forces = 0. It is the X coordinate of the pzero
+                            double tzero;
 
-                            t2 = newt * c.Length; // current t parameter of the point being visualized
-                            if ((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0)) // if there is a change in the force sign, calculate the intersection point
+                            // Current t parameter of the point being visualized relative to the length of the frame curve
+                            t2 = newt * c.Length;
+
+                            // If there is a change in the force sign, calculate the intersection point
+                            // Then, add two trianglular mesh faces
+                            if ((v1 > 0 && v2 < 0) || (v1 < 0 && v2 > 0))
                             {
+                                // The function of the line is: y= (t2-t1)tzero/(d2-d1)+d1  This has to be equal to 0
+                                double ml = (v2 - v1) / (t2 - t1);
+                                tzero = (0 - v1) / ml;
 
-                                // the function of the line is
-                                //y= (t2-t1)tzero/(d2-d1)+d1  This has to be equal to pZ
-                                double ml = (d2 - d1) / (t2 - t1);
-                                tzero = (0 - d1) / ml; // multiply by the length of the curve and add the X coordinate of the last mesh point
-
+                                // Add the X coordinate of the last mesh point
                                 tzero += t1;
 
-                                
+                                pzero = Point.ByCartesianCoordinates(localCS, tzero, 0.0, 0.0);
+
+
+                                //Add the third point for the first triangular mesh face
                                 MeshPoints.Add(pzero); //index 2 
+                                indices.Add(ig3);
 
-                                ig = IndexGroup.ByIndices(0, 1, 2);
-                                indices.Add(ig);
-                                // Color coding here
+                                // ||| Color coding here
 
+                                m = Mesh.ByPointsFaceIndices(MeshPoints, indices);
+
+                                frameResultsMesh.Add(m);
+
+                                MeshPoints.Clear();
+
+                                //Add the third point for the second triangular mesh face
+                                MeshPoints.Add(pzero); //new face index 0
+                                // Add the current station's points
+                                MeshPoints.Add(tPoint); //new face index 1
+                                MeshPoints.Add(vPoint); //new face index 2  
+
+                                // ||| Color coding here
+
+                                m = Mesh.ByPointsFaceIndices(MeshPoints, indices);
+                                frameResultsMesh.Add(m);
                             }
+
+                            // Create a quad mesh face or a triangular mesh if the first value was 0
                             else
                             {
                                 MeshPoints.Add(vPoint); //index 2 (note: vPoint before cPoint)
-                                MeshPoints.Add(cPoint); //index 3 
-                                if (MeshPoints.Count == 3)
-                                {
-                                    ig = IndexGroup.ByIndices(0, 1, 2);
-                                    indices.Add(ig);
-                                }
-                                else
-                                {
-                                    ig = IndexGroup.ByIndices(0, 1, 2, 3);
-                                    indices.Add(ig);
-                                }
-                                //color coding here
+                                MeshPoints.Add(tPoint); //index 3 
+
+
+                                if (MeshPoints.Count == 4) indices.Add(ig4);
+                                else indices.Add(ig3);
+
+                                // ||| Color coding here
+
+                                m = Mesh.ByPointsFaceIndices(MeshPoints, indices);
+                                frameResultsMesh.Add(m);
                             }
 
-                            // Add face
-                            //append...??
-                            m = Mesh.ByPointsFaceIndices(MeshPoints, indices);
-                            mm.Add(m);
-
+                            //Clear the temporary list
                             MeshPoints.Clear();
 
-                            if ((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0)) // if there is a change in the force sign, add the second triangle
-                            {
-                                MeshPoints.Add(pzero); //new face index 0
-                                MeshPoints.Add(cPoint); //new face index 1
-                                MeshPoints.Add(vPoint); //new face index 2  
-
-                                ig = IndexGroup.ByIndices(0, 1, 2);
-                                indices.Clear();
-                                indices.Add(ig);
-
-                                //make mesh
-                                m = Mesh.ByPointsFaceIndices(MeshPoints, indices);
-                                mm.Add(m);
-
-                                MeshPoints.Clear();
-                            }
-
-                            MeshPoints.Add(cPoint); //new face index 0
+                            // Add the current station's points
+                            MeshPoints.Add(tPoint); //new face index 0
                             MeshPoints.Add(vPoint); //new face index 1   
-
                         }
+
+                        // Update the values for the next station
                         t1 = newt * c.Length;
-                        d1 = d2;
+                        v1 = v2;
                     }
-                    // if all the values were zero, do not add the mesh
+
+                    // If all the values were zero, show empty list in output for that specific member
                     if (zeroCount == AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys.Count)
                     {
-                        continue;
+                        frameResultsMesh.Clear();
                     }
-                    else
-                    {
-                        myVizMeshes.Add(mm);
-                    }
+                    
+                        VizMeshes.Add(frameResultsMesh);
+                    
 
                 }
             }
             //return myVizMeshes;
             return new Dictionary<string, object>
             {
-                {"Meshes", myVizMeshes},
-                {"Normals", myLines}
+                {"Meshes", VizMeshes},
+                {"Normals", frameNormals}
             };
         }
 
