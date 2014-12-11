@@ -25,9 +25,9 @@ namespace DynamoSAP.Analysis
         /// </summary>
         public List<FrameResults> FrameResults { get; set; }
         /// <summary>
-        /// Load combination of the analysis results
+        /// Load combination (load case or load pattern) of the analysis results
         /// </summary>
-        public string LoadCombination { get; set; }
+        public string LCaseOrLPatternRun { get; set; }
 
         private static cSapModel mySapModel;
 
@@ -115,19 +115,19 @@ namespace DynamoSAP.Analysis
         /// <summary>
         /// Get the results from the analysis run with the Analysis.Run component
         /// </summary>
-        /// <param name="LoadCombination">Choose a load case, load pattern or load combination</param>
+        /// <param name="LCaseOrLPattern">Choose a load case, load pattern or load combination</param>
         /// <param name="Get">Set Boolean to True to get the specified case;s analysis results </param>
         /// <returns></returns>
-        public static Analysis GetResults(string LoadCombination, bool Get)
+        public static Analysis GetResults(string LCaseOrLPattern, bool Get)
         {
             List<FrameResults> frameResults = null;
             Analysis AnalysisResults = new Analysis();
             if (Get)
             {
                 // loop over frames get results and populate to dictionary
-                frameResults = SAPConnection.AnalysisMapper.GetFrameForces(ref mySapModel, LoadCombination);
+                frameResults = SAPConnection.AnalysisMapper.GetFrameForces(ref mySapModel, LCaseOrLPattern);
                 AnalysisResults.FrameResults = frameResults;
-                AnalysisResults.LoadCombination = LoadCombination;
+                AnalysisResults.LCaseOrLPatternRun = LCaseOrLPattern;
             }
             return AnalysisResults;
         }
@@ -152,7 +152,7 @@ namespace DynamoSAP.Analysis
                                           where frm.ID == StructuralModel.StructuralElements[i].Label
                                           select frm).First();
 
-                foreach (FrameAnalysisData fad in frmresult.Results[AnalysisResults.LoadCombination].Values)
+                foreach (FrameAnalysisData fad in frmresult.Results[AnalysisResults.LCaseOrLPatternRun].Values)
                 {
 
                     if (ForceType == "Axial") //Get Axial Forces P
@@ -197,7 +197,7 @@ namespace DynamoSAP.Analysis
         /// <param name="Scale">Scale of the visualization</param>
         /// <param name="Visualize">Set Boolean to True to draw the meshes</param>
         /// <returns>Forces and moments  in the form of meshes for each station in each structural member in the model</returns>
-        [MultiReturn("Meshes", "Normals")]
+        [MultiReturn("Meshes")]
         public static Dictionary<string, object> VisualizeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType, double Scale, bool Visualize)
         {
             List<List<Mesh>> VizMeshes = new List<List<Mesh>>();
@@ -233,9 +233,9 @@ namespace DynamoSAP.Analysis
                     CoordinateSystem localCS = CoordinateSystem.ByOriginVectors(c.StartPoint, xAxis, yAxis);
 
                     //LINES TO VISUALIZE THE NORMALS OF THE FRAME CURVES
-                    Point middlePt = c.PointAtParameter(0.5);
-                    Line ln = Line.ByStartPointDirectionLength(middlePt, localCS.ZAxis, 30.0);
-                    frameNormals.Add(ln);
+                    //Point middlePt = c.PointAtParameter(0.5);
+                    //Line ln = Line.ByStartPointDirectionLength(middlePt, localCS.ZAxis, 30.0);
+                    //frameNormals.Add(ln);
 
                     //List to hold the points to make a mesh face
                     List<Point> MeshPoints = new List<Point>();
@@ -256,7 +256,7 @@ namespace DynamoSAP.Analysis
                     // Loop through each station (t value) in the analysis results dictionary
                     //foreach (double t in AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys)
                     //{
-                    foreach (double t in frmresult.Results[AnalysisResults.LoadCombination].Keys)
+                    foreach (double t in frmresult.Results[AnalysisResults.LCaseOrLPatternRun].Keys)
                     {
                         double newt = t;
                         if (t < 0) newt = -t;
@@ -270,36 +270,36 @@ namespace DynamoSAP.Analysis
 
                         if (ForceType == "Axial") // Get Axial P
                         {
-                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].P;
+                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].P;
                             translateCoord = v2 * (-Scale);
                         }
 
                         else if (ForceType == "Shear22") // Get Shear V2
                         {
-                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V2;
+                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].V2;
                             translateCoord = v2 * (-Scale);
                         }
                         else if (ForceType == "Shear33") // Get Shear V3
                         {
-                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].V3;
+                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].V3;
                             translateCoord = v2 * Scale;
                         }
 
                         else if (ForceType == "Torsion") // Get Torsion T
                         {
-                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].T;
+                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].T;
                             translateCoord = v2 * (-Scale);
                         }
 
                         else if (ForceType == "Moment22") // Get Moment M2
                         {
-                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M2;
+                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].M2;
                             translateCoord = v2 * Scale;
                         }
 
                         else if (ForceType == "Moment33") // Get Moment M3
                         {
-                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination][newt].M3;
+                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].M3;
                             translateCoord = v2 * Scale;
                         }
 
@@ -416,7 +416,7 @@ namespace DynamoSAP.Analysis
                     }
 
                     // If all the values were zero, show empty list in output for that specific member
-                    if (zeroCount == AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys.Count)
+                    if (zeroCount == AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun].Keys.Count)
                     {
                         frameResultsMesh.Clear();
                     }
@@ -429,8 +429,8 @@ namespace DynamoSAP.Analysis
             //return myVizMeshes;
             return new Dictionary<string, object>
             {
-                {"Meshes", VizMeshes},
-                {"Normals", frameNormals}
+                {"Meshes", VizMeshes}
+                
             };
         }
 
@@ -492,10 +492,10 @@ namespace DynamoSAP.Analysis
         //Results private methods
 
         private Analysis() { }
-        private Analysis(List<FrameResults> fresults, string loadcombination)
+        private Analysis(List<FrameResults> fresults, string LcOrLp)
         {
             FrameResults = fresults;
-            LoadCombination = loadcombination;
+            LCaseOrLPatternRun = LcOrLp;
         }
 
     }
