@@ -18,24 +18,27 @@ namespace SAPConnection
     [SupressImportIntoVM]
     public class Initialize
     {
-        public static void InitializeSapModel(ref SapObject mySAPObject, ref cSapModel mySapModel)
+        public static void InitializeSapModel(ref SapObject mySAPObject, ref cSapModel mySapModel, string units)
         {
 
             long ret = 0;
 
-            //TO DO: Grab open Instance if already open!!!
+            //TO DO: Grab open Instance if already open!!! 
 
             //Create SAP2000 Object
             mySAPObject = new SAP2000v16.SapObject();
 
+            //
+            eUnits Units = (eUnits)Enum.Parse(typeof(eUnits), units);
+
             //Start Application
-            mySAPObject.ApplicationStart(SAP2000v16.eUnits.kip_in_F, true); //TODO: Pass E_unit as constructor
+            mySAPObject.ApplicationStart(Units, true); 
 
             //Create SapModel object
             mySapModel = mySAPObject.SapModel;
 
             //initialize the model
-            ret = mySapModel.InitializeNewModel(eUnits.kip_in_F); // TODO: Pass Eunit as Constructor
+            ret = mySapModel.InitializeNewModel(Units);
 
             //create new blank model
             ret = mySapModel.File.NewBlank();
