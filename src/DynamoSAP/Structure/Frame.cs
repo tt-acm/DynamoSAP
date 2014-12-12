@@ -175,10 +175,15 @@ namespace DynamoSAP.Structure
         {
             List<List<Object>> LoadViz = new List<List<Object>>();
 
+            Frame firstf = (Frame)StructuralModel.StructuralElements[0];
+            Double l = firstf.BaseCrv.Length;
+            
+            double arrowLenght = l/5;
+            double arrowLongSide = l/20;
+            
             foreach (Element e in StructuralModel.StructuralElements)
             {
                 List<Object> LoadObjects = new List<Object>();
-                
                 if (e.GetType().ToString().Contains("Frame"))
                 {
                     Frame f = e as Frame;
@@ -208,7 +213,7 @@ namespace DynamoSAP.Structure
                             {
                                 isDistributed = true;
                                 //number of arrows to represent a Distributed Load
-                                int n = Convert.ToInt32((load.Dist - load.Dist2) / 0.05);
+                                int n = Convert.ToInt32((load.Dist - load.Dist2) / 0.1);
                                 double step = (load.Dist - load.Dist2) / n;
 
                                 for (double i = load.Dist; i < load.Dist2; i += step)
@@ -240,27 +245,27 @@ namespace DynamoSAP.Structure
 
                                 if (load.Dir == 4) // if it's the X Direction
                                 {
-                                    v2 = Vector.ByCoordinates(20.0 * Size, 0.0, 0.0);
-                                    v3 = Vector.ByCoordinates(5.0 * Size, 0.0, 0.0);
+                                    v2 = Vector.ByCoordinates(arrowLenght * Size, 0.0, 0.0);
+                                    v3 = Vector.ByCoordinates(arrowLongSide * Size, 0.0, 0.0);
                                 }
 
                                 if (load.Dir == 5) // if it's the Y Direction
                                 {
-                                    v2 = Vector.ByCoordinates(0.0, 20.0 * Size, 0.0);
-                                    v3 = Vector.ByCoordinates(0.0, 5.0 * Size, 0.0);
+                                    v2 = Vector.ByCoordinates(0.0, arrowLenght * Size, 0.0);
+                                    v3 = Vector.ByCoordinates(0.0, arrowLongSide * Size, 0.0);
                                 }
                                 if (load.Dir == 6) // if it's the Z Direction
                                 {
-                                    v2 = Vector.ByCoordinates(0.0, 0.0, 20.0 * Size);
-                                    v3 = Vector.ByCoordinates(0.0, 0.0, 5.0 * Size);
+                                    v2 = Vector.ByCoordinates(0.0, 0.0, arrowLenght * Size);
+                                    v3 = Vector.ByCoordinates(0.0, 0.0, arrowLongSide * Size);
                                 }
 
                                 p2 = (Point)p1.Translate(v2);
 
-                                p3 = (Point)p1.Translate(xAxis, 5.0 * Size);
+                                p3 = (Point)p1.Translate(xAxis, arrowLongSide * Size);
                                 p3 = (Point)p3.Translate(v3);
 
-                                p4 = (Point)p1.Translate(xAxis, -5.0 * Size);
+                                p4 = (Point)p1.Translate(xAxis, -arrowLongSide * Size);
                                 p4 = (Point)p4.Translate(v3);
 
                                 pps.Add(p1); pps.Add(p3); pps.Add(p4);
@@ -286,12 +291,12 @@ namespace DynamoSAP.Structure
                                     }
                                     else if (i == Convert.ToInt32(dd.Count / 2)) // if it is the middle point
                                     {
-                                        labelLocation = (Point)p2.Translate(v2.Normalized().Scale(20));
+                                        labelLocation = (Point)p2.Translate(v2.Normalized().Scale(arrowLenght));
                                     }
                                 }
                                 else
                                 {
-                                    labelLocation = (Point)p2.Translate(v2.Normalized().Scale(20));
+                                    labelLocation = (Point)p2.Translate(v2.Normalized().Scale(arrowLenght));
                                 }
                             }
                             if (ShowValues)

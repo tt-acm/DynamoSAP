@@ -84,11 +84,15 @@ namespace SAPConnection
 
         }
 
-        public static void GetLoads(ref cSapModel Model, ref string[] frameName, ref int NumberItems, ref string[] LoadPat, ref int[] MyType, ref string[] CSys, ref int[] Dir, ref double[] RD1, ref double[] RD2, ref double[] Dist1, ref double[] Dist2, ref double[] Val1, ref double[] Val2)
-        {
+        public static void GetPointLoads(ref cSapModel Model, ref string[] FrameName, ref int NumberItems, ref string[] LoadPat, ref int[] MyType, ref string[] CSys, ref int[] Dir, ref double[] RelDist, ref double[] Dist, ref double[] Val){
 
+            int ret = Model.FrameObj.GetLoadPoint("ALL", NumberItems, FrameName, LoadPat, MyType, CSys, Dir, RelDist, Dist, Val, SAP2000v16.eItemType.Group);
+        }
+
+        public static void GetDistributedLoads(ref cSapModel Model, ref string[] FrameName, ref int NumberItems, ref string[] LoadPat, ref int[] MyType, ref string[] CSys, ref int[] Dir, ref double[] RD1, ref double[] RD2, ref double[] Dist1, ref double[] Dist2, ref double[] Val1, ref double[] Val2)
+        {
             int ret = 0;
-            ret = Model.FrameObj.GetLoadDistributed("ALL", ref NumberItems, ref frameName, ref LoadPat, ref MyType, ref CSys, ref Dir, ref RD1, ref RD2, ref Dist1, ref Dist2, ref Val1, ref Val2, SAP2000v16.eItemType.Group);
+            ret = Model.FrameObj.GetLoadDistributed("ALL", ref NumberItems, ref FrameName, ref LoadPat, ref MyType, ref CSys, ref Dir, ref RD1, ref RD2, ref Dist1, ref Dist2, ref Val1, ref Val2, SAP2000v16.eItemType.Group);
         }
 
 
