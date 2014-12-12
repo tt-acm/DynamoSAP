@@ -33,13 +33,14 @@ namespace DynamoSAP.Assembly
         /// Create SAP2000 model from Dynamo Structural Model
         /// </summary>
         /// <param name="StructuralModel">Structural Model to bake</param>
+        /// <param name="Units">Set Units of SapModel</param>
         /// <param name="Bake">Set Boolean to True to bake the model</param>
         /// <returns>Structural Model</returns>
-        public static StructuralModel ToSAP(StructuralModel StructuralModel, bool Bake)
+        public static StructuralModel ToSAP(StructuralModel StructuralModel, string Units, bool Bake)
         {
             if (StructuralModel != null)
             {
-                if (Bake) CreateSAPModel(ref StructuralModel);
+                if (Bake) CreateSAPModel(ref StructuralModel, Units);
             }
             return StructuralModel;
         }
@@ -123,7 +124,7 @@ namespace DynamoSAP.Assembly
         }
 
         // Create Sap Model from a Dynamo Model
-        private static void CreateSAPModel(ref StructuralModel StructuralModel)
+        private static void CreateSAPModel(ref StructuralModel StructuralModel, string Units)
         {
             string report = string.Empty;
 
@@ -132,7 +133,7 @@ namespace DynamoSAP.Assembly
 
             try
             {
-                SAPConnection.Initialize.InitializeSapModel(ref mySapObject, ref mySapModel);
+                SAPConnection.Initialize.InitializeSapModel(ref mySapObject, ref mySapModel, Units);
             }
             catch (Exception)
             {
