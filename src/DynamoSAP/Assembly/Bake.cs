@@ -14,6 +14,7 @@ using DynamoSAP.Structure;
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
+using DynamoUnits;
 
 //SAP 
 using SAP2000v16;
@@ -38,9 +39,22 @@ namespace DynamoSAP.Assembly
         /// <returns>Structural Model</returns>
         public static StructuralModel ToSAP(StructuralModel StructuralModel, string Units, bool Bake)
         {
+            // Calculate Lenght Conversion Factor
+            string fromUnit = "m"; // Dynamo 
+            LengthUnit LU = DynamoUnits.Length.LengthUnit; // Display Units
+
+            string toUnit = string.Empty;
+            if (Units.ToLower().Contains("m") || Units.ToLower().Contains("meter")) toUnit = "m";
+            else if (Units.ToLower().Contains("cm") || Units.ToLower().Contains("centimeter")) toUnit = "cm";
+            else if (Units.ToLower().Contains("mm") || Units.ToLower().Contains("milimeter")) toUnit = "m";
+            else if (Units.ToLower().Contains("ft") || Units.ToLower().Contains("feet")) toUnit = "ft";
+            else if (Units.ToLower().Contains("in") || Units.ToLower().Contains("inch")) toUnit = "ft";
+
+            double LengthSF = SAPConnection.Utilities.UnitConversion(toUnit, fromUnit); // lenght Conversion Factor
+
             if (StructuralModel != null)
             {
-                if (Bake) CreateSAPModel(ref StructuralModel, Units);
+                if (Bake) CreateSAPModel(ref StructuralModel, Units , LengthSF);
             }
             return StructuralModel;
         }
@@ -49,17 +63,17 @@ namespace DynamoSAP.Assembly
 
         #region PRIVATE SAP METHODS
         //CREATE FRAME METHOD
-        private static void CreateFrame(Frame f, ref cSapModel mySapModel)
+        private static void CreateFrame(Frame f, ref cSapModel mySapModel, double SF)
         {
             // Draw Frm Object return Label
             string dummy = string.Empty;
             //1. Create Frame
-            SAPConnection.StructureMapper.DrawFrm(ref mySapModel, f.BaseCrv.StartPoint.X,
-                f.BaseCrv.StartPoint.Y,
-                f.BaseCrv.StartPoint.Z,
-                f.BaseCrv.EndPoint.X,
-                f.BaseCrv.EndPoint.Y,
-                f.BaseCrv.EndPoint.Z,
+            SAPConnection.StructureMapper.DrawFrm(ref mySapModel, f.BaseCrv.StartPoint.X*SF,
+                f.BaseCrv.StartPoint.Y*SF,
+                f.BaseCrv.StartPoint.Z*SF,
+                f.BaseCrv.EndPoint.X*SF,
+                f.BaseCrv.EndPoint.Y*SF,
+                f.BaseCrv.EndPoint.Z*SF,
                 ref dummy);
 
             // TODO: set custom name !
@@ -124,7 +138,7 @@ namespace DynamoSAP.Assembly
         }
 
         // Create Sap Model from a Dynamo Model
-        private static void CreateSAPModel(ref StructuralModel StructuralModel, string Units)
+        private static void CreateSAPModel(ref StructuralModel StructuralModel, string Units, double SF)
         {
             string report = string.Empty;
 
@@ -146,7 +160,7 @@ namespace DynamoSAP.Assembly
             {
                 if (el.GetType().ToString().Contains("Frame"))
                 {
-                    CreateFrame(el as Frame, ref mySapModel);
+                    CreateFrame(el as Frame, ref mySapModel, SF);
                     Frame frm = el as Frame;
 
                     // Set Releases

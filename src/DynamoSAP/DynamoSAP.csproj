@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DynamoUnits">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.7\DynamoUnits.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="ProtoCore">
       <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.7\ProtoCore.dll</HintPath>
