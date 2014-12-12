@@ -20,7 +20,7 @@ namespace SAPConnection
         public static void DrawFrm(ref cSapModel Model, double iX, double iY, double iZ, double jX, double jY, double jZ, ref string Id)
         {
             //1. Create Frame
-            long ret = Model.FrameObj.AddByCoord(iX,iY,iZ,jX,jY,jZ,ref Id);
+            long ret = Model.FrameObj.AddByCoord(iX, iY, iZ, jX, jY, jZ, ref Id);
         }
 
         public static void SetGUIDFrm(ref cSapModel Model, string Label, string GUID)
@@ -49,16 +49,48 @@ namespace SAPConnection
 
         public static void SetSectionFrm(ref cSapModel mySapModel, string Name, string SectionProfile)
         {
-            long ret= mySapModel.FrameObj.SetSection(Name, SectionProfile);
+            long ret = mySapModel.FrameObj.SetSection(Name, SectionProfile);
         }
 
         // to extract the Section Names on Specific Section Catalog
         public static void GetSectionsfromCatalog(ref cSapModel Model, string SC, ref string[] Names)
-        { 
+        {
             int number = 0;
             eFramePropType[] PropType = null;
-            long ret = Model.PropFrame.GetPropFileNameList(SC, ref number, ref Names, ref PropType); 
+            long ret = Model.PropFrame.GetPropFileNameList(SC, ref number, ref Names, ref PropType);
         }
+
+
+        public static void GetLoadPatterns(ref cSapModel Model, ref string[] LoadPatternNames, ref string[] LoadPatternTypes, ref double[] LoadPatternMultipliers)
+        {
+            int number = 0;
+            int ret = Model.LoadPatterns.GetNameList(ref number, ref LoadPatternNames);
+
+            LoadPatternMultipliers = new double[number];
+            LoadPatternTypes = new string[number];
+            
+            foreach (string lpname in LoadPatternNames)
+            {
+                double mult = 0;
+                eLoadPatternType type=eLoadPatternType.LTYPE_DEAD;
+                int pos = Array.IndexOf(LoadPatternNames,lpname);
+                Model.LoadPatterns.GetLoadType(lpname, ref type);
+
+                ret = Model.LoadPatterns.GetSelfWTMultiplier(lpname,ref mult);
+                LoadPatternMultipliers[pos] = mult;
+                //int typeInt = (int)type;
+                LoadPatternTypes[pos] = type.ToString();
+            }
+
+        }
+
+        public static void GetLoads(ref cSapModel Model, ref string[] frameName, ref int NumberItems, ref string[] LoadPat, ref int[] MyType, ref string[] CSys, ref int[] Dir, ref double[] RD1, ref double[] RD2, ref double[] Dist1, ref double[] Dist2, ref double[] Val1, ref double[] Val2)
+        {
+
+            int ret = 0;
+            ret = Model.FrameObj.GetLoadDistributed("ALL", ref NumberItems, ref frameName, ref LoadPat, ref MyType, ref CSys, ref Dir, ref RD1, ref RD2, ref Dist1, ref Dist2, ref Val1, ref Val2, SAP2000v16.eItemType.Group);
+        }
+
 
         // READ FROM SAPMODEL
         public static void GetFrameIds(ref string[] Names, ref cSapModel Model)
@@ -68,8 +100,8 @@ namespace SAPConnection
         }
 
         public static void GetFrm(ref cSapModel Model, string frmId, ref Point i, ref Point j, ref string MatProp, ref string SecName, ref string Just, ref double Rot, ref string SecCatalog)
-        { 
-            
+        {
+
             long ret = 0;
             // Get Geometry
             // SAP Frame start and end point

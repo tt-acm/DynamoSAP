@@ -21,7 +21,7 @@ namespace DynamoSAP.Structure
         /// Create a Load Pattern
         /// </summary>
         /// <param name="Name">The name for the new load pattern</param>
-        /// <param name="LType">Load PAttern Type. Use the Load Pattern Type Dropdown</param>
+        /// <param name="LType">Load Pattern Type. Use the Load Pattern Type Dropdown</param>
         /// <param name="Multiplier">The self weight multiplier for the new load pattern.</param>
         /// <returns>Load Pattern</returns>
         //public static LoadPattern SetLoadPattern(string Name, eLoadPatternType LoadPatternType, double Multiplier)
@@ -51,7 +51,7 @@ namespace DynamoSAP.Structure
         }
 
         //PRIVATE CONSTRUCTOR
-        private LoadPattern(string Name, string LoadPatternType, double Multiplier)
+        internal LoadPattern(string Name, string LoadPatternType, double Multiplier)
         {
             name = Name;
             type = LoadPatternType;

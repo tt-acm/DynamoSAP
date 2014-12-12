@@ -187,10 +187,10 @@ namespace DynamoSAP.Structure
             l.LoadType = "DistributedLoad";
             return l;
         }
-        private Load() { }
+        internal Load() { }
 
         //constructor for PointLoads
-        private Load(LoadPattern loadPat, int myType, int dir, double dist, double val, string cSys, bool relDist)
+        internal Load(LoadPattern loadPat, int myType, int dir, double dist, double val, string cSys, bool relDist)
         {
             lPattern = loadPat;
             FMType = myType;
@@ -203,7 +203,7 @@ namespace DynamoSAP.Structure
         }
 
         //constructor for DistributedLoads
-        private Load(LoadPattern loadPat, int myType, int dir, double dist, double dist2, double val, double val2, string cSys, bool relDist)
+        internal Load(LoadPattern loadPat, int myType, int dir, double dist, double dist2, double val, double val2, string cSys, bool relDist)
         {
             lPattern = loadPat;
             FMType = myType;

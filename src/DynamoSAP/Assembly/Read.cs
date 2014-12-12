@@ -59,13 +59,13 @@ namespace DynamoSAP.Assembly
         /// </summary>
         /// <param name="read">Set Boolean to True to read the open project</param>
         /// <returns>Structural Model</returns>
-        [MultiReturn("StructuralModel","units")]
-        public static Dictionary<string,object> SAPModel(bool read)
+        [MultiReturn("StructuralModel", "units")]
+        public static Dictionary<string, object> SAPModel(bool read)
         {
             if (read)
             {
                 StructuralModel Model = new StructuralModel();
-            
+
                 cSapModel mySapModel = null;
                 string units = string.Empty;
 
@@ -81,7 +81,7 @@ namespace DynamoSAP.Assembly
                     {"units", units}
                 };
             }
-            else 
+            else
             {
                 throw new Exception("Set boolean True to read!");
             }
@@ -95,8 +95,46 @@ namespace DynamoSAP.Assembly
             model.StructuralElements = new List<Element>();
             if (SapModel != null)
             {
+
+                // 1. GET LOAD PATTERNS
+
+                string[] LoadPatternNames = null;
+                string[] LoadPatternTypes = null;
+                double[] LoadPatternMultipliers = null;
+
+                StructureMapper.GetLoadPatterns(ref SapModel, ref LoadPatternNames, ref LoadPatternTypes, ref LoadPatternMultipliers);
+                if (LoadPatternNames != null)
+                {
+                    model.LoadPatterns = new List<LoadPattern>();
+                    foreach (string lpname in LoadPatternNames)
+                    {
+                        int pos = Array.IndexOf(LoadPatternNames,lpname);
+                        model.LoadPatterns.Add(new LoadPattern(lpname, LoadPatternTypes[pos], LoadPatternMultipliers[pos]));
+                    }
+                }
+                //2. GET LOADS
+                string[] framesWithLoads = null;
+                string[] lPattern = null;
+                int number = 0;
+                int[] myType = null;
+                string[] Csys = null;
+                int[] dir = null;
+                double[] RD1 = null;
+                double[] RD2 = null;
+                double[] Dist1 = null;
+                double[] Dist2 = null;
+                double[] Val1 = null;
+                double[] Val2 = null;
+
+                // This is only getting distributed loads right now MUST GET POINT LOADS TOO
+                StructureMapper.GetLoads(ref SapModel, ref framesWithLoads, ref number, ref lPattern, ref myType, ref Csys, ref dir, ref RD1, ref RD2, ref Dist1, ref Dist2, ref Val1, ref Val2);
+
+
+
+
+
                 // Populate the model's elements
-                //Get Frames          
+                //3. GET FRAMES    
                 string[] FrmIds = null;
                 StructureMapper.GetFrameIds(ref FrmIds, ref SapModel);
                 for (int i = 0; i < FrmIds.Length; i++)
@@ -118,9 +156,35 @@ namespace DynamoSAP.Assembly
                     StructureMapper.GetGUIDFrm(ref SapModel, FrmIds[i], ref guid);
                     d_frm.GUID = guid;
                     model.StructuralElements.Add(d_frm);
+
+
+
+                    //!!!!!!!! MUST LOOK TO CHECK IF THE FRAME HAS MORE THAN ONE DISTRIBUTED LOAD
+                    //check if the frame has a load
+                    int pos = Array.IndexOf(framesWithLoads, d_frm.Label);
+                    if (pos > -1)
+                    {
+                        d_frm.Loads = new List<Load>();
+                        // the array contains the frame and the pos variable will hosts its position in the array
+                        bool relDist = true;
+                        if (RD1 == null) relDist = false;
+                        LoadPattern lp = null;
+                        foreach (LoadPattern loadp in model.LoadPatterns)
+                        {
+                            if (loadp.name == lPattern[pos])
+                            {
+                                lp = loadp;
+                                break;
+                            }
+                        }
+                        Load l = new Load(lp, myType[pos], dir[pos], Dist1[pos], Dist2[pos], Val1[pos], Val2[pos], Csys[pos], relDist);
+                        l.LoadType = "DistributedLoad";
+                        d_frm.Loads.Add(l);
+                    }
+
                 }
             }
-            else 
+            else
             {
                 throw new Exception("Make sure SAP Model is open!");
             }
