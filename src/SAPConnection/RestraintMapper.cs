@@ -28,7 +28,7 @@ namespace SAPConnection
                 double x = 0; double y = 0; double z = 0;
                 ret = Model.PointObj.GetCoordCartesian(PtIds[i], ref x, ref y, ref z);
 
-                if (Pt.X == Math.Round(x,3) && Pt.Y == Math.Round(y,3) && Pt.Z == Math.Round(z,3)) //TODO: Math Round per linear length???
+                if (Math.Round(Pt.X,3) == Math.Round(x,3) && Math.Round(Pt.Y,3) == Math.Round(y,3) && Math.Round(Pt.Z,3) == Math.Round(z,3)) //TODO: Math Round per linear length???
                 {
                     ret = Model.PointObj.SetRestraint(PtIds[i], restaints);
                     break;
