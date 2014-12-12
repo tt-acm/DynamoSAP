@@ -130,4 +130,14 @@ namespace DynamoSAP_UI
         Concrete_4000Psi
     }
 
+
+    [NodeName("UnitsDropdown")]
+    [NodeCategory("DynamoSAP.DynamoSAP.Assembly")]
+    [NodeDescription("Select units")]
+    [IsDesignScriptCompatible]
+    public class UnitsDropdown : EnumAsString<eUnits>
+    {
+        public UnitsDropdown(WorkspaceModel workspace) : base(workspace) { }
+    }
+
 }
