@@ -153,11 +153,7 @@ namespace DynamoSAP.Assembly
                     {
                         SetReleases(el as Frame, ref mySapModel); // Set releases 
                     }
-                    // Set Loads
-                    if (frm.Loads != null)
-                    {
-                        SetLoads(el as Frame, ref mySapModel);
-                    }
+                    
 
                 }
             }
@@ -211,6 +207,20 @@ namespace DynamoSAP.Assembly
                     double[] DSFs = SFs.ToArray();
 
                     SAPConnection.LoadMapper.AddLoadCase(ref mySapModel, lc.name, types.Count(), ref Dtypes, ref Dnames, ref DSFs, lc.type);
+                }
+            }
+
+            foreach (var el in StructuralModel.StructuralElements)
+            {
+                if (el.GetType().ToString().Contains("Frame"))
+                {
+                    Frame frm = el as Frame;
+
+                    // Set Loads
+                    if (frm.Loads != null)
+                    {
+                        SetLoads(el as Frame, ref mySapModel);
+                    }
                 }
             }
 

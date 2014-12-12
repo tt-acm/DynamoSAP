@@ -190,7 +190,7 @@ namespace DynamoSAP.Structure
                             continue; // show only the loads whose load pattern is the specified in the node
                         }
                     }
-
+                   
                     Curve c = Frame.BaseCrv;
                     if (load.Val > 0) Size = -Size; // make negative and change the direction of the arrow
 
