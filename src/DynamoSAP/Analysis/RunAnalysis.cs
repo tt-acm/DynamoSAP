@@ -154,7 +154,6 @@ namespace DynamoSAP.Analysis
 
                 foreach (FrameAnalysisData fad in frmresult.Results[AnalysisResults.LCaseOrLPatternRun].Values)
                 {
-
                     if (ForceType == "Axial") //Get Axial Forces P
                     {
                         ff.Add(fad.P);
@@ -197,9 +196,26 @@ namespace DynamoSAP.Analysis
         /// <param name="Scale">Scale of the visualization</param>
         /// <param name="Visualize">Set Boolean to True to draw the meshes</param>
         /// <returns>Forces and moments  in the form of meshes for each station in each structural member in the model</returns>
-        [MultiReturn("Meshes")]
-        public static Dictionary<string, object> VisualizeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType, double Scale, bool Visualize)
+        /// 
+        public static List<List<Mesh>> VisualizeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType,  bool Visualize, double Scale=1.0)
         {
+
+            
+            List<List<double>> myForces = DecomposeResults(StructuralModel, AnalysisResults, ForceType);
+
+            double max = 0.0;
+            for (int i = 0; i < myForces.Count; i++)
+            {
+                for (int j = 0; j < myForces[i].Count; j++)
+                {
+                    if (myForces[i][j] > max) max = myForces[i][j];
+                }
+            }
+            // Define a coefficient to visualize the forces
+            Frame fs = (Frame)StructuralModel.StructuralElements[0];
+            double lenght= 0.5 * fs.BaseCrv.Length;
+            double coefficient =  lenght/ max;
+            
             List<List<Mesh>> VizMeshes = new List<List<Mesh>>();
             List<Line> frameNormals = new List<Line>();
             if (Visualize)
@@ -207,13 +223,10 @@ namespace DynamoSAP.Analysis
                 for (int i = 0; i < StructuralModel.StructuralElements.Count; i++)
                 {
 
-
                     // Linq inqury
                     FrameResults frmresult = (from frm in AnalysisResults.FrameResults
                                               where frm.ID == StructuralModel.StructuralElements[i].Label
                                               select frm).First();
-
-
 
                     //List of meshes per structural element in the model
                     List<Mesh> frameResultsMesh = new List<Mesh>();
@@ -251,11 +264,7 @@ namespace DynamoSAP.Analysis
                     // Integer to count the number of times there are stations with value=0 (no force)
                     int zeroCount = 0;
 
-
-
                     // Loop through each station (t value) in the analysis results dictionary
-                    //foreach (double t in AnalysisResults.FrameResults[i].Results[AnalysisResults.LoadCombination].Keys)
-                    //{
                     foreach (double t in frmresult.Results[AnalysisResults.LCaseOrLPatternRun].Keys)
                     {
                         double newt = t;
@@ -271,36 +280,36 @@ namespace DynamoSAP.Analysis
                         if (ForceType == "Axial") // Get Axial P
                         {
                             v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].P;
-                            translateCoord = v2 * (-Scale);
+                            translateCoord = v2 * coefficient * (-Scale);
                         }
 
                         else if (ForceType == "Shear22") // Get Shear V2
                         {
                             v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].V2;
-                            translateCoord = v2 * (-Scale);
+                            translateCoord = v2 * coefficient * (-Scale);
                         }
                         else if (ForceType == "Shear33") // Get Shear V3
                         {
                             v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].V3;
-                            translateCoord = v2 * Scale;
+                            translateCoord = v2 * coefficient * coefficient * Scale;
                         }
 
                         else if (ForceType == "Torsion") // Get Torsion T
                         {
                             v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].T;
-                            translateCoord = v2 * (-Scale);
+                            translateCoord = v2 * coefficient * (-Scale);
                         }
 
                         else if (ForceType == "Moment22") // Get Moment M2
                         {
                             v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].M2;
-                            translateCoord = v2 * Scale;
+                            translateCoord = v2 * coefficient * Scale;
                         }
 
                         else if (ForceType == "Moment33") // Get Moment M3
                         {
                             v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].M3;
-                            translateCoord = v2 * Scale;
+                            translateCoord = v2 * coefficient * Scale;
                         }
 
                         v2 = Math.Round(v2, 4, MidpointRounding.AwayFromZero);
@@ -426,12 +435,8 @@ namespace DynamoSAP.Analysis
 
                 }
             }
-            //return myVizMeshes;
-            return new Dictionary<string, object>
-            {
-                {"Meshes", VizMeshes}
-                
-            };
+            return VizMeshes;
+            
         }
 
 
