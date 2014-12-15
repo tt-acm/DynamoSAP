@@ -53,7 +53,7 @@ namespace DynamoSAP.Analysis
 
                 SAPConnection.Initialize.GrabOpenSAP(ref mySapModel, ref units);
 
-                Read.StructuralModelFromSapFile(ref mySapModel, ref Model);
+                Read.StructuralModelFromSapFile(ref mySapModel, ref Model, units);
 
                 SaveAs = SAPConnection.Initialize.GetModelFilename(ref mySapModel);
 
@@ -100,7 +100,7 @@ namespace DynamoSAP.Analysis
                 string units = string.Empty;
 
                 SAPConnection.Initialize.OpenSAPModel(FilePath, ref mySapModel, ref units);
-                Read.StructuralModelFromSapFile(ref mySapModel, ref Model);
+                Read.StructuralModelFromSapFile(ref mySapModel, ref Model, units);
                 // run analysis
                 SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, FilePath, ref LoadCaseNames, ref LoadPatternNames);
             }

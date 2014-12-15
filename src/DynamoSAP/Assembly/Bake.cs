@@ -37,7 +37,7 @@ namespace DynamoSAP.Assembly
         /// <param name="Units">Set Units of SapModel</param>
         /// <param name="Bake">Set Boolean to True to bake the model</param>
         /// <returns>Structural Model</returns>
-        public static StructuralModel ToSAP(StructuralModel StructuralModel, string Units, bool Bake)
+        public static StructuralModel ToSAP(StructuralModel StructuralModel, bool Bake, string Units = "kip_ft_F")
         {
             // 1. Calculate Lenght Conversion Factor
             string fromUnit = "m"; // Dynamo API Units
@@ -161,8 +161,6 @@ namespace DynamoSAP.Assembly
                     {
                         SetReleases(el as Frame, ref mySapModel); // Set releases 
                     }
-                    
-
                 }
             }
 

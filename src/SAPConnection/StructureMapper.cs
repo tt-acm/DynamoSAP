@@ -84,16 +84,6 @@ namespace SAPConnection
 
         }
 
-        public static void GetPointLoads(ref cSapModel Model, ref string[] FrameName, ref int NumberItems, ref string[] LoadPat, ref int[] MyType, ref string[] CSys, ref int[] Dir, ref double[] RelDist, ref double[] Dist, ref double[] Val){
-
-            int ret = Model.FrameObj.GetLoadPoint("ALL", NumberItems, FrameName, LoadPat, MyType, CSys, Dir, RelDist, Dist, Val, SAP2000v16.eItemType.Group);
-        }
-
-        public static void GetDistributedLoads(ref cSapModel Model, ref string[] FrameName, ref int NumberItems, ref string[] LoadPat, ref int[] MyType, ref string[] CSys, ref int[] Dir, ref double[] RD1, ref double[] RD2, ref double[] Dist1, ref double[] Dist2, ref double[] Val1, ref double[] Val2)
-        {
-            int ret = 0;
-            ret = Model.FrameObj.GetLoadDistributed("ALL", ref NumberItems, ref FrameName, ref LoadPat, ref MyType, ref CSys, ref Dir, ref RD1, ref RD2, ref Dist1, ref Dist2, ref Val1, ref Val2, SAP2000v16.eItemType.Group);
-        }
 
 
         // READ FROM SAPMODEL
@@ -103,7 +93,7 @@ namespace SAPConnection
             int ret = Model.FrameObj.GetNameList(ref number, ref Names);
         }
 
-        public static void GetFrm(ref cSapModel Model, string frmId, ref Point i, ref Point j, ref string MatProp, ref string SecName, ref string Just, ref double Rot, ref string SecCatalog)
+        public static void GetFrm(ref cSapModel Model, string frmId, ref Point i, ref Point j, ref string MatProp, ref string SecName, ref string Just, ref double Rot, ref string SecCatalog, double LSF) //Length Scale Factor
         {
 
             long ret = 0;
@@ -125,8 +115,8 @@ namespace SAPConnection
             //getting coordinates of ending point
             ret = Model.PointObj.GetCoordCartesian(EndPoint, ref myEndX, ref myEndY, ref myEndZ);
 
-            i = Point.ByCoordinates(myStartX, myStartY, myStartZ);
-            j = Point.ByCoordinates(myEndX, myEndY, myEndZ);
+            i = Point.ByCoordinates(myStartX * LSF, myStartY * LSF, myStartZ * LSF);
+            j = Point.ByCoordinates(myEndX * LSF, myEndY * LSF, myEndZ * LSF);
 
             // Section
             string SAuto = string.Empty;

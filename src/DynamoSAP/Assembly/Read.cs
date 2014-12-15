@@ -38,7 +38,7 @@ namespace DynamoSAP.Assembly
                 Initialize.OpenSAPModel(FilePath, ref mySapModel, ref units);
 
                 // Populate the model's elemets
-                StructuralModelFromSapFile(ref mySapModel, ref Model);
+                StructuralModelFromSapFile(ref mySapModel, ref Model, units);
 
                 // Return outputs
                 return new Dictionary<string, object>
@@ -72,7 +72,7 @@ namespace DynamoSAP.Assembly
                 // Open & instantiate SAP file
                 Initialize.GrabOpenSAP(ref mySapModel, ref units);
 
-                StructuralModelFromSapFile(ref mySapModel, ref Model);
+                StructuralModelFromSapFile(ref mySapModel, ref Model, units);
 
                 // Return outputs
                 return new Dictionary<string, object>
@@ -90,7 +90,7 @@ namespace DynamoSAP.Assembly
 
         private Read() { }
 
-        internal static void StructuralModelFromSapFile(ref cSapModel SapModel, ref StructuralModel model)
+        internal static void StructuralModelFromSapFile(ref cSapModel SapModel, ref StructuralModel model, string SapModelUnits)
         {
             model.StructuralElements = new List<Element>();
             if (SapModel != null)
@@ -113,10 +113,12 @@ namespace DynamoSAP.Assembly
                     }
                 }
 
+                // 2. GET DYNAMO FRAMES
 
-                // METHODS FOR FRAMES
+                //2.a GET LOADS that are Assigned to Frames
 
-                //2. GET LOADS
+                Dictionary<int, string> DictFrm_PointLoads = new Dictionary<int, string>();
+                Dictionary<int, string> DictFrm_DistLoads = new Dictionary<int, string>();
 
                 //Get Point Loads
                 string[] framesWithPointLoads = null;
@@ -129,7 +131,14 @@ namespace DynamoSAP.Assembly
                 double[] PDist = null;
                 double[] PVal = null;
 
-                StructureMapper.GetPointLoads(ref SapModel, ref framesWithPointLoads, ref Pnumber, ref PlPattern, ref PmyType, ref PCsys, ref Pdir, ref PRelDist, ref PDist, ref PVal);
+                LoadMapper.GetPointLoads(ref SapModel, ref framesWithPointLoads, ref Pnumber, ref PlPattern, ref PmyType, ref PCsys, ref Pdir, ref PRelDist, ref PDist, ref PVal);
+                if (framesWithPointLoads != null)
+                {
+                    for (int i = 0; i < framesWithPointLoads.Count(); i++)
+                    {
+                        DictFrm_PointLoads.Add(i, framesWithPointLoads[i]);
+                    }
+                }
 
                 // Get Distributed Loads
                 string[] framesWithDistributedLoads = null;
@@ -145,9 +154,21 @@ namespace DynamoSAP.Assembly
                 double[] DVal1 = null;
                 double[] DVal2 = null;
 
-                StructureMapper.GetDistributedLoads(ref SapModel, ref framesWithDistributedLoads, ref Dnumber, ref DlPattern, ref DmyType, ref DCsys, ref Ddir, ref DRD1, ref DRD2, ref DDist1, ref DDist2, ref DVal1, ref DVal2);
+                LoadMapper.GetDistributedLoads(ref SapModel, ref framesWithDistributedLoads, ref Dnumber, ref DlPattern, ref DmyType, ref DCsys, ref Ddir, ref DRD1, ref DRD2, ref DDist1, ref DDist2, ref DVal1, ref DVal2);
+                if (framesWithDistributedLoads != null)
+                {
+                    for (int i = 0; i < framesWithDistributedLoads.Count(); i++)
+                    {
+                        DictFrm_DistLoads.Add(i, framesWithDistributedLoads[i]);
+                    }
+                }
 
-                //3. GET FRAMES    
+
+                //2.b Get Frames
+
+                // Calculate Length Scale Factor
+                Double SF = Utilities.UnitConversion("m", SapModelUnits); // Dynamo API Lenght Unit is 'meter'
+
                 string[] FrmIds = null;
                 StructureMapper.GetFrameIds(ref FrmIds, ref SapModel);
                 for (int i = 0; i < FrmIds.Length; i++)
@@ -160,7 +181,7 @@ namespace DynamoSAP.Assembly
                     string Just = "MiddleCenter"; // default value
                     double Rot = 0; // default value
 
-                    StructureMapper.GetFrm(ref SapModel, FrmIds[i], ref s, ref e, ref matProp, ref secName, ref Just, ref Rot, ref secCatalog);
+                    StructureMapper.GetFrm(ref SapModel, FrmIds[i], ref s, ref e, ref matProp, ref secName, ref Just, ref Rot, ref secCatalog, SF);
                     SectionProp secProp = new SectionProp(secName, matProp, secCatalog);
                     Frame d_frm = new Frame(s, e, secProp, Just, Rot);
                     d_frm.Label = FrmIds[i];
@@ -170,67 +191,58 @@ namespace DynamoSAP.Assembly
                     d_frm.GUID = guid;
                     model.StructuralElements.Add(d_frm);
 
+                    // Frame might have multiple loads assigned to it...
+                    d_frm.Loads = new List<Load>();
 
+                    //Check if the frame has distributed loads
+                    var outindexes = from obj in DictFrm_DistLoads
+                                     where obj.Value == d_frm.Label
+                                     select obj.Key;
 
-//!!!!!!!! MUST LOOK TO CHECK IF THE FRAME HAS MORE THAN ONE LOAD
-
-                    //Check if the frame has a load
-                    if (framesWithDistributedLoads != null)
+                    foreach(int index in outindexes)
                     {
-                        int Dpos = Array.IndexOf(framesWithDistributedLoads, d_frm.Label);
-                        if (Dpos > -1)
+                       LoadPattern Dlp = null;
+                       foreach (LoadPattern loadp in model.LoadPatterns)
                         {
-                            d_frm.Loads = new List<Load>();
-                            
-                           
-                            
-                            LoadPattern Dlp = null;
-                            foreach (LoadPattern loadp in model.LoadPatterns)
+                            if (loadp.name == DlPattern[index])
                             {
-                                if (loadp.name == DlPattern[Dpos])
-                                {
-                                    Dlp = loadp;
-                                    break;
-                                }
+                                Dlp = loadp;
+                                break;
                             }
-                            if (Dlp != null)
-                            {
-                                // using relDist as true, and using the relative distance values DRD1 and DRD2
-                                bool relDist = true;
-                                Load l = new Load(Dlp, DmyType[Dpos], Ddir[Dpos], DRD1[Dpos], DRD2[Dpos], DVal1[Dpos], DVal2[Dpos], DCsys[Dpos], relDist);
-                                l.LoadType = "DistributedLoad";
-                                d_frm.Loads.Add(l);
-                            }
+                        }
+                        if (Dlp != null)
+                        {
+                            // using relDist as true, and using the relative distance values DRD1 and DRD2
+                            bool relDist = true;
+                            Load l = new Load(Dlp, DmyType[index], Ddir[index], DRD1[index], DRD2[index], DVal1[index], DVal2[index], DCsys[index], relDist);
+                            l.LoadType = "DistributedLoad";
+                            d_frm.Loads.Add(l);
                         }
                     }
 
-                    if (framesWithPointLoads != null)
+                    //Check if the frame has Point Loads
+                    var outindexesO = from obj in DictFrm_PointLoads
+                                      where obj.Value == d_frm.Label
+                                      select obj.Key;
+
+                    foreach (int index in outindexesO)
                     {
-                        int Ppos = Array.IndexOf(framesWithPointLoads, d_frm.Label);
-                        if (Ppos > -1)
+                        LoadPattern Plp = null;
+                        foreach (LoadPattern loadp in model.LoadPatterns)
                         {
-                            if (d_frm.Loads == null)
+                            if (loadp.name == PlPattern[index])
                             {
-                                d_frm.Loads = new List<Load>();
+                                Plp = loadp;
+                                break;
                             }
+                        }
 
-                            LoadPattern Plp = null;
-                            foreach (LoadPattern loadp in model.LoadPatterns)
-                            {
-                                if (loadp.name == PlPattern[Ppos])
-                                {
-                                    Plp = loadp;
-                                    break;
-                                }
-                            }
-
-                            if (Plp != null)
-                            {
-                                bool relativedist = true;
-                                Load l = new Load(Plp, PmyType[Ppos], Pdir[Ppos], PRelDist[Ppos], PVal[Ppos], PCsys[Ppos], relativedist);
-                                l.LoadType = "PointLoad";
-                                d_frm.Loads.Add(l);
-                            }
+                        if (Plp != null)
+                        {
+                            bool relativedist = true;
+                            Load l = new Load(Plp, PmyType[index], Pdir[index], PRelDist[index], PVal[index], PCsys[index], relativedist);
+                            l.LoadType = "PointLoad";
+                            d_frm.Loads.Add(l);
                         }
                     }
                 }
