@@ -39,19 +39,13 @@ namespace DynamoSAP.Assembly
         /// <returns>Structural Model</returns>
         public static StructuralModel ToSAP(StructuralModel StructuralModel, string Units, bool Bake)
         {
-            // Calculate Lenght Conversion Factor
-            string fromUnit = "m"; // Dynamo 
-            LengthUnit LU = DynamoUnits.Length.LengthUnit; // Display Units
+            // 1. Calculate Lenght Conversion Factor
+            string fromUnit = "m"; // Dynamo API Units
+            LengthUnit LU = DynamoUnits.Length.LengthUnit; // Display Units 
 
-            string toUnit = string.Empty;
-            if (Units.ToLower().Contains("m") || Units.ToLower().Contains("meter")) toUnit = "m";
-            else if (Units.ToLower().Contains("cm") || Units.ToLower().Contains("centimeter")) toUnit = "cm";
-            else if (Units.ToLower().Contains("mm") || Units.ToLower().Contains("milimeter")) toUnit = "m";
-            else if (Units.ToLower().Contains("ft") || Units.ToLower().Contains("feet")) toUnit = "ft";
-            else if (Units.ToLower().Contains("in") || Units.ToLower().Contains("inch")) toUnit = "ft";
+            double LengthSF = SAPConnection.Utilities.UnitConversion(Units, fromUnit); // Lenght Conversion Factor
 
-            double LengthSF = SAPConnection.Utilities.UnitConversion(toUnit, fromUnit); // lenght Conversion Factor
-
+            // 2. Create new SAP Model and bake Stuctural Model 
             if (StructuralModel != null)
             {
                 if (Bake) CreateSAPModel(ref StructuralModel, Units , LengthSF);
@@ -153,7 +147,6 @@ namespace DynamoSAP.Assembly
             {
                 SAPConnection.Initialize.Release(ref mySapObject, ref mySapModel);
             };
-
 
             //2. Create Geometry
             foreach (var el in StructuralModel.StructuralElements)

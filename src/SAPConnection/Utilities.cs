@@ -13,6 +13,13 @@ namespace SAPConnection
     {
         public static double UnitConversion(string toUnit, string fromUnit)
         {
+            // input string mapper
+            if (toUnit == "kgf_m_C" || toUnit == "kN_m_C" || toUnit == "N_m_C" || toUnit == "Ton_m_C" || toUnit.ToLower().Contains("meter")) toUnit = "m";
+            else if (toUnit == "kgf_cm_C" || toUnit == "kN_cm_C" || toUnit == "N_cm_C" || toUnit == "Ton_cm_C" || toUnit.ToLower().Contains("cm") || toUnit.ToLower().Contains("centimeter")) toUnit = "cm";
+            else if (toUnit == "kgf_mm_C" || toUnit == "kN_mm_C" || toUnit == "N_mm_C" || toUnit == "Ton_mm_C" || toUnit.ToLower().Contains("mm") || toUnit.ToLower().Contains("milimeter")) toUnit = "mm";
+            else if (toUnit == "kip_ft_F" || toUnit == "lb_ft_F" || toUnit.ToLower().Contains("ft") || toUnit.ToLower().Contains("feet")) toUnit = "ft";
+            else if (toUnit == "kip_in_F" || toUnit == "lb_in_F" || toUnit.ToLower().Contains("in") || toUnit.ToLower().Contains("inch")) toUnit = "in";
+
             toUnit = toUnit.ToLower();
             fromUnit = fromUnit.ToLower();
             double conversionFactor = 1.0;
@@ -95,6 +102,5 @@ namespace SAPConnection
             return conversionFactor;
         
         }
-
     }
 }
