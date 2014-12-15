@@ -14,15 +14,10 @@ namespace SAPConnection
         public static double UnitConversion(string toUnit, string fromUnit)
         {
             // input string mapper
-            if (toUnit == "kgf_m_C" || toUnit == "kN_m_C" || toUnit == "N_m_C" || toUnit == "Ton_m_C" || toUnit.ToLower().Contains("meter")) toUnit = "m";
-            else if (toUnit == "kgf_cm_C" || toUnit == "kN_cm_C" || toUnit == "N_cm_C" || toUnit == "Ton_cm_C" || toUnit.ToLower().Contains("cm") || toUnit.ToLower().Contains("centimeter")) toUnit = "cm";
-            else if (toUnit == "kgf_mm_C" || toUnit == "kN_mm_C" || toUnit == "N_mm_C" || toUnit == "Ton_mm_C" || toUnit.ToLower().Contains("mm") || toUnit.ToLower().Contains("milimeter")) toUnit = "mm";
-            else if (toUnit == "kip_ft_F" || toUnit == "lb_ft_F" || toUnit.ToLower().Contains("ft") || toUnit.ToLower().Contains("feet")) toUnit = "ft";
-            else if (toUnit == "kip_in_F" || toUnit == "lb_in_F" || toUnit.ToLower().Contains("in") || toUnit.ToLower().Contains("inch")) toUnit = "in";
+            toUnit = L_UnitStringMapper(toUnit);
+            fromUnit = L_UnitStringMapper(fromUnit);
 
-            toUnit = toUnit.ToLower();
-            fromUnit = fromUnit.ToLower();
-            double conversionFactor = 1.0;
+            double conversionFactor = 1.0; // default value
 
             //if project units = meters
             if (fromUnit == "m")
@@ -101,6 +96,19 @@ namespace SAPConnection
 
             return conversionFactor;
         
+        }
+
+        public static string L_UnitStringMapper(string Unit)
+        {
+            string outUnit = "m"; //default
+
+            if (Unit == "kgf_m_C" || Unit == "kN_m_C" || Unit == "N_m_C" || Unit == "Ton_m_C" || Unit == "m" || Unit.ToLower().Contains("meter")) outUnit = "m";
+            else if (Unit == "kgf_cm_C" || Unit == "kN_cm_C" || Unit == "N_cm_C" || Unit == "Ton_cm_C" || Unit.ToLower().Contains("cm") || Unit.ToLower().Contains("centimeter")) outUnit = "cm";
+            else if (Unit == "kgf_mm_C" || Unit == "kN_mm_C" || Unit == "N_mm_C" || Unit == "Ton_mm_C" || Unit.ToLower().Contains("mm") || Unit.ToLower().Contains("milimeter")) outUnit = "mm";
+            else if (Unit == "kip_ft_F" || Unit == "lb_ft_F" || Unit.ToLower().Contains("ft") || Unit.ToLower().Contains("feet")) outUnit = "ft";
+            else if (Unit == "kip_in_F" || Unit == "lb_in_F" || Unit.ToLower().Contains("in") || Unit.ToLower().Contains("inch")) outUnit = "in";
+
+            return outUnit;
         }
     }
 }
