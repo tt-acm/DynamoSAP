@@ -24,16 +24,16 @@ namespace DynamoSAP.Structure
         /// Set a Restraint on a node
         /// </summary>
         /// <param name="Point">Point to set the Restraint on</param>
-        /// <param name="XX">Translation XX</param>
-        /// <param name="YY">Translation YY</param>
-        /// <param name="ZZ">Translation ZZ</param>
-        /// <param name="X">Rotation X</param>
-        /// <param name="Y">Rotation Y</param>
-        /// <param name="Z">Rotation Z</param>
+        /// <param name="Tx">Translation X</param>
+        /// <param name="Ty">Translation Y</param>
+        /// <param name="Tz">Translation Z</param>
+        /// <param name="Rx">Rotation X</param>
+        /// <param name="Ry">Rotation Y</param>
+        /// <param name="Rz">Rotation Z</param>
         /// <returns>Restraint</returns>
-        public static Restraint SetRestraint(Point Point, bool XX, bool YY, bool ZZ, bool X, bool Y, bool Z)
+        public static Restraint SetRestraint(Point Point, bool Tx, bool Ty, bool Tz, bool Rx, bool Ry, bool Rz)
         {
-            return new Restraint(Point, XX, YY, ZZ, X, Y, Z);
+            return new Restraint(Point, Tx, Ty, Tz, Rx, Ry, Rz);
         }
 
         // FAST RESTRAINTS
@@ -80,19 +80,19 @@ namespace DynamoSAP.Structure
         /// </summary>
         /// <param name="restraint">Restraint to decompose</param>
         /// <returns>Node point, U1, U2, U3, R1, R2 and R3 </returns>
-        [MultiReturn("Point", "U1", "U2","U3","R1","R2","R3")]
+        [MultiReturn("Point", "Tx", "Ty", "Tz", "Rx", "Ry", "Rz")]
         public static Dictionary<string, object> Decompose(Restraint restraint)
         {
             // Return outputs
             return new Dictionary<string, object>
             {
                 {"Point", restraint.pt},
-                {"U1", restraint.u1},
-                {"U2", restraint.u2},
-                {"U3", restraint.u3},
-                {"R1", restraint.r1},
-                {"R2", restraint.r2},
-                {"R3", restraint.r3}
+                {"Tx", restraint.u1},
+                {"Ty", restraint.u2},
+                {"Tz", restraint.u3},
+                {"Rx", restraint.r1},
+                {"Ry", restraint.r2},
+                {"Rz", restraint.r3}
             };
         }
 

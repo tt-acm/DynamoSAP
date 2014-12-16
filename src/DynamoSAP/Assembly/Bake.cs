@@ -148,7 +148,7 @@ namespace DynamoSAP.Assembly
                 SAPConnection.Initialize.Release(ref mySapObject, ref mySapModel);
             };
 
-            //2. Create Geometry
+            //2. Create Frames (Sets Releases)
             foreach (var el in StructuralModel.StructuralElements)
             {
                 if (el.GetType().ToString().Contains("Frame"))
@@ -175,7 +175,7 @@ namespace DynamoSAP.Assembly
                     restraints.Add(rest.r1); restraints.Add(rest.r2); restraints.Add(rest.r3);
 
                     // Set restaints
-                    SAPConnection.RestraintMapper.SetRestaints(ref mySapModel, rest.pt, restraints.ToArray());
+                    SAPConnection.RestraintMapper.Set(ref mySapModel, rest.pt, restraints.ToArray());
                 }
             }
 

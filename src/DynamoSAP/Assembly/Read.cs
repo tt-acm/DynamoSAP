@@ -113,7 +113,7 @@ namespace DynamoSAP.Assembly
                     }
                 }
 
-                // 2. GET DYNAMO FRAMES
+                // 2. GET DYNAMO FRAMES ( get Loads and Releases that are assigned to that frame)
 
                 //2.a GET LOADS that are Assigned to Frames
 
@@ -246,6 +246,30 @@ namespace DynamoSAP.Assembly
                         }
                     }
                 }
+
+                // 3. GET RESTRAINTS
+                int CountRes = SapModel.PointObj.CountRestraint();
+                if (CountRes > 0) 
+                {
+                    model.Restraints = new List<Restraint>();
+
+                    List<string> PtIds = new List<string>();
+                    RestraintMapper.GetSupportedPts(ref SapModel, ref PtIds);
+
+                    // Populate Dynamo Restraints 
+                    foreach (var PtId in PtIds)
+                    {
+                        Point Pti = null;
+                        bool[] restraints = new bool[6];
+
+                        RestraintMapper.Get(ref SapModel, PtId, ref Pti, ref restraints, SF);
+
+                        // Populate on Structural Model restraint Ls
+                        Restraint support = Restraint.SetRestraint(Pti, restraints[0], restraints[1],restraints[2], restraints[3], restraints[4], restraints[5]);
+                        model.Restraints.Add(support);
+                    }
+                }
+                
             }
             else
             {
