@@ -110,7 +110,7 @@ namespace DynamoSAP.Assembly
             bool[] iireleases = ireleases.ToArray();
             bool[] jjreleases = jreleases.ToArray();
 
-            SAPConnection.ReleaseMapper.SetReleases(ref mySapModel, frm.Label, iireleases, jjreleases);
+            SAPConnection.ReleaseMapper.Set(ref mySapModel, frm.Label, iireleases, jjreleases);
         }
 
         // Set Loads to a frame

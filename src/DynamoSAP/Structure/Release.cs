@@ -41,22 +41,22 @@ namespace DynamoSAP.Structure
         /// <summary>
         /// Set a Release
         /// </summary>
-        /// <param name="U1i">U1 Start value</param>
-        /// <param name="U1j">U1 End value</param>
-        /// <param name="U2i">U2 Start value</param>
-        /// <param name="U2j">U2 End value</param>
-        /// <param name="U3i">U3 Start value</param>
-        /// <param name="U3j">U3 End value</param>
-        /// <param name="R1i">R1 Start value</param>
-        /// <param name="R1j">R1 End value</param>
-        /// <param name="R2i">R2 Start value</param>
-        /// <param name="R2j">R2 End value</param>
-        /// <param name="R3i">R3 Start value</param>
-        /// <param name="R3j">R4 End value</param>
+        /// <param name="iP">P Start bool value</param>
+        /// <param name="jP">P End bool value</param>
+        /// <param name="iV2">V2 Start bool value</param>
+        /// <param name="jV2">V2 End bool value</param>
+        /// <param name="iV3">V3 Start bool value</param>
+        /// <param name="jV3">V3 End bool value</param>
+        /// <param name="iT">T Start bool value</param>
+        /// <param name="jT">T End bool value</param>
+        /// <param name="iM2">M2 Start bool value</param>
+        /// <param name="jM2">M2 End bool value</param>
+        /// <param name="iM3">M3 Start bool value</param>
+        /// <param name="jM3">M3 End bool value</param>
         /// <returns>Release</returns>
-        public static Release Set(bool U1i = false, bool U1j = false, bool U2i = false, bool U2j = false, bool U3i = false, bool U3j = false, bool R1i = false, bool R1j = false, bool R2i = false, bool R2j = false, bool R3i = false, bool R3j = false)
+        public static Release Set(bool iP = false, bool jP = false, bool iV2 = false, bool jV2 = false, bool iV3 = false, bool jV3 = false, bool iT = false, bool jT = false, bool iM2 = false, bool jM2 = false, bool iM3 = false, bool jM3 = false)
         {
-            return new Release(U1i, U1j, U2i, U2j, U3i, U3j, R1i, R1j, R2i, R2j, R3i, R3j);
+            return new Release(iP, jP, iV2, jV2, iV3, jV3, iT, jT, iM2, jM2, iM3, jM3);
         }
 
 
@@ -65,24 +65,24 @@ namespace DynamoSAP.Structure
         /// </summary>
         /// <param name="release">Release to decompose</param>
         /// <returns>End releases</returns>
-        [MultiReturn("U1i", "U1j", "U2i", "U2j", "U3i", "U3j", "R1i", "R1j", "R2i", "R2j", "R3i", "R3j")]
+        [MultiReturn("iP", "jP", "iV2", "jV2", "iV3", "jV3", "iT", "jT", "iM2", "jM2", "iM3", "jM3")]
         public static Dictionary<string, object> Decompose(Release release)
         {
             // Return outputs
             return new Dictionary<string, object>
             {
-                {"U1i", release.u1i},
-                {"U1j", release.u1j},
-                {"U2i", release.u2i},
-                {"U2j", release.u2j},
-                {"U3i", release.u3i},
-                {"U3j", release.u3j},
-                {"R1i", release.r1i},
-                {"R1j", release.r1j},
-                {"R2i", release.r2i},
-                {"R2j", release.r2j},
-                {"R3i", release.r3i},
-                {"R3j", release.r3j}
+                {"iP", release.u1i},
+                {"jP", release.u1j},
+                {"iV2", release.u2i},
+                {"jV2", release.u2j},
+                {"iV3", release.u3i},
+                {"jV3", release.u3j},
+                {"iT", release.r1i},
+                {"jT", release.r1j},
+                {"iM2", release.r2i},
+                {"jM2", release.r2j},
+                {"iM3", release.r3i},
+                {"jM3", release.r3j}
             };
         }
 

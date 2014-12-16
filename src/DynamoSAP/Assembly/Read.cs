@@ -191,9 +191,10 @@ namespace DynamoSAP.Assembly
                     d_frm.GUID = guid;
                     model.StructuralElements.Add(d_frm);
 
+                    //LOADS
                     // Frame might have multiple loads assigned to it...
                     d_frm.Loads = new List<Load>();
-
+                    
                     //Check if the frame has distributed loads
                     var outindexes = from obj in DictFrm_DistLoads
                                      where obj.Value == d_frm.Label
@@ -245,10 +246,26 @@ namespace DynamoSAP.Assembly
                             d_frm.Loads.Add(l);
                         }
                     }
+
+                    //RELEASES
+                    bool[] ii = new bool[6];
+                    bool[] jj = new bool[6];
+                    ReleaseMapper.Get(ref SapModel, FrmIds[i], ref ii, ref jj);
+
+                    // Populate if return releases
+                    if (ii.Contains(true) || jj.Contains(true))
+                    {
+                        d_frm.Releases = Release.Set(ii[0], jj[0]
+                                                    , ii[1], jj[1]
+                                                    , ii[2], jj[2]
+                                                    , ii[3], jj[3]
+                                                    , ii[4], jj[4]
+                                                    , ii[5], jj[5]);
+                    }
                 }
 
                 // 3. GET RESTRAINTS
-                int CountRes = SapModel.PointObj.CountRestraint();
+                int CountRes = RestraintMapper.Count(ref SapModel);
                 if (CountRes > 0) 
                 {
                     model.Restraints = new List<Restraint>();

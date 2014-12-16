@@ -77,5 +77,11 @@ namespace SAPConnection
 
         }
 
+        public static int Count(ref cSapModel Model)
+        {
+            int count = Model.PointObj.CountRestraint();
+            return count;
+        }
+
     }
 }
