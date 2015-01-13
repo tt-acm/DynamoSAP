@@ -17,15 +17,35 @@ namespace SAPConnection
     public class StructureMapper
     {
         // Draw Frame Object return ID
-        public static void DrawFrm(ref cSapModel Model, double iX, double iY, double iZ, double jX, double jY, double jZ, ref string Id)
+        public static void CreateorUpdateFrm(ref cSapModel Model, double iX, double iY, double iZ, double jX, double jY, double jZ, ref string Id, bool update)
         {
-            //1. Create Frame
-            long ret = Model.FrameObj.AddByCoord(iX, iY, iZ, jX, jY, jZ, ref Id);
+            if (!update)
+            {
+                //1. Create Frame
+                long ret = Model.FrameObj.AddByCoord(iX, iY, iZ, jX, jY, jZ, ref Id);
+            }
+            else 
+            {
+                // update location
+                string startPoint = string.Empty;
+                string endPoint = string.Empty;
+                long ret = Model.FrameObj.GetPoints(Id, ref startPoint, ref endPoint);
+                ret = Model.EditPoint.ChangeCoordinates(startPoint, iX, iY, iZ);
+                ret = Model.EditPoint.ChangeCoordinates(endPoint, jX, jY, jZ);
+            }
+            
         }
+
 
         public static void SetGUIDFrm(ref cSapModel Model, string Label, string GUID)
         {
             long ret = Model.FrameObj.SetGUID(Label, GUID);
+        }
+
+        public static bool ChangeNameSAPFrm(ref cSapModel Model, string Name, string NewName)
+        {
+            long ret = Model.FrameObj.ChangeName(Name, NewName);
+            if (ret == 0) { return true; } else { return false; }
         }
 
         //Check if Section exists
@@ -143,5 +163,58 @@ namespace SAPConnection
                 ret = Model.FrameObj.GetGUID(Label, ref GUID);
             }
         }
+
+        /// <summary>
+        /// Harvesting the active SAP and creates dictionardy holds FramesGUID and Labels
+        /// </summary>
+        /// <param name="Model">Active SAP Model</param>
+        /// <param name="myFrameDict"> Dictionary key, value pair of GUID, Label </param>
+        public static void GetSAPFrameDict(ref cSapModel Model, ref Dictionary<string, string> myFrameDict) // <GUID, Label> 
+        {
+            string[] ID = null;
+            int NumbOfFrames = 0;
+            int ret = Model.FrameObj.GetNameList(ref NumbOfFrames, ref ID);
+
+            for (int i = 0; i < NumbOfFrames; i++)
+            {
+                // frame objectid
+                string frameid = ID.GetValue(i).ToString();
+
+                // set and get guid  
+                string GUID = SetGUIDFrm(ref Model, frameid);
+                myFrameDict.Add(GUID, frameid);
+            }
+        }
+
+        /// <summary>
+        /// Generates system.GUID and Sets GUID to a frame
+        /// </summary>
+        /// <param name="Model"> SapModel </param>
+        /// <param name="frameid"> Frameobject label id </param>
+        /// <returns> string GUID </returns>
+        public static string SetGUIDFrm(ref cSapModel Model, string frameid)
+        {
+            string GUID = string.Empty;
+            long ret = 0;
+            Guid g;
+
+            ret = Model.FrameObj.GetGUID(frameid, ref GUID);
+            if (GUID == null || GUID == "")
+            {
+                g = Guid.NewGuid();
+                GUID = g.ToString();
+                ret = Model.FrameObj.SetGUID(frameid, GUID);
+                return GUID;
+            }
+            if (GUID.Contains("{"))
+            {
+                //clean guid from characters
+                char[] delimiterChars = { '{', '}' };
+                string[] words = GUID.Split(delimiterChars);
+                GUID = words[1];
+            }
+            return GUID;
+        }
+
     }
 }

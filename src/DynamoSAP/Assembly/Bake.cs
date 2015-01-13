@@ -27,14 +27,14 @@ namespace DynamoSAP.Assembly
     public class Bake
     {
         private static cSapModel mySapModel;
-
+        private static Dictionary<string, string> SAPFrmDict = new Dictionary<string, string>(); // <GUID, Label>
         //// DYNAMO NODES ////
 
         /// <summary>
-        /// Create SAP2000 model from Dynamo Structural Model
+        /// Create or Update SAP2000 model from Dynamo Structural Model
         /// </summary>
         /// <param name="StructuralModel">Structural Model to bake</param>
-        /// <param name="Units">Set Units of SapModel</param>
+        /// <param name="Units">Set Units if u are creating new Sap Model</param>
         /// <param name="Bake">Set Boolean to True to bake the model</param>
         /// <returns>Structural Model</returns>
         public static StructuralModel ToSAP(StructuralModel StructuralModel, bool Bake, string Units = "kip_ft_F")
@@ -45,10 +45,13 @@ namespace DynamoSAP.Assembly
 
             double LengthSF = SAPConnection.Utilities.UnitConversion(Units, fromUnit); // Lenght Conversion Factor
 
+            // Clear Frame Dictionary
+            SAPFrmDict.Clear();
+
             // 2. Create new SAP Model and bake Stuctural Model 
             if (StructuralModel != null)
             {
-                if (Bake) CreateSAPModel(ref StructuralModel, Units , LengthSF);
+                if (Bake) CreateorUpdateSAPModel(ref StructuralModel, Units , LengthSF);
             }
             return StructuralModel;
         }
@@ -57,24 +60,42 @@ namespace DynamoSAP.Assembly
 
         #region PRIVATE SAP METHODS
         //CREATE FRAME METHOD
-        private static void CreateFrame(Frame f, ref cSapModel mySapModel, double SF)
+        private static void CreateorUpdateFrame(Frame f, ref cSapModel mySapModel, double SF, bool update)
         {
-            // Draw Frm Object return Label
-            string dummy = string.Empty;
-            //1. Create Frame
-            SAPConnection.StructureMapper.DrawFrm(ref mySapModel, f.BaseCrv.StartPoint.X*SF,
-                f.BaseCrv.StartPoint.Y*SF,
-                f.BaseCrv.StartPoint.Z*SF,
-                f.BaseCrv.EndPoint.X*SF,
-                f.BaseCrv.EndPoint.Y*SF,
-                f.BaseCrv.EndPoint.Z*SF,
-                ref dummy);
+            if (!update) // Create new 
+            {
+                // Draw Frm Object return Label
+                string dummy = string.Empty;
+                //1. Create Frame
+                SAPConnection.StructureMapper.CreateorUpdateFrm(ref mySapModel, f.BaseCrv.StartPoint.X * SF,
+                    f.BaseCrv.StartPoint.Y*SF,
+                    f.BaseCrv.StartPoint.Z*SF,
+                    f.BaseCrv.EndPoint.X*SF,
+                    f.BaseCrv.EndPoint.Y*SF,
+                    f.BaseCrv.EndPoint.Z*SF,
+                    ref dummy, false);
 
-            // TODO: set custom name !
-            f.Label = dummy; // for now passing the SAP label to Frame label!
+                // TODO: set custom name !
+                f.Label = dummy; // for now passing the SAP label to Frame label!
 
-            // 2. Set GUID
-            SAPConnection.StructureMapper.SetGUIDFrm(ref mySapModel, f.Label, f.GUID);
+                // 2. Set GUID
+                SAPConnection.StructureMapper.SetGUIDFrm(ref mySapModel, f.Label, f.GUID); // for later updates
+            }
+            else // Update Coordinates
+            { 
+                // update sapElementlabel if different then Frame.Label !!!
+                SAPConnection.StructureMapper.ChangeNameSAPFrm(ref mySapModel, SAPFrmDict[f.GUID], f.Label);
+
+                string id = f.Label;
+                SAPConnection.StructureMapper.CreateorUpdateFrm(ref mySapModel, f.BaseCrv.StartPoint.X * SF,
+                    f.BaseCrv.StartPoint.Y * SF,
+                    f.BaseCrv.StartPoint.Z * SF,
+                    f.BaseCrv.EndPoint.X * SF,
+                    f.BaseCrv.EndPoint.Y * SF,
+                    f.BaseCrv.EndPoint.Z * SF,
+                    ref id, true);
+            }
+
 
             // 3. Get or Define Section Profile
             bool exists = SAPConnection.StructureMapper.IsSectionExistsFrm(ref mySapModel, f.SecProp.SectName);
@@ -132,30 +153,51 @@ namespace DynamoSAP.Assembly
         }
 
         // Create Sap Model from a Dynamo Model
-        private static void CreateSAPModel(ref StructuralModel StructuralModel, string Units, double SF)
+        private static void CreateorUpdateSAPModel(ref StructuralModel StructuralModel, string Units, double SF)
         {
+            // check if any SAP file is open, grab 
+
             string report = string.Empty;
 
-            //1. Instantiate SAPModel
+            //1. Instantiate or Grab SAPModel
+
             SAP2000v16.SapObject mySapObject = null;
+            string SapModelUnits = string.Empty;
 
-            try
+            // Open & instantiate SAP file
+            Initialize.GrabOpenSAP(ref mySapModel, ref SapModelUnits);
+
+            if (mySapModel == null)
             {
-                SAPConnection.Initialize.InitializeSapModel(ref mySapObject, ref mySapModel, Units);
+                // Open a blank SAP Model
+                try
+                {
+                    SAPConnection.Initialize.InitializeSapModel(ref mySapObject, ref mySapModel, Units);
+                }
+                catch (Exception)
+                {
+                    SAPConnection.Initialize.Release(ref mySapObject, ref mySapModel);
+                };
             }
-            catch (Exception)
-            {
-                SAPConnection.Initialize.Release(ref mySapObject, ref mySapModel);
-            };
 
-            //2. Create Frames (Sets Releases)
+            
+
+            //2. CREATE OR UPDATE SIMULTENOUSLY
+           
+
+            //2. Create or Update Frames (Sets Releases)
+
+            SAPConnection.StructureMapper.GetSAPFrameDict(ref mySapModel, ref SAPFrmDict);
+
             foreach (var el in StructuralModel.StructuralElements)
             {
                 if (el.GetType().ToString().Contains("Frame"))
                 {
-                    CreateFrame(el as Frame, ref mySapModel, SF);
-                    Frame frm = el as Frame;
+                    bool isupdate = SAPFrmDict.ContainsKey(el.GUID);
 
+                    CreateorUpdateFrame(el as Frame, ref mySapModel, SF, isupdate);
+
+                    Frame frm = el as Frame;
                     // Set Releases
                     if (frm.Releases != null)
                     {
