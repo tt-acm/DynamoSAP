@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DSNodeServices">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.7\DSNodeServices.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="DynamoUnits">
       <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.7\DynamoUnits.dll</HintPath>
       <Private>False</Private>
@@ -83,6 +87,7 @@
     <Compile Include="Structure\Frame.cs" />
     <Compile Include="Structure\SectionProp.cs" />
     <Compile Include="Text.cs" />
+    <Compile Include="TracedFrameManager.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

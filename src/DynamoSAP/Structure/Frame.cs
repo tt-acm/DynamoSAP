@@ -7,6 +7,7 @@ using System.Text;
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
 
+
 //SAP
 using SAP2000v16;
 using SAPConnection;
@@ -14,6 +15,7 @@ using DynamoSAP.Assembly;
 
 namespace DynamoSAP.Structure
 {
+    [DSNodeServices.RegisterForTrace]
     public class Frame : Element
     {
         // FIELDS
@@ -30,6 +32,8 @@ namespace DynamoSAP.Structure
         internal Release Releases { get; set; }
         internal List<Load> Loads { get; set; }
 
+        private const string TRACE_ID = "{0459D869-0C72-447F-96D8-08A7FB92214B}-REVIT"; // this constant can't change
+
         // QUERY NODES
         /// <summary>
         /// Curve representing the frame
@@ -39,6 +43,8 @@ namespace DynamoSAP.Structure
             get { return BaseCrv; }
         }
 
+        public int ID { get; private set; }
+        
 
         //PUBLIC METHODS
         /// <summary>
@@ -47,7 +53,7 @@ namespace DynamoSAP.Structure
         /// <returns></returns>
         public override string ToString()
         {
-            return "Frame";
+            return String.Format("FrameID: {0}", ID.ToString());  
         }
 
 
@@ -61,7 +67,28 @@ namespace DynamoSAP.Structure
         /// <returns>Frame with all the properties set up by the inputs</returns>
         public static Frame FromLine(Line Line, SectionProp SectionProp, string Justification = "MiddleCenter", double Rotation = 0)
         {
-            return new Frame(Line, SectionProp, Justification, Rotation);
+            Frame tFrm;
+            FrmID tFrmid = DSNodeServices.TraceUtils.GetTraceData(TRACE_ID) as FrmID;
+
+            if (tFrmid == null)
+            {
+                // trace cache log didnot return an object, create new one !
+                tFrm = new Frame(Line, SectionProp, Justification, Rotation);
+            }
+            else
+            {
+                tFrm = TracedFrameManager.GetFramebyID(tFrmid.IntID);
+                
+                tFrm.BaseCrv = Line;
+                tFrm.SecProp = SectionProp;
+                tFrm.Just = Justification;
+                tFrm.Angle = Rotation;
+            }
+
+            //Set the trace data on the return to be this Frame
+            DSNodeServices.TraceUtils.SetTraceData(TRACE_ID, new FrmID { IntID = tFrm.ID });
+
+            return tFrm;
         }
         
         /// <summary>
@@ -75,7 +102,28 @@ namespace DynamoSAP.Structure
         /// <returns>Frame with all the properties set up by the inputs</returns>
         public static Frame FromEndPoints(Point i, Point j, SectionProp SectionProp, string Justification = "MiddleCenter", double Rotation = 0)
         {
-            return new Frame(i, j, SectionProp, Justification, Rotation);
+            Frame tFrm;
+            FrmID tFrmid = DSNodeServices.TraceUtils.GetTraceData(TRACE_ID) as FrmID;
+
+            if (tFrmid == null)
+            {
+                // trace cache log didnot return an object, create new one !
+               tFrm = new Frame(i, j, SectionProp, Justification, Rotation);
+            }
+            else 
+            {
+                tFrm = TracedFrameManager.GetFramebyID(tFrmid.IntID);
+
+                tFrm.BaseCrv = Line.ByStartPointEndPoint(i, j);
+                tFrm.SecProp = SectionProp;
+                tFrm.Just = Justification;
+                tFrm.Angle = Rotation;
+            }
+
+            //Set the trace data on the return to be this Frame
+            DSNodeServices.TraceUtils.SetTraceData(TRACE_ID, new FrmID { IntID = tFrm.ID });
+
+            return tFrm;
         }
 
         /// <summary>
@@ -369,6 +417,10 @@ namespace DynamoSAP.Structure
             Angle = angle;
             SecProp = secProp;
             Just = just;
+
+            //register for cache
+            ID = TracedFrameManager.GetNextUnusedID();
+            TracedFrameManager.RegisterFrmforID(ID, this);
         }
         internal Frame(Point i, Point j, SectionProp secProp, string just, double angle)
         {
@@ -376,6 +428,10 @@ namespace DynamoSAP.Structure
             Angle = angle;
             SecProp = secProp;
             Just = just;
+
+            //register for cache
+            ID = TracedFrameManager.GetNextUnusedID();
+            TracedFrameManager.RegisterFrmforID(ID, this);
         }
 
     }
