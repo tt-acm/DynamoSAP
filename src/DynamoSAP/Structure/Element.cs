@@ -24,6 +24,7 @@ namespace DynamoSAP.Structure
 
     }
 
+    [IsVisibleInDynamoLibrary(false)]
     public enum  Type
     {
         Frame,

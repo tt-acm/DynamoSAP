@@ -190,5 +190,14 @@ namespace SAPConnection
             long ret = Model.FrameObj.Delete(Label);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Model"></param>
+        public static void RefreshView(ref cSapModel Model)
+        {
+            Model.View.RefreshView(0, false);
+        }
+
     }
 }

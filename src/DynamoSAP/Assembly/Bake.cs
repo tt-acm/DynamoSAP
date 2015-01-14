@@ -307,7 +307,7 @@ namespace DynamoSAP.Assembly
 
             // refresh View 
 
-            mySapModel.View.RefreshView(0, false);
+            SAPConnection.StructureMapper.RefreshView(ref mySapModel);
 
             //if can't set to null, will be a hanging process
             mySapModel = null;

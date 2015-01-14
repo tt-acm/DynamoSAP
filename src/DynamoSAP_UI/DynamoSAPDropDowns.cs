@@ -9,33 +9,33 @@ using SAP2000v16;
 
 namespace DynamoSAP_UI
 {
-    [NodeName("LoadPatternTypeDropDown")]
+    [NodeName("LoadPatternTypes")]
     [NodeCategory("DynamoSAP.DynamoSAP.Structure.LoadPattern")]
     [NodeDescription("Select Load Pattern to use with Set Load Pattern node")]
     [IsDesignScriptCompatible]
-    public class LoadPatternTypeDropDown: EnumAsString<eLoadPatternType>
+    public class LoadPatternTypes: EnumAsString<eLoadPatternType>
     {
-        public LoadPatternTypeDropDown(WorkspaceModel workspace) : base(workspace) { }
+        public LoadPatternTypes(WorkspaceModel workspace) : base(workspace) { }
     }
 
-    [NodeName("LoadCaseTypeDropDown")]
+    [NodeName("LoadCaseTypes")]
     [NodeCategory("DynamoSAP.DynamoSAP.Structure.LoadCase")]
     [NodeDescription("Select Load Case to use with Set Load Case node")]
     [IsDesignScriptCompatible]
-    public class LoadCaseTypeDropDown : EnumAsString<eLoadCaseType>
+    public class LoadCaseTypes : EnumAsString<eLoadCaseType>
     {
-        public LoadCaseTypeDropDown(WorkspaceModel workspace) : base(workspace) { }
+        public LoadCaseTypes(WorkspaceModel workspace) : base(workspace) { }
     }
 
     // TODO: Add LoadDirectionDropDown Global or Local CS
 
-    [NodeName("JustificationDropDown")]
+    [NodeName("Justifications")]
     [NodeCategory("DynamoSAP.DynamoSAP.Structure.Frame")]
     [NodeDescription("Select Justification to use with Create Frame nodes")]
     [IsDesignScriptCompatible]
-    public class JustificationTypeDropdown : EnumAsString<Justification>
+    public class JustificationTypes : EnumAsString<Justification>
     {
-        public JustificationTypeDropdown(WorkspaceModel workspace) : base(workspace) { }
+        public JustificationTypes(WorkspaceModel workspace) : base(workspace) { }
     }
 
     public enum Justification // Dynamo change the order, ans starts at 0
@@ -53,13 +53,13 @@ namespace DynamoSAP_UI
         ShearCenter = 11    
     }
 
-    [NodeName("ForceTypeDropDown")]
+    [NodeName("ForceTypes")]
     [NodeCategory("DynamoSAP.DynamoSAP.Analysis")]
     [NodeDescription("Select Force Type to use with Decompose Result component")]
     [IsDesignScriptCompatible]
-    public class ForceTypeDropdown : EnumAsString<ForceType>
+    public class ForceTypes : EnumAsString<ForceType>
     {
-        public ForceTypeDropdown(WorkspaceModel workspace) : base(workspace) { }
+        public ForceTypes(WorkspaceModel workspace) : base(workspace) { }
     }
 
     public enum ForceType 
@@ -73,13 +73,13 @@ namespace DynamoSAP_UI
     }
 
 
-    [NodeName("SectionCatalogDropdown")]
+    [NodeName("SectionCatalogs")]
     [NodeCategory("DynamoSAP.DynamoSAP.Structure.SectionProp")]
     [NodeDescription("Select Section Catalog as input Sections Node to retrive the section names of selected catalog")]
     [IsDesignScriptCompatible]
-    public class SectionCatalogDropdown : EnumAsString<SectionCatalog>
+    public class SectionCatalogs : EnumAsString<SectionCatalog>
     {
-        public SectionCatalogDropdown(WorkspaceModel workspace) : base(workspace) { }
+        public SectionCatalogs(WorkspaceModel workspace) : base(workspace) { }
     }
     public enum SectionCatalog
     { 
@@ -109,16 +109,16 @@ namespace DynamoSAP_UI
         SECTIONS8
     }
 
-    [NodeName("MaterialDropDown")]
+    [NodeName("Materials")]
     [NodeCategory("DynamoSAP.DynamoSAP.Structure.SectionProp")]
     [NodeDescription("Select Materials to set Section Property")]
     [IsDesignScriptCompatible]
-    public class MaterialDropDown : EnumAsString<Materials>
+    public class Materials : EnumAsString<Material>
     {
-        public MaterialDropDown(WorkspaceModel workspace) : base(workspace) { }
+        public Materials(WorkspaceModel workspace) : base(workspace) { }
     }
 
-    public enum Materials
+    public enum Material
     { 
         A36,
         A53GrB,
@@ -131,13 +131,13 @@ namespace DynamoSAP_UI
     }
 
 
-    [NodeName("UnitsDropdown")]
+    [NodeName("Units")]
     [NodeCategory("DynamoSAP.DynamoSAP.Assembly")]
     [NodeDescription("Select units")]
     [IsDesignScriptCompatible]
-    public class UnitsDropdown : EnumAsString<eUnits>
+    public class Units: EnumAsString<eUnits>
     {
-        public UnitsDropdown(WorkspaceModel workspace) : base(workspace) { }
+        public Units(WorkspaceModel workspace) : base(workspace) { }
     }
 
 }
