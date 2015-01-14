@@ -42,10 +42,11 @@ namespace DynamoSAP.Structure
         {
             get { return BaseCrv; }
         }
+
         /// <summary>
         /// ID of the Curve
         /// </summary>
-        public int ID { get; private set; }
+        internal int ID { get; private set; } 
         
 
         //PUBLIC METHODS
