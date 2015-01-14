@@ -186,6 +186,11 @@ namespace SAPConnection
             }
         }
 
+        public static void DeleteFrm(ref cSapModel Model, string Label)
+        {
+            long ret = Model.FrameObj.Delete(Label);
+        }
+
         /// <summary>
         /// Generates system.GUID and Sets GUID to a frame
         /// </summary>
