@@ -74,6 +74,8 @@ namespace DynamoSAP.Structure
             {
                 // trace cache log didnot return an object, create new one !
                 tFrm = new Frame(Line, SectionProp, Justification, Rotation);
+                // Set Label
+                tFrm.Label = String.Format("dyn_{0}", tFrm.ID.ToString());  
             }
             else
             {
@@ -109,6 +111,8 @@ namespace DynamoSAP.Structure
             {
                 // trace cache log didnot return an object, create new one !
                tFrm = new Frame(i, j, SectionProp, Justification, Rotation);
+                // Set Label
+               tFrm.Label = String.Format("dyn_{0}", tFrm.ID.ToString());  
             }
             else 
             {
@@ -135,16 +139,14 @@ namespace DynamoSAP.Structure
         public static Frame SetReleases(Frame Frame, Release Release)
         {
             // Create a new Frame using the properties of the input frame
-            Frame newFrame = Frame.FromLine(Frame.BaseCurve, Frame.SecProp, Frame.Just, Frame.Angle);
-            // Pass the GUID of the existing frame to override it
-            // The collector will check if there are duplicate GUIDs
-            newFrame.GUID = Frame.GUID;
+            Frame newFrm = Frame.FromLine(Frame.BaseCurve, Frame.SecProp, Frame.Just, Frame.Angle);
+            // Set Label
+            newFrm.Label = String.Format("dyn_{0}", newFrm.ID.ToString());  
             // Add any loads the frame already has
-            newFrame.Loads = Frame.Loads;
+            newFrm.Loads = Frame.Loads;
             // Set the release in the node
-            newFrame.Releases = Release;
-            return newFrame;
-
+            newFrm.Releases = Release;
+            return newFrm;
         }
 
         /// <summary>
@@ -157,12 +159,11 @@ namespace DynamoSAP.Structure
         public static Frame SetLoad(Frame Frame, Load Load, bool replaceExisting = false)
         {
             // Create a new Frame using the properties of the input frame
-            Frame newFrame = Frame.FromLine(Frame.BaseCurve, Frame.SecProp, Frame.Just, Frame.Angle);
-            // Pass the GUID of the existing frame to override it
-            // The collector will check if there are duplicate GUIDs
-            newFrame.GUID = Frame.GUID;
+            Frame newFrm = Frame.FromLine(Frame.BaseCurve, Frame.SecProp, Frame.Just, Frame.Angle);
+            // Set Label
+            newFrm.Label = String.Format("dyn_{0}", newFrm.ID.ToString());  
             // Add any releases the frame already has
-            newFrame.Releases = Frame.Releases;
+            newFrm.Releases = Frame.Releases;
             
             //Set the load in the node
             List<Load> frameLoads = new List<Load>();
@@ -181,9 +182,9 @@ namespace DynamoSAP.Structure
                 }
             }
             frameLoads.Add(Load);
-            newFrame.Loads = frameLoads;
+            newFrm.Loads = frameLoads;
 
-            return newFrame;
+            return newFrm;
         }
 
         // DYNAMO DISPLAY NODES
@@ -211,9 +212,9 @@ namespace DynamoSAP.Structure
         }
 
         /// <summary>
-        /// Display the Loads on a Frame
+        /// Display the Loads
         /// </summary>
-        /// <param name="Frame">Frame to display Loads on</param>
+        /// <param name="StructuralModel">Structural Model</param>
         /// <param name="LPattern">Load Pattern to display</param>
         /// <param name="Size">Size of the arrows</param>
         /// <param name="ShowValues">Set Boolean to True to show the tags of the numeric values</param>
@@ -388,7 +389,6 @@ namespace DynamoSAP.Structure
 
 
 
-
         /// <summary>
         /// Decompose a Frame into its geometry and settings
         /// </summary>
@@ -409,6 +409,7 @@ namespace DynamoSAP.Structure
             };
         }
 
+
         // PRIVATE CONSTRUCTORS
         internal Frame() { }
         internal Frame(Line line, SectionProp secProp, string just, double angle)
@@ -417,6 +418,7 @@ namespace DynamoSAP.Structure
             Angle = angle;
             SecProp = secProp;
             Just = just;
+            this.Type = Structure.Type.Frame;
 
             //register for cache
             ID = TracedFrameManager.GetNextUnusedID();
@@ -428,6 +430,7 @@ namespace DynamoSAP.Structure
             Angle = angle;
             SecProp = secProp;
             Just = just;
+            this.Type = Structure.Type.Frame;
 
             //register for cache
             ID = TracedFrameManager.GetNextUnusedID();

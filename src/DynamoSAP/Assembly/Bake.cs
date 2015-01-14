@@ -27,7 +27,9 @@ namespace DynamoSAP.Assembly
     public class Bake
     {
         private static cSapModel mySapModel;
-        private static Dictionary<string, string> SAPFrmDict = new Dictionary<string, string>(); // <GUID, Label>
+        private static List<string> SAPFrmList = new List<string>(); // List to hold 
+
+
         //// DYNAMO NODES ////
 
         /// <summary>
@@ -47,7 +49,7 @@ namespace DynamoSAP.Assembly
             double LengthSF = SAPConnection.Utilities.UnitConversion(Units, fromUnit); // Lenght Conversion Factor
 
             // Clear Frame Dictionary
-            SAPFrmDict.Clear();
+            SAPFrmList.Clear();
 
             // 2. Create new SAP Model and bake Stuctural Model 
             if (StructuralModel != null)
@@ -57,10 +59,15 @@ namespace DynamoSAP.Assembly
             return StructuralModel;
         }
 
+        // Private Constructor
         private Bake() { }
+
+
 
         #region PRIVATE SAP METHODS
         //CREATE FRAME METHOD
+
+        //Create or Update Frame
         private static void CreateorUpdateFrame(Frame f, ref cSapModel mySapModel, double SF, bool update)
         {
             if (!update) // Create new 
@@ -86,15 +93,10 @@ namespace DynamoSAP.Assembly
                 {
                     f.Label = dummy;
                 }
-                
-                // 2. Set GUID
-                SAPConnection.StructureMapper.SetGUIDFrm(ref mySapModel, f.Label, f.GUID); // GUID matches to ElementGUID, for updates !
+
             }
             else // Update Coordinates
             { 
-                // update sapElementlabel if different then Frame.Label !!!
-                SAPConnection.StructureMapper.ChangeNameSAPFrm(ref mySapModel, SAPFrmDict[f.GUID], f.Label);
-
                 string id = f.Label;
                 SAPConnection.StructureMapper.CreateorUpdateFrm(ref mySapModel, f.BaseCrv.StartPoint.X * SF,
                     f.BaseCrv.StartPoint.Y * SF,
@@ -161,7 +163,7 @@ namespace DynamoSAP.Assembly
             }
         }
 
-        // Create Sap Model from a Dynamo Model
+        // Create or Update Sap Model from a Dynamo Model
         private static void CreateorUpdateSAPModel(ref StructuralModel StructuralModel, string Units, double SF, bool delete)
         {
             // check if any SAP file is open, grab 
@@ -196,13 +198,13 @@ namespace DynamoSAP.Assembly
 
             //2. Create or Update Frames (Sets Releases)
             // Harvest the elements from SAP Model
-            SAPConnection.StructureMapper.GetSAPFrameDict(ref mySapModel, ref SAPFrmDict); // frms
+            SAPConnection.StructureMapper.GetSAPFrameList(ref mySapModel, ref SAPFrmList); // frms
 
             foreach (var el in StructuralModel.StructuralElements)
             {
-                if (el.GetType().ToString().Contains("Frame"))
+                if (el.Type == Structure.Type.Frame)
                 {
-                    bool isupdate = SAPFrmDict.ContainsKey(el.GUID);
+                    bool isupdate = SAPFrmList.Contains(el.Label);
 
                     CreateorUpdateFrame(el as Frame, ref mySapModel, SF, isupdate);
 
@@ -219,20 +221,20 @@ namespace DynamoSAP.Assembly
             if (delete)
             {
                 //Frms from SAP not in Structural elements
-                foreach (var sapfrm in SAPFrmDict)
+                foreach (var sapfrm in SAPFrmList)
                 {
                     Element el = null;
                     try
                     {
                         el = (from f in StructuralModel.StructuralElements
-                              where f.GUID == sapfrm.Key
+                              where f.Label == sapfrm
                               select f).First();
                     }
                     catch (Exception) { }
 
                     if (el == null) // not in Dynamo Structure so delete from SAP Model
                     {
-                        SAPConnection.StructureMapper.DeleteFrm(ref mySapModel, sapfrm.Value);
+                        SAPConnection.StructureMapper.DeleteFrm(ref mySapModel, sapfrm);
                     }
 
                 } 
@@ -303,12 +305,15 @@ namespace DynamoSAP.Assembly
                 }
             }
 
+            // refresh View 
+
             mySapModel.View.RefreshView(0, false);
 
             //if can't set to null, will be a hanging process
             mySapModel = null;
             mySapObject = null;
         }
+
         #endregion
     }
 }

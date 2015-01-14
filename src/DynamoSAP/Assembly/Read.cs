@@ -185,10 +185,6 @@ namespace DynamoSAP.Assembly
                     SectionProp secProp = new SectionProp(secName, matProp, secCatalog);
                     Frame d_frm = new Frame(s, e, secProp, Just, Rot);
                     d_frm.Label = FrmIds[i];
-                    // get Guid
-                    string guid = string.Empty;
-                    StructureMapper.GetGUIDFrm(ref SapModel, FrmIds[i], ref guid);
-                    d_frm.GUID = guid;
                     model.StructuralElements.Add(d_frm);
 
                     //LOADS

@@ -12,20 +12,22 @@ namespace DynamoSAP.Structure
     [IsVisibleInDynamoLibrary(false)]
     public class Element
     {
-        private string guid = System.Guid.NewGuid().ToString();
         /// <summary>
-        /// GUID of an element
-        /// </summary>
-        public string GUID { get { return guid; } set { guid = value; } }
-        /// <summary>
-        /// SAP2000 Label of an object
+        /// Label 
         /// </summary>
         public string Label { get; set; }
 
-        //internal string getType(object o) // ?
-        //{
-        //    return o.GetType().ToString();
-        //}
+        /// <summary>
+        /// Type
+        /// </summary>
+        public Type Type { get; set; }
 
+    }
+
+    public enum  Type
+    {
+        Frame,
+        Cable,
+        Shell
     }
 }

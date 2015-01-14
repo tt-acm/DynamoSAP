@@ -27,12 +27,12 @@ namespace DynamoSAP.Assembly
         private static void CheckDuplicateFrame(List<Element> StructEl)
         {
             // Dictionary to hold Structure Frames on <string, string> <GUID,Label>
-            Dictionary<string, string> SapModelFrmDict = new Dictionary<string, string>();
+            List<string> SapModelFrmList = new List<string>();
             foreach (Element el in StructEl)
             {
-                if (!SapModelFrmDict.Keys.Contains(el.GUID))
+                if (!SapModelFrmList.Contains(el.Label))
                 {
-                    SapModelFrmDict.Add(el.GUID, el.Label);
+                    SapModelFrmList.Add(el.Label);
                 }
                 // If the key exists, throw an error in the collector
                 else

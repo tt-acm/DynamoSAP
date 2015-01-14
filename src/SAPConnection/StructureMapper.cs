@@ -168,57 +168,26 @@ namespace SAPConnection
         /// Harvesting the active SAP and creates dictionardy holds FramesGUID and Labels
         /// </summary>
         /// <param name="Model">Active SAP Model</param>
-        /// <param name="myFrameDict"> Dictionary key, value pair of GUID, Label </param>
-        public static void GetSAPFrameDict(ref cSapModel Model, ref Dictionary<string, string> myFrameDict) // <GUID, Label> 
+        /// <param name="myFrameList"> List of Labels of SAP Frames </param>
+        public static void GetSAPFrameList(ref cSapModel Model, ref List<string> myFrameList) // <GUID, Label> 
         {
             string[] ID = null;
             int NumbOfFrames = 0;
             int ret = Model.FrameObj.GetNameList(ref NumbOfFrames, ref ID);
-
-            for (int i = 0; i < NumbOfFrames; i++)
+            if (ID != null)
             {
-                // frame objectid
-                string frameid = ID.GetValue(i).ToString();
-
-                // set and get guid  
-                string GUID = SetGUIDFrm(ref Model, frameid);
-                myFrameDict.Add(GUID, frameid);
-            }
-        }
-
-        public static void DeleteFrm(ref cSapModel Model, string Label)
-        {
-            long ret = Model.FrameObj.Delete(Label);
+                myFrameList = ID.ToList();
+            }  
         }
 
         /// <summary>
-        /// Generates system.GUID and Sets GUID to a frame
+        /// 
         /// </summary>
-        /// <param name="Model"> SapModel </param>
-        /// <param name="frameid"> Frameobject label id </param>
-        /// <returns> string GUID </returns>
-        public static string SetGUIDFrm(ref cSapModel Model, string frameid)
+        /// <param name="Model"></param>
+        /// <param name="Label"></param>
+        public static void DeleteFrm(ref cSapModel Model, string Label)
         {
-            string GUID = string.Empty;
-            long ret = 0;
-            Guid g;
-
-            ret = Model.FrameObj.GetGUID(frameid, ref GUID);
-            if (GUID == null || GUID == "")
-            {
-                g = Guid.NewGuid();
-                GUID = g.ToString();
-                ret = Model.FrameObj.SetGUID(frameid, GUID);
-                return GUID;
-            }
-            if (GUID.Contains("{"))
-            {
-                //clean guid from characters
-                char[] delimiterChars = { '{', '}' };
-                string[] words = GUID.Split(delimiterChars);
-                GUID = words[1];
-            }
-            return GUID;
+            long ret = Model.FrameObj.Delete(Label);
         }
 
     }
