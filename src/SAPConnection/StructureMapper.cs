@@ -36,7 +36,7 @@ namespace SAPConnection
             
         }
 
-        public static void CreateorUpdateArea(ref cSapModel Model, Mesh m, ref string Id, bool update)
+        public static void CreateorUpdateArea(ref cSapModel Model, Mesh m, ref string Id, bool update, double SF)
         {
             if (!update)
             {
@@ -44,7 +44,7 @@ namespace SAPConnection
                 foreach (var v in m.VertexPositions)
                 {
                     string dummy = null;
-                    long ret = Model.PointObj.AddCartesian(v.X, v.Y, v.Z, ref dummy);
+                    long ret = Model.PointObj.AddCartesian(v.X*SF, v.Y*SF, v.Z*SF, ref dummy);
                     ProfilePts.Add(dummy);
                 }
 
@@ -64,7 +64,7 @@ namespace SAPConnection
                 {
                     for (int i = 0; i < eNumberofPts; i++)
                     {
-                        long reto = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X, m.VertexPositions[i].Y, m.VertexPositions[i].Z);
+                        long reto = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X*SF, m.VertexPositions[i].Y*SF, m.VertexPositions[i].Z*SF);
                     }
                 }
                 else if (eNumberofPts > m.VertexPositions.Count()) // remove Points
@@ -73,7 +73,7 @@ namespace SAPConnection
                     {
                         if (i < m.VertexPositions.Count())
                         {
-                            ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X, m.VertexPositions[i].Y, m.VertexPositions[i].Z);
+                            ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X*SF, m.VertexPositions[i].Y*SF, m.VertexPositions[i].Z*SF);
                         }
                         else
                         {
@@ -90,7 +90,7 @@ namespace SAPConnection
                     {
                         if (i < eNumberofPts)
                         {
-                            ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X, m.VertexPositions[i].Y, m.VertexPositions[i].Z);
+                            ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X*SF, m.VertexPositions[i].Y*SF, m.VertexPositions[i].Z*SF);
                         }
                         else 
                         {
@@ -107,13 +107,11 @@ namespace SAPConnection
                             ret = Model.AreaObj.GetPoints(Id, ref tempnumb, ref TempPtNames);
 
 
-                            ret = Model.EditPoint.ChangeCoordinates_1(TempPtNames[i], m.VertexPositions[i].X, m.VertexPositions[i].Y, m.VertexPositions[i].Z);
+                            ret = Model.EditPoint.ChangeCoordinates_1(TempPtNames[i], m.VertexPositions[i].X*SF, m.VertexPositions[i].Y*SF, m.VertexPositions[i].Z*SF);
                         }
                     }
 
-
                 }
-
 
             }
         }

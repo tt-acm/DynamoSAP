@@ -165,7 +165,7 @@ namespace DynamoSAP.Assembly
             if (!update) // create new one
             {
                 string dummy = string.Empty;
-                SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseMesh, ref dummy, false);
+                SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseMesh, ref dummy, false, SF);
                 // Set custom Label to Frame in dynamo & Frame! User can match by using Label & ID
                 bool renamed = SAPConnection.StructureMapper.ChangeNameSAPArea(ref mySapModel, dummy, s.Label);
                 if (!renamed)
@@ -176,7 +176,7 @@ namespace DynamoSAP.Assembly
             else // modify the existing
             {
                 string id = s.Label;
-                SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseMesh, ref id, true);
+                SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseMesh, ref id, true, SF);
             }
         }
 
