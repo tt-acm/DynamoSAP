@@ -186,11 +186,6 @@ namespace SAPConnection
 
 
         // READ FROM SAPMODEL
-        public static void GetFrameIds(ref string[] Names, ref cSapModel Model)
-        {
-            int number = 0;
-            int ret = Model.FrameObj.GetNameList(ref number, ref Names);
-        }
 
         public static void GetFrm(ref cSapModel Model, string frmId, ref Point i, ref Point j, ref string MatProp, ref string SecName, ref string Just, ref double Rot, ref string SecCatalog, double LSF) //Length Scale Factor
         {
@@ -233,6 +228,31 @@ namespace SAPConnection
 
         }
 
+        public static void GetShell(ref cSapModel Model, string areaid, ref Surface BaseS, double LSF) //Length Scale Factor
+        {
+            long ret = 0;
+
+            int NumOfPts = 0;
+            string[] PtsNames = null;
+            ret = Model.AreaObj.GetPoints(areaid, ref NumOfPts, ref PtsNames);
+
+            List<Point> dynPts = new List<Point>();
+            List<IndexGroup> igs = new List<IndexGroup>();
+            for (int i = 0; i < PtsNames.Count(); i++)
+            {
+                double x = 0;
+                double y = 0;
+                double z = 0;
+
+                ret = Model.PointObj.GetCoordCartesian(PtsNames[i], ref x, ref y, ref z);
+
+                Point p = Point.ByCoordinates(x * LSF, y * LSF, z * LSF);
+                dynPts.Add(p);
+            }
+
+            //Mesh.ByPointsFaceIndices()
+            BaseS = Surface.ByPerimeterPoints(dynPts);
+        }
 
         /// <summary>
         /// Harvesting the active SAP and creates dictionardy holds FramesGUID and Labels

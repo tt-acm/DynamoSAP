@@ -169,9 +169,10 @@ namespace DynamoSAP.Assembly
                 // Calculate Length Scale Factor
                 Double SF = Utilities.UnitConversion("m", SapModelUnits); // Dynamo API Lenght Unit is 'meter'
 
-                string[] FrmIds = null;
-                StructureMapper.GetFrameIds(ref FrmIds, ref SapModel);
-                for (int i = 0; i < FrmIds.Length; i++)
+                List<string> FrmIds = new List<string>();
+                StructureMapper.GetSAPFrameList(ref SapModel,ref FrmIds);
+
+                for (int i = 0; i < FrmIds.Count; i++)
                 {
                     Point s = null;
                     Point e = null;
@@ -258,6 +259,18 @@ namespace DynamoSAP.Assembly
                                                     , ii[4], jj[4]
                                                     , ii[5], jj[5]);
                     }
+                }
+
+                // 2.b Get Shells from SAP Model
+                List<string> AreaIds = new List<string>();
+                SAPConnection.StructureMapper.GetSAPAreaList(ref SapModel, ref AreaIds);
+                for (int i = 0; i < AreaIds.Count; i++)
+                {
+                    Surface S = null;
+                    SAPConnection.StructureMapper.GetShell(ref SapModel, AreaIds[i], ref S, SF);
+                    Shell d_Shell = new Shell(S);
+                    d_Shell.Label = AreaIds[i];
+                    model.StructuralElements.Add(d_Shell);
                 }
 
                 // 3. GET RESTRAINTS

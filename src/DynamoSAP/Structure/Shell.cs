@@ -23,11 +23,17 @@ namespace DynamoSAP.Structure
         // Mesh
         internal Mesh BaseM { get; set; }
 
+        internal Surface BaseS { get; set; }
         
         // QUERY NODES
         public Mesh BaseMesh
         {
             get { return BaseM; }
+        }
+
+        public Surface BaseSurface
+        {
+            get { return BaseS; }
         }
 
         /// <summary>
@@ -76,6 +82,15 @@ namespace DynamoSAP.Structure
         internal Shell(Mesh mesh)
         {
             BaseM = mesh;
+            this.Type = Structure.Type.Shell;
+
+            //register for cache
+            ID = TracedShellManager.GetNextUnusedID();
+            TracedShellManager.RegisterShellforID(ID, this);
+        }
+        internal Shell(Surface surface)
+        {
+            BaseS = surface;
             this.Type = Structure.Type.Shell;
 
             //register for cache
