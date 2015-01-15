@@ -22,6 +22,8 @@ namespace DynamoSAP.Structure
         /// </summary>
         public Type Type { get; set; }
 
+
+        internal const string TRACE_ID = "{0459D869-0C72-447F-96D8-08A7FB92214B}-REVIT"; // this constant can't change
     }
 
     [IsVisibleInDynamoLibrary(false)]

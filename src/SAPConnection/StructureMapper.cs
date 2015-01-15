@@ -36,15 +36,97 @@ namespace SAPConnection
             
         }
 
-
-        public static void SetGUIDFrm(ref cSapModel Model, string Label, string GUID)
+        public static void CreateorUpdateArea(ref cSapModel Model, Mesh m, ref string Id, bool update)
         {
-            long ret = Model.FrameObj.SetGUID(Label, GUID);
+            if (!update)
+            {
+                List<string> ProfilePts = new List<string>();
+                foreach (var v in m.VertexPositions)
+                {
+                    string dummy = null;
+                    long ret = Model.PointObj.AddCartesian(v.X, v.Y, v.Z, ref dummy);
+                    ProfilePts.Add(dummy);
+                }
+
+                string[] names = ProfilePts.ToArray();
+                long reti = Model.AreaObj.AddByPoint(ProfilePts.Count(), ref names, ref Id);
+            }
+            else
+            {  // TODO: Update Shell
+
+                // Existing
+                int eNumberofPts = 0;
+                string[] ePtNames = null;
+                long ret = Model.AreaObj.GetPoints(Id, ref eNumberofPts, ref ePtNames);
+
+                // Compare the number of points
+                if (eNumberofPts == m.VertexPositions.Count())
+                {
+                    for (int i = 0; i < eNumberofPts; i++)
+                    {
+                        long reto = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X, m.VertexPositions[i].Y, m.VertexPositions[i].Z);
+                    }
+                }
+                else if (eNumberofPts > m.VertexPositions.Count()) // remove Points
+                {
+                    for (int i = 0; i < eNumberofPts; i++)
+                    {
+                        if (i < m.VertexPositions.Count())
+                        {
+                            ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X, m.VertexPositions[i].Y, m.VertexPositions[i].Z);
+                        }
+                        else
+                        {
+                            ret = Model.SelectObj.ClearSelection();
+                            ret = Model.AreaObj.SetSelected(Id, true);
+                            ret = Model.PointObj.SetSelected(ePtNames[i], true);
+                            ret = Model.EditArea.PointRemove();
+                        }
+                    }
+                }
+                else if(eNumberofPts < m.VertexPositions.Count()) // add points
+                {
+                    for (int i = 0; i < m.VertexPositions.Count(); i++)
+                    {
+                        if (i < eNumberofPts)
+                        {
+                            ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X, m.VertexPositions[i].Y, m.VertexPositions[i].Z);
+                        }
+                        else 
+                        {
+                            // add point to latest edge
+                            ret = Model.SelectObj.ClearSelection();
+                            int a = i - 1;
+                            ret = Model.AreaObj.SetSelectedEdge(Id, a, true);
+
+                            ret = Model.EditArea.PointAdd();
+
+                            // the repeat the first step so # of name and has updated
+                            int tempnumb = 0;
+                            string[] TempPtNames = null;
+                            ret = Model.AreaObj.GetPoints(Id, ref tempnumb, ref TempPtNames);
+
+
+                            ret = Model.EditPoint.ChangeCoordinates_1(TempPtNames[i], m.VertexPositions[i].X, m.VertexPositions[i].Y, m.VertexPositions[i].Z);
+                        }
+                    }
+
+
+                }
+
+
+            }
         }
 
         public static bool ChangeNameSAPFrm(ref cSapModel Model, string Name, string NewName)
         {
             long ret = Model.FrameObj.ChangeName(Name, NewName);
+            if (ret == 0) { return true; } else { return false; }
+        }
+
+        public static bool ChangeNameSAPArea(ref cSapModel Model, string Name, string NewName)
+        {
+            long ret = Model.AreaObj.ChangeName(Name, NewName);
             if (ret == 0) { return true; } else { return false; }
         }
 
@@ -79,7 +161,6 @@ namespace SAPConnection
             eFramePropType[] PropType = null;
             long ret = Model.PropFrame.GetPropFileNameList(SC, ref number, ref Names, ref PropType);
         }
-
 
         public static void GetLoadPatterns(ref cSapModel Model, ref string[] LoadPatternNames, ref string[] LoadPatternTypes, ref double[] LoadPatternMultipliers)
         {
@@ -154,15 +235,6 @@ namespace SAPConnection
 
         }
 
-        public static void GetGUIDFrm(ref cSapModel Model, string Label, ref string GUID)
-        {
-            long ret = Model.FrameObj.GetGUID(Label, ref GUID);
-            if (String.IsNullOrEmpty(GUID))
-            {
-                ret = Model.FrameObj.SetGUID(Label);
-                ret = Model.FrameObj.GetGUID(Label, ref GUID);
-            }
-        }
 
         /// <summary>
         /// Harvesting the active SAP and creates dictionardy holds FramesGUID and Labels
@@ -171,12 +243,12 @@ namespace SAPConnection
         /// <param name="myFrameList"> List of Labels of SAP Frames </param>
         public static void GetSAPFrameList(ref cSapModel Model, ref List<string> myFrameList) // <GUID, Label> 
         {
-            string[] ID = null;
+            string[] IDs = null;
             int NumbOfFrames = 0;
-            int ret = Model.FrameObj.GetNameList(ref NumbOfFrames, ref ID);
-            if (ID != null)
+            long ret = Model.FrameObj.GetNameList(ref NumbOfFrames, ref IDs);
+            if (IDs != null)
             {
-                myFrameList = ID.ToList();
+                myFrameList = IDs.ToList();
             }  
         }
 
@@ -188,6 +260,27 @@ namespace SAPConnection
         public static void DeleteFrm(ref cSapModel Model, string Label)
         {
             long ret = Model.FrameObj.Delete(Label);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Model"></param>
+        /// <param name="Label"></param>
+        public static void DeleteArea(ref cSapModel Model, string Label)
+        {
+            long ret = Model.AreaObj.Delete(Label);
+        }
+
+        public static void GetSAPAreaList(ref cSapModel Model, ref List<string> myAreaList)
+        {
+            string[] IDs = null;
+            int NumbOfAreas = 0;
+            long ret = Model.AreaObj.GetNameList(ref NumbOfAreas, ref IDs);
+            if (IDs != null)
+            {
+                myAreaList = IDs.ToList();
+            }
         }
 
         /// <summary>

@@ -32,7 +32,6 @@ namespace DynamoSAP.Structure
         internal Release Releases { get; set; }
         internal List<Load> Loads { get; set; }
 
-        private const string TRACE_ID = "{0459D869-0C72-447F-96D8-08A7FB92214B}-REVIT"; // this constant can't change
 
         // QUERY NODES
         /// <summary>
@@ -391,6 +390,7 @@ namespace DynamoSAP.Structure
         }
 
 
+        // DECOMPOSE NODE
 
         /// <summary>
         /// Decompose a Frame into its geometry and settings

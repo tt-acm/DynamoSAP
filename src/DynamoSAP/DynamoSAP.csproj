@@ -86,6 +86,7 @@
     <Compile Include="Structure\Element.cs" />
     <Compile Include="Structure\Frame.cs" />
     <Compile Include="Structure\SectionProp.cs" />
+    <Compile Include="Structure\Shell.cs" />
     <Compile Include="Text.cs" />
     <Compile Include="TracedFrameManager.cs" />
   </ItemGroup>

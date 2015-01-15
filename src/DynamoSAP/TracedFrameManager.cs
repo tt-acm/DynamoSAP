@@ -69,4 +69,62 @@ namespace DynamoSAP
             IntID = (int)info.GetValue("intID", typeof(int));
         }
     }
+
+    [SupressImportIntoVM]
+    public class TracedShellManager
+    {
+        public static int shellID = 0;
+
+        public static int GetNextUnusedID()
+        {
+            int next = shellID;
+            shellID++;
+            return next;
+        }
+
+        public static Dictionary<int, Shell> ShellDictionary = new Dictionary<int, Shell>();
+
+        public static Shell GetShellbyID(int id)
+        {
+            Shell ret;
+            ShellDictionary.TryGetValue(id, out ret);
+            return ret;
+        }
+
+        public static void RegisterShellforID(int id, Shell shell)
+        {
+            if (ShellDictionary.ContainsKey(id))
+            {
+                ShellDictionary[id] = shell;
+            }
+            else
+            {
+                ShellDictionary.Add(id, shell);
+            }
+
+        }
+
+    }
+
+    [SupressImportIntoVM]
+    public class ShellID : ISerializable
+    {
+        public int IntID { get; set; }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("intID", IntID, typeof(int));
+        }
+
+        public ShellID()
+        {
+            IntID = int.MinValue;
+        }
+
+        public ShellID(SerializationInfo info, StreamingContext context)
+        {
+            IntID = (int)info.GetValue("intID", typeof(int));
+        }
+    }
+
 }

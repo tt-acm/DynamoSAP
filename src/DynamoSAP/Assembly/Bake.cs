@@ -28,7 +28,7 @@ namespace DynamoSAP.Assembly
     {
         private static cSapModel mySapModel;
         private static List<string> SAPFrmList = new List<string>(); // List to hold 
-
+        private static List<string> SAPAreaList = new List<string>();
 
         //// DYNAMO NODES ////
 
@@ -85,13 +85,9 @@ namespace DynamoSAP.Assembly
 
                 // Set custom Label to Frame in dynamo & Frame! User can match by using Label & ID
                 bool renamed = SAPConnection.StructureMapper.ChangeNameSAPFrm(ref mySapModel, dummy, String.Format("dyn_{0}", f.ID.ToString()));
-                if (renamed)
+                if (!renamed)
                 {
-                   f.Label = String.Format("dyn_{0}", f.ID.ToString());  
-                }
-                else 
-                {
-                    f.Label = dummy;
+                    f.Label = dummy; 
                 }
 
             }
@@ -163,15 +159,36 @@ namespace DynamoSAP.Assembly
             }
         }
 
+        // Create or Update Area
+        private static void CreateorUpdateArea(Shell s, ref cSapModel mySAPModel, double SF, bool update)
+        {
+            if (!update) // create new one
+            {
+                string dummy = string.Empty;
+                SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseMesh, ref dummy, false);
+                // Set custom Label to Frame in dynamo & Frame! User can match by using Label & ID
+                bool renamed = SAPConnection.StructureMapper.ChangeNameSAPArea(ref mySapModel, dummy, s.Label);
+                if (!renamed)
+                {
+                    s.Label = dummy;
+                }
+            }
+            else // modify the existing
+            {
+                string id = s.Label;
+                SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseMesh, ref id, true);
+            }
+        }
+
         // Create or Update Sap Model from a Dynamo Model
         private static void CreateorUpdateSAPModel(ref StructuralModel StructuralModel, string Units, double SF, bool delete)
         {
-            // check if any SAP file is open, grab 
 
             string report = string.Empty;
 
-            //1. Instantiate or Grab SAPModel
-
+            //1. INSTANTIATE NEW OR GRAB OPEN SAPMODEL 
+            
+            // check if any SAP file is open, grab 
             SAP2000v16.SapObject mySapObject = null;
             string SapModelUnits = string.Empty;
 
@@ -190,16 +207,16 @@ namespace DynamoSAP.Assembly
                     SAPConnection.Initialize.Release(ref mySapObject, ref mySapModel);
                 };
             }
-
-            
+ 
 
             //2. CREATE OR UPDATE SIMULTENOUSLY
            
-
             //2. Create or Update Frames (Sets Releases)
-            // Harvest the elements from SAP Model
+            // 2.a. Harvest the elements from SAP Model
             SAPConnection.StructureMapper.GetSAPFrameList(ref mySapModel, ref SAPFrmList); // frms
+            SAPConnection.StructureMapper.GetSAPAreaList(ref mySapModel, ref SAPAreaList);
 
+            //2.b. Create or Update 
             foreach (var el in StructuralModel.StructuralElements)
             {
                 if (el.Type == Structure.Type.Frame)
@@ -215,7 +232,16 @@ namespace DynamoSAP.Assembly
                         SetReleases(el as Frame, ref mySapModel); // Set releases 
                     }
                 }
+                else if (el.Type == Structure.Type.Shell)
+                {
+                    bool isupdate = SAPAreaList.Contains(el.Label);
+
+                    CreateorUpdateArea(el as Shell, ref mySapModel, SF, isupdate);
+                    
+                }
             }
+
+
 
             // DELETE 
             if (delete)
@@ -237,7 +263,26 @@ namespace DynamoSAP.Assembly
                         SAPConnection.StructureMapper.DeleteFrm(ref mySapModel, sapfrm);
                     }
 
-                } 
+                }
+ 
+                // Areas from SAP not in Structural elements
+                foreach (var sapArea in SAPAreaList)
+                {
+                    Element el = null;
+                    try
+                    {
+                              el = (from f in StructuralModel.StructuralElements
+                              where f.Label == sapArea
+                              select f).First();
+                    }
+                    catch (Exception){ }
+
+                    if (el == null)
+                    {
+                        SAPConnection.StructureMapper.DeleteArea(ref mySapModel, sapArea);
+                    }
+                }
+
             }
 
             // 3. Assigns Restraints to Nodes
@@ -291,9 +336,10 @@ namespace DynamoSAP.Assembly
                 }
             }
 
+            // Set Loads 
             foreach (var el in StructuralModel.StructuralElements)
             {
-                if (el.GetType().ToString().Contains("Frame"))
+                if (el.Type == Structure.Type.Frame)
                 {
                     Frame frm = el as Frame;
 
@@ -305,8 +351,8 @@ namespace DynamoSAP.Assembly
                 }
             }
 
-            // refresh View 
 
+            // refresh View 
             SAPConnection.StructureMapper.RefreshView(ref mySapModel);
 
             //if can't set to null, will be a hanging process
