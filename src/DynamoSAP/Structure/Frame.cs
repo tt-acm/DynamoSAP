@@ -400,16 +400,20 @@ namespace DynamoSAP.Structure
         [MultiReturn("BaseCurve", "SectionProp", "Justification", "Rotation", "Loads", "Releases")]
         public static Dictionary<string, object> Decompose(Frame Frame)
         {
-            // Return outputs
-            return new Dictionary<string, object>
+            if (Frame.Type == Structure.Type.Frame)
             {
-                {"BaseCurve", Frame.BaseCrv},
-                {"SectionProp", Frame.SecProp},
-                {"Justification", Frame.Just},
-                {"Rotation", Frame.Angle},
-                {"Loads", Frame.Loads},
-                {"Releases", Frame.Releases}
-            };
+                // Return outputs
+                return new Dictionary<string, object>
+                {
+                    {"BaseCurve", Frame.BaseCrv},
+                    {"SectionProp", Frame.SecProp},
+                    {"Justification", Frame.Just},
+                    {"Rotation", Frame.Angle},
+                    {"Loads", Frame.Loads},
+                    {"Releases", Frame.Releases}
+                };
+            }
+            return null;           
         }
 
 

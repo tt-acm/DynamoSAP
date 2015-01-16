@@ -22,8 +22,10 @@ namespace DynamoSAP.Structure
 
         // Mesh
         internal Mesh BaseM { get; set; }
-
+        // Surface
         internal Surface BaseS { get; set; }
+        // Shell Property
+        internal ShellProp shellProp { get; set; }
         
         // QUERY NODES
         public Mesh BaseMesh
@@ -34,6 +36,11 @@ namespace DynamoSAP.Structure
         public Surface BaseSurface
         {
             get { return BaseS; }
+        }
+
+        public ShellProp ShellProp
+        {
+            get { return shellProp; }
         }
 
         /// <summary>
@@ -52,7 +59,13 @@ namespace DynamoSAP.Structure
         }
 
         //PUBLIC NODES
-        public static Shell FromMesh(Mesh Mesh)
+        /// <summary>
+        /// Creates Shell from Mesh
+        /// </summary>
+        /// <param name="Mesh">Dynamo Mesh</param>
+        /// <param name="ShellProp">Shell Property</param>
+        /// <returns></returns>
+        public static Shell FromMesh(Mesh Mesh, ShellProp ShellProp)
         {
             Shell tShell;
             ShellID tShellid = DSNodeServices.TraceUtils.GetTraceData(TRACE_ID) as ShellID;
@@ -60,7 +73,7 @@ namespace DynamoSAP.Structure
             if (tShellid == null)
             {
                 // trace cache log didnoy return an objec, create new one !
-                tShell = new Shell(Mesh);
+                tShell = new Shell(Mesh, ShellProp);
                 // Set Label
                 tShell.Label = String.Format("dyn_{0}", tShell.ID.ToString()); 
             }
@@ -69,6 +82,39 @@ namespace DynamoSAP.Structure
                 tShell = TracedShellManager.GetShellbyID(tShellid.IntID);
 
                 tShell.BaseM = Mesh;
+                tShell.shellProp = ShellProp;
+            }
+
+            // Set the trace data on the return to be this Shell
+            DSNodeServices.TraceUtils.SetTraceData(TRACE_ID, new ShellID { IntID = tShell.ID });
+
+            return tShell;
+        }
+
+        /// <summary>
+        /// Creates Shell from Surface
+        /// </summary>
+        /// <param name="Surface">Dynamo Surface</param>
+        /// <param name="ShellProp">Shell Property </param>
+        /// <returns></returns>
+        public static Shell FromSurface(Surface Surface, ShellProp ShellProp)
+        {
+            Shell tShell;
+            ShellID tShellid = DSNodeServices.TraceUtils.GetTraceData(TRACE_ID) as ShellID;
+
+            if (tShellid == null)
+            {
+                // trace cache log didnoy return an objec, create new one !
+                tShell = new Shell(Surface, ShellProp);
+                // Set Label
+                tShell.Label = String.Format("dyn_{0}", tShell.ID.ToString());
+            }
+            else
+            {
+                tShell = TracedShellManager.GetShellbyID(tShellid.IntID);
+
+                tShell.BaseS = Surface;
+                tShell.shellProp = ShellProp;
             }
 
             // Set the trace data on the return to be this Shell
@@ -79,18 +125,20 @@ namespace DynamoSAP.Structure
 
         //PRIVATE CONSTRUCTORS
         internal Shell() { }
-        internal Shell(Mesh mesh)
+        internal Shell(Mesh mesh, ShellProp shellprop)
         {
             BaseM = mesh;
+            shellProp = shellprop;
             this.Type = Structure.Type.Shell;
 
             //register for cache
             ID = TracedShellManager.GetNextUnusedID();
             TracedShellManager.RegisterShellforID(ID, this);
         }
-        internal Shell(Surface surface)
+        internal Shell(Surface surface, ShellProp shellprop)
         {
             BaseS = surface;
+            shellProp = shellprop;
             this.Type = Structure.Type.Shell;
 
             //register for cache

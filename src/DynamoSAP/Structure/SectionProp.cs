@@ -50,7 +50,7 @@ namespace DynamoSAP.Structure
         /// Define a Section property
         /// </summary>
         /// <param name="Name">Name of the section property</param>
-        /// <param name="Material">Material of the section</param>
+        /// <param name="Material">Material of the section property</param>
         /// <param name="SectionCatalog">Section Catalog</param>
         /// <returns>Section Property</returns>
         public static SectionProp Define(string Name = "W12X14", string Material = "A992Fy50", string SectionCatalog = "AISC14")

@@ -37,7 +37,7 @@ namespace DynamoSAP_UI
     {
         public JustificationTypes(WorkspaceModel workspace) : base(workspace) { }
     }
-
+    
     public enum Justification // Dynamo change the order, ans starts at 0
     {
         BottomLeft = 1,
@@ -140,4 +140,23 @@ namespace DynamoSAP_UI
         public Units(WorkspaceModel workspace) : base(workspace) { }
     }
 
+    [NodeName("ShellTypes")]
+    [NodeCategory("DynamoSAP.DynamoSAP.Structure.ShellProp")]
+    [NodeDescription("Shell Types")]
+    [IsDesignScriptCompatible]
+    public class ShellTypes : EnumAsString<ShellType>
+    {
+        public ShellTypes(WorkspaceModel workspace) : base(workspace) { }
+    }
+
+ 
+    public enum ShellType
+    {
+        Shell_thin = 1,
+        Shell_thick ,
+        Plate_thin,
+        Plate_thick,
+        Membrane,
+        Shell_layered
+    }
 }

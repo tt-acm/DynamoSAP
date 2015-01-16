@@ -267,8 +267,20 @@ namespace DynamoSAP.Assembly
                 for (int i = 0; i < AreaIds.Count; i++)
                 {
                     Surface S = null;
-                    SAPConnection.StructureMapper.GetShell(ref SapModel, AreaIds[i], ref S, SF);
-                    Shell d_Shell = new Shell(S);
+
+                    string propName = string.Empty;
+                    SAPConnection.StructureMapper.GetShell(ref SapModel, AreaIds[i], ref S, SF, ref propName);
+                    
+                    string ShellType= string.Empty;
+                    bool DOF = true;
+                    string MatProp = string.Empty;
+                    double MatAngle = 0;
+                    double Thickness = 0;
+                    double Bending = 0;
+                    SAPConnection.StructureMapper.GetShellProp(ref SapModel, propName, ref ShellType, ref DOF, ref MatProp, ref MatAngle, ref Thickness, ref Bending);
+                    ShellProp sP = new ShellProp(propName, ShellType, DOF, MatProp, MatAngle, Thickness, Bending);
+
+                    Shell d_Shell = new Shell(S, sP);
                     d_Shell.Label = AreaIds[i];
                     model.StructuralElements.Add(d_Shell);
                 }

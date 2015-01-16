@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 
 using SAP2000v16;
+using DynamoSAP_UI;
+
 // interop.COM services for SAP
 using System.Runtime.InteropServices;
 
@@ -38,6 +40,7 @@ namespace SAPConnection
 
         public static void CreateorUpdateArea(ref cSapModel Model, Mesh m, ref string Id, bool update, double SF)
         {
+
             if (!update)
             {
                 List<string> ProfilePts = new List<string>();
@@ -115,6 +118,92 @@ namespace SAPConnection
 
             }
         }
+        public static void CreateorUpdateArea(ref cSapModel Model, Surface s, ref string Id, bool update, double SF)
+        {
+            Curve[] PerimeterCrvs = s.PerimeterCurves();
+            List<Point> SurfPoints = new List<Point>();
+            foreach (var crv in PerimeterCrvs)
+            {
+                SurfPoints.Add(crv.StartPoint);
+            }
+
+            if (!update)
+            {
+                List<string> ProfilePts = new List<string>();
+                foreach (var v in SurfPoints)
+                {
+                    string dummy = null;
+                    long ret = Model.PointObj.AddCartesian(v.X * SF, v.Y * SF, v.Z * SF, ref dummy);
+                    ProfilePts.Add(dummy);
+                }
+
+                string[] names = ProfilePts.ToArray();
+                long reti = Model.AreaObj.AddByPoint(ProfilePts.Count(), ref names, ref Id);
+            }
+            else
+            {  // TODO: Update Shell
+
+                // Existing
+                int eNumberofPts = 0;
+                string[] ePtNames = null;
+                long ret = Model.AreaObj.GetPoints(Id, ref eNumberofPts, ref ePtNames);
+
+                // Compare the number of points
+                if (eNumberofPts == SurfPoints.Count())
+                {
+                    for (int i = 0; i < eNumberofPts; i++)
+                    {
+                        long reto = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], SurfPoints[i].X * SF, SurfPoints[i].Y * SF, SurfPoints[i].Z * SF);
+                    }
+                }
+                else if (eNumberofPts > SurfPoints.Count()) // remove Points
+                {
+                    for (int i = 0; i < eNumberofPts; i++)
+                    {
+                        if (i < SurfPoints.Count())
+                        {
+                            ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], SurfPoints[i].X * SF, SurfPoints[i].Y * SF, SurfPoints[i].Z * SF);
+                        }
+                        else
+                        {
+                            ret = Model.SelectObj.ClearSelection();
+                            ret = Model.AreaObj.SetSelected(Id, true);
+                            ret = Model.PointObj.SetSelected(ePtNames[i], true);
+                            ret = Model.EditArea.PointRemove();
+                        }
+                    }
+                }
+                else if (eNumberofPts < SurfPoints.Count()) // add points
+                {
+                    for (int i = 0; i < SurfPoints.Count(); i++)
+                    {
+                        if (i < eNumberofPts)
+                        {
+                            ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], SurfPoints[i].X * SF, SurfPoints[i].Y * SF, SurfPoints[i].Z * SF);
+                        }
+                        else
+                        {
+                            // add point to latest edge
+                            ret = Model.SelectObj.ClearSelection();
+                            int a = i - 1;
+                            ret = Model.AreaObj.SetSelectedEdge(Id, a, true);
+
+                            ret = Model.EditArea.PointAdd();
+
+                            // the repeat the first step so # of name and has updated
+                            int tempnumb = 0;
+                            string[] TempPtNames = null;
+                            ret = Model.AreaObj.GetPoints(Id, ref tempnumb, ref TempPtNames);
+
+
+                            ret = Model.EditPoint.ChangeCoordinates_1(TempPtNames[i], SurfPoints[i].X * SF, SurfPoints[i].Y * SF, SurfPoints[i].Z * SF);
+                        }
+                    }
+
+                }
+
+            }
+        }
 
         public static bool ChangeNameSAPFrm(ref cSapModel Model, string Name, string NewName)
         {
@@ -152,6 +241,19 @@ namespace SAPConnection
             long ret = mySapModel.FrameObj.SetSection(Name, SectionProfile);
         }
 
+        // Area  prop
+        public static void SetPropArea( ref cSapModel Model, string PropName, string ShellType, bool DOF, string MatProp, double MatAngle, double Thickness, double Bending  )
+        {
+            int type = (int)((ShellType)Enum.Parse(typeof(ShellType), ShellType));
+            long ret = Model.PropArea.SetShell_1(PropName, type, DOF, MatProp, MatAngle, Thickness, Bending);
+        }
+        public static void SetShellPropArea(ref cSapModel Model, string AreaId, string PropName)
+        {
+            long ret = Model.AreaObj.SetProperty(AreaId, PropName);
+        }
+
+            // READ FROM SAPMODEL
+
         // to extract the Section Names on Specific Section Catalog
         public static void GetSectionsfromCatalog(ref cSapModel Model, string SC, ref string[] Names)
         {
@@ -182,10 +284,6 @@ namespace SAPConnection
             }
 
         }
-
-
-
-        // READ FROM SAPMODEL
 
         public static void GetFrm(ref cSapModel Model, string frmId, ref Point i, ref Point j, ref string MatProp, ref string SecName, ref string Just, ref double Rot, ref string SecCatalog, double LSF) //Length Scale Factor
         {
@@ -228,7 +326,7 @@ namespace SAPConnection
 
         }
 
-        public static void GetShell(ref cSapModel Model, string areaid, ref Surface BaseS, double LSF) //Length Scale Factor
+        public static void GetShell(ref cSapModel Model, string areaid, ref Surface BaseS, double LSF, ref string PropName) //Length Scale Factor
         {
             long ret = 0;
 
@@ -252,6 +350,9 @@ namespace SAPConnection
 
             //Mesh.ByPointsFaceIndices()
             BaseS = Surface.ByPerimeterPoints(dynPts);
+
+            // Get assigned Property Name
+            ret = Model.AreaObj.GetProperty(areaid, ref PropName);
         }
 
         /// <summary>
@@ -301,6 +402,19 @@ namespace SAPConnection
             }
         }
 
+        public static void GetShellProp(ref cSapModel Model, string PropName, ref string ShellType, ref bool DOF, ref string MatProp, ref double MatAngle, ref double Thickness, ref double Bending)
+        {
+            int type = 1;
+            int color = 1;
+            string notes = string.Empty;
+            string guid = string.Empty;
+
+            long ret = Model.PropArea.GetShell_1(PropName, ref type, ref DOF, ref MatProp, ref MatAngle, ref Thickness, ref Bending, ref color, ref notes, ref guid);
+
+            ShellType = Enum.GetName(typeof(ShellType), type);
+
+            
+        }
         /// <summary>
         /// 
         /// </summary>
