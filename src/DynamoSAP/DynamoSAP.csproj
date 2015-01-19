@@ -74,20 +74,20 @@
   <ItemGroup>
     <Compile Include="Analysis\RunAnalysis.cs" />
     <Compile Include="Assembly\Read.cs" />
-    <Compile Include="Structure\Load.cs" />
-    <Compile Include="Structure\LoadCase.cs" />
-    <Compile Include="Structure\LoadPattern.cs" />
-    <Compile Include="Structure\Release.cs" />
-    <Compile Include="Structure\Restraint.cs" />
+    <Compile Include="Definitions\Load.cs" />
+    <Compile Include="Definitions\LoadCase.cs" />
+    <Compile Include="Definitions\LoadPattern.cs" />
+    <Compile Include="Definitions\Release.cs" />
+    <Compile Include="Definitions\Restraint.cs" />
     <Compile Include="Assembly\Bake.cs" />
     <Compile Include="Assembly\StructuralModel.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structure\Element.cs" />
     <Compile Include="Structure\Frame.cs" />
-    <Compile Include="Structure\SectionProp.cs" />
+    <Compile Include="Definitions\SectionProp.cs" />
     <Compile Include="Structure\Shell.cs" />
-    <Compile Include="Structure\ShellProp.cs" />
+    <Compile Include="Definitions\ShellProp.cs" />
     <Compile Include="Text.cs" />
     <Compile Include="TracedFrameManager.cs" />
   </ItemGroup>

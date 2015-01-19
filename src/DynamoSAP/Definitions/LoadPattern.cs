@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Autodesk.DesignScript.Runtime;
 
-namespace DynamoSAP.Structure
+namespace DynamoSAP.Definitions
 {
     public class LoadPattern
     {

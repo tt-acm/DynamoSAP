@@ -12,6 +12,7 @@ using Autodesk.DesignScript.Runtime;
 using SAP2000v16;
 using SAPConnection;
 using DynamoSAP.Assembly;
+using DynamoSAP.Definitions;
 
 namespace DynamoSAP.Structure
 {

@@ -5,7 +5,7 @@
   </assembly>
   <namespaces>
     <namespace name="DynamoSAP">
-      <category>DynamoSAP2222</category>
+      <category>DynamoSAP</category>
     </namespace>
   </namespaces>
 </doc>

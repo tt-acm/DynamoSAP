@@ -10,6 +10,7 @@ using System.IO;
 
 using SAPConnection;
 using DynamoSAP.Structure;
+using DynamoSAP.Definitions;
 
 //DYNAMO
 using Autodesk.DesignScript.Geometry;

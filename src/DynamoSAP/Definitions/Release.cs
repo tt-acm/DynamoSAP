@@ -8,7 +8,7 @@ using Autodesk.DesignScript.Runtime;
 using DynamoSAP.Structure;
 
 
-namespace DynamoSAP.Structure
+namespace DynamoSAP.Definitions
 {
     public class Release
     {

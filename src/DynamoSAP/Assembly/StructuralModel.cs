@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using DynamoSAP.Structure;
+using DynamoSAP.Definitions;
 
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
@@ -94,8 +95,8 @@ namespace DynamoSAP.Assembly
             // Return outputs
             return new Dictionary<string, object>
             {
-                {"Frames", structuralModel.StructuralElements},
-                {"Shells", structuralModel.StructuralElements},
+                {"Frames", Frms},
+                {"Shells", Shells},
                 {"Load Patterns", structuralModel.LoadPatterns},
                 {"Load Cases", structuralModel.LoadCases},
                 {"Restraints", structuralModel.Restraints}

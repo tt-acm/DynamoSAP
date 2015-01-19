@@ -9,7 +9,7 @@ using DynamoSAP.Assembly;
 using Autodesk.DesignScript.Runtime;
 
 
-namespace DynamoSAP.Structure
+namespace DynamoSAP.Definitions
 {
     /// <summary>
     /// Load

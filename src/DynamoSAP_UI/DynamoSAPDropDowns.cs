@@ -10,7 +10,7 @@ using SAP2000v16;
 namespace DynamoSAP_UI
 {
     [NodeName("LoadPatternTypes")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Structure.LoadPattern")]
+    [NodeCategory("DynamoSAP.DynamoSAP.Definitions.LoadPattern")]
     [NodeDescription("Select Load Pattern to use with Set Load Pattern node")]
     [IsDesignScriptCompatible]
     public class LoadPatternTypes: EnumAsString<eLoadPatternType>
@@ -19,7 +19,7 @@ namespace DynamoSAP_UI
     }
 
     [NodeName("LoadCaseTypes")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Structure.LoadCase")]
+    [NodeCategory("DynamoSAP.DynamoSAP.Definitions.LoadCase")]
     [NodeDescription("Select Load Case to use with Set Load Case node")]
     [IsDesignScriptCompatible]
     public class LoadCaseTypes : EnumAsString<eLoadCaseType>
@@ -74,7 +74,7 @@ namespace DynamoSAP_UI
 
 
     [NodeName("SectionCatalogs")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Structure.SectionProp")]
+    [NodeCategory("DynamoSAP.DynamoSAP.Definitions.SectionProp")]
     [NodeDescription("Select Section Catalog as input Sections Node to retrive the section names of selected catalog")]
     [IsDesignScriptCompatible]
     public class SectionCatalogs : EnumAsString<SectionCatalog>
@@ -110,7 +110,7 @@ namespace DynamoSAP_UI
     }
 
     [NodeName("Materials")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Structure.SectionProp")]
+    [NodeCategory("DynamoSAP.DynamoSAP.Definitions")]
     [NodeDescription("Select Materials to set Section Property")]
     [IsDesignScriptCompatible]
     public class Materials : EnumAsString<Material>
@@ -141,7 +141,7 @@ namespace DynamoSAP_UI
     }
 
     [NodeName("ShellTypes")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Structure.ShellProp")]
+    [NodeCategory("DynamoSAP.DynamoSAP.Definitions.ShellProp")]
     [NodeDescription("Shell Types")]
     [IsDesignScriptCompatible]
     public class ShellTypes : EnumAsString<ShellType>
