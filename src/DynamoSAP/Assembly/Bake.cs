@@ -48,8 +48,9 @@ namespace DynamoSAP.Assembly
 
             double LengthSF = SAPConnection.Utilities.UnitConversion(Units, fromUnit); // Lenght Conversion Factor
 
-            // Clear Frame Dictionary
+            // Clear Frame & Area Dictionaries to hold 
             SAPFrmList.Clear();
+            SAPAreaList.Clear();
 
             // 2. Create new SAP Model and bake Stuctural Model 
             if (StructuralModel != null)
@@ -189,12 +190,12 @@ namespace DynamoSAP.Assembly
 
             // Define Shell Properties
             SAPConnection.StructureMapper.SetPropArea(ref mySapModel,
-                s.ShellProp.PropName,
+                s.shellProp.PropName,
                 s.shellProp.ShellType,
                 s.shellProp.DOF,
                 s.shellProp.MatProp,
                 s.shellProp.MatAngle,
-                s.shellProp.Thickness,
+                s.shellProp.Thickness * SF,
                 s.shellProp.Bending
                 );
 
@@ -235,7 +236,7 @@ namespace DynamoSAP.Assembly
             //2. Create or Update Frames (Sets Releases)
             // 2.a. Harvest the elements from SAP Model
             SAPConnection.StructureMapper.GetSAPFrameList(ref mySapModel, ref SAPFrmList); // frms
-            SAPConnection.StructureMapper.GetSAPAreaList(ref mySapModel, ref SAPAreaList);
+            SAPConnection.StructureMapper.GetSAPAreaList(ref mySapModel, ref SAPAreaList); // areas
 
             //2.b. Create or Update 
             foreach (var el in StructuralModel.StructuralElements)

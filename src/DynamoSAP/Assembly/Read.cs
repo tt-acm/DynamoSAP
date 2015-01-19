@@ -278,7 +278,7 @@ namespace DynamoSAP.Assembly
                     double Thickness = 0;
                     double Bending = 0;
                     SAPConnection.StructureMapper.GetShellProp(ref SapModel, propName, ref ShellType, ref DOF, ref MatProp, ref MatAngle, ref Thickness, ref Bending);
-                    ShellProp sP = new ShellProp(propName, ShellType, DOF, MatProp, MatAngle, Thickness, Bending);
+                    ShellProp sP = new ShellProp(propName, ShellType, DOF, MatProp, MatAngle, Thickness * SF, Bending);
 
                     Shell d_Shell = new Shell(S, sP);
                     d_Shell.Label = AreaIds[i];

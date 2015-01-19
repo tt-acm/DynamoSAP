@@ -38,10 +38,10 @@ namespace DynamoSAP.Structure
             get { return BaseS; }
         }
 
-        public ShellProp ShellProp
-        {
-            get { return shellProp; }
-        }
+        //public ShellProp ShellProp
+        //{
+        //    get { return shellProp; }
+        //}
 
         /// <summary>
         /// ID of the Curve
@@ -121,6 +121,30 @@ namespace DynamoSAP.Structure
             DSNodeServices.TraceUtils.SetTraceData(TRACE_ID, new ShellID { IntID = tShell.ID });
 
             return tShell;
+        }
+
+        // DECOMPOSE NODE
+
+        /// <summary>
+        /// Decompose a Shell into its geometry and Shell Property
+        /// </summary>
+        /// <param name="Shell"></param>
+        /// <returns></returns>
+        [MultiReturn("BaseSurface", "BaseMesh", "ShellProp")]
+        public static Dictionary<string,object> Decompose( Shell Shell)
+        {
+            //Return outputs
+            if (Shell.Type == Structure.Type.Shell)
+            {
+                return new Dictionary<string, object>
+                {
+                    {"BaseSurface", Shell.BaseS},
+                    {"BaseMesh", Shell.BaseM},
+                    {"ShellProp", Shell.shellProp},                
+                }; 
+            }
+            return null;
+
         }
 
         //PRIVATE CONSTRUCTORS

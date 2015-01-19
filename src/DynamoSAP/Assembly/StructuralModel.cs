@@ -73,14 +73,29 @@ namespace DynamoSAP.Assembly
         /// Decomposes a Structural Model into its geometry and structural settings
         /// </summary>
         /// <param name="structuralModel">Structural Model to decompose </param>
-        /// <returns>Structural Elements, Load Patterns, Load Cases and Restraints of the project </returns>
-        [MultiReturn("Structural Elements", "Load Patterns", "Load Cases", "Restraints")]
+        /// <returns> Frames, Shells, Load Patterns, Load Cases and Restraints of the project </returns>
+        [MultiReturn("Frames","Shells", "Load Patterns", "Load Cases", "Restraints")]
         public static Dictionary<string, object> Decompose(StructuralModel structuralModel)
         {
+            List<Element> Frms = new List<Element>();
+            List<Element> Shells = new List<Element>();
+
+            foreach (var el in structuralModel.StructuralElements)
+            {
+                if (el.Type == Structure.Type.Frame)
+                {
+                    Frms.Add(el);
+                }
+                else if (el.Type == Structure.Type.Shell)
+                {
+                    Shells.Add(el);
+                }
+            }
             // Return outputs
             return new Dictionary<string, object>
             {
-                {"Structural Elements", structuralModel.StructuralElements},
+                {"Frames", structuralModel.StructuralElements},
+                {"Shells", structuralModel.StructuralElements},
                 {"Load Patterns", structuralModel.LoadPatterns},
                 {"Load Cases", structuralModel.LoadCases},
                 {"Restraints", structuralModel.Restraints}

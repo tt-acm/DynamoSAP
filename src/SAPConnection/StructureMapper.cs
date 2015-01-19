@@ -412,8 +412,7 @@ namespace SAPConnection
             long ret = Model.PropArea.GetShell_1(PropName, ref type, ref DOF, ref MatProp, ref MatAngle, ref Thickness, ref Bending, ref color, ref notes, ref guid);
 
             ShellType = Enum.GetName(typeof(ShellType), type);
-
-            
+  
         }
         /// <summary>
         /// 
