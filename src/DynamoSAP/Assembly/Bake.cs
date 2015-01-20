@@ -230,7 +230,48 @@ namespace DynamoSAP.Assembly
                     SAPConnection.Initialize.Release(ref mySapObject, ref mySapModel);
                 };
             }
- 
+
+            // DELETE 
+            if (delete)
+            {
+                //Frms from SAP not in Structural elements
+                foreach (var sapfrm in SAPFrmList)
+                {
+                    Element el = null;
+                    try
+                    {
+                        el = (from f in StructuralModel.StructuralElements
+                              where f.Label == sapfrm
+                              select f).First();
+                    }
+                    catch (Exception) { }
+
+                    if (el == null) // not in Dynamo Structure so delete from SAP Model
+                    {
+                        SAPConnection.StructureMapper.DeleteFrm(ref mySapModel, sapfrm);
+                    }
+
+                }
+
+                // Areas from SAP not in Structural elements
+                foreach (var sapArea in SAPAreaList)
+                {
+                    Element el = null;
+                    try
+                    {
+                        el = (from f in StructuralModel.StructuralElements
+                              where f.Label == sapArea
+                              select f).First();
+                    }
+                    catch (Exception) { }
+
+                    if (el == null)
+                    {
+                        SAPConnection.StructureMapper.DeleteArea(ref mySapModel, sapArea);
+                    }
+                }
+
+            }
 
             //2. CREATE OR UPDATE SIMULTENOUSLY
            
@@ -266,47 +307,7 @@ namespace DynamoSAP.Assembly
 
 
 
-            // DELETE 
-            if (delete)
-            {
-                //Frms from SAP not in Structural elements
-                foreach (var sapfrm in SAPFrmList)
-                {
-                    Element el = null;
-                    try
-                    {
-                        el = (from f in StructuralModel.StructuralElements
-                              where f.Label == sapfrm
-                              select f).First();
-                    }
-                    catch (Exception) { }
 
-                    if (el == null) // not in Dynamo Structure so delete from SAP Model
-                    {
-                        SAPConnection.StructureMapper.DeleteFrm(ref mySapModel, sapfrm);
-                    }
-
-                }
- 
-                // Areas from SAP not in Structural elements
-                foreach (var sapArea in SAPAreaList)
-                {
-                    Element el = null;
-                    try
-                    {
-                              el = (from f in StructuralModel.StructuralElements
-                              where f.Label == sapArea
-                              select f).First();
-                    }
-                    catch (Exception){ }
-
-                    if (el == null)
-                    {
-                        SAPConnection.StructureMapper.DeleteArea(ref mySapModel, sapArea);
-                    }
-                }
-
-            }
 
             // 3. Assigns Restraints to Nodes
             if (StructuralModel.Restraints != null)
