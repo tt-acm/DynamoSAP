@@ -231,7 +231,12 @@ namespace DynamoSAP.Assembly
                 };
             }
 
-            // DELETE 
+            //2. Create or Update Frames (Sets Releases)
+            // 2.a. Harvest the elements from SAP Model
+            SAPConnection.StructureMapper.GetSAPFrameList(ref mySapModel, ref SAPFrmList); // frms
+            SAPConnection.StructureMapper.GetSAPAreaList(ref mySapModel, ref SAPAreaList); // areas
+
+            // 2a. DELETE 
             if (delete)
             {
                 //Frms from SAP not in Structural elements
@@ -274,12 +279,6 @@ namespace DynamoSAP.Assembly
             }
 
             //2. CREATE OR UPDATE SIMULTENOUSLY
-           
-            //2. Create or Update Frames (Sets Releases)
-            // 2.a. Harvest the elements from SAP Model
-            SAPConnection.StructureMapper.GetSAPFrameList(ref mySapModel, ref SAPFrmList); // frms
-            SAPConnection.StructureMapper.GetSAPAreaList(ref mySapModel, ref SAPAreaList); // areas
-
             //2.b. Create or Update 
             foreach (var el in StructuralModel.StructuralElements)
             {
