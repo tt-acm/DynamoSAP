@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Analysis\RunAnalysis.cs" />
     <Compile Include="Assembly\Read.cs" />
+    <Compile Include="Definitions\Group.cs" />
     <Compile Include="Definitions\Load.cs" />
     <Compile Include="Definitions\LoadCase.cs" />
     <Compile Include="Definitions\LoadPattern.cs" />

@@ -31,9 +31,14 @@ namespace SAPConnection
                 // update location
                 string startPoint = string.Empty;
                 string endPoint = string.Empty;
-                long ret = Model.FrameObj.GetPoints(Id, ref startPoint, ref endPoint);
-                ret = Model.EditPoint.ChangeCoordinates(startPoint, iX, iY, iZ);
-                ret = Model.EditPoint.ChangeCoordinates(endPoint, jX, jY, jZ);
+                //long ret = Model.FrameObj.GetPoints(Id, ref startPoint, ref endPoint);
+                //ret = Model.EditPoint.ChangeCoordinates(startPoint, iX, iY, iZ);
+                //ret = Model.EditPoint.ChangeCoordinates(endPoint, jX, jY, jZ);
+
+                long ret = Model.PointObj.AddCartesian(iX, iY, iZ, ref startPoint);
+                ret = Model.PointObj.AddCartesian(jX, jY, jZ, ref endPoint);
+                ret = Model.EditFrame.ChangeConnectivity(Id, startPoint, endPoint);
+                
             }
             
         }
