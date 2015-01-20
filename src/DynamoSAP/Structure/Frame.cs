@@ -56,7 +56,8 @@ namespace DynamoSAP.Structure
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format("FrameID: {0}", ID.ToString());  
+            //return String.Format("FrameID: {0}", ID.ToString());  
+            return Label; 
         }
 
 
