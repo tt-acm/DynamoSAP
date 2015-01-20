@@ -67,70 +67,59 @@ namespace SAPConnection
                 string[] ePtNames = null;
                 long ret = Model.AreaObj.GetPoints(Id, ref eNumberofPts, ref ePtNames);
 
-                // TEST: Instead changing coordinates of the existing node cerate new point and use change connectivity !
-                List<string> ProfilePts = new List<string>();
-                foreach (var v in m.VertexPositions)
+                // Compare the number of points
+                if (eNumberofPts == m.VertexPositions.Count())
                 {
-                    string dummy = null;
-                    ret = Model.PointObj.AddCartesian(v.X * SF, v.Y * SF, v.Z * SF, ref dummy);
-                    ProfilePts.Add(dummy);
+                    for (int i = 0; i < eNumberofPts; i++)
+                    {
+                        long reto = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X * SF, m.VertexPositions[i].Y * SF, m.VertexPositions[i].Z * SF);
+                    }
                 }
+                else if (eNumberofPts > m.VertexPositions.Count()) // remove Points
+                {
+                    for (int i = 0; i < eNumberofPts; i++)
+                    {
+                        if (i < m.VertexPositions.Count())
+                        {
+                            ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X * SF, m.VertexPositions[i].Y * SF, m.VertexPositions[i].Z * SF);
+                        }
+                        else
+                        {
+                            ret = Model.SelectObj.ClearSelection();
+                            ret = Model.AreaObj.SetSelected(Id, true);
+                            ret = Model.PointObj.SetSelected(ePtNames[i], true);
+                            ret = Model.EditArea.PointRemove();
+                        }
+                    }
+                }
+                else if (eNumberofPts < m.VertexPositions.Count()) // add points
+                {
+                    for (int i = 0; i < m.VertexPositions.Count(); i++)
+                    {
+                        if (i < eNumberofPts)
+                        {
+                            ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X * SF, m.VertexPositions[i].Y * SF, m.VertexPositions[i].Z * SF);
+                        }
+                        else
+                        {
+                            // add point to latest edge
+                            ret = Model.SelectObj.ClearSelection();
+                            int a = i - 1;
+                            ret = Model.AreaObj.SetSelectedEdge(Id, a, true);
 
-                ret = Model.EditArea.ChangeConnectivity(Id, ProfilePts.Count, ProfilePts.ToArray()); // I am not sure this works with
+                            ret = Model.EditArea.PointAdd();
 
-                //// Compare the number of points
-                //if (eNumberofPts == m.VertexPositions.Count())
-                //{
-                //    for (int i = 0; i < eNumberofPts; i++)
-                //    {
-                //        long reto = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X*SF, m.VertexPositions[i].Y*SF, m.VertexPositions[i].Z*SF);
-                //    }
-                //}
-                //else if (eNumberofPts > m.VertexPositions.Count()) // remove Points
-                //{
-                //    for (int i = 0; i < eNumberofPts; i++)
-                //    {
-                //        if (i < m.VertexPositions.Count())
-                //        {
-                //            ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X*SF, m.VertexPositions[i].Y*SF, m.VertexPositions[i].Z*SF);
-                //        }
-                //        else
-                //        {
-                //            ret = Model.SelectObj.ClearSelection();
-                //            ret = Model.AreaObj.SetSelected(Id, true);
-                //            ret = Model.PointObj.SetSelected(ePtNames[i], true);
-                //            ret = Model.EditArea.PointRemove();
-                //        }
-                //    }
-                //}
-                //else if(eNumberofPts < m.VertexPositions.Count()) // add points
-                //{
-                //    for (int i = 0; i < m.VertexPositions.Count(); i++)
-                //    {
-                //        if (i < eNumberofPts)
-                //        {
-                //            ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X*SF, m.VertexPositions[i].Y*SF, m.VertexPositions[i].Z*SF);
-                //        }
-                //        else 
-                //        {
-                //            // add point to latest edge
-                //            ret = Model.SelectObj.ClearSelection();
-                //            int a = i - 1;
-                //            ret = Model.AreaObj.SetSelectedEdge(Id, a, true);
-
-                //            ret = Model.EditArea.PointAdd();
-
-                //            // the repeat the first step so # of name and has updated
-                //            int tempnumb = 0;
-                //            string[] TempPtNames = null;
-                //            ret = Model.AreaObj.GetPoints(Id, ref tempnumb, ref TempPtNames);
+                            // the repeat the first step so # of name and has updated
+                            int tempnumb = 0;
+                            string[] TempPtNames = null;
+                            ret = Model.AreaObj.GetPoints(Id, ref tempnumb, ref TempPtNames);
 
 
-                //            ret = Model.EditPoint.ChangeCoordinates_1(TempPtNames[i], m.VertexPositions[i].X*SF, m.VertexPositions[i].Y*SF, m.VertexPositions[i].Z*SF);
-                //        }
-                //    }
+                            ret = Model.EditPoint.ChangeCoordinates_1(TempPtNames[i], m.VertexPositions[i].X * SF, m.VertexPositions[i].Y * SF, m.VertexPositions[i].Z * SF);
+                        }
+                    }
 
-                //}
+                }
 
             }
         }
