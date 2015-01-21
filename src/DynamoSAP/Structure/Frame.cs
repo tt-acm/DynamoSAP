@@ -233,14 +233,30 @@ namespace DynamoSAP.Structure
             
             double arrowLenght = l/5;
             double arrowLongSide = l/20;
-            
+
+            List<List<string>> LoadObjectsGen = new List<List<string>>();
+            foreach (Element e in StructuralModel.StructuralElements)
+            {
+                List<string> LoadObjects = new List<string>();
+                if (e.GetType().ToString().Contains("Frame"))
+                {
+                    Frame f = e as Frame;
+                   
+                        foreach (Load load in f.Loads)
+                        {
+                            LoadObjects.Add(load.lPattern.name);
+                        }
+                }
+                LoadObjectsGen.Add(LoadObjects);
+            }
+
             foreach (Element e in StructuralModel.StructuralElements)
             {
                 List<Object> LoadObjects = new List<Object>();
                 if (e.GetType().ToString().Contains("Frame"))
                 {
                     Frame f = e as Frame;
-                    if (f.Loads != null)
+                    if (f.Loads != null && f.Loads.Count>0)
                     {
                         foreach (Load load in f.Loads)
                         {

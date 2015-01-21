@@ -99,7 +99,7 @@ namespace SAPConnection
         // READ LOAD METHODS
         public static void GetPointLoads(ref cSapModel Model, ref string[] FrameName, ref int NumberItems, ref string[] LoadPat, ref int[] MyType, ref string[] CSys, ref int[] Dir, ref double[] RelDist, ref double[] Dist, ref double[] Val)
         {
-            int ret = Model.FrameObj.GetLoadPoint("ALL", NumberItems, FrameName, LoadPat, MyType, CSys, Dir, RelDist, Dist, Val,eItemType.Group);
+            int ret = Model.FrameObj.GetLoadPoint("ALL", ref NumberItems, ref FrameName, ref LoadPat, ref MyType, ref CSys, ref Dir, ref RelDist, ref Dist, ref Val,eItemType.Group);
         }
 
         public static void GetDistributedLoads(ref cSapModel Model, ref string[] FrameName, ref int NumberItems, ref string[] LoadPat, ref int[] MyType, ref string[] CSys, ref int[] Dir, ref double[] RD1, ref double[] RD2, ref double[] Dist1, ref double[] Dist2, ref double[] Val1, ref double[] Val2)
