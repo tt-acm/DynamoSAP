@@ -228,8 +228,17 @@ namespace DynamoSAP.Structure
         {
             List<List<Object>> LoadViz = new List<List<Object>>();
 
-            Frame firstf = (Frame)StructuralModel.StructuralElements[0];
-            Double l = firstf.BaseCrv.Length;
+            Double l = 1.0;
+            foreach (Element e in StructuralModel.StructuralElements)
+            {
+                if (e.GetType().ToString().Contains("Frame"))
+                {
+                    //get the length of the first frame found in the collection and use to set up a scale for the load display
+                    l = ((Frame)e).BaseCrv.Length;
+                    break;
+                }
+            }
+            
             
             double arrowLenght = l/5;
             double arrowLongSide = l/20;
