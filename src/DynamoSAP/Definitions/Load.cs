@@ -70,7 +70,7 @@ namespace DynamoSAP.Definitions
 
 
             string axisDir = "";
-            if(Load.CSys == "Global")
+            if (Load.CSys == "GLOBAL" || Load.CSys == "global" || Load.CSys == "Global")
             {
                 if (Load.Dir == 4) axisDir = "Global X direction";
                 else if (Load.Dir == 5) axisDir = "Global Y direction";
