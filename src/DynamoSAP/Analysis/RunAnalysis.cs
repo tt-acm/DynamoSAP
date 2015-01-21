@@ -143,7 +143,6 @@ namespace DynamoSAP.Analysis
         {
             List<List<double>> Forces = new List<List<double>>();
 
-
             for (int i = 0; i < StructuralModel.StructuralElements.Count; i++)
             {
                 List<double> ff = new List<double>();
@@ -199,10 +198,7 @@ namespace DynamoSAP.Analysis
         /// 
         public static List<List<Mesh>> VisualizeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType,  bool Visualize, double Scale=1.0)
         {
-
-            
             List<List<double>> myForces = DecomposeResults(StructuralModel, AnalysisResults, ForceType);
-
             double max = 0.0;
             for (int i = 0; i < myForces.Count; i++)
             {
@@ -439,60 +435,6 @@ namespace DynamoSAP.Analysis
             
         }
 
-
-        //public static List<Object> TranslateDisplay(List<Object> AnalysisMeshes, Vector Direction)
-        //{
-        //    List<Object> objs = new List<Object>();
-
-        //    foreach (Object obj in AnalysisMeshes)
-        //    {
-        //        try
-        //        {
-        //            Mesh m = (Mesh)obj;
-        //            Mesh newm = null;
-        //            Point[] pp = m.VertexPositions;
-        //            List<Point> mypoints = new List<Point>();
-        //            foreach (Point ppt in pp)
-        //            {
-        //                Point p = (Point)ppt.Translate(Direction);
-        //                mypoints.Add(p);
-        //            }
-        //            IndexGroup ig = null;
-        //            List<IndexGroup> indices = new List<IndexGroup>();
-        //            if (mypoints.Count == 4)
-        //            {
-        //                ig = IndexGroup.ByIndices(0, 1, 2, 3);
-
-        //            }
-        //            else
-        //            {
-        //                ig = IndexGroup.ByIndices(0, 1, 2);
-        //            }
-        //            indices.Add(ig);
-
-        //            newm = Mesh.ByPointsFaceIndices(mypoints, indices);
-        //            objs.Add(newm);
-        //        }
-        //        catch (Exception)
-        //        {
-
-        //            //throw;
-        //        }
-        //        try
-        //        {
-        //            Line ln = (Line)obj;
-        //            Line lnt = (Line)ln.Translate(Direction);
-        //            objs.Add(lnt);
-        //        }
-        //        catch (Exception)
-        //        {
-        //            //throw;
-        //        }
-        //    }
-
-
-        //    return objs;
-        //}
 
         //Results private methods
 
