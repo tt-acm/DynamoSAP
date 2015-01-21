@@ -57,7 +57,7 @@ namespace DynamoSAP
                     if (lineSeg != null)
                     {
                         b = lineSeg.Point;
-                        var crv = LineBetweenPoints(originPlane.Origin, scale, a, b);
+                        var crv = LineBetweenPoints(originPlane.Origin, 0.5*scale, a, b);
                         a = b;
                         //Curve rotC = (Curve)crv.Rotate(originPlane.Origin, CoordinateSystem.Identity().XAxis, 90.0);
                         CoordinateSystem localWorldcs = CoordinateSystem.ByOrigin(originPlane.Origin);
@@ -70,7 +70,7 @@ namespace DynamoSAP
                     {
                         foreach (var segPt in plineSeg.Points)
                         {
-                            var crv = LineBetweenPoints(originPlane.Origin, scale, a, segPt);
+                            var crv = LineBetweenPoints(originPlane.Origin, 0.5 * scale, a, segPt);
                             a = segPt;
                             //Curve rotC = (Curve)crv.Rotate(originPlane.Origin, CoordinateSystem.Identity().XAxis, 90.0);
                             CoordinateSystem localWorldcs = CoordinateSystem.ByOrigin(originPlane.Origin);

@@ -46,8 +46,8 @@ namespace DynamoSAP.Structure
         /// <summary>
         /// ID of the Curve
         /// </summary>
-        internal int ID { get; private set; } 
-        
+        internal int ID { get; private set; }
+
 
         //PUBLIC METHODS
         /// <summary>
@@ -57,7 +57,7 @@ namespace DynamoSAP.Structure
         public override string ToString()
         {
             //return String.Format("FrameID: {0}", ID.ToString());  
-            return Label; 
+            return Label;
         }
 
 
@@ -79,12 +79,12 @@ namespace DynamoSAP.Structure
                 // trace cache log didnot return an object, create new one !
                 tFrm = new Frame(Line, SectionProp, Justification, Rotation);
                 // Set Label
-                tFrm.Label = String.Format("dyn_{0}", tFrm.ID.ToString());  
+                tFrm.Label = String.Format("dyn_{0}", tFrm.ID.ToString());
             }
             else
             {
                 tFrm = TracedFrameManager.GetFramebyID(tFrmid.IntID);
-                
+
                 tFrm.BaseCrv = Line;
                 tFrm.SecProp = SectionProp;
                 tFrm.Just = Justification;
@@ -96,7 +96,7 @@ namespace DynamoSAP.Structure
 
             return tFrm;
         }
-        
+
         /// <summary>
         /// Create a Frame from the end points
         /// </summary>
@@ -114,11 +114,11 @@ namespace DynamoSAP.Structure
             if (tFrmid == null)
             {
                 // trace cache log didnot return an object, create new one !
-               tFrm = new Frame(i, j, SectionProp, Justification, Rotation);
+                tFrm = new Frame(i, j, SectionProp, Justification, Rotation);
                 // Set Label
-               tFrm.Label = String.Format("dyn_{0}", tFrm.ID.ToString());  
+                tFrm.Label = String.Format("dyn_{0}", tFrm.ID.ToString());
             }
-            else 
+            else
             {
                 tFrm = TracedFrameManager.GetFramebyID(tFrmid.IntID);
 
@@ -145,7 +145,7 @@ namespace DynamoSAP.Structure
             // Create a new Frame using the properties of the input frame
             Frame newFrm = Frame.FromLine(Frame.BaseCurve, Frame.SecProp, Frame.Just, Frame.Angle);
             // Set Label
-            newFrm.Label = String.Format("dyn_{0}", newFrm.ID.ToString());  
+            newFrm.Label = String.Format("dyn_{0}", newFrm.ID.ToString());
             // Add any loads the frame already has
             newFrm.Loads = Frame.Loads;
             // Set the release in the node
@@ -165,10 +165,10 @@ namespace DynamoSAP.Structure
             // Create a new Frame using the properties of the input frame
             Frame newFrm = Frame.FromLine(Frame.BaseCurve, Frame.SecProp, Frame.Just, Frame.Angle);
             // Set Label
-            newFrm.Label = String.Format("dyn_{0}", newFrm.ID.ToString());  
+            newFrm.Label = String.Format("dyn_{0}", newFrm.ID.ToString());
             // Add any releases the frame already has
             newFrm.Releases = Frame.Releases;
-            
+
             //Set the load in the node
             List<Load> frameLoads = new List<Load>();
             if (Frame.Loads != null)
@@ -193,11 +193,11 @@ namespace DynamoSAP.Structure
 
         // DYNAMO DISPLAY NODES
 
-       /// <summary>
-       /// Display the Releases of a Frame
-       /// </summary>
-       /// <param name="frame">Frame to display the releases on (if any)</param>
-       /// <param name="radius">Radius of the spheres </param>
+        /// <summary>
+        /// Display the Releases of a Frame
+        /// </summary>
+        /// <param name="frame">Frame to display the releases on (if any)</param>
+        /// <param name="radius">Radius of the spheres </param>
         /// <returns>Spheres representing the Releases</returns>
         public static List<Sphere> DisplayReleases(Frame frame, double radius = 10.0)
         {
@@ -224,10 +224,14 @@ namespace DynamoSAP.Structure
         /// <param name="ShowValues">Set Boolean to True to show the tags of the numeric values</param>
         /// <param name="TextSize">Size of the tags</param>
         /// <returns>Arrows and tags representing the loads</returns>
-        public static List<List<Object>> DisplayLoads(StructuralModel StructuralModel, string LPattern = "Show All", double Size = 1.0, bool ShowValues = true, double TextSize = 1.0)
+        //public static List<List<Object>> DisplayLoads(StructuralModel StructuralModel, string LPattern = "Show All", double Size = 1.0, bool ShowValues = true, double TextSize = 1.0)
+        [MultiReturn("Points", "Text", "Arrows")]
+        public static Dictionary<string, object> DisplayLoads(StructuralModel StructuralModel, string LPattern = "Show All", double Size = 1.0, bool ShowValues = true, double TextSize = 1.0)
         {
             List<List<Object>> LoadViz = new List<List<Object>>();
-
+            List<List<Object>> ppts = new List<List<Object>>();
+            List<List<Object>> texts = new List<List<Object>>();
+            List<List<Object>> arrows = new List<List<Object>>();
             Double l = 1.0;
             foreach (Element e in StructuralModel.StructuralElements)
             {
@@ -238,34 +242,21 @@ namespace DynamoSAP.Structure
                     break;
                 }
             }
-            
-            
-            double arrowLenght = l/5;
-            double arrowLongSide = l/20;
 
-            List<List<string>> LoadObjectsGen = new List<List<string>>();
-            foreach (Element e in StructuralModel.StructuralElements)
-            {
-                List<string> LoadObjects = new List<string>();
-                if (e.GetType().ToString().Contains("Frame"))
-                {
-                    Frame f = e as Frame;
-                   
-                        foreach (Load load in f.Loads)
-                        {
-                            LoadObjects.Add(load.lPattern.name);
-                        }
-                }
-                LoadObjectsGen.Add(LoadObjects);
-            }
+            double arrowLenght = l / 5;
+            double arrowLongSide = l / 20;
 
             foreach (Element e in StructuralModel.StructuralElements)
             {
+                double sz = Size;
                 List<Object> LoadObjects = new List<Object>();
+                List<Object> ppt = new List<Object>();
+                List<Object> text = new List<Object>();
+                List<Object> arrow = new List<Object>();
                 if (e.GetType().ToString().Contains("Frame"))
                 {
                     Frame f = e as Frame;
-                    if (f.Loads != null && f.Loads.Count>0)
+                    if (f.Loads != null && f.Loads.Count > 0)
                     {
                         foreach (Load load in f.Loads)
                         {
@@ -283,7 +274,7 @@ namespace DynamoSAP.Structure
                             }
 
                             Curve c = f.BaseCrv;
-                            if (load.Val > 0) Size = -Size; // make negative and change the direction of the arrow
+                            if (load.Val > 0) sz = -sz; // make negative and change the direction of the arrow
 
                             List<double> dd = new List<double>(); // parameter values where arrows will be drawn
                             bool isDistributed = false;
@@ -323,27 +314,27 @@ namespace DynamoSAP.Structure
 
                                 if (load.Dir == 4) // if it's the X Direction
                                 {
-                                    v2 = Vector.ByCoordinates(arrowLenght * Size, 0.0, 0.0);
-                                    v3 = Vector.ByCoordinates(arrowLongSide * Size, 0.0, 0.0);
+                                    v2 = Vector.ByCoordinates(arrowLenght * sz, 0.0, 0.0);
+                                    v3 = Vector.ByCoordinates(arrowLongSide * sz, 0.0, 0.0);
                                 }
 
                                 if (load.Dir == 5) // if it's the Y Direction
                                 {
-                                    v2 = Vector.ByCoordinates(0.0, arrowLenght * Size, 0.0);
-                                    v3 = Vector.ByCoordinates(0.0, arrowLongSide * Size, 0.0);
+                                    v2 = Vector.ByCoordinates(0.0, arrowLenght * sz, 0.0);
+                                    v3 = Vector.ByCoordinates(0.0, arrowLongSide * sz, 0.0);
                                 }
                                 if (load.Dir == 6) // if it's the Z Direction
                                 {
-                                    v2 = Vector.ByCoordinates(0.0, 0.0, arrowLenght * Size);
-                                    v3 = Vector.ByCoordinates(0.0, 0.0, arrowLongSide * Size);
+                                    v2 = Vector.ByCoordinates(0.0, 0.0, arrowLenght * sz);
+                                    v3 = Vector.ByCoordinates(0.0, 0.0, arrowLongSide * sz);
                                 }
 
                                 p2 = (Point)p1.Translate(v2);
 
-                                p3 = (Point)p1.Translate(xAxis, arrowLongSide * Size);
+                                p3 = (Point)p1.Translate(xAxis, arrowLongSide * sz);
                                 p3 = (Point)p3.Translate(v3);
 
-                                p4 = (Point)p1.Translate(xAxis, -arrowLongSide * Size);
+                                p4 = (Point)p1.Translate(xAxis, -arrowLongSide * sz);
                                 p4 = (Point)p4.Translate(v3);
 
                                 pps.Add(p1); pps.Add(p3); pps.Add(p4);
@@ -352,8 +343,11 @@ namespace DynamoSAP.Structure
                                 igs.Add(IndexGroup.ByIndices(0, 1, 2));
                                 Mesh m = Mesh.ByPointsFaceIndices(pps, igs);
 
+                                ppt.Add(v2);
                                 LoadObjects.Add(Line.ByStartPointEndPoint(p1, p2));
                                 LoadObjects.Add(m);
+                                arrow.Add(Line.ByStartPointEndPoint(p1, p2));
+                                arrow.Add(m);
                                 if (isDistributed) // create top line
                                 {
                                     if (i == 0)
@@ -369,12 +363,12 @@ namespace DynamoSAP.Structure
                                     }
                                     else if (i == Convert.ToInt32(dd.Count / 2)) // if it is the middle point
                                     {
-                                        labelLocation = (Point)p2.Translate(v2.Normalized().Scale(arrowLenght));
+                                        labelLocation = (Point)p2.Translate(v2.Normalized().Scale(arrowLenght/4));
                                     }
                                 }
                                 else
                                 {
-                                    labelLocation = (Point)p2.Translate(v2.Normalized().Scale(arrowLenght));
+                                    labelLocation = (Point)p2.Translate(v2.Normalized().Scale(arrowLenght/4));
                                 }
                             }
                             if (ShowValues)
@@ -385,20 +379,24 @@ namespace DynamoSAP.Structure
                                 string value = Math.Round(load.Val, 2).ToString(); // value of the load rounded to two decimals
 
                                 //create ZX Plane to host the text
-                                Plane pl = null;
-                                if (c.StartPoint.Z == c.EndPoint.Z) //if it is a beam
-                                {
-                                    pl = Plane.ByOriginXAxisYAxis(labelLocation, xAxis, v2);
-                                }
-                                else //if it is a column or an inclined member
-                                {
-                                    pl = Plane.ByOriginXAxisYAxis(labelLocation, v2, CoordinateSystem.Identity().ZAxis);
-                                }
+                                //Plane pl = null;
+
+                                Plane pl = Plane.ByOriginXAxisYAxis(labelLocation, CoordinateSystem.Identity().XAxis, CoordinateSystem.Identity().ZAxis);
+                                
+                                //if (c.StartPoint.Z == c.EndPoint.Z) //if it is a beam
+                                // {
+                                //pl = Plane.ByOriginXAxisYAxis(labelLocation, xAxis, v2);
+                                // }
+                                //else //if it is a column or an inclined member
+                                //{
+                               // pl = Plane.ByOriginXAxisYAxis(labelLocation, v2, CoordinateSystem.Identity().ZAxis);
+                                // }
 
                                 //call the function to create the text
                                 textCurves = Text.FromStringOriginAndScale(value, pl, TextSize).ToList();
                                 foreach (Curve textc in textCurves)
                                 {
+                                    text.Add(textc);
                                     LoadObjects.Add(textc);
                                 }
                             }
@@ -411,9 +409,24 @@ namespace DynamoSAP.Structure
                 //Add contiditon for shell
 
                 LoadViz.Add(LoadObjects);
+
+                ppts.Add(ppt);
+                texts.Add(text);
+                arrows.Add(arrow);
             }
 
-            return LoadViz;
+
+
+            //return LoadViz;
+
+            // Return outputs
+            return new Dictionary<string, object>
+                {
+                    {"Points", ppts},
+                    {"Text", texts},
+                    {"Arrows", arrows}
+                };
+
         }
 
 
@@ -440,7 +453,7 @@ namespace DynamoSAP.Structure
                     {"Releases", Frame.Releases}
                 };
             }
-            return null;           
+            return null;
         }
 
 
