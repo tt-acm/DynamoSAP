@@ -6,7 +6,7 @@ using Autodesk.DesignScript.Runtime;
 
 namespace DynamoSAP.Definitions
 {
-    public class LoadPattern
+    public class LoadPattern:Definition
     {
         //Load Pattern Name
         internal string name { get; set; }
@@ -56,6 +56,7 @@ namespace DynamoSAP.Definitions
             name = Name;
             type = LoadPatternType;
             multiplier = Multiplier;
+            Type = Definitions.Type.LoadCombo;
         }
     }
 }

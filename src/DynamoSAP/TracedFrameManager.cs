@@ -127,4 +127,59 @@ namespace DynamoSAP
         }
     }
 
+    [SupressImportIntoVM]
+    public class TracedJointManager
+    {
+        public static int jointID = 0;
+
+        public static int GetNextUnusedID()
+        {
+            int next = jointID;
+            jointID++;
+            return next;
+        }
+
+        public static Dictionary<int, Joint> JointDictionary = new Dictionary<int, Joint>();
+
+        public static Joint GetJointbyID(int id)
+        {
+            Joint ret;
+            JointDictionary.TryGetValue(id, out ret);
+            return ret;
+        }
+
+        public static void RegisterJointforID(int id, Joint joint)
+        {
+            if (JointDictionary.ContainsKey(id))
+            {
+                JointDictionary[id] = joint;
+            }
+            else
+            {
+                JointDictionary.Add(id, joint);
+            }
+        }
+
+    }
+
+    [SupressImportIntoVM]
+    public class JointID : ISerializable
+    {
+        public int IntID { get; set; }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("intID", IntID, typeof(int));
+        }
+
+        public JointID()
+        {
+            IntID = int.MinValue;
+        }
+
+        public JointID(SerializationInfo info, StreamingContext context)
+        {
+            IntID = (int)info.GetValue("intID", typeof(int));
+        }
+    }
 }

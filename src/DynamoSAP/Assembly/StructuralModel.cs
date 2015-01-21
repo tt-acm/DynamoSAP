@@ -20,8 +20,7 @@ namespace DynamoSAP.Assembly
         public List<LoadPattern> LoadPatterns { get; set; }
         [SupressImportIntoVMAttribute]
         public List<LoadCase> LoadCases { get; set; }
-        [SupressImportIntoVMAttribute]
-        public List<Restraint> Restraints { get; set; }
+
         
 
         // Check that the GUID does not exist, in case users added the same element twice
@@ -62,12 +61,11 @@ namespace DynamoSAP.Assembly
         /// <param name="StructuralElements">Structural elements in the project. Please, input as a flat list</param>
         /// <param name="LoadPatterns">Load Patterns in the project. Please, input as a flat list</param>
         /// <param name="LoadCases">Load Cases in the project. Please, input as a flat list</param>
-        /// <param name="Restraints">Restraints in the project. Please, input as a flat list</param>
         /// <returns>Structural Model consisting of all the elements provided</returns>
-        public static StructuralModel Collector(List<Element> StructuralElements, List<LoadPattern> LoadPatterns, List<LoadCase> LoadCases, List<Restraint> Restraints)
+        public static StructuralModel Collector(List<Element> StructuralElements, List<LoadPattern> LoadPatterns, List<LoadCase> LoadCases)
         {
             CheckDuplicateFrame(StructuralElements);
-            return new StructuralModel(StructuralElements, LoadPatterns, LoadCases, Restraints);
+            return new StructuralModel(StructuralElements, LoadPatterns, LoadCases);
         }
 
         /// <summary>
@@ -80,6 +78,7 @@ namespace DynamoSAP.Assembly
         {
             List<Element> Frms = new List<Element>();
             List<Element> Shells = new List<Element>();
+            List<Element> Joints = new List<Element>();
 
             foreach (var el in structuralModel.StructuralElements)
             {
@@ -91,27 +90,30 @@ namespace DynamoSAP.Assembly
                 {
                     Shells.Add(el);
                 }
+                else if (el.Type == Structure.Type.Joint)
+                {
+                    Joints.Add(el);
+                }
             }
             // Return outputs
             return new Dictionary<string, object>
             {
                 {"Frames", Frms},
                 {"Shells", Shells},
+                {"Joints", Joints},
                 {"Load Patterns", structuralModel.LoadPatterns},
                 {"Load Cases", structuralModel.LoadCases},
-                {"Restraints", structuralModel.Restraints}
                
             };
         }
 
         internal StructuralModel() { }
 
-        private StructuralModel(List<Element> Elements, List<LoadPattern> loadPatterns, List<LoadCase> loadCases, List<Restraint> restraints)
+        private StructuralModel(List<Element> Elements, List<LoadPattern> loadPatterns, List<LoadCase> loadCases)
         {
             StructuralElements = Elements;
             LoadPatterns = loadPatterns;
             LoadCases = loadCases;
-            Restraints = restraints;
 
         }
     }

@@ -290,7 +290,6 @@ namespace DynamoSAP.Assembly
                 int CountRes = RestraintMapper.Count(ref SapModel);
                 if (CountRes > 0) 
                 {
-                    model.Restraints = new List<Restraint>();
 
                     List<string> PtIds = new List<string>();
                     RestraintMapper.GetSupportedPts(ref SapModel, ref PtIds);
@@ -303,9 +302,15 @@ namespace DynamoSAP.Assembly
 
                         RestraintMapper.Get(ref SapModel, PtId, ref Pti, ref restraints, SF);
 
-                        // Populate on Structural Model restraint Ls
-                        Restraint support = Restraint.SetRestraint(Pti, restraints[0], restraints[1],restraints[2], restraints[3], restraints[4], restraints[5]);
-                        model.Restraints.Add(support);
+                        Joint myj = new Joint(Pti);
+                        myj.Label = PtId;
+
+                        // Populate on Joint Restraints
+                        Restraint support = Restraint.Define(restraints[0], restraints[1], restraints[2], restraints[3], restraints[4], restraints[5]);
+
+                        myj.JointRestraint = support;
+
+                        model.StructuralElements.Add(myj);
                     }
                 }
                 

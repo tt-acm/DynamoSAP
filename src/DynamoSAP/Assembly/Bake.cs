@@ -30,6 +30,7 @@ namespace DynamoSAP.Assembly
         private static cSapModel mySapModel;
         private static List<string> SAPFrmList = new List<string>(); // List to hold 
         private static List<string> SAPAreaList = new List<string>();
+        private static List<string> SAPJointList = new List<string>();
 
         //// DYNAMO NODES ////
 
@@ -52,6 +53,7 @@ namespace DynamoSAP.Assembly
             // Clear Frame & Area Dictionaries to hold 
             SAPFrmList.Clear();
             SAPAreaList.Clear();
+            SAPJointList.Clear();
 
             // 2. Create new SAP Model and bake Stuctural Model 
             if (StructuralModel != null)
@@ -203,6 +205,41 @@ namespace DynamoSAP.Assembly
             SAPConnection.StructureMapper.SetShellPropArea(ref mySapModel, s.Label, s.shellProp.PropName);
         }
 
+        private static void CreateorUpdateJoint(Joint j, ref cSapModel mySAPModel, double SF, bool update) 
+        {
+            if (!update) // create new one
+            {
+                string dummy = string.Empty;
+                StructureMapper.CreateorUpdateJoint(ref mySapModel, j.BasePt,ref dummy, false, SF);
+                // Set custom Label to Frame in dynamo & Frame! User can match by using Label & ID
+                bool renamed = SAPConnection.StructureMapper.ChangeNameSAPFrm(ref mySapModel, dummy, j.Label);
+                if (!renamed)
+                {
+                    j.Label = dummy; 
+                }
+
+            }
+            else // modify the existing
+            {
+                string id = j.Label;
+                StructureMapper.CreateorUpdateJoint(ref mySapModel, j.BasePt, ref id, true, SF);
+            }
+
+             // 3. Assigns Restraints to Node
+
+            if (j.JointRestraint != null)
+	        {
+		        List<bool> restraints = new List<bool>();
+                restraints.Add(j.JointRestraint.u1); restraints.Add(j.JointRestraint.u2); restraints.Add(j.JointRestraint.u3);
+                restraints.Add(j.JointRestraint.r1); restraints.Add(j.JointRestraint.r2); restraints.Add(j.JointRestraint.r3);
+
+                // Set restaints
+                SAPConnection.RestraintMapper.Set(ref mySapModel, j.Label, restraints.ToArray()); 
+	        }
+
+
+        }
+
         // Create or Update Sap Model from a Dynamo Model
         private static void CreateorUpdateSAPModel(ref StructuralModel StructuralModel, string Units, double SF, bool delete)
         {
@@ -235,7 +272,8 @@ namespace DynamoSAP.Assembly
             // 2.a. Harvest the elements from SAP Model
             SAPConnection.StructureMapper.GetSAPFrameList(ref mySapModel, ref SAPFrmList); // frms
             SAPConnection.StructureMapper.GetSAPAreaList(ref mySapModel, ref SAPAreaList); // areas
-
+            SAPConnection.StructureMapper.GetSAPJointList(ref mySapModel, ref SAPJointList); // joints
+            
             // 2a. DELETE 
             if (delete)
             {
@@ -302,25 +340,13 @@ namespace DynamoSAP.Assembly
                     CreateorUpdateArea(el as Shell, ref mySapModel, SF, isupdate);
                     
                 }
-            }
-
-
-
-
-
-            // 3. Assigns Restraints to Nodes
-            if (StructuralModel.Restraints != null)
-            {
-                foreach (var rest in StructuralModel.Restraints)
+                else if (el.Type == Structure.Type.Joint)
                 {
-                    List<bool> restraints = new List<bool>();
-                    restraints.Add(rest.u1); restraints.Add(rest.u2); restraints.Add(rest.u3);
-                    restraints.Add(rest.r1); restraints.Add(rest.r2); restraints.Add(rest.r3);
-
-                    // Set restaints
-                    SAPConnection.RestraintMapper.Set(ref mySapModel, rest.pt, restraints.ToArray());
+                    bool isupdate = SAPJointList.Contains(el.Label);
+                    CreateorUpdateJoint(el as Joint, ref mySapModel, SF, isupdate);
                 }
             }
+
 
 
             // 4. Add Load Patterns

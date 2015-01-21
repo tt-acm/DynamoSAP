@@ -11,7 +11,6 @@ namespace DynamoSAP.Definitions
     {
         //FIELDS
 
-        internal Point pt;
         internal bool u1;
         internal bool u2;
         internal bool u3;
@@ -31,9 +30,9 @@ namespace DynamoSAP.Definitions
         /// <param name="Ry">Rotation Y</param>
         /// <param name="Rz">Rotation Z</param>
         /// <returns>Restraint</returns>
-        public static Restraint SetRestraint(Point Point, bool Tx, bool Ty, bool Tz, bool Rx, bool Ry, bool Rz)
+        public static Restraint Define( bool Tx, bool Ty, bool Tz, bool Rx, bool Ry, bool Rz)
         {
-            return new Restraint(Point, Tx, Ty, Tz, Rx, Ry, Rz);
+            return new Restraint( Tx, Ty, Tz, Rx, Ry, Rz);
         }
 
         // FAST RESTRAINTS
@@ -42,9 +41,9 @@ namespace DynamoSAP.Definitions
         /// </summary>
         /// <param name="Point">Point to set a Fixed Restraint</param>
         /// <returns>Fixed Restraint</returns>
-        public static Restraint Fixed(Point Point)
+        public static Restraint Fixed()
         {
-            return new Restraint(Point, true, true, true, true, true, true);
+            return new Restraint(true, true, true, true, true, true);
         }
 
         /// <summary>
@@ -52,27 +51,27 @@ namespace DynamoSAP.Definitions
         /// </summary>
         /// <param name="Point">Point to set a Pinned Restraint</param>
         /// <returns>Pinned Restraint</returns>
-        public static Restraint Pinned(Point Point)
+        public static Restraint Pinned()
         {
-            return new Restraint(Point, true, true, true, false, false, false);
+            return new Restraint( true, true, true, false, false, false);
         }
         /// <summary>
         /// Create a Roller
         /// </summary>
         /// <param name="Point">Point to set a Roller</param>
         /// <returns>Roller</returns>
-        public static Restraint Roller(Point Point)
+        public static Restraint Roller()
         {
-            return new Restraint(Point, false, false, true, false, false, false);
+            return new Restraint(false, false, true, false, false, false);
         }
         /// <summary>
         /// Create a Simple Restraint
         /// </summary>
         /// <param name="Point">Point to set a simple restraint</param>
         /// <returns>Simple Restraint</returns>
-        public static Restraint Simple(Point Point)
+        public static Restraint Simple()
         {
-            return new Restraint(Point, false, false, false, false, false, false);
+            return new Restraint(false, false, false, false, false, false);
         }
 
         /// <summary>
@@ -80,13 +79,12 @@ namespace DynamoSAP.Definitions
         /// </summary>
         /// <param name="restraint">Restraint to decompose</param>
         /// <returns>Node point, U1, U2, U3, R1, R2 and R3 </returns>
-        [MultiReturn("Point", "Tx", "Ty", "Tz", "Rx", "Ry", "Rz")]
+        [MultiReturn("Tx", "Ty", "Tz", "Rx", "Ry", "Rz")]
         public static Dictionary<string, object> Decompose(Restraint restraint)
         {
             // Return outputs
             return new Dictionary<string, object>
             {
-                {"Point", restraint.pt},
                 {"Tx", restraint.u1},
                 {"Ty", restraint.u2},
                 {"Tz", restraint.u3},
@@ -98,9 +96,8 @@ namespace DynamoSAP.Definitions
 
         // PRIVATE CONSTRUCTOR
         private Restraint() { }
-        private Restraint(Point Pt, bool U1, bool U2, bool U3, bool R1, bool R2, bool R3)
+        private Restraint( bool U1, bool U2, bool U3, bool R1, bool R2, bool R3)
         {
-            pt = Pt;
             u1 = U1;
             u2 = U2;
             u3 = U3;

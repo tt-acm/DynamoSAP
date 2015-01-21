@@ -7,7 +7,7 @@ using Autodesk.DesignScript.Runtime;
 
 namespace DynamoSAP.Definitions
 {
-    public class LoadCase
+    public class LoadCase:Definition
     {
         //FIELDS
         internal string name { get; set; }
@@ -55,12 +55,13 @@ namespace DynamoSAP.Definitions
 
         //PRIVATE CONSTRUCTOR
 
-        private LoadCase(string Name, List<LoadPattern> LoadPatterns, List<double> SFs, string Type = "CASE_LINEAR_STATIC") // Type has default value
+        private LoadCase(string Name, List<LoadPattern> LoadPatterns, List<double> SFs, string LoadCaseType = "CASE_LINEAR_STATIC") // Type has default value
         {
             name = Name;
-            type = Type;
+            type = LoadCaseType;
             loadPatterns = LoadPatterns;
             sFs = SFs;
+            Type = Definitions.Type.LoadCase;
         }
 
     }

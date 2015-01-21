@@ -210,6 +210,20 @@ namespace SAPConnection
             }
         }
 
+        public static void CreateorUpdateJoint(ref cSapModel Model, Point pt, ref string Id, bool update, double SF)
+        {
+            if (!update) // create new Joint
+            {
+                string dummy = string.Empty;
+                long ret = Model.PointObj.AddCartesian(pt.X * SF, pt.Y *SF, pt.Z *SF, ref dummy);
+
+            }
+            else 
+            {
+                long ret = Model.EditPoint.ChangeCoordinates_1(Id, pt.X * SF, pt.Y * SF, pt.Z * SF);
+            }
+        }
+
         public static bool ChangeNameSAPFrm(ref cSapModel Model, string Name, string NewName)
         {
             long ret = Model.FrameObj.ChangeName(Name, NewName);
@@ -219,6 +233,12 @@ namespace SAPConnection
         public static bool ChangeNameSAPArea(ref cSapModel Model, string Name, string NewName)
         {
             long ret = Model.AreaObj.ChangeName(Name, NewName);
+            if (ret == 0) { return true; } else { return false; }
+        }
+
+        public static bool ChangeNameSAPJoint(ref cSapModel Model, string Name, string NewName)
+        {
+            long ret = Model.PointObj.ChangeName(Name, NewName);
             if (ret == 0) { return true; } else { return false; }
         }
 
@@ -404,6 +424,17 @@ namespace SAPConnection
             if (IDs != null)
             {
                 myAreaList = IDs.ToList();
+            }
+        }
+
+        public static void GetSAPJointList(ref cSapModel Model, ref List<string> myJointList)
+        {
+            string[] IDs = null;
+            int NumbOfAreas = 0;
+            long ret = Model.PointObj.GetNameList(ref NumbOfAreas, ref IDs);
+            if (IDs != null)
+            {
+                myJointList = IDs.ToList();
             }
         }
 

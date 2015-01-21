@@ -18,7 +18,6 @@ namespace DynamoSAP
         List<Element> StructuralElements { get; }
         List<LoadPattern> LoadPatterns { get; }
         List<LoadCase> LoadCases { get; }
-        List<Restraint> Restraints { get; }
     }
 
     

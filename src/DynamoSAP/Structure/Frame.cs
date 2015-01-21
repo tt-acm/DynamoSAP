@@ -51,7 +51,7 @@ namespace DynamoSAP.Structure
 
         //PUBLIC METHODS
         /// <summary>
-        /// Type of the structural element
+        /// Unique Label
         /// </summary>
         /// <returns></returns>
         public override string ToString()

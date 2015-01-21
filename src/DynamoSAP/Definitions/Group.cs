@@ -10,7 +10,7 @@ using Autodesk.DesignScript.Runtime;
 
 namespace DynamoSAP.Definitions
 {
-    public class Group
+    public class Group:Definition
     {
         //FIELDS
         internal string Name { get; set; }
@@ -48,7 +48,8 @@ namespace DynamoSAP.Definitions
         private Group(string name, List<Element>elements)
         {
             Name = name;
-            GroupElements = elements; 
+            GroupElements = elements;
+            Type = Definitions.Type.Group;
         }
     }
 }

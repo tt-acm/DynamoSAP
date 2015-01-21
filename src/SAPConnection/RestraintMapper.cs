@@ -17,24 +17,9 @@ namespace SAPConnection
     public class RestraintMapper
     {
         // Dynamo To SAP
-        public static void Set(ref cSapModel Model, Point Pt, bool[] restaints)
+        public static void Set(ref cSapModel Model, string Id, bool[] restaints)
         { 
-            //Get Points
-            int num = 0;
-            string[] PtIds = null;
-            int ret = Model.PointObj.GetNameList(ref num, ref PtIds);
-
-            for (int i = 0; i < num; i++)
-            {
-                double x = 0; double y = 0; double z = 0;
-                ret = Model.PointObj.GetCoordCartesian(PtIds[i], ref x, ref y, ref z);
-
-                if (Math.Round(Pt.X,3) == Math.Round(x,3) && Math.Round(Pt.Y,3) == Math.Round(y,3) && Math.Round(Pt.Z,3) == Math.Round(z,3)) //TODO: Math Round per linear length???
-                {
-                    ret = Model.PointObj.SetRestraint(PtIds[i], restaints);
-                    break;
-                }
-            }
+           long ret = Model.PointObj.SetRestraint(Id, restaints);
         }
 
         // SAP to Dynamo

@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Analysis\RunAnalysis.cs" />
     <Compile Include="Assembly\Read.cs" />
+    <Compile Include="Definitions\Definition.cs" />
     <Compile Include="Definitions\Group.cs" />
     <Compile Include="Definitions\Load.cs" />
     <Compile Include="Definitions\LoadCase.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Structure\Element.cs" />
     <Compile Include="Structure\Frame.cs" />
     <Compile Include="Definitions\SectionProp.cs" />
+    <Compile Include="Structure\Joint.cs" />
     <Compile Include="Structure\Shell.cs" />
     <Compile Include="Definitions\ShellProp.cs" />
     <Compile Include="Text.cs" />

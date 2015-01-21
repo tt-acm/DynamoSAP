@@ -31,6 +31,7 @@ namespace DynamoSAP.Structure
     {
         Frame,
         Cable,
-        Shell
+        Shell,
+        Joint
     }
 }
