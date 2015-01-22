@@ -94,6 +94,10 @@ namespace DynamoSAP.Assembly
         internal static void StructuralModelFromSapFile(ref cSapModel SapModel, ref StructuralModel model, string SapModelUnits)
         {
             model.StructuralElements = new List<Element>();
+            model.ModelDefinitions = new List<Definition>();
+
+            List<LoadPattern> TempLPatterns = new List<LoadPattern>();
+
             if (SapModel != null)
             {
 
@@ -106,13 +110,15 @@ namespace DynamoSAP.Assembly
                 StructureMapper.GetLoadPatterns(ref SapModel, ref LoadPatternNames, ref LoadPatternTypes, ref LoadPatternMultipliers);
                 if (LoadPatternNames != null)
                 {
-                    model.LoadPatterns = new List<LoadPattern>();
                     foreach (string lpname in LoadPatternNames)
                     {
                         int pos = Array.IndexOf(LoadPatternNames, lpname);
-                        model.LoadPatterns.Add(new LoadPattern(lpname, LoadPatternTypes[pos], LoadPatternMultipliers[pos]));
+                        LoadPattern lp = new LoadPattern(lpname, LoadPatternTypes[pos], LoadPatternMultipliers[pos]);
+                        model.ModelDefinitions.Add(lp);
+                        TempLPatterns.Add(lp);
                     }
                 }
+
 
                 // 2. GET DYNAMO FRAMES ( get Loads and Releases that are assigned to that frame)
 
@@ -201,7 +207,7 @@ namespace DynamoSAP.Assembly
                     foreach(int index in outindexes)
                     {
                        LoadPattern Dlp = null;
-                       foreach (LoadPattern loadp in model.LoadPatterns)
+                       foreach (LoadPattern loadp in TempLPatterns)
                         {
                             if (loadp.name == DlPattern[index])
                             {
@@ -227,7 +233,7 @@ namespace DynamoSAP.Assembly
                     foreach (int index in outindexesO)
                     {
                         LoadPattern Plp = null;
-                        foreach (LoadPattern loadp in model.LoadPatterns)
+                        foreach (LoadPattern loadp in TempLPatterns)
                         {
                             if (loadp.name == PlPattern[index])
                             {

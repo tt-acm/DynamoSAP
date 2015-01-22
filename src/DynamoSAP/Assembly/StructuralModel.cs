@@ -17,10 +17,7 @@ namespace DynamoSAP.Assembly
         [SupressImportIntoVMAttribute]
         public List<Element> StructuralElements { get; set; }
         [SupressImportIntoVMAttribute]
-        public List<LoadPattern> LoadPatterns { get; set; }
-        [SupressImportIntoVMAttribute]
-        public List<LoadCase> LoadCases { get; set; }
-
+        public List<Definition> ModelDefinitions { get; set; }
 
 
         // Check that the label does not exist, in case users added the same element twice
@@ -107,10 +104,10 @@ namespace DynamoSAP.Assembly
         /// <param name="LoadPatterns">Load Patterns in the project. Please, input as a flat list</param>
         /// <param name="LoadCases">Load Cases in the project. Please, input as a flat list</param>
         /// <returns>Structural Model consisting of all the elements provided</returns>
-        public static StructuralModel Collector(List<Element> StructuralElements, List<LoadPattern> LoadPatterns, List<LoadCase> LoadCases)
+        public static StructuralModel Collector(List<Element> StructuralElements, List<Definition> Definitions)
         {
             CheckDuplicates(StructuralElements);
-            return new StructuralModel(StructuralElements, LoadPatterns, LoadCases);
+            return new StructuralModel(StructuralElements,Definitions);
         }
 
         /// <summary>
@@ -118,7 +115,7 @@ namespace DynamoSAP.Assembly
         /// </summary>
         /// <param name="structuralModel">Structural Model to decompose </param>
         /// <returns> Frames, Shells,Joints, Load Patterns, Load Cases </returns>
-        [MultiReturn("Frames","Shells","Joints", "Load Patterns", "Load Cases")]
+        [MultiReturn("Frames","Shells","Joints", "Load Patterns", "Load Cases", "Groups")]
         public static Dictionary<string, object> Decompose(StructuralModel structuralModel)
         {
             List<Element> Frms = new List<Element>();
@@ -140,25 +137,46 @@ namespace DynamoSAP.Assembly
                     Joints.Add(el);
                 }
             }
+
+            List<Definition> LoadPatterns = new List<Definition>();
+            List<Definition> LoadCases= new List<Definition>();
+            List<Definition> Groups = new List<Definition>();
+
+            foreach (var def in structuralModel.ModelDefinitions)
+            {
+                if (def.Type == Definitions.Type.LoadCase)
+                {
+                    LoadCases.Add(def);
+                }
+                else if (def.Type == Definitions.Type.LoadPattern)
+                {
+                    LoadPatterns.Add(def);
+                }
+                else if (def.Type == Definitions.Type.Group)
+                {
+                    Groups.Add(def);
+                }
+            }
+
             // Return outputs
             return new Dictionary<string, object>
             {
                 {"Frames", Frms},
                 {"Shells", Shells},
                 {"Joints", Joints},
-                {"Load Patterns", structuralModel.LoadPatterns},
-                {"Load Cases", structuralModel.LoadCases},
+                {"Load Patterns", LoadPatterns},
+                {"Load Cases", LoadCases},
+                {"Group", Groups}
                
             };
         }
 
         internal StructuralModel() { }
 
-        private StructuralModel(List<Element> Elements, List<LoadPattern> loadPatterns, List<LoadCase> loadCases)
+        private StructuralModel(List<Element> Elements, List<Definition> Definitions )
         {
             StructuralElements = Elements;
-            LoadPatterns = loadPatterns;
-            LoadCases = loadCases;
+            ModelDefinitions = Definitions;
 
         }
     }

@@ -360,25 +360,29 @@ namespace DynamoSAP.Assembly
                 }
             }
 
+            // LinqInquiry
+            var LPatterns = from def in StructuralModel.ModelDefinitions
+                         where def.Type == Definitions.Type.LoadPattern
+                         select def;
 
-
-            // 4. Add Load Patterns
-            if (StructuralModel.LoadPatterns != null)
+            // Add Load Patterns to the SAP Model
+            if (LPatterns!= null)
             {
-                foreach (LoadPattern lp in StructuralModel.LoadPatterns)
+                foreach (LoadPattern lp in LPatterns)
                 {
-                    //Call the AddLoadPattern method
+                     //Call the AddLoadPattern method
                     SAPConnection.LoadMapper.AddLoadPattern(ref mySapModel, lp.name, lp.type, lp.multiplier);
                 }
             }
 
-            // 5. Define Load Cases
+            var LCases = from def in StructuralModel.ModelDefinitions
+                         where def.Type == Definitions.Type.LoadCase
+                         select def;
 
-            if (StructuralModel.LoadCases != null)
+            if (LCases != null)
             {
-                foreach (LoadCase lc in StructuralModel.LoadCases)
+                foreach (LoadCase lc in LCases)
                 {
-
                     List<string> types = new List<string>();
                     List<string> names = new List<string>();
                     List<double> SFs = new List<double>();
@@ -397,6 +401,7 @@ namespace DynamoSAP.Assembly
                     SAPConnection.LoadMapper.AddLoadCase(ref mySapModel, lc.name, types.Count(), ref Dtypes, ref Dnames, ref DSFs, lc.type);
                 }
             }
+
 
             // Set Loads 
             foreach (var el in StructuralModel.StructuralElements)

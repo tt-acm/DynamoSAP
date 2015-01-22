@@ -16,8 +16,7 @@ namespace DynamoSAP
     public interface IModel
     {
         List<Element> StructuralElements { get; }
-        List<LoadPattern> LoadPatterns { get; }
-        List<LoadCase> LoadCases { get; }
+        List<Definition> ModelDefinitions { get; }
     }
 
     
