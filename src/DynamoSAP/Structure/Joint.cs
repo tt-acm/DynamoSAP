@@ -81,8 +81,10 @@ namespace DynamoSAP.Structure
         /// <returns></returns>
         public static Joint SetRestraint( Joint Joint, Restraint Restraint )
         {
-            Joint.JointRestraint = Restraint;
-            return Joint;
+            Joint newJoint = Joint.FromPoint(Joint.BasePoint);
+            newJoint.JointRestraint = Restraint;
+            newJoint.Label = Joint.Label;
+            return newJoint;
         }
 
         //public static Joint SetJointForce ( Joint Joint, bool replaceExisting = false)
