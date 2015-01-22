@@ -145,7 +145,7 @@ namespace DynamoSAP.Structure
             // Create a new Frame using the properties of the input frame
             Frame newFrm = Frame.FromLine(Frame.BaseCurve, Frame.SecProp, Frame.Just, Frame.Angle);
             // Set Label
-            newFrm.Label = String.Format("dyn_{0}", newFrm.ID.ToString());
+            newFrm.Label = String.Format("dyn_{0}", Frame.ID.ToString());
             // Add any loads the frame already has
             newFrm.Loads = Frame.Loads;
             // Set the release in the node
