@@ -153,12 +153,12 @@ namespace DynamoSAP.Assembly
                 if (load.LoadType == "PointLoad")
                 {
                     //Call the CreatePointLoad method
-                    SAPConnection.LoadMapper.CreatePointLoad(ref mySapModel, frm.Label, load.lPattern.name, load.FMType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, false);
+                    SAPConnection.LoadMapper.CreatePointLoad(ref mySapModel, frm.Label, load.lPattern.name, load.FMType, load.Dir, load.Dist, load.Val, load.CSys, load.RelDist, true);
                 }
                 if (load.LoadType == "DistributedLoad")
                 {
                     //Call the CreateDistributedLoad method
-                    SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, frm.Label, load.lPattern.name, load.FMType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, false);
+                    SAPConnection.LoadMapper.CreateDistributedLoad(ref mySapModel, frm.Label, load.lPattern.name, load.FMType, load.Dir, load.Dist, load.Dist2, load.Val, load.Val2, load.CSys, load.RelDist, true);
                 }
             }
         }
@@ -237,11 +237,11 @@ namespace DynamoSAP.Assembly
                 SAPConnection.RestraintMapper.Set(ref mySapModel, j.Label, restraints.ToArray()); 
 	        }
 
-            //  3. Assign Force to  Node
-            if (j.Loads != null)
-            {
+            ////  3. Assign Force to  Node
+            //if (j.Loads != null)
+            //{
 
-            }
+            //}
 
 
         }
