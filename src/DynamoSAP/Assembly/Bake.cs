@@ -188,7 +188,14 @@ namespace DynamoSAP.Assembly
             else // modify the existing
             {
                 string id = s.Label;
-                SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseMesh, ref id, true, SF);
+                if (s.BaseMesh != null)
+                {
+                   SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseMesh, ref id, true, SF); 
+                }
+                else
+                {
+                    SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseSurface, ref id, true, SF); 
+                }               
             }
 
             // Define Shell Properties
