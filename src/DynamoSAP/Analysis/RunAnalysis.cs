@@ -299,7 +299,7 @@ namespace DynamoSAP.Analysis
                         else if (ForceType == "Moment22") // Get Moment M2
                         {
                             v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].M2;
-                            translateCoord = v2 * coefficient * Scale;
+                            translateCoord = v2 * coefficient * (-Scale);
                         }
 
                         else if (ForceType == "Moment33") // Get Moment M3
@@ -313,7 +313,7 @@ namespace DynamoSAP.Analysis
                         // if there is no value for the force (it is zero), add one to the count
                         if (translateCoord == 0.0) zeroCount++;
 
-                        if (ForceType == "Moment22")
+                        if (ForceType == "Moment22" || ForceType == "Shear33")
                         {
                             vPoint = (Point)tPoint.Translate(localCS.YAxis, translateCoord); // Translate in the Y direction to match the visualization of SAP
                         }
