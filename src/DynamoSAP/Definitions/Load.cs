@@ -37,7 +37,7 @@ namespace DynamoSAP.Definitions
         //Optional inputs
         internal string CSys;
         internal bool RelDist;
-       
+
 
         //PUBLIC METHODS
         public override string ToString()
@@ -53,46 +53,47 @@ namespace DynamoSAP.Definitions
         [MultiReturn("Load Type", "Load Pattern", "Force/Moment Type", "Direction", "Distance", "Distance 2", "Value", "Value 2", "Coordinate System", "Relative Distance")]
         public static Dictionary<string, object> Decompose(Load Load)
         {
-
-            string d2 = ""; // if it is a Point Load this should return empty
-            string v2 = "";// if it is a Point Load this should return empty
-
-            if (Load.LoadType == "DistributedLoad")
+            if (Load != null)
             {
-                //if it is a Distributed Load
-                d2 = Load.Dist2.ToString();
-                v2 = Load.Val2.ToString();
-            }
+                string d2 = ""; // if it is a Point Load this should return empty
+                string v2 = "";// if it is a Point Load this should return empty
 
-            string forceOrMoment = "";
-            if (Load.FMType == 1) forceOrMoment = "Force";
-            else forceOrMoment = "Moment";
+                if (Load.LoadType == "DistributedLoad")
+                {
+                    //if it is a Distributed Load
+                    d2 = Load.Dist2.ToString();
+                    v2 = Load.Val2.ToString();
+                }
 
-
-            string axisDir = "";
-            if (Load.CSys == "GLOBAL" || Load.CSys == "global" || Load.CSys == "Global")
-            {
-                if (Load.Dir == 4) axisDir = "Global X direction";
-                else if (Load.Dir == 5) axisDir = "Global Y direction";
-                else if (Load.Dir == 6) axisDir = "Global Z direction";
-                else if (Load.Dir == 7) axisDir = "Projected X direction";
-                else if (Load.Dir == 8) axisDir = "Projected Y direction";
-                else if (Load.Dir == 9) axisDir = "Projected Z direction";
-                else if (Load.Dir == 10) axisDir = "Gravity direction";
-                else if (Load.Dir == 11) axisDir = "Projected gravity direction";
-            }
+                string forceOrMoment = "";
+                if (Load.FMType == 1) forceOrMoment = "Force";
+                else if (Load.FMType == 2) forceOrMoment = "Moment";
 
 
-            else // for local coordinate systems
-            {
-                if (Load.Dir == 1) axisDir = "Local 1 axis";
-                else if (Load.Dir == 2) axisDir = "Local 2 axis";
-                else if (Load.Dir == 3) axisDir = "Local 3 axis";
-            }
-            
+                string axisDir = "";
+                if (Load.CSys == "GLOBAL" || Load.CSys == "global" || Load.CSys == "Global")
+                {
+                    if (Load.Dir == 4) axisDir = "Global X direction";
+                    else if (Load.Dir == 5) axisDir = "Global Y direction";
+                    else if (Load.Dir == 6) axisDir = "Global Z direction";
+                    else if (Load.Dir == 7) axisDir = "Projected X direction";
+                    else if (Load.Dir == 8) axisDir = "Projected Y direction";
+                    else if (Load.Dir == 9) axisDir = "Projected Z direction";
+                    else if (Load.Dir == 10) axisDir = "Gravity direction";
+                    else if (Load.Dir == 11) axisDir = "Projected gravity direction";
+                }
 
-            // Return outputs
-            return new Dictionary<string, object>
+
+                else // for local coordinate systems
+                {
+                    if (Load.Dir == 1) axisDir = "Local 1 axis";
+                    else if (Load.Dir == 2) axisDir = "Local 2 axis";
+                    else if (Load.Dir == 3) axisDir = "Local 3 axis";
+                }
+
+
+                // Return outputs
+                return new Dictionary<string, object>
             {
                 {"Load Type", Load.LoadType},
                 {"Load Pattern", Load.lPattern.name},
@@ -105,6 +106,23 @@ namespace DynamoSAP.Definitions
                 {"Coordinate System", Load.CSys},
                 {"Relative Distance", Load.RelDist}
             };
+            }
+            else
+            {
+                return new Dictionary<string, object>
+            {
+                {"Load Type", null},
+                {"Load Pattern", null},
+                {"Force/Moment Type", null},
+                {"Direction", null},
+                {"Distance", null},
+                {"Distance 2", null},
+                {"Value",null},
+                {"Value 2", null},
+                {"Coordinate System", null},
+                {"Relative Distance",null}
+            };
+            }
         }
 
         /// <summary>
@@ -142,7 +160,7 @@ namespace DynamoSAP.Definitions
         //DYNAMO CREATE NODES
         public static Load PointLoad(LoadPattern LoadPattern, int ForceMomentType, int Direction, double Distance, double Value, string CoordSystem = "Global", bool RelativeDistance = true, bool Replace = true)
         {
-            CheckCoordSysAndDir(Direction,CoordSystem);
+            CheckCoordSysAndDir(Direction, CoordSystem);
             Load l = new Load(LoadPattern, ForceMomentType, Direction, Distance, Value, CoordSystem, RelativeDistance);
             l.LoadType = "PointLoad";
             return l;
@@ -182,7 +200,7 @@ namespace DynamoSAP.Definitions
         /// <returns></returns>
         public static Load DistributedLoad(LoadPattern LoadPattern, int ForceMomentType, int Direction, double Distance, double Distance2, double Value, double Value2, string CoordSystem = "Global", bool RelativeDistance = true)
         {
-            CheckCoordSysAndDir(Direction,CoordSystem);
+            CheckCoordSysAndDir(Direction, CoordSystem);
             Load l = new Load(LoadPattern, ForceMomentType, Direction, Distance, Distance2, Value, Value2, CoordSystem, RelativeDistance);
             l.LoadType = "DistributedLoad";
             return l;
@@ -199,7 +217,7 @@ namespace DynamoSAP.Definitions
             Val = val;
             CSys = cSys;
             RelDist = relDist;
-           
+
         }
 
         //constructor for DistributedLoads
@@ -214,7 +232,7 @@ namespace DynamoSAP.Definitions
             Val2 = val2;
             CSys = cSys;
             RelDist = relDist;
-            
+
         }
 
         //Private method
@@ -223,14 +241,14 @@ namespace DynamoSAP.Definitions
             //Check that the settings are correct
             if (CS != "Global")
             {
-                if (dir == 4 || dir == 5 || dir == 6 || dir == 7 || dir == 8 || dir == 9 || dir == 10 || dir == 11)
+                if (dir == 0 || dir == 4 || dir == 5 || dir == 6 || dir == 7 || dir == 8 || dir == 9 || dir == 10 || dir == 11)
                 {
                     throw new Exception("The direction setting and the Coordinate System are not compatible. Please, change these values");
                 }
             }
             else // for global coordinate system
             {
-                if (dir == 1 || dir == 2 || dir == 3)
+                if (dir == 0 || dir == 1 || dir == 2 || dir == 3)
                 {
                     throw new Exception("The direction setting and the Coordinate System are not compatible. Please, change these values");
                 }
