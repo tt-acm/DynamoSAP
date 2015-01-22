@@ -219,7 +219,7 @@ namespace DynamoSAP.Assembly
                 string dummy = string.Empty;
                 StructureMapper.CreateorUpdateJoint(ref mySapModel, j.BasePt,ref dummy, false, SF);
                 // Set custom Label to Frame in dynamo & Frame! User can match by using Label & ID
-                bool renamed = SAPConnection.StructureMapper.ChangeNameSAPFrm(ref mySapModel, dummy, j.Label);
+                bool renamed = SAPConnection.StructureMapper.ChangeNameSAPJoint(ref mySapModel, dummy, j.Label);
                 if (!renamed)
                 {
                     j.Label = dummy; 
