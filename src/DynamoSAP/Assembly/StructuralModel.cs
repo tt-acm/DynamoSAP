@@ -21,25 +21,70 @@ namespace DynamoSAP.Assembly
         [SupressImportIntoVMAttribute]
         public List<LoadCase> LoadCases { get; set; }
 
-        
 
-        // Check that the GUID does not exist, in case users added the same element twice
-        private static void CheckDuplicateFrame(List<Element> StructEl)
+
+        // Check that the label does not exist, in case users added the same element twice
+        private static void CheckDuplicates(List<Element> StructEl)
         {
-            // Dictionary to hold Structure Frames on <string, string> <GUID,Label>
-            List<string> SapModelFrmList = new List<string>();
+            int errorcounter = 0;
+            List<string> duplicates = new List<string>();
+            List<string> frames = new List<string>();
+            List<string> shells = new List<string>();
+            List<string> joints = new List<string>();
+
             foreach (Element el in StructEl)
             {
-                if (!SapModelFrmList.Contains(el.Label))
+                if (el.Type == Structure.Type.Frame)
                 {
-                    SapModelFrmList.Add(el.Label);
+                    if (!frames.Contains(el.Label))
+                    {
+                        frames.Add(el.Label);
+                    }
+                    else
+                    {
+                        errorcounter++;
+                        duplicates.Add("Frame: " + el.Label);
+
+                    }
                 }
-                // If the key exists, throw an error in the collector
-                else
+                if (el.Type == Structure.Type.Shell)
                 {
-                    throw new Exception("A structural element has been added twice. Please, make sure you do not have duplicate elements");
+                    if (!shells.Contains(el.Label))
+                    {
+                        shells.Add(el.Label);
+                    }
+                    else
+                    {
+                        errorcounter++;
+                        duplicates.Add("Shell: " + el.Label);
+
+                    }
+                }
+                if (el.Type == Structure.Type.Joint)
+                {
+                    if (!joints.Contains(el.Label))
+                    {
+                        joints.Add(el.Label);
+                    }
+                    else
+                    {
+                        errorcounter++;
+                        duplicates.Add("Joint: " + el.Label);
+                    }
                 }
             }
+
+            if (errorcounter > 0)
+            {
+                string errorMessage = "One or more structural elements have been added twice: ";
+                for (int i = 0; i < duplicates.Count; i++)
+                {
+                    errorMessage += duplicates[i] + " ";
+                }
+                // pass  this to  error log
+                throw new Exception(errorMessage);
+            }
+
         }
 
         /// <summary>
@@ -49,7 +94,7 @@ namespace DynamoSAP.Assembly
         /// <returns>Structural Model consisting of the structural elements provided</returns>
         public static StructuralModel Collector(List<Element> StructuralElements)
         {
-            CheckDuplicateFrame(StructuralElements);
+            CheckDuplicates(StructuralElements);
             StructuralModel mySt = new StructuralModel();
             mySt.StructuralElements = StructuralElements;
             return mySt;
@@ -64,7 +109,7 @@ namespace DynamoSAP.Assembly
         /// <returns>Structural Model consisting of all the elements provided</returns>
         public static StructuralModel Collector(List<Element> StructuralElements, List<LoadPattern> LoadPatterns, List<LoadCase> LoadCases)
         {
-            CheckDuplicateFrame(StructuralElements);
+            CheckDuplicates(StructuralElements);
             return new StructuralModel(StructuralElements, LoadPatterns, LoadCases);
         }
 
@@ -73,7 +118,7 @@ namespace DynamoSAP.Assembly
         /// </summary>
         /// <param name="structuralModel">Structural Model to decompose </param>
         /// <returns> Frames, Shells, Load Patterns, Load Cases and Restraints of the project </returns>
-        [MultiReturn("Frames","Shells", "Load Patterns", "Load Cases", "Restraints")]
+        [MultiReturn("Frames", "Shells", "Load Patterns", "Load Cases", "Restraints")]
         public static Dictionary<string, object> Decompose(StructuralModel structuralModel)
         {
             List<Element> Frms = new List<Element>();
