@@ -81,10 +81,13 @@ namespace DynamoSAP.Structure
         /// <returns></returns>
         public static Joint SetRestraint( Joint Joint, Restraint Restraint )
         {
+            // Create a new Joint using the properties of the input Joint
             Joint newJoint = Joint.FromPoint(Joint.BasePoint);
+            // Create label
+            newJoint.Label = String.Format("dyn_{0}", Joint.ID.ToString());
+            // set the restraint
             newJoint.JointRestraint = Restraint;
-            newJoint.Label = Joint.Label;
-            return newJoint;
+           return newJoint;
         }
 
         //public static Joint SetJointForce ( Joint Joint, bool replaceExisting = false)
