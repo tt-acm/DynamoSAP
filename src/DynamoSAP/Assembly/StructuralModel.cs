@@ -72,8 +72,8 @@ namespace DynamoSAP.Assembly
         /// Decomposes a Structural Model into its geometry and structural settings
         /// </summary>
         /// <param name="structuralModel">Structural Model to decompose </param>
-        /// <returns> Frames, Shells, Load Patterns, Load Cases and Restraints of the project </returns>
-        [MultiReturn("Frames","Shells", "Load Patterns", "Load Cases", "Restraints")]
+        /// <returns> Frames, Shells, Load Patterns, Load Cases </returns>
+        [MultiReturn("Frames","Shells", "Load Patterns", "Load Cases")]
         public static Dictionary<string, object> Decompose(StructuralModel structuralModel)
         {
             List<Element> Frms = new List<Element>();

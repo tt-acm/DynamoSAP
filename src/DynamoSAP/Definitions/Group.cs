@@ -49,7 +49,7 @@ namespace DynamoSAP.Definitions
         {
             Name = name;
             GroupElements = elements;
-            Type = Definitions.Type.Group;
+            this.Type = Definitions.Type.Group;
         }
     }
 }

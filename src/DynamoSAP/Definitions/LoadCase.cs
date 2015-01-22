@@ -61,7 +61,7 @@ namespace DynamoSAP.Definitions
             type = LoadCaseType;
             loadPatterns = LoadPatterns;
             sFs = SFs;
-            Type = Definitions.Type.LoadCase;
+            this.Type = Definitions.Type.LoadCase;
         }
 
     }

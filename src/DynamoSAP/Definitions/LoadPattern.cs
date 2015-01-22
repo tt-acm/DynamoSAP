@@ -56,7 +56,7 @@ namespace DynamoSAP.Definitions
             name = Name;
             type = LoadPatternType;
             multiplier = Multiplier;
-            Type = Definitions.Type.LoadCombo;
+            this.Type = Definitions.Type.LoadPattern;
         }
     }
 }
