@@ -312,19 +312,19 @@ namespace DynamoSAP.Assembly
                 // Areas from SAP not in Structural elements
                 foreach (var sapArea in SAPAreaList)
                 {
-                    Element el = null;
-                    try
-                    {
-                        el = (from f in StructuralModel.StructuralElements
-                              where f.Label == sapArea
-                              select f).First();
-                    }
-                    catch (Exception) { }
+                    //Element el = null;
+                    //try
+                    //{
+                    //    el = (from f in StructuralModel.StructuralElements
+                    //          where f.Label == sapArea
+                    //          select f).First();
+                    //}
+                    //catch (Exception) { }
 
-                    if (el == null)
-                    {
+                    //if (el == null)
+                    //{
                         SAPConnection.StructureMapper.DeleteArea(ref mySapModel, sapArea);
-                    }
+                    //}
                 }
 
             }
@@ -350,7 +350,7 @@ namespace DynamoSAP.Assembly
                 {
                     bool isupdate = SAPAreaList.Contains(el.Label);
 
-                    CreateorUpdateArea(el as Shell, ref mySapModel, SF, isupdate);
+                    CreateorUpdateArea(el as Shell, ref mySapModel, SF, false);
                     
                 }
                 else if (el.Type == Structure.Type.Joint)
@@ -361,12 +361,18 @@ namespace DynamoSAP.Assembly
             }
 
             // LinqInquiry
-            var LPatterns = from def in StructuralModel.ModelDefinitions
-                         where def.Type == Definitions.Type.LoadPattern
-                         select def;
-
+            List<Definition> LPatterns = new List<Definition>();
+            try
+            {
+                LPatterns = (from def in StructuralModel.ModelDefinitions
+                                where def.Type == Definitions.Type.LoadPattern
+                                select def).ToList();
+            }
+            catch (Exception)
+            {
+            }
             // Add Load Patterns to the SAP Model
-            if (LPatterns!= null)
+            if (LPatterns.Count > 0)
             {
                 foreach (LoadPattern lp in LPatterns)
                 {
@@ -375,11 +381,16 @@ namespace DynamoSAP.Assembly
                 }
             }
 
-            var LCases = from def in StructuralModel.ModelDefinitions
-                         where def.Type == Definitions.Type.LoadCase
-                         select def;
-
-            if (LCases != null)
+            List<Definition> LCases = new List<Definition>();
+            try
+            {
+                LCases = (from def in StructuralModel.ModelDefinitions
+                          where def.Type == Definitions.Type.LoadCase
+                          select def).ToList();
+            }
+            catch { }
+            
+            if (LCases.Count>0)
             {
                 foreach (LoadCase lc in LCases)
                 {
@@ -418,6 +429,8 @@ namespace DynamoSAP.Assembly
                 }
             }
 
+            // Delete unconnected points at the SAP
+            //SAPConnection.StructureMapper.DeleteUnconnectedPts(ref mySapModel);
 
             // refresh View 
             SAPConnection.StructureMapper.RefreshView(ref mySapModel);

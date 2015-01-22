@@ -438,6 +438,25 @@ namespace SAPConnection
             }
         }
 
+        public static void DeleteUnconnectedPts(ref cSapModel Model)
+        {
+            // get name list
+            List<string> PtList = new List<string>();
+            GetSAPJointList(ref Model, ref PtList);
+            foreach (var pt in PtList)
+            {
+                int Num = 0;
+                int[] Otype = null;
+                string[] OName = null;
+                int[] refNum = null;
+                Model.PointObj.GetConnectivity(pt, ref Num, ref Otype, ref OName, ref refNum);
+                if (Num == 0)
+                { // delete if not connected
+                    Model.PointObj.DeleteSpecialPoint(pt);
+                }
+            }
+            
+        }
         public static void GetShellProp(ref cSapModel Model, string PropName, ref string ShellType, ref bool DOF, ref string MatProp, ref double MatAngle, ref double Thickness, ref double Bending)
         {
             int type = 1;
