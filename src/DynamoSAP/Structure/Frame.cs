@@ -224,42 +224,43 @@ namespace DynamoSAP.Structure
         /// <param name="ShowValues">Set Boolean to True to show the tags of the numeric values</param>
         /// <param name="TextSize">Size of the tags</param>
         /// <returns>Arrows and tags representing the loads</returns>
-        //public static List<List<Object>> DisplayLoads(StructuralModel StructuralModel, string LPattern = "Show All", double Size = 1.0, bool ShowValues = true, double TextSize = 1.0)
-        [MultiReturn("Points", "Text", "Arrows")]
-        public static Dictionary<string, object> DisplayLoads(StructuralModel StructuralModel, string LPattern = "Show All", double Size = 1.0, bool ShowValues = true, double TextSize = 1.0)
+        public static List<List<Object>> DisplayLoads(StructuralModel StructuralModel, string LPattern = "Show All", double Size = 1.0, bool ShowValues = true, double TextSize = 1.0)
         {
+            //List to hold all the load visualization objects
             List<List<Object>> LoadViz = new List<List<Object>>();
-            List<List<Object>> ppts = new List<List<Object>>();
-            List<List<Object>> texts = new List<List<Object>>();
-            List<List<Object>> arrows = new List<List<Object>>();
-            Double l = 1.0;
+            
+            // Length of the arrow
+            Double length = 1.0;
             foreach (Element e in StructuralModel.StructuralElements)
             {
                 if (e.GetType().ToString().Contains("Frame"))
                 {
                     //get the length of the first frame found in the collection and use to set up a scale for the load display
-                    l = ((Frame)e).BaseCrv.Length;
+                    length = ((Frame)e).BaseCrv.Length;
                     break;
                 }
             }
-
-            double arrowLenght = l / 5;
-            double arrowLongSide = l / 20;
-
+            double arrowLenght = length / 6;
+            
+            // Loop through all the elements in the structural model
             foreach (Element e in StructuralModel.StructuralElements)
             {
                 double sz = Size;
+                //List to hold the load visualization objects per structural member
                 List<Object> LoadObjects = new List<Object>();
-                List<Object> ppt = new List<Object>();
-                List<Object> text = new List<Object>();
-                List<Object> arrow = new List<Object>();
+                
+                // 1. If the object is a frame
                 if (e.GetType().ToString().Contains("Frame"))
                 {
                     Frame f = e as Frame;
                     if (f.Loads != null && f.Loads.Count > 0)
                     {
+                        //Loop through all the loads on the frame
                         foreach (Load load in f.Loads)
                         {
+                            // If the Load type is  a moment, throw warning
+                            if (load.FMType == 2) throw new Exception("Moment visualization is not supported");
+
                             Point labelLocation = null;
                             if (LPattern == "Show All")
                             {
@@ -276,7 +277,8 @@ namespace DynamoSAP.Structure
                             Curve c = f.BaseCrv;
                             if (load.Val > 0) sz = -sz; // make negative and change the direction of the arrow
 
-                            List<double> dd = new List<double>(); // parameter values where arrows will be drawn
+                            // List to hold parameter values where arrows will be drawn
+                            List<double> dd = new List<double>(); 
                             bool isDistributed = false;
                             if (load.LoadType == "DistributedLoad")
                             {
@@ -295,60 +297,92 @@ namespace DynamoSAP.Structure
                             {
                                 dd.Add(load.Dist);
                             }
+                            //First top point for distributed load visualization
                             Point A = null;
+                            //Last top point for distributed load visualization
                             Point B = null;
-                            Vector v2 = null;
-                            Vector v3 = null;
+                            
+                            //Vector used to translate the arrow location point
+                            Vector v = null;
+
                             Vector xAxis = c.TangentAtParameter(0.0);
+                            Vector yAxis = c.NormalAtParameter(0.0);
+                            Vector triangleNormal = null;
+                            
+                            //List to hold the index group of the mesh
+                            List<IndexGroup> igs = new List<IndexGroup>();
+                            igs.Add(IndexGroup.ByIndices(0, 1, 2));
+                            
+                            //Loop through all the parameter values along the curve.
+                            // If it is a point load it will only have one value
                             for (int i = 0; i < dd.Count; i++)
                             {
+                                //List to hold the points to create a triangular mesh per arrow
                                 List<Point> pps = new List<Point>();
-                                List<IndexGroup> igs = new List<IndexGroup>();
-                                // Line of the arrow
+
+                                //Create the point where the arrow should be located
                                 Point p1 = c.PointAtParameter(dd[i]);
                                 Point p2 = null;
                                 Point p3 = null;
                                 Point p4 = null;
-
-                                //MUST ADD CONDITIONS HERE FOR LOCAL COORDINATE SYSTEM
-
-                                if (load.Dir == 4) // if it's the X Direction
+  
+                                //Calculate the vector needed to create the line of the arrow
+                                // if it's the local X Direction
+                                if (load.Dir == 1) 
                                 {
-                                    v2 = Vector.ByCoordinates(arrowLenght * sz, 0.0, 0.0);
-                                    v3 = Vector.ByCoordinates(arrowLongSide * sz, 0.0, 0.0);
+                                    v = xAxis;
+                                }
+                                // if it's the local Y Direction
+                                else if (load.Dir == 2) 
+                                {
+                                    v = yAxis;
+                                }
+                                // if it's the local Z Direction
+                                else if (load.Dir == 3) 
+                                {
+                                    v = xAxis.Cross(yAxis);
+                                }
+                                // if it's the global X Direction
+                                else if (load.Dir == 4) 
+                                {
+                                    v = Vector.ByCoordinates(arrowLenght * sz, 0.0, 0.0);
+                                }
+                                // if it's the global Y Direction
+                                else if (load.Dir == 5) 
+                                {
+                                    v = Vector.ByCoordinates(0.0, arrowLenght * sz, 0.0);
+                                }
+                                // if it's the global Z Direction
+                                else if (load.Dir == 6) 
+                                {
+                                    v = Vector.ByCoordinates(0.0, 0.0, arrowLenght * sz);
                                 }
 
-                                if (load.Dir == 5) // if it's the Y Direction
-                                {
-                                    v2 = Vector.ByCoordinates(0.0, arrowLenght * sz, 0.0);
-                                    v3 = Vector.ByCoordinates(0.0, arrowLongSide * sz, 0.0);
-                                }
-                                if (load.Dir == 6) // if it's the Z Direction
-                                {
-                                    v2 = Vector.ByCoordinates(0.0, 0.0, arrowLenght * sz);
-                                    v3 = Vector.ByCoordinates(0.0, 0.0, arrowLongSide * sz);
-                                }
+                                // Create the line of the arrow
+                                p2 = (Point)p1.Translate(v);
+                                Line ln=Line.ByStartPointEndPoint(p1, p2);
 
-                                p2 = (Point)p1.Translate(v2);
+                                // Create a temporary point to hold the position of the base of the triangle of the arrow
+                                Point ptOnArrow = ln.PointAtDistance(arrowLenght/5);
+                                triangleNormal = ln.Normal;
+                                double triangleBase=0.10/1.25;
+                                
+                                // Translate the point on the arrow to the sides to create the base of the triangle
+                                p3 = (Point)ptOnArrow.Translate(triangleNormal,triangleBase);
+                                p4 = (Point)ptOnArrow.Translate(triangleNormal,-triangleBase);
 
-                                p3 = (Point)p1.Translate(xAxis, arrowLongSide * sz);
-                                p3 = (Point)p3.Translate(v3);
-
-                                p4 = (Point)p1.Translate(xAxis, -arrowLongSide * sz);
-                                p4 = (Point)p4.Translate(v3);
-
+                                // Add the points to the list
                                 pps.Add(p1); pps.Add(p3); pps.Add(p4);
 
-                                //Triangle of the arrow
-                                igs.Add(IndexGroup.ByIndices(0, 1, 2));
+                                //Create the triangular mesh of the arrow
                                 Mesh m = Mesh.ByPointsFaceIndices(pps, igs);
 
-                                ppt.Add(v2);
-                                LoadObjects.Add(Line.ByStartPointEndPoint(p1, p2));
+                                //Add the arrow objects to the list
+                                LoadObjects.Add(ln);
                                 LoadObjects.Add(m);
-                                arrow.Add(Line.ByStartPointEndPoint(p1, p2));
-                                arrow.Add(m);
-                                if (isDistributed) // create top line
+
+                                // Calculate the location of the labels                                
+                                if (isDistributed) 
                                 {
                                     if (i == 0)
                                     {
@@ -357,46 +391,36 @@ namespace DynamoSAP.Structure
                                     else if (i == dd.Count - 1)
                                     {
                                         B = p2;
-
+                                        //If it is a distributed load, create a top line
                                         Line topLine = Line.ByStartPointEndPoint(A, B);
                                         LoadObjects.Add(topLine);
                                     }
                                     else if (i == Convert.ToInt32(dd.Count / 2)) // if it is the middle point
                                     {
-                                        labelLocation = (Point)p2.Translate(v2.Normalized().Scale(arrowLenght/4));
+                                        labelLocation = (Point)p2.Translate(v.Normalized().Scale(arrowLenght/4));
                                     }
                                 }
                                 else
                                 {
-                                    labelLocation = (Point)p2.Translate(v2.Normalized().Scale(arrowLenght/4));
+                                    labelLocation = (Point)p2.Translate(v.Normalized().Scale(arrowLenght/4));
                                 }
                             }
+                            
+                            // If the user wants to see the values of the forces
                             if (ShowValues)
                             {
-                                //CREATE LABEL
-                                //get the text curves
+                                //List to hold the curves of the label
                                 List<Curve> textCurves = new List<Curve>();
+                                //Create label
                                 string value = Math.Round(load.Val, 2).ToString(); // value of the load rounded to two decimals
 
-                                //create ZX Plane to host the text
-                                //Plane pl = null;
-
+                                //create XZ Plane to host the text
                                 Plane pl = Plane.ByOriginXAxisYAxis(labelLocation, CoordinateSystem.Identity().XAxis, CoordinateSystem.Identity().ZAxis);
-                                
-                                //if (c.StartPoint.Z == c.EndPoint.Z) //if it is a beam
-                                // {
-                                //pl = Plane.ByOriginXAxisYAxis(labelLocation, xAxis, v2);
-                                // }
-                                //else //if it is a column or an inclined member
-                                //{
-                               // pl = Plane.ByOriginXAxisYAxis(labelLocation, v2, CoordinateSystem.Identity().ZAxis);
-                                // }
 
-                                //call the function to create the text
+                                // Call the function to create the text
                                 textCurves = Text.FromStringOriginAndScale(value, pl, TextSize).ToList();
                                 foreach (Curve textc in textCurves)
                                 {
-                                    text.Add(textc);
                                     LoadObjects.Add(textc);
                                 }
                             }
@@ -404,29 +428,16 @@ namespace DynamoSAP.Structure
                     }
                 }
 
-                // Add condition for cable
+                //TO DO:
+                // 2. Add condition for cable
 
-                //Add contiditon for shell
+                // 3. Add contiditon for shell
 
                 LoadViz.Add(LoadObjects);
-
-                ppts.Add(ppt);
-                texts.Add(text);
-                arrows.Add(arrow);
             }
 
-
-
-            //return LoadViz;
-
-            // Return outputs
-            return new Dictionary<string, object>
-                {
-                    {"Points", ppts},
-                    {"Text", texts},
-                    {"Arrows", arrows}
-                };
-
+            // Return Load Visualization
+            return LoadViz;
         }
 
 
