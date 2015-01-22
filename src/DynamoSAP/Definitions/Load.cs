@@ -140,7 +140,7 @@ namespace DynamoSAP.Definitions
         /// in the specified load pattern, are deleted before making the new assignment.</param>
         /// <returns>Load at a point along a Frame</returns>
         //DYNAMO CREATE NODES
-        public static Load PointLoadOnFrame(LoadPattern LoadPattern, int ForceMomentType, int Direction, double Distance, double Value, string CoordSystem = "Global", bool RelativeDistance = true, bool Replace = true)
+        public static Load PointLoad(LoadPattern LoadPattern, int ForceMomentType, int Direction, double Distance, double Value, string CoordSystem = "Global", bool RelativeDistance = true, bool Replace = true)
         {
             CheckCoordSysAndDir(Direction,CoordSystem);
             Load l = new Load(LoadPattern, ForceMomentType, Direction, Distance, Value, CoordSystem, RelativeDistance);
@@ -180,7 +180,7 @@ namespace DynamoSAP.Definitions
         /// <param name="CoordSystem">This is Local or the name of a defined coordinate system. It is the coordinate system in which the loads are specified.</param>
         /// <param name="RelativeDistance">If this item is True, the specified Dist item is a relative distance, otherwise it is an actual distance.</param>
         /// <returns></returns>
-        public static Load DistributedLoadOnFrame(LoadPattern LoadPattern, int ForceMomentType, int Direction, double Distance, double Distance2, double Value, double Value2, string CoordSystem = "Global", bool RelativeDistance = true)
+        public static Load DistributedLoad(LoadPattern LoadPattern, int ForceMomentType, int Direction, double Distance, double Distance2, double Value, double Value2, string CoordSystem = "Global", bool RelativeDistance = true)
         {
             CheckCoordSysAndDir(Direction,CoordSystem);
             Load l = new Load(LoadPattern, ForceMomentType, Direction, Distance, Distance2, Value, Value2, CoordSystem, RelativeDistance);

@@ -96,6 +96,11 @@ namespace SAPConnection
            int ret = Model.FrameObj.SetLoadDistributed(FrameName, LoadPat, MyType, Dir, Dist, Dist2, Val, Val2, CSys, RelDist, Replace);
         }
 
+        public static void SetLoadForcetoJoint(ref cSapModel Model, string JointId, string LoadPat, double[] Values, bool Replace)
+        {
+            int ret = Model.PointObj.SetLoadForce(JointId, LoadPat, Values,Replace);
+        }
+
         // READ LOAD METHODS
         public static void GetPointLoads(ref cSapModel Model, ref string[] FrameName, ref int NumberItems, ref string[] LoadPat, ref int[] MyType, ref string[] CSys, ref int[] Dir, ref double[] RelDist, ref double[] Dist, ref double[] Val)
         {

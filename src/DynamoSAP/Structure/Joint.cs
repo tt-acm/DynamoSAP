@@ -23,6 +23,7 @@ namespace DynamoSAP.Structure
         internal Point BasePt { get; set; }
         internal Restraint JointRestraint { get; set; }
 
+       
         //QUERY NODES
 
         public Point BasePoint
@@ -41,6 +42,11 @@ namespace DynamoSAP.Structure
             return Label;
         }
 
+        /// <summary>
+        /// Create Joint from Dynamo Point
+        /// </summary>
+        /// <param name="Point"></param>
+        /// <returns></returns>
         public static Joint FromPoint(Point Point)
         {
             Joint tJoint;
@@ -78,6 +84,16 @@ namespace DynamoSAP.Structure
             Joint.JointRestraint = Restraint;
             return Joint;
         }
+
+        //public static Joint SetJointForce ( Joint Joint, bool replaceExisting = false)
+        //{
+        //    if (replaceExisting)
+        //    {
+                
+        //    }
+
+        //    return Joint;
+        //}
 
         //PRIVATE CONSTRUCTORS
         internal Joint(){}

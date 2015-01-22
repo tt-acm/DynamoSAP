@@ -225,7 +225,7 @@ namespace DynamoSAP.Assembly
                 StructureMapper.CreateorUpdateJoint(ref mySapModel, j.BasePt, ref id, true, SF);
             }
 
-             // 3. Assigns Restraints to Node
+             // 2. Assigns Restraints to Node
 
             if (j.JointRestraint != null)
 	        {
@@ -236,6 +236,12 @@ namespace DynamoSAP.Assembly
                 // Set restaints
                 SAPConnection.RestraintMapper.Set(ref mySapModel, j.Label, restraints.ToArray()); 
 	        }
+
+            //  3. Assign Force to  Node
+            if (j.Loads != null)
+            {
+
+            }
 
 
         }
