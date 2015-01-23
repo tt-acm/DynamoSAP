@@ -11,7 +11,7 @@ namespace DynamoSAP_UI
 {
     [NodeName("LoadPatternTypes")]
     [NodeCategory("DynamoSAP.Definitions.LoadPattern")]
-    [NodeDescription("Select Load Pattern to use with Set Load Pattern node")]
+    [NodeDescription("Select Load Pattern type to use with Set Load Pattern node")]
     [IsDesignScriptCompatible]
     public class LoadPatternTypes: EnumAsString<eLoadPatternType>
     {
@@ -20,14 +20,22 @@ namespace DynamoSAP_UI
 
     [NodeName("LoadCaseTypes")]
     [NodeCategory("DynamoSAP.Definitions.LoadCase")]
-    [NodeDescription("Select Load Case to use with Set Load Case node")]
+    [NodeDescription("Select Load Case type to use with Set Load Case node")]
     [IsDesignScriptCompatible]
     public class LoadCaseTypes : EnumAsString<eLoadCaseType>
     {
         public LoadCaseTypes(WorkspaceModel workspace) : base(workspace) { }
     }
 
-    // TODO: Add LoadDirectionDropDown Global or Local CS
+    [NodeName("LoadComboTypes")]
+    [NodeCategory("DynamoSAP.Definitions.LoadCombo")]
+    [NodeDescription("Select Load Combo type to use with Set Load Combo node")]
+    [IsDesignScriptCompatible]
+    public class LoadComboTypes : EnumAsString<eCType>
+    {
+        public LoadComboTypes(WorkspaceModel workspace) : base(workspace) { }
+    }
+
 
     [NodeName("Justifications")]
     [NodeCategory("DynamoSAP.Structure.Frame")]
