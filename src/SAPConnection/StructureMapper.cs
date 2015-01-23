@@ -334,15 +334,6 @@ namespace SAPConnection
                 Model.LoadCases.GetType(lcname, ref cType, ref subType);
                 LoadCaseTypes[pos] = cType.ToString();
 
-                //get the loads and the multipliers
-
-               ////We need the load patterns!
-               // int numberLoads = 0;
-               // string[] loadType = null;
-               // string[] loadName = null;
-               // double[] sf = null;
-               // Model.LoadCases.StaticLinear.GetLoads(lcname, ref numberLoads, ref loadType, ref loadName, ref sf);
-               
             }
         }
         public static void GetFrm(ref cSapModel Model, string frmId, ref Point i, ref Point j, ref string MatProp, ref string SecName, ref string Just, ref double Rot, ref string SecCatalog, double LSF) //Length Scale Factor
