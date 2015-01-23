@@ -38,7 +38,7 @@ namespace DynamoSAP.Definitions
         /// <summary>
         /// Decompose a Load Case
         /// </summary>
-        /// <param name="LoadCase">Load case to decompose</param>
+        /// <param name="LoadCase">Load Case to decompose</param>
         /// <returns>Name, Type, Load Patterns and Scale Factors of the Load Case</returns>
         [MultiReturn("Name", "Type", "Load Patterns", "Scale Factors")]
         public static Dictionary<string, object> Decompose(LoadCase LoadCase)

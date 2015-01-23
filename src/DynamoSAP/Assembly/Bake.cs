@@ -413,6 +413,51 @@ namespace DynamoSAP.Assembly
                 }
             }
 
+            
+
+            List<Definition> LCombo = new List<Definition>();
+
+            try
+            {
+                LCombo = (from def in StructuralModel.ModelDefinitions
+                          where def.Type == Definitions.Type.LoadCombo
+                          select def).ToList();
+            }
+            catch {}
+
+            if (LCombo.Count > 0)
+            {
+                foreach (LoadCombo lc in LCombo)
+                {
+                    List<string> types = new List<string>();
+                    List<string> names = new List<string>();
+                    List<double> SFs = new List<double>();
+
+                    for (int i = 0; i < lc.loadDefinitions.Count; i++)
+                    {
+                        if (lc.loadDefinitions[i].Type == Definitions.Type.LoadCase)
+                        {
+                            types.Add("LoadCase");
+                            names.Add(((LoadCase)lc.loadDefinitions[i]).name);
+                            
+                        }
+                        else if (lc.loadDefinitions[i].Type == Definitions.Type.LoadCombo)
+                        {
+                            types.Add("LoadCombo");
+                            names.Add(((LoadCombo)lc.loadDefinitions[i]).name);
+                            
+                        }
+                        SFs.Add(lc.sFs[i]);
+                    }
+
+                    
+                    string[] Dtypes = types.ToArray();
+                    string[] Dnames = names.ToArray();
+                    double[] DSFs = SFs.ToArray();
+
+                    SAPConnection.LoadMapper.AddLoadCombo(ref mySapModel, lc.name, Dtypes,  Dnames,  DSFs, lc.type);
+                }
+            }
 
             // Set Loads 
             foreach (var el in StructuralModel.StructuralElements)
@@ -430,7 +475,7 @@ namespace DynamoSAP.Assembly
             }
 
             // Delete unconnected points at the SAP
-            //SAPConnection.StructureMapper.DeleteUnconnectedPts(ref mySapModel);
+            SAPConnection.StructureMapper.DeleteUnconnectedPts(ref mySapModel);
 
             // refresh View 
             SAPConnection.StructureMapper.RefreshView(ref mySapModel);

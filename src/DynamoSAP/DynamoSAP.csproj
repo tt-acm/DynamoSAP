@@ -78,6 +78,7 @@
     <Compile Include="Definitions\Group.cs" />
     <Compile Include="Definitions\Load.cs" />
     <Compile Include="Definitions\LoadCase.cs" />
+    <Compile Include="Definitions\LoadCombo.cs" />
     <Compile Include="Definitions\LoadPattern.cs" />
     <Compile Include="Definitions\Release.cs" />
     <Compile Include="Definitions\Restraint.cs" />
