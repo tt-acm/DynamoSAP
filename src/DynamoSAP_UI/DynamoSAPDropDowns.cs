@@ -40,7 +40,7 @@ namespace DynamoSAP_UI
     [NodeCategory("DynamoSAP.Definitions.Load")]
     [NodeDescription("Select Coordinate System to use with Load nodes")]
     [IsDesignScriptCompatible]
-    public class CoordinateSystem : EnumAsString<string>
+    public class CoordinateSystem : EnumAsString<CSystem>
     {
         public CoordinateSystem(WorkspaceModel workspace) : base(workspace) { }
     }
@@ -53,7 +53,13 @@ namespace DynamoSAP_UI
     {
         public JustificationTypes(WorkspaceModel workspace) : base(workspace) { }
     }
-    
+
+    public enum CSystem // Dynamo change the order, ans starts at 0
+    {
+        Global = 1,
+        Local = 2,
+    }
+
     public enum Justification // Dynamo change the order, ans starts at 0
     {
         BottomLeft = 1,
