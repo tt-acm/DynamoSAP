@@ -38,11 +38,21 @@ namespace DynamoSAP_UI
 
     [NodeName("CoordinateSystem")]
     [NodeCategory("DynamoSAP.Definitions.Load")]
-    [NodeDescription("Select Coordinate System to use with Load nodes")]
+    [NodeDescription("Select the Coordinate System to use with Load nodes")]
     [IsDesignScriptCompatible]
     public class CoordinateSystem : EnumAsString<CSystem>
     {
         public CoordinateSystem(WorkspaceModel workspace) : base(workspace) { }
+    }
+
+
+    [NodeName("LoadType")]
+    [NodeCategory("DynamoSAP.Definitions.Load")]
+    [NodeDescription("Select the Load Type to use with Load nodes")]
+    [IsDesignScriptCompatible]
+    public class LoadType : EnumAsInt<LType>
+    {
+        public LoadType(WorkspaceModel workspace) : base(workspace) { }
     }
 
     [NodeName("Justifications")]
@@ -58,6 +68,12 @@ namespace DynamoSAP_UI
     {
         Global = 1,
         Local = 2,
+    }
+
+    public enum LType // Dynamo change the order, ans starts at 0
+    {
+        Force = 1,
+        Moment = 2,
     }
 
     public enum Justification // Dynamo change the order, ans starts at 0

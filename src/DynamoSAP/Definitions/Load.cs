@@ -130,9 +130,7 @@ namespace DynamoSAP.Definitions
         /// Parameters description below as presented in the SAP CSi OAPI Documentation
         /// </summary>
         /// <param name="LoadPattern">The name of a defined load pattern.</param>
-        /// <param name="ForceMomentType">This is 1 or 2, indicating the type of point load.
-        /// 1 = Force
-        /// 2 = Moment</param>
+        /// <param name="LoadType">Force or moment load. Use the Load Type dropdown</param>
         /// <param name="Direction">This is an integer between 1 and 11, indicating the direction of the load.
         /// 1 = Local 1 axis (only applies when CSys is Local)
         /// 2 = Local 2 axis (only applies when CSys is Local)
@@ -158,10 +156,10 @@ namespace DynamoSAP.Definitions
         /// in the specified load pattern, are deleted before making the new assignment.</param>
         /// <returns>Load at a point along a Frame</returns>
         //DYNAMO CREATE NODES
-        public static Load PointLoad(LoadPattern LoadPattern, int ForceMomentType, int Direction, double Distance, double Value, string CoordSystem = "Global", bool RelativeDistance = true, bool Replace = true)
+        public static Load PointLoad(LoadPattern LoadPattern, int LoadType, int Direction, double Distance, double Value, string CoordSystem = "Global", bool RelativeDistance = true, bool Replace = true)
         {
             CheckCoordSysAndDir(Direction, CoordSystem);
-            Load l = new Load(LoadPattern, ForceMomentType, Direction, Distance, Value, CoordSystem, RelativeDistance);
+            Load l = new Load(LoadPattern, LoadType, Direction, Distance, Value, CoordSystem, RelativeDistance);
             l.LoadType = "PointLoad";
             return l;
         }
@@ -171,9 +169,7 @@ namespace DynamoSAP.Definitions
         /// Parameters description below as presented in the SAP CSi OAPI Documentation
         /// </summary>
         /// <param name="LoadPattern">The name of a defined load pattern</param>
-        /// <param name="ForceMomentType">This is 1 or 2, indicating the type of distributed load.
-        /// 1 = Force per unit length
-        /// 2 = Moment per unit length</param>
+        /// <param name="LoadType">Force or moment load. Use the Load Type dropdown</param>
         ///<param name="Direction">This is an integer between 1 and 11, indicating the direction of the load.
         /// 1 = Local 1 axis (only applies when CSys is Local)
         /// 2 = Local 2 axis (only applies when CSys is Local)
@@ -198,10 +194,10 @@ namespace DynamoSAP.Definitions
         /// <param name="CoordSystem">This is Local or the name of a defined coordinate system. It is the coordinate system in which the loads are specified.</param>
         /// <param name="RelativeDistance">If this item is True, the specified Dist item is a relative distance, otherwise it is an actual distance.</param>
         /// <returns></returns>
-        public static Load DistributedLoad(LoadPattern LoadPattern, int ForceMomentType, int Direction, double Distance, double Distance2, double Value, double Value2, string CoordSystem = "Global", bool RelativeDistance = true)
+        public static Load DistributedLoad(LoadPattern LoadPattern, int LoadType, int Direction, double Distance, double Distance2, double Value, double Value2, string CoordSystem = "Global", bool RelativeDistance = true)
         {
             CheckCoordSysAndDir(Direction, CoordSystem);
-            Load l = new Load(LoadPattern, ForceMomentType, Direction, Distance, Distance2, Value, Value2, CoordSystem, RelativeDistance);
+            Load l = new Load(LoadPattern, LoadType, Direction, Distance, Distance2, Value, Value2, CoordSystem, RelativeDistance);
             l.LoadType = "DistributedLoad";
             return l;
         }
