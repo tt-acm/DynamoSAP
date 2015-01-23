@@ -97,11 +97,12 @@ namespace DynamoSAP.Assembly
             model.ModelDefinitions = new List<Definition>();
 
             List<LoadPattern> TempLPatterns = new List<LoadPattern>();
+            List<LoadCase> TempLCases = new List<LoadCase>();
 
             if (SapModel != null)
             {
 
-                // 1. GET LOAD PATTERNS
+                // 1.a GET LOAD PATTERNS
 
                 string[] LoadPatternNames = null;
                 string[] LoadPatternTypes = null;
@@ -119,9 +120,35 @@ namespace DynamoSAP.Assembly
                     }
                 }
 
+                // 1.b GET LOAD CASES
+
+                string[] LoadCasesNames = null;
+                string[] LoadCasesTypes = null;
+                double[] LoadCasesMultipliers = null;
+                
+                //With this method we only get the name and the type of each load case
+                StructureMapper.GetLoadCases(ref SapModel, ref LoadCasesNames, ref LoadCasesMultipliers, ref LoadCasesTypes);
+                if (LoadCasesNames != null)
+                {
+                    foreach (string lcname in LoadCasesNames)
+                    {
+                        int pos = Array.IndexOf(LoadCasesNames, lcname);
+                        
+                        //create a new load
+                        LoadCase lc = new LoadCase();
+                        lc.name = lcname;
+                        lc.type = LoadCasesTypes[pos];
+                           
+                        model.ModelDefinitions.Add(lc);
+                        TempLCases.Add(lc);
+                    }
+                }
+
+                //1.c GET LOAD COMBOS
+
+
 
                 // 2. GET DYNAMO FRAMES ( get Loads and Releases that are assigned to that frame)
-
                 //2.a GET LOADS that are Assigned to Frames
 
                 Dictionary<int, string> DictFrm_PointLoads = new Dictionary<int, string>();
@@ -331,6 +358,7 @@ namespace DynamoSAP.Assembly
             List<String> SapGroups = new List<string>();
             SAPConnection.GroupMapper.GetSAPGroupList(ref SapModel, ref SapGroups);
 
+            int counter = 0;
             foreach (var g in SapGroups)
             {
                 Group myG = new Group();
@@ -341,59 +369,74 @@ namespace DynamoSAP.Assembly
                 int[] types = null;
                 string[] Labels = null;
                 SAPConnection.GroupMapper.GetGroupAssignments(ref SapModel, g, ref types, ref Labels);
-
-                for (int i = 0; i < Labels.Length; i++)
+                if (Labels!=null && Labels.Count() > 0)
                 {
-                    if (types[i] == 1) // Joint
+                    for (int i = 0; i < Labels.Length; i++)
                     {
-                        try
-                        {
-                            var gel = (from el in model.StructuralElements
-                                       where el.Type == Structure.Type.Joint
-                                       select el).First();
-                            if (gel != null)
-                            {
-                                myG.GroupElements.Add(gel);
-                            }
+                        //if (types[i] == 1) // Joint
+                        //{
+                        //    try
+                        //    {
+                        //        var gel = (from el in model.StructuralElements
+                        //                   where el.Type == Structure.Type.Joint
+                        //                   select el).First();
+                        //        if (gel != null)
+                        //        {
+                        //            myG.GroupElements.Add(gel);
+                        //        }
 
-                        }
-                        catch (Exception) { }
+                        //    }
+                        //    catch (Exception) { }
 
-                    }
-                    else if(types[i] == 2) // frame
-                    {
-                        try
-                        {
-                            var gel = (from el in model.StructuralElements
-                                       where el.Type == Structure.Type.Frame
-                                       select el).First();
-                            if (gel != null)
-                            {
-                                myG.GroupElements.Add(gel);
-                            }
+                        //}
+                        //else if (types[i] == 2) // frame
+                        //{
+                        //    try
+                        //    {
+                        //        var gel = (from el in model.StructuralElements
+                        //                   where el.Type == Structure.Type.Frame
+                        //                   select el).First();
+                        //        if (gel != null)
+                        //        {
+                        //            myG.GroupElements.Add(gel);
+                        //        }
 
-                        }
-                        catch (Exception) { }
-                    }
-                    else if(types[i] == 3) // cable
-                    {
-                        //TODO: After cable object defined
-                    }
-                    else if (types[i] == 5) // shell
-                    {
+                        //    }
+                        //    catch (Exception) { }
+                        //}
+                        //else if (types[i] == 3) // cable
+                        //{
+                        //    //TODO: After cable object defined
+                        //}
+                        //else if (types[i] == 5) // shell
+                        //{
+                        //    var gel = (from el in model.StructuralElements
+                        //               where el.Type == Structure.Type.Shell
+                        //               select el).First();
+                        //    if (gel != null)
+                        //    {
+                        //        myG.GroupElements.Add(gel);
+                        //    }
+                        //}
+
                         var gel = (from el in model.StructuralElements
-                                   where el.Type == Structure.Type.Shell
+                                   where el.Label == Labels[i]
                                    select el).First();
-                        if (gel != null)
-                        {
-                            myG.GroupElements.Add(gel);
-                        }
+                        myG.GroupElements.Add(gel);
                     }
+                }
+                else
+                {
+                   counter++;
                 }
 
                 //Add to Model definitions
                 model.ModelDefinitions.Add(myG);
 
+            }
+            if (counter == SapGroups.Count)
+            {
+                throw new Exception("The group(s) have no members assigned");
             }
 
         }
