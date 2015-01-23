@@ -533,7 +533,7 @@ namespace DynamoSAP.Assembly
             try
             {
                 Groups = (from def in StructuralModel.ModelDefinitions
-                          where def.Type == Definitions.Type.LoadCase
+                          where def.Type == Definitions.Type.Group
                           select def).ToList();
             }
             catch (Exception)
