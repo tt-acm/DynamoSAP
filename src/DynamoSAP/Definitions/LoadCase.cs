@@ -40,16 +40,14 @@ namespace DynamoSAP.Definitions
         /// </summary>
         /// <param name="LoadCase">Load Case to decompose</param>
         /// <returns>Name, Type, Load Patterns and Scale Factors of the Load Case</returns>
-        [MultiReturn("Name", "Type", "Load Patterns", "Scale Factors")]
+        [MultiReturn("Name", "Type")]
         public static Dictionary<string, object> Decompose(LoadCase LoadCase)
         {
             // Return outputs
             return new Dictionary<string, object>
             {
                 {"Name", LoadCase.name},
-                {"Type", LoadCase.type},
-                {"Load Patterns", LoadCase.loadPatterns},
-                {"SFs", LoadCase.sFs},
+                {"Type", LoadCase.type}
             };
         }
 
