@@ -21,5 +21,5 @@ We are developing nodes in four main categories:
 
 DynamoSAP is developed and maintained by Thornton Tomasetti’s CORE studio.  The main developers are:
 
-[Elcin Ertugrul](https://github.com/eertugrul)
-[Ana Gracia-Puyol](https://github.com/anagpuyol)
+- [Elcin Ertugrul](https://github.com/eertugrul)
+- [Ana Gracia-Puyol](https://github.com/anagpuyol)
