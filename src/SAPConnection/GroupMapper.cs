@@ -73,6 +73,12 @@ namespace SAPConnection
             }
         }
 
+        public static void GetGroupAssignments( ref cSapModel Model, string GroupName, ref int[] types, ref string[] Labels)
+        {
+            int  num = 0;
+            long ret = Model.GroupDef.GetAssignments(GroupName, ref num, ref types, ref Labels);       
+        }
+
 
     }
 }
