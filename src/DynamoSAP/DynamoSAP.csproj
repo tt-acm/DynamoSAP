@@ -23,7 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <RegisterForComInterop>false</RegisterForComInterop>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>bin\DynamoSAP.XML</DocumentationFile>
+    <DocumentationFile>bin\DynamoSAP.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
