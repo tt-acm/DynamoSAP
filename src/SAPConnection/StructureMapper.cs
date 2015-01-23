@@ -26,7 +26,7 @@ namespace SAPConnection
                 //1. Create Frame
                 long ret = Model.FrameObj.AddByCoord(iX, iY, iZ, jX, jY, jZ, ref Id);
             }
-            else 
+            else
             {
                 // update location
                 string startPoint = string.Empty;
@@ -38,9 +38,9 @@ namespace SAPConnection
                 long ret = Model.PointObj.AddCartesian(iX, iY, iZ, ref startPoint);
                 ret = Model.PointObj.AddCartesian(jX, jY, jZ, ref endPoint);
                 ret = Model.EditFrame.ChangeConnectivity(Id, startPoint, endPoint);
-                
+
             }
-            
+
         }
 
         public static void CreateorUpdateArea(ref cSapModel Model, Mesh m, ref string Id, bool update, double SF)
@@ -52,7 +52,7 @@ namespace SAPConnection
                 foreach (var v in m.VertexPositions)
                 {
                     string dummy = null;
-                    long ret = Model.PointObj.AddCartesian(v.X*SF, v.Y*SF, v.Z*SF, ref dummy);
+                    long ret = Model.PointObj.AddCartesian(v.X * SF, v.Y * SF, v.Z * SF, ref dummy);
                     ProfilePts.Add(dummy);
                 }
 
@@ -60,7 +60,7 @@ namespace SAPConnection
                 long reti = Model.AreaObj.AddByPoint(ProfilePts.Count(), ref names, ref Id);
             }
             else
-            {  
+            {
 
                 // Existing
                 int eNumberofPts = 0;
@@ -215,10 +215,10 @@ namespace SAPConnection
             if (!update) // create new Joint
             {
                 string dummy = string.Empty;
-                long ret = Model.PointObj.AddCartesian(pt.X * SF, pt.Y *SF, pt.Z *SF, ref dummy);
+                long ret = Model.PointObj.AddCartesian(pt.X * SF, pt.Y * SF, pt.Z * SF, ref dummy);
 
             }
-            else 
+            else
             {
                 long ret = Model.EditPoint.ChangeCoordinates_1(Id, pt.X * SF, pt.Y * SF, pt.Z * SF);
             }
@@ -267,7 +267,7 @@ namespace SAPConnection
         }
 
         // Area  prop
-        public static void SetPropArea( ref cSapModel Model, string PropName, string ShellType, bool DOF, string MatProp, double MatAngle, double Thickness, double Bending  )
+        public static void SetPropArea(ref cSapModel Model, string PropName, string ShellType, bool DOF, string MatProp, double MatAngle, double Thickness, double Bending)
         {
             int type = (int)((ShellType)Enum.Parse(typeof(ShellType), ShellType));
             long ret = Model.PropArea.SetShell_1(PropName, type, DOF, MatProp, MatAngle, Thickness, Bending);
@@ -277,7 +277,7 @@ namespace SAPConnection
             long ret = Model.AreaObj.SetProperty(AreaId, PropName);
         }
 
-            // READ FROM SAPMODEL
+        // READ FROM SAPMODEL
 
         // to extract the Section Names on Specific Section Catalog
         public static void GetSectionsfromCatalog(ref cSapModel Model, string SC, ref string[] Names)
@@ -294,15 +294,15 @@ namespace SAPConnection
 
             LoadPatternMultipliers = new double[number];
             LoadPatternTypes = new string[number];
-            
+
             foreach (string lpname in LoadPatternNames)
             {
                 double mult = 0;
-                eLoadPatternType type=eLoadPatternType.LTYPE_DEAD;
-                int pos = Array.IndexOf(LoadPatternNames,lpname);
+                eLoadPatternType type = eLoadPatternType.LTYPE_DEAD;
+                int pos = Array.IndexOf(LoadPatternNames, lpname);
                 Model.LoadPatterns.GetLoadType(lpname, ref type);
 
-                ret = Model.LoadPatterns.GetSelfWTMultiplier(lpname,ref mult);
+                ret = Model.LoadPatterns.GetSelfWTMultiplier(lpname, ref mult);
                 LoadPatternMultipliers[pos] = mult;
                 //int typeInt = (int)type;
                 LoadPatternTypes[pos] = type.ToString();
@@ -310,6 +310,41 @@ namespace SAPConnection
 
         }
 
+        public static void GetLoadCases(ref cSapModel Model, ref string[] LoadCaseNames, ref double[] LoadCaseMultipliers, ref string[] LoadCaseTypes)
+        {
+
+            int NumberNames = 0;
+            int ret = Model.LoadCases.GetNameList(ref NumberNames, ref LoadCaseNames);
+
+            LoadCaseMultipliers = new double[NumberNames];
+            LoadCaseTypes = new string[NumberNames];
+            
+
+            foreach (string lcname in LoadCaseNames)
+            {
+
+                //Parameters that we need to get
+                //dummy eLoadCaseType
+                eLoadCaseType cType = eLoadCaseType.CASE_LINEAR_STATIC;
+                int subType = 0;
+
+                int pos = Array.IndexOf(LoadCaseNames, lcname);
+
+                //get the load case type
+                Model.LoadCases.GetType(lcname, ref cType, ref subType);
+                LoadCaseTypes[pos] = cType.ToString();
+
+                //get the loads and the multipliers
+
+               ////We need the load patterns!
+               // int numberLoads = 0;
+               // string[] loadType = null;
+               // string[] loadName = null;
+               // double[] sf = null;
+               // Model.LoadCases.StaticLinear.GetLoads(lcname, ref numberLoads, ref loadType, ref loadName, ref sf);
+               
+            }
+        }
         public static void GetFrm(ref cSapModel Model, string frmId, ref Point i, ref Point j, ref string MatProp, ref string SecName, ref string Just, ref double Rot, ref string SecCatalog, double LSF) //Length Scale Factor
         {
 
@@ -393,7 +428,7 @@ namespace SAPConnection
             if (IDs != null)
             {
                 myFrameList = IDs.ToList();
-            }  
+            }
         }
 
         /// <summary>
@@ -455,7 +490,7 @@ namespace SAPConnection
                     Model.PointObj.DeleteSpecialPoint(pt);
                 }
             }
-            
+
         }
         public static void GetShellProp(ref cSapModel Model, string PropName, ref string ShellType, ref bool DOF, ref string MatProp, ref double MatAngle, ref double Thickness, ref double Bending)
         {
@@ -467,7 +502,7 @@ namespace SAPConnection
             long ret = Model.PropArea.GetShell_1(PropName, ref type, ref DOF, ref MatProp, ref MatAngle, ref Thickness, ref Bending, ref color, ref notes, ref guid);
 
             ShellType = Enum.GetName(typeof(ShellType), type);
-  
+
         }
         /// <summary>
         /// 
