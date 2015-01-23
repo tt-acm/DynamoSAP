@@ -140,7 +140,7 @@ namespace DynamoSAP.Assembly
 
             List<Definition> LoadPatterns = new List<Definition>();
             List<Definition> LoadCases= new List<Definition>();
-            List<Definition> Groups = new List<Definition>();
+            List<Group> Groups = new List<Group>();
 
             foreach (var def in structuralModel.ModelDefinitions)
             {
@@ -154,7 +154,7 @@ namespace DynamoSAP.Assembly
                 }
                 else if (def.Type == Definitions.Type.Group)
                 {
-                    Groups.Add(def);
+                    Groups.Add(def as Group);
                 }
             }
 
