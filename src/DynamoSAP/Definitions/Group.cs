@@ -13,8 +13,10 @@ namespace DynamoSAP.Definitions
     public class Group:Definition
     {
         //FIELDS
-        internal string Name { get; set; }
-        internal List<Element> GroupElements = new List<Element>();
+        [SupressImportIntoVMAttribute]
+        public string Name { get; set; }
+        [SupressImportIntoVMAttribute]
+        public List<Element> GroupElements { get; set; }
 
         //CREATE NODE
         /// <summary>
