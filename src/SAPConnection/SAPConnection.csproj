@@ -55,6 +55,7 @@
     <Compile Include="AnalysisDataInterfaces.cs" />
     <Compile Include="AnalysisDataTypes.cs" />
     <Compile Include="AnalysisMapper.cs" />
+    <Compile Include="GroupMapper.cs" />
     <Compile Include="Initialize.cs" />
     <Compile Include="JusticationMapper.cs" />
     <Compile Include="LoadMapper.cs" />

@@ -10,7 +10,7 @@ using SAP2000v16;
 namespace DynamoSAP_UI
 {
     [NodeName("LoadPatternTypes")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Definitions.LoadPattern")]
+    [NodeCategory("DynamoSAP.Definitions.LoadPattern")]
     [NodeDescription("Select Load Pattern to use with Set Load Pattern node")]
     [IsDesignScriptCompatible]
     public class LoadPatternTypes: EnumAsString<eLoadPatternType>
@@ -19,7 +19,7 @@ namespace DynamoSAP_UI
     }
 
     [NodeName("LoadCaseTypes")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Definitions.LoadCase")]
+    [NodeCategory("DynamoSAP.Definitions.LoadCase")]
     [NodeDescription("Select Load Case to use with Set Load Case node")]
     [IsDesignScriptCompatible]
     public class LoadCaseTypes : EnumAsString<eLoadCaseType>
@@ -30,7 +30,7 @@ namespace DynamoSAP_UI
     // TODO: Add LoadDirectionDropDown Global or Local CS
 
     [NodeName("Justifications")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Structure.Frame")]
+    [NodeCategory("DynamoSAP.Structure.Frame")]
     [NodeDescription("Select Justification to use with Create Frame nodes")]
     [IsDesignScriptCompatible]
     public class JustificationTypes : EnumAsString<Justification>
@@ -54,7 +54,7 @@ namespace DynamoSAP_UI
     }
 
     [NodeName("ForceTypes")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Analysis")]
+    [NodeCategory("DynamoSAP.Analysis.Analysis")]
     [NodeDescription("Select Force Type to use with Decompose Result component")]
     [IsDesignScriptCompatible]
     public class ForceTypes : EnumAsString<ForceType>
@@ -74,7 +74,7 @@ namespace DynamoSAP_UI
 
 
     [NodeName("SectionCatalogs")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Definitions.SectionProp")]
+    [NodeCategory("DynamoSAP.Definitions.SectionProp")]
     [NodeDescription("Select Section Catalog as input Sections Node to retrive the section names of selected catalog")]
     [IsDesignScriptCompatible]
     public class SectionCatalogs : EnumAsString<SectionCatalog>
@@ -110,7 +110,7 @@ namespace DynamoSAP_UI
     }
 
     [NodeName("Materials")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Definitions")]
+    [NodeCategory("DynamoSAP.Definitions")]
     [NodeDescription("Select Materials to set Section Property")]
     [IsDesignScriptCompatible]
     public class Materials : EnumAsString<Material>
@@ -132,7 +132,7 @@ namespace DynamoSAP_UI
 
 
     [NodeName("Units")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Assembly")]
+    [NodeCategory("DynamoSAP.Assembly")]
     [NodeDescription("Select units")]
     [IsDesignScriptCompatible]
     public class Units: EnumAsString<eUnits>
@@ -141,7 +141,7 @@ namespace DynamoSAP_UI
     }
 
     [NodeName("ShellTypes")]
-    [NodeCategory("DynamoSAP.DynamoSAP.Definitions.ShellProp")]
+    [NodeCategory("DynamoSAP.Definitions.ShellProp")]
     [NodeDescription("Shell Types")]
     [IsDesignScriptCompatible]
     public class ShellTypes : EnumAsString<ShellType>

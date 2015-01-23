@@ -31,6 +31,7 @@ namespace DynamoSAP.Assembly
         private static List<string> SAPFrmList = new List<string>(); // List to hold 
         private static List<string> SAPAreaList = new List<string>();
         private static List<string> SAPJointList = new List<string>();
+        private static List<string> SAPGroupList = new List<string>();
 
         //// DYNAMO NODES ////
 
@@ -42,7 +43,7 @@ namespace DynamoSAP.Assembly
         /// <param name="Units"></param>
         /// <param name="Delete"> Set false to update partial SAP Model! </param>
         /// <returns></returns>
-        public static StructuralModel ToSAP(StructuralModel StructuralModel, bool Bake, string Units = "kip_ft_F", bool Delete = true )
+        public static StructuralModel ToSAP(StructuralModel StructuralModel, bool Bake, string Units = "kip_ft_F", bool Delete = true)
         {
             // 1. Calculate Lenght Conversion Factor
             string fromUnit = "m"; // Dynamo API Units
@@ -58,7 +59,7 @@ namespace DynamoSAP.Assembly
             // 2. Create new SAP Model and bake Stuctural Model 
             if (StructuralModel != null)
             {
-                if (Bake) CreateorUpdateSAPModel(ref StructuralModel, Units , LengthSF, Delete);
+                if (Bake) CreateorUpdateSAPModel(ref StructuralModel, Units, LengthSF, Delete);
             }
             return StructuralModel;
         }
@@ -80,23 +81,23 @@ namespace DynamoSAP.Assembly
                 string dummy = string.Empty;
                 //1. Create Frame
                 SAPConnection.StructureMapper.CreateorUpdateFrm(ref mySapModel, f.BaseCrv.StartPoint.X * SF,
-                    f.BaseCrv.StartPoint.Y*SF,
-                    f.BaseCrv.StartPoint.Z*SF,
-                    f.BaseCrv.EndPoint.X*SF,
-                    f.BaseCrv.EndPoint.Y*SF,
-                    f.BaseCrv.EndPoint.Z*SF,
+                    f.BaseCrv.StartPoint.Y * SF,
+                    f.BaseCrv.StartPoint.Z * SF,
+                    f.BaseCrv.EndPoint.X * SF,
+                    f.BaseCrv.EndPoint.Y * SF,
+                    f.BaseCrv.EndPoint.Z * SF,
                     ref dummy, false);
 
                 // Set custom Label to Frame in dynamo & Frame! User can match by using Label & ID
                 bool renamed = SAPConnection.StructureMapper.ChangeNameSAPFrm(ref mySapModel, dummy, String.Format("dyn_{0}", f.ID.ToString()));
                 if (!renamed)
                 {
-                    f.Label = dummy; 
+                    f.Label = dummy;
                 }
 
             }
             else // Update Coordinates
-            { 
+            {
                 string id = f.Label;
                 SAPConnection.StructureMapper.CreateorUpdateFrm(ref mySapModel, f.BaseCrv.StartPoint.X * SF,
                     f.BaseCrv.StartPoint.Y * SF,
@@ -177,7 +178,7 @@ namespace DynamoSAP.Assembly
                 {
                     SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseSurface, ref dummy, false, SF);
                 }
-                
+
                 // Set custom Label to Frame in dynamo & Frame! User can match by using Label & ID
                 bool renamed = SAPConnection.StructureMapper.ChangeNameSAPArea(ref mySapModel, dummy, s.Label);
                 if (!renamed)
@@ -190,12 +191,12 @@ namespace DynamoSAP.Assembly
                 string id = s.Label;
                 if (s.BaseMesh != null)
                 {
-                   SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseMesh, ref id, true, SF); 
+                    SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseMesh, ref id, true, SF);
                 }
                 else
                 {
-                    SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseSurface, ref id, true, SF); 
-                }               
+                    SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseSurface, ref id, true, SF);
+                }
             }
 
             // Define Shell Properties
@@ -212,17 +213,18 @@ namespace DynamoSAP.Assembly
             SAPConnection.StructureMapper.SetShellPropArea(ref mySapModel, s.Label, s.shellProp.PropName);
         }
 
-        private static void CreateorUpdateJoint(Joint j, ref cSapModel mySAPModel, double SF, bool update) 
+        // Create or Update Joint
+        private static void CreateorUpdateJoint(Joint j, ref cSapModel mySAPModel, double SF, bool update)
         {
             if (!update) // create new one
             {
                 string dummy = string.Empty;
-                StructureMapper.CreateorUpdateJoint(ref mySapModel, j.BasePt,ref dummy, false, SF);
+                StructureMapper.CreateorUpdateJoint(ref mySapModel, j.BasePt, ref dummy, false, SF);
                 // Set custom Label to Frame in dynamo & Frame! User can match by using Label & ID
                 bool renamed = SAPConnection.StructureMapper.ChangeNameSAPJoint(ref mySapModel, dummy, j.Label);
                 if (!renamed)
                 {
-                    j.Label = dummy; 
+                    j.Label = dummy;
                 }
 
             }
@@ -232,17 +234,17 @@ namespace DynamoSAP.Assembly
                 StructureMapper.CreateorUpdateJoint(ref mySapModel, j.BasePt, ref id, true, SF);
             }
 
-             // 2. Assigns Restraints to Node
+            // 2. Assigns Restraints to Node
 
             if (j.JointRestraint != null)
-	        {
-		        List<bool> restraints = new List<bool>();
+            {
+                List<bool> restraints = new List<bool>();
                 restraints.Add(j.JointRestraint.u1); restraints.Add(j.JointRestraint.u2); restraints.Add(j.JointRestraint.u3);
                 restraints.Add(j.JointRestraint.r1); restraints.Add(j.JointRestraint.r2); restraints.Add(j.JointRestraint.r3);
 
                 // Set restaints
-                SAPConnection.RestraintMapper.Set(ref mySapModel, j.Label, restraints.ToArray()); 
-	        }
+                SAPConnection.RestraintMapper.Set(ref mySapModel, j.Label, restraints.ToArray());
+            }
 
             ////  3. Assign Force to  Node
             //if (j.Loads != null)
@@ -253,6 +255,55 @@ namespace DynamoSAP.Assembly
 
         }
 
+        //Create or Update Group
+        private static void CreateorUpdateGroup(Group g, ref cSapModel mySAPModel, bool update)
+        {
+            if (!update)// define the group first
+            {
+                SAPConnection.GroupMapper.DefineGroup(ref mySapModel, g.Name);
+            }
+            else
+            {
+                // clear existing assignments
+                SAPConnection.GroupMapper.ClearGroupAssigment(ref mySapModel, g.Name);
+            }
+
+            // Set assignments per element types
+            List<string> Frms = new List<string>();
+            List<string> Shells = new List<string>();
+            List<string> Joints = new List<string>();
+            try
+            {
+                Frms = (from el in g.GroupElements
+                          where el.Type == Structure.Type.Frame
+                          select el.Label).ToList();
+
+                SAPConnection.GroupMapper.SetGroupAssign_Frm(ref mySapModel, g.Name, Frms);
+
+            } catch (Exception){}
+            try
+            {
+                Shells = (from el in g.GroupElements
+                        where el.Type == Structure.Type.Shell
+                        select el.Label).ToList();
+
+                SAPConnection.GroupMapper.SetGroupAssign_Shell(ref mySapModel, g.Name, Shells);
+
+            }
+            catch (Exception) { }
+            try
+            {
+                Joints = (from el in g.GroupElements
+                          where el.Type == Structure.Type.Joint
+                          select el.Label).ToList();
+
+                SAPConnection.GroupMapper.SetGroupAssign_Joint(ref mySapModel, g.Name, Joints);
+
+            }
+            catch (Exception) { }
+
+        }
+
         // Create or Update Sap Model from a Dynamo Model
         private static void CreateorUpdateSAPModel(ref StructuralModel StructuralModel, string Units, double SF, bool delete)
         {
@@ -260,7 +311,7 @@ namespace DynamoSAP.Assembly
             string report = string.Empty;
 
             //1. INSTANTIATE NEW OR GRAB OPEN SAPMODEL 
-            
+
             // check if any SAP file is open, grab 
             SAP2000v16.SapObject mySapObject = null;
             string SapModelUnits = string.Empty;
@@ -286,7 +337,7 @@ namespace DynamoSAP.Assembly
             SAPConnection.StructureMapper.GetSAPFrameList(ref mySapModel, ref SAPFrmList); // frms
             SAPConnection.StructureMapper.GetSAPAreaList(ref mySapModel, ref SAPAreaList); // areas
             SAPConnection.StructureMapper.GetSAPJointList(ref mySapModel, ref SAPJointList); // joints
-            
+
             // 2a. DELETE 
             if (delete)
             {
@@ -323,7 +374,7 @@ namespace DynamoSAP.Assembly
 
                     //if (el == null)
                     //{
-                        SAPConnection.StructureMapper.DeleteArea(ref mySapModel, sapArea);
+                    SAPConnection.StructureMapper.DeleteArea(ref mySapModel, sapArea);
                     //}
                 }
 
@@ -351,7 +402,7 @@ namespace DynamoSAP.Assembly
                     bool isupdate = SAPAreaList.Contains(el.Label);
 
                     CreateorUpdateArea(el as Shell, ref mySapModel, SF, false);
-                    
+
                 }
                 else if (el.Type == Structure.Type.Joint)
                 {
@@ -365,8 +416,8 @@ namespace DynamoSAP.Assembly
             try
             {
                 LPatterns = (from def in StructuralModel.ModelDefinitions
-                                where def.Type == Definitions.Type.LoadPattern
-                                select def).ToList();
+                             where def.Type == Definitions.Type.LoadPattern
+                             select def).ToList();
             }
             catch (Exception)
             {
@@ -376,7 +427,7 @@ namespace DynamoSAP.Assembly
             {
                 foreach (LoadPattern lp in LPatterns)
                 {
-                     //Call the AddLoadPattern method
+                    //Call the AddLoadPattern method
                     SAPConnection.LoadMapper.AddLoadPattern(ref mySapModel, lp.name, lp.type, lp.multiplier);
                 }
             }
@@ -389,8 +440,8 @@ namespace DynamoSAP.Assembly
                           select def).ToList();
             }
             catch { }
-            
-            if (LCases.Count>0)
+
+            if (LCases.Count > 0)
             {
                 foreach (LoadCase lc in LCases)
                 {
@@ -472,6 +523,49 @@ namespace DynamoSAP.Assembly
                         SetLoads(el as Frame, ref mySapModel);
                     }
                 }
+            }
+
+            // Create or Update Groups 
+            // Harvest the names of the groups// delete the ones not in the SAP Model
+            SAPConnection.GroupMapper.GetSAPGroupList(ref mySapModel, ref SAPGroupList);
+
+            List<Definition> Groups = new List<Definition>();
+            try
+            {
+                Groups = (from def in StructuralModel.ModelDefinitions
+                          where def.Type == Definitions.Type.LoadCase
+                          select def).ToList();
+            }
+            catch (Exception)
+            {
+            }
+
+            // Update or Create new one and set assignments    
+            List<string> tempNames = new List<string>();
+            if (Groups.Count > 0)
+            {
+                foreach (Group g in Groups)
+                {
+                    tempNames.Add(g.Name);
+
+                    bool update = false;
+                    if (SAPGroupList.Contains(g.Name))
+                    {
+                        update = true;
+                    }
+
+                    CreateorUpdateGroup(g, ref mySapModel, update);
+                }
+
+                // Delete from SAP Model
+                foreach (var g in SAPGroupList)
+                {
+                    if (!tempNames.Contains(g))
+                    {
+                        SAPConnection.GroupMapper.Delete(ref mySapModel, g);
+                    }
+                }
+
             }
 
             // Delete unconnected points at the SAP
