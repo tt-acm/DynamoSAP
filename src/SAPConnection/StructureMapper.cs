@@ -318,7 +318,7 @@ namespace SAPConnection
 
             LoadCaseMultipliers = new double[NumberNames];
             LoadCaseTypes = new string[NumberNames];
-            
+
 
             foreach (string lcname in LoadCaseNames)
             {
@@ -331,11 +331,33 @@ namespace SAPConnection
                 int pos = Array.IndexOf(LoadCaseNames, lcname);
 
                 //get the load case type
-                Model.LoadCases.GetType(lcname, ref cType, ref subType);
+                ret = Model.LoadCases.GetType(lcname, ref cType, ref subType);
                 LoadCaseTypes[pos] = cType.ToString();
 
             }
         }
+
+        public static void GetLoadCombos(ref cSapModel Model, ref string[] LoadComboNames, ref string[] LoadComboTypes, ref string[][] LoadComboCase, ref double[][] Multipliers)
+        {
+            int NumberNames = 0;
+            int ret = Model.RespCombo.GetNameList(ref NumberNames, ref LoadComboNames);
+
+
+            foreach (string lc in LoadComboNames)
+            {
+                int pos = Array.IndexOf(LoadComboNames, lc);
+                
+                int numberItems=0;
+                eCType[] cType =null;
+                string[] cName=null;
+                double[] sf = null;
+                ret = Model.RespCombo.GetCaseList(lc, ref numberItems, ref cType, ref cName, ref sf);
+                LoadComboTypes[pos] = cType.ToString();
+                LoadComboCase[pos] = cName;
+                Multipliers[pos] = sf;
+            }
+        }
+
         public static void GetFrm(ref cSapModel Model, string frmId, ref Point i, ref Point j, ref string MatProp, ref string SecName, ref string Just, ref double Rot, ref string SecCatalog, double LSF) //Length Scale Factor
         {
 

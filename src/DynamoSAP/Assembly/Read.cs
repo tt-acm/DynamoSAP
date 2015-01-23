@@ -97,7 +97,7 @@ namespace DynamoSAP.Assembly
             model.ModelDefinitions = new List<Definition>();
 
             List<LoadPattern> TempLPatterns = new List<LoadPattern>();
-            List<LoadCase> TempLCases = new List<LoadCase>();
+           
 
             if (SapModel != null)
             {
@@ -140,11 +140,47 @@ namespace DynamoSAP.Assembly
                         lc.type = LoadCasesTypes[pos];
                            
                         model.ModelDefinitions.Add(lc);
-                        TempLCases.Add(lc);
+                       
                     }
                 }
 
                 //1.c GET LOAD COMBOS
+
+                string[] LoadCombosNames = null;
+                string[] LoadCombosTypes = null;
+                string[][] LoadCombosCases = null;
+                double[][] LoadCombosMultipliers = null;
+
+
+                StructureMapper.GetLoadCombos(ref SapModel, ref LoadCombosNames, ref LoadCasesTypes, ref LoadCombosCases, ref LoadCombosMultipliers);
+                if (LoadCombosNames != null)
+                {
+                    foreach (string lcname in LoadCombosNames)
+                    {
+                        int pos = Array.IndexOf(LoadCombosNames, lcname);
+
+                        List<Definition> LoadDefinitions = new List<Definition>();
+
+                        //foreach (string cCase in LoadCombosCases[pos])
+                        //{
+                        //    Definition def = new Definition();
+                        //    if (LoadCasesTypes[pos] == "LoadCase")
+                        //    {
+                        //        def.Type = Definitions.Type.LoadCase;
+                        //        ((LoadCase)def).name = cCase;
+                        //    }
+                        //    else if()
+                            
+                        //    LoadDefinitions.Add(cCase);
+                        //}
+                        //create a new load
+                        LoadCombo lc = new LoadCombo(lcname, LoadCasesTypes[pos], LoadDefinitions, LoadCombosMultipliers[pos].ToList());
+
+                        model.ModelDefinitions.Add(lc);
+                        
+                    }
+                }
+
 
 
 
