@@ -4,8 +4,17 @@
     <name>DynamoSAP</name>
   </assembly>
   <namespaces>
-    <namespace name="DynamoSAP">
-      <category>DynamoSAP</category>
+    <namespace name="DynamoSAP.Analysis">
+      <category>DynamoSAP.Analysis</category>
+    </namespace>
+    <namespace name="DynamoSAP.Assembly">
+      <category>DynamoSAP.Assembly</category>
+    </namespace>
+    <namespace name="DynamoSAP.Definitions">
+      <category>DynamoSAP.Definitions</category>
+    </namespace>
+    <namespace name="DynamoSAP.Structure">
+      <category>DynamoSAP.Structure</category>
     </namespace>
   </namespaces>
 </doc>
