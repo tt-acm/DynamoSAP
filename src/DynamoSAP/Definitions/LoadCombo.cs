@@ -24,6 +24,7 @@ namespace DynamoSAP.Definitions
         /// </summary>
         /// <param name="Name">Name of the load combination</param>
         /// <param name="LoadDefinitions">Load Cases and Load Patterns to combine</param>
+        /// <param name="ComboType">Combination Type. Use dropdown</param>
         /// <param name="ScaleFactors">Scale factors to apply to the load cases and patterns</param>
         /// <returns></returns>
         public static LoadCombo SetLoadCombo(string Name, string ComboType, List<Definition> LoadDefinitions, List<double> ScaleFactors)
