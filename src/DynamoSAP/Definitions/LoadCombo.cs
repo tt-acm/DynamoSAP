@@ -53,6 +53,10 @@ namespace DynamoSAP.Definitions
             };
         }
 
+        internal LoadCombo()
+        {
+            this.Type = Definitions.Type.LoadCombo;
+        }
 
         private LoadCombo(string Name, string ComboType, List<Definition> LoadDefinitions, List<double> SFs)
         {
