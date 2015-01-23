@@ -115,7 +115,7 @@ namespace DynamoSAP.Assembly
         /// </summary>
         /// <param name="structuralModel">Structural Model to decompose </param>
         /// <returns> Frames, Shells,Joints, Load Patterns, Load Cases </returns>
-        [MultiReturn("Frames","Shells","Joints", "Load Patterns", "Load Cases", "Groups")]
+        [MultiReturn("Frames","Shells","Joints", "Load Patterns","Load Cases", "Load Combos", "Groups")]
         public static Dictionary<string, object> Decompose(StructuralModel structuralModel)
         {
             List<Element> Frms = new List<Element>();
@@ -140,7 +140,8 @@ namespace DynamoSAP.Assembly
 
             List<Definition> LoadPatterns = new List<Definition>();
             List<Definition> LoadCases= new List<Definition>();
-            List<Group> Groups = new List<Group>();
+            List<Definition> LoadCombos = new List<Definition>();
+            List<Definition> Groups = new List<Definition>();
 
             foreach (var def in structuralModel.ModelDefinitions)
             {
@@ -154,11 +155,15 @@ namespace DynamoSAP.Assembly
                 }
                 else if (def.Type == Definitions.Type.Group)
                 {
-                    Groups.Add(def as Group);
+                    Groups.Add(def);
+                }
+                else if (def.Type == Definitions.Type.LoadCombo)
+                {
+                    LoadCombos.Add(def);
                 }
             }
 
-            // Return outputs
+             //Return outputs
             return new Dictionary<string, object>
             {
                 {"Frames", Frms},
@@ -166,9 +171,11 @@ namespace DynamoSAP.Assembly
                 {"Joints", Joints},
                 {"Load Patterns", LoadPatterns},
                 {"Load Cases", LoadCases},
-                {"Group", Groups}
+                {"Load Combos", LoadCombos},
+                {"Groups", Groups}
                
             };
+
         }
 
         internal StructuralModel() { }
