@@ -36,6 +36,14 @@ namespace DynamoSAP_UI
         public LoadComboTypes(WorkspaceModel workspace) : base(workspace) { }
     }
 
+    [NodeName("CoordinateSystem")]
+    [NodeCategory("DynamoSAP.Definitions.Load")]
+    [NodeDescription("Select Coordinate System to use with Load nodes")]
+    [IsDesignScriptCompatible]
+    public class CoordinateSystem : EnumAsString<string>
+    {
+        public CoordinateSystem(WorkspaceModel workspace) : base(workspace) { }
+    }
 
     [NodeName("Justifications")]
     [NodeCategory("DynamoSAP.Structure.Frame")]
