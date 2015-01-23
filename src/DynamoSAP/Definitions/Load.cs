@@ -156,10 +156,13 @@ namespace DynamoSAP.Definitions
         /// in the specified load pattern, are deleted before making the new assignment.</param>
         /// <returns>Load at a point along a Frame</returns>
         //DYNAMO CREATE NODES
-        public static Load PointLoad(LoadPattern LoadPattern, int LoadType, int Direction, double Distance, double Value, string CoordSystem = "Global", bool RelativeDistance = true, bool Replace = true)
+        public static Load PointLoad(LoadPattern LoadPattern, string LoadType, int Direction, double Distance, double Value, string CoordSystem = "Global", bool RelativeDistance = true, bool Replace = true)
         {
+            int ltype = 1;
+            if (LoadType == "Moment") ltype = 2;
+            
             CheckCoordSysAndDir(Direction, CoordSystem);
-            Load l = new Load(LoadPattern, LoadType, Direction, Distance, Value, CoordSystem, RelativeDistance);
+            Load l = new Load(LoadPattern, ltype, Direction, Distance, Value, CoordSystem, RelativeDistance);
             l.LoadType = "PointLoad";
             return l;
         }
@@ -194,10 +197,13 @@ namespace DynamoSAP.Definitions
         /// <param name="CoordSystem">This is Local or the name of a defined coordinate system. It is the coordinate system in which the loads are specified.</param>
         /// <param name="RelativeDistance">If this item is True, the specified Dist item is a relative distance, otherwise it is an actual distance.</param>
         /// <returns></returns>
-        public static Load DistributedLoad(LoadPattern LoadPattern, int LoadType, int Direction, double Distance, double Distance2, double Value, double Value2, string CoordSystem = "Global", bool RelativeDistance = true)
+        public static Load DistributedLoad(LoadPattern LoadPattern, string LoadType, int Direction, double Distance, double Distance2, double Value, double Value2, string CoordSystem = "Global", bool RelativeDistance = true)
         {
+            int ltype = 1;
+            if (LoadType == "Moment") ltype = 2;
+
             CheckCoordSysAndDir(Direction, CoordSystem);
-            Load l = new Load(LoadPattern, LoadType, Direction, Distance, Distance2, Value, Value2, CoordSystem, RelativeDistance);
+            Load l = new Load(LoadPattern, ltype, Direction, Distance, Distance2, Value, Value2, CoordSystem, RelativeDistance);
             l.LoadType = "DistributedLoad";
             return l;
         }
