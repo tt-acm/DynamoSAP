@@ -33,19 +33,42 @@ namespace DynamoSAP.Definitions
         /// </summary>
         /// <param name="Group"></param>
         /// <returns></returns>
-        [MultiReturn("Name", "Elements")]
+        [MultiReturn("Name", "Frames", "Shells", "Joints")]
         public static Dictionary<string, object> Decompose(Group Group)
         {
+            List<Element> Frms = new List<Element>();
+            List<Element> Shells = new List<Element>();
+            List<Element> Joints = new List<Element>();
+
+            foreach (var el in Group.GroupElements)
+            {
+                if (el.Type == Structure.Type.Frame)
+                {
+                    Frms.Add(el);
+                }
+                else if (el.Type == Structure.Type.Shell)
+                {
+                    Shells.Add(el);
+                }
+                else if (el.Type == Structure.Type.Joint)
+                {
+                    Joints.Add(el);
+                }
+            }
+
             return new Dictionary<string, object>
             {
                 {"Name", Group.Name},
-                {"Elements",Group.GroupElements},
+                {"Frames",Frms},
+                {"Shells", Shells},
+                {"Joints", Joints},
             };
 
         }
 
         //PRIVATE CONSTRUCTOR
-        private Group(string name, List<Element>elements)
+        internal Group() { this.Type = Definitions.Type.Group; }
+        internal Group(string name, List<Element>elements)
         {
             Name = name;
             GroupElements = elements;

@@ -325,6 +325,77 @@ namespace DynamoSAP.Assembly
             {
                 throw new Exception("Make sure SAP Model is open!");
             }
+
+
+            // Get Groups
+            List<String> SapGroups = new List<string>();
+            SAPConnection.GroupMapper.GetSAPGroupList(ref SapModel, ref SapGroups);
+
+            foreach (var g in SapGroups)
+            {
+                Group myG = new Group();
+                myG.Name = g;
+                myG.GroupElements = new List<Element>();
+
+                // get assignments
+                int[] types = null;
+                string[] Labels = null;
+                SAPConnection.GroupMapper.GetGroupAssignments(ref SapModel, g, ref types, ref Labels);
+
+                for (int i = 0; i < Labels.Length; i++)
+                {
+                    if (types[i] == 1) // Joint
+                    {
+                        try
+                        {
+                            var gel = (from el in model.StructuralElements
+                                       where el.Type == Structure.Type.Joint
+                                       select el).First();
+                            if (gel != null)
+                            {
+                                myG.GroupElements.Add(gel);
+                            }
+
+                        }
+                        catch (Exception) { }
+
+                    }
+                    else if(types[i] == 2) // frame
+                    {
+                        try
+                        {
+                            var gel = (from el in model.StructuralElements
+                                       where el.Type == Structure.Type.Frame
+                                       select el).First();
+                            if (gel != null)
+                            {
+                                myG.GroupElements.Add(gel);
+                            }
+
+                        }
+                        catch (Exception) { }
+                    }
+                    else if(types[i] == 3) // cable
+                    {
+                        //TODO: After cable object defined
+                    }
+                    else if (types[i] == 5) // shell
+                    {
+                        var gel = (from el in model.StructuralElements
+                                   where el.Type == Structure.Type.Shell
+                                   select el).First();
+                        if (gel != null)
+                        {
+                            myG.GroupElements.Add(gel);
+                        }
+                    }
+                }
+
+                //Add to Model definitions
+                model.ModelDefinitions.Add(myG);
+
+            }
+
         }
     }
 }
