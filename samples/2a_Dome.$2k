@@ -1,4 +1,4 @@
-File C:\Users\AGarciaPuyol\Documents\GitHub\DynamoSAP\samples\sap_files\Dome.$2k was saved on 1/26/15 at 14:20:08
+File C:\Users\EErtugrul\Documents\GitHub\DynamoSAP\samples\2a_Dome.$2k was saved on 1/26/15 at 14:27:51
  
 TABLE:  "ACTIVE DEGREES OF FREEDOM"
    UX=Yes   UY=Yes   UZ=Yes   RX=Yes   RY=Yes   RZ=Yes
@@ -788,7 +788,7 @@ TABLE:  "FRAME AUTO MESH ASSIGNMENTS"
    Frame=381   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
  
 TABLE:  "FRAME DESIGN PROCEDURES"
-   Frame=1   DesignProc="No Design"
+   Frame=1   DesignProc="From Material"
    Frame=2   DesignProc="From Material"
    Frame=3   DesignProc="From Material"
    Frame=4   DesignProc="From Material"
@@ -2727,6 +2727,16 @@ TABLE:  "FUNCTION - TIME HISTORY - USER"
    Name=RAMPTH   Time=4   Value=1
    Name=UNIFTH   Time=0   Value=1
    Name=UNIFTH   Time=1   Value=1
+ 
+TABLE:  "GRID LINES"
+   CoordSys=GLOBAL   AxisDir=X   XRYZCoord=-5.91858520854911   LineType=Primary   LineColor=Gray8Dark   Visible=Yes   BubbleLoc=End   AllVisible=Yes   BubbleSize=2.4384
+   CoordSys=GLOBAL   AxisDir=X   XRYZCoord=0   LineType=Primary   LineColor=Gray8Dark   Visible=Yes   BubbleLoc=End
+   CoordSys=GLOBAL   AxisDir=X   XRYZCoord=5.9185852085491   LineType=Primary   LineColor=Gray8Dark   Visible=Yes   BubbleLoc=End
+   CoordSys=GLOBAL   AxisDir=Y   XRYZCoord=-5.91858520854911   LineType=Primary   LineColor=Gray8Dark   Visible=Yes   BubbleLoc=End
+   CoordSys=GLOBAL   AxisDir=Y   XRYZCoord=0   LineType=Primary   LineColor=Gray8Dark   Visible=Yes   BubbleLoc=End
+   CoordSys=GLOBAL   AxisDir=Y   XRYZCoord=5.91858520854909   LineType=Primary   LineColor=Gray8Dark   Visible=Yes   BubbleLoc=End
+   CoordSys=GLOBAL   AxisDir=Z   XRYZCoord=-8.43991543320044E-13   LineType=Primary   LineColor=Gray8Dark   Visible=Yes   BubbleLoc=End
+   CoordSys=GLOBAL   AxisDir=Z   XRYZCoord=5.06991613660886   LineType=Primary   LineColor=Gray8Dark   Visible=Yes   BubbleLoc=End
  
 TABLE:  "GROUPS 1 - DEFINITIONS"
    GroupName=ALL   Selection=Yes   SectionCut=Yes   Steel=Yes   Concrete=Yes   Aluminum=Yes   ColdFormed=Yes   Stage=Yes   Bridge=Yes   AutoSeismic=No   AutoWind=No   SelDesSteel=No   SelDesAlum=No   SelDesCold=No   MassWeight=Yes   Color=Red
