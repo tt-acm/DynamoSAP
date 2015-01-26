@@ -1,4 +1,6 @@
-﻿// ROT Helper class to get Running Object Table 
+﻿/// Developed by Thornton Tomasetti's CORE Studio for Autodesk
+/// http://core.thorntontomasetti.com
+/// CORE Developers: Elcin Ertugrul and Ana Garcia Puyol
 
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,9 @@ using System.Collections;
 
 namespace SAPConnection
 {
+    /// <summary>
+    /// ROT Helper class to get Running Object Table 
+    /// </summary>
     [SupressImportIntoVM]
     public class ROTHelper
     {

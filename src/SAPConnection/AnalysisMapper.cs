@@ -1,4 +1,8 @@
-﻿using System;
+﻿/// Developed by Thornton Tomasetti's CORE Studio for Autodesk
+/// http://core.thorntontomasetti.com
+/// CORE Developers: Elcin Ertugrul and Ana Garcia Puyol
+
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;

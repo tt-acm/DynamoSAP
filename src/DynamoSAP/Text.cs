@@ -1,4 +1,7 @@
-﻿//Based on the original script by Michael Kirschner for DynamoText
+﻿/// Developed by Thornton Tomasetti's CORE Studio for Autodesk
+/// http://core.thorntontomasetti.com
+/// CORE Developers: Elcin Ertugrul and Ana Garcia Puyol
+/// Based on the original script by Michael Kirschner for DynamoText
 
 using System;
 using System.Collections.Generic;
@@ -26,9 +29,6 @@ namespace DynamoSAP
             var font = new System.Windows.Media.FontFamily("Arial");
             var fontStyle = FontStyles.Normal;
             var fontWeight = FontWeights.Medium;
-
-            //if (Bold == true) fontWeight = FontWeights.Bold;
-            //if (Italic == true) fontStyle = FontStyles.Italic;
 
             // Create the formatted text based on the properties set.
             var formattedText = new FormattedText(
@@ -59,7 +59,6 @@ namespace DynamoSAP
                         b = lineSeg.Point;
                         var crv = LineBetweenPoints(originPlane.Origin, 0.5*scale, a, b);
                         a = b;
-                        //Curve rotC = (Curve)crv.Rotate(originPlane.Origin, CoordinateSystem.Identity().XAxis, 90.0);
                         CoordinateSystem localWorldcs = CoordinateSystem.ByOrigin(originPlane.Origin);
                         Curve rotC = (Curve)crv.Transform(localWorldcs, originPlane.ToCoordinateSystem());
                         crvs.Add(rotC);
@@ -72,7 +71,6 @@ namespace DynamoSAP
                         {
                             var crv = LineBetweenPoints(originPlane.Origin, 0.5 * scale, a, segPt);
                             a = segPt;
-                            //Curve rotC = (Curve)crv.Rotate(originPlane.Origin, CoordinateSystem.Identity().XAxis, 90.0);
                             CoordinateSystem localWorldcs = CoordinateSystem.ByOrigin(originPlane.Origin);
                             Curve rotC = (Curve)crv.Transform(localWorldcs, originPlane.ToCoordinateSystem());
                             crvs.Add(rotC);
