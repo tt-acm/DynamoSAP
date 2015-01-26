@@ -17,7 +17,7 @@ namespace DynamoSAP_UI
     [NodeCategory("DynamoSAP.Definitions.LoadPattern")]
     [NodeDescription("Select Load Pattern type to use with Set Load Pattern node")]
     [IsDesignScriptCompatible]
-    public class LoadPatternTypes: EnumAsString<eLoadPatternType>
+    public class LoadPatternTypes : EnumAsString<eLoadPatternType>
     {
         public LoadPatternTypes(WorkspaceModel workspace) : base(workspace) { }
     }
@@ -49,6 +49,15 @@ namespace DynamoSAP_UI
         public CoordinateSystem(WorkspaceModel workspace) : base(workspace) { }
     }
 
+    [NodeName("LoadDirection")]
+    [NodeCategory("DynamoSAP.Definitions.Load")]
+    [NodeDescription("Select the Direction of the Load ")]
+    [IsDesignScriptCompatible]
+    public class LoadDirection : EnumAsInt<LDir>
+    {
+        public LoadDirection(WorkspaceModel workspace) : base(workspace) { }
+    }
+
 
     [NodeName("LoadType")]
     [NodeCategory("DynamoSAP.Definitions.Load")]
@@ -68,10 +77,24 @@ namespace DynamoSAP_UI
         public JustificationTypes(WorkspaceModel workspace) : base(workspace) { }
     }
 
-    public enum CSystem 
+    public enum CSystem
     {
         Global = 1,
         Local = 2,
+    }
+    public enum LDir
+    {
+        a_LocalX = 1,
+        a_LocalY = 2,
+        a_LocalZ = 3,
+        b_GlobalX = 4,
+        b_GlobalY = 5,
+        b_GlobalZ = 6,
+        c_GlobalProjectedX = 7,
+        c_GlobalProjectedY = 8,
+        c_GlobalProjectedZ = 9,
+        Gravity = 10,
+        ProjectedGravity = 11,
     }
 
     public enum LType // Dynamo changes the order, and starts from 0
@@ -80,7 +103,7 @@ namespace DynamoSAP_UI
         Moment = 2,
     }
 
-    public enum Justification 
+    public enum Justification
     {
         BottomLeft = 1,
         BottomCenter = 2,
@@ -92,7 +115,7 @@ namespace DynamoSAP_UI
         TopCenter = 8,
         TopRight = 9,
         Centroid = 10,
-        ShearCenter = 11    
+        ShearCenter = 11
     }
 
     [NodeName("ForceTypes")]
@@ -104,14 +127,14 @@ namespace DynamoSAP_UI
         public ForceTypes(WorkspaceModel workspace) : base(workspace) { }
     }
 
-    public enum ForceType 
-    {      
+    public enum ForceType
+    {
         Axial = 1,
         Shear22 = 2,
         Shear33 = 3,
         Torsion = 4,
         Moment22 = 5,
-        Moment33 = 6,        
+        Moment33 = 6,
     }
 
 
@@ -124,7 +147,7 @@ namespace DynamoSAP_UI
         public SectionCatalogs(WorkspaceModel workspace) : base(workspace) { }
     }
     public enum SectionCatalog
-    { 
+    {
         AISC,
         AISC3,
         AISC13,
@@ -161,7 +184,7 @@ namespace DynamoSAP_UI
     }
 
     public enum Material
-    { 
+    {
         A36,
         A53GrB,
         A500GrB42,
@@ -177,7 +200,7 @@ namespace DynamoSAP_UI
     [NodeCategory("DynamoSAP.Assembly")]
     [NodeDescription("Select units")]
     [IsDesignScriptCompatible]
-    public class Units: EnumAsString<eUnits>
+    public class Units : EnumAsString<eUnits>
     {
         public Units(WorkspaceModel workspace) : base(workspace) { }
     }
@@ -191,11 +214,11 @@ namespace DynamoSAP_UI
         public ShellTypes(WorkspaceModel workspace) : base(workspace) { }
     }
 
- 
+
     public enum ShellType
     {
         Shell_thin = 1,
-        Shell_thick ,
+        Shell_thick,
         Plate_thin,
         Plate_thick,
         Membrane,
