@@ -405,60 +405,57 @@ namespace DynamoSAP.Assembly
                 int[] types = null;
                 string[] Labels = null;
                 SAPConnection.GroupMapper.GetGroupAssignments(ref SapModel, g, ref types, ref Labels);
+
                 if (Labels!=null && Labels.Count() > 0)
                 {
                     for (int i = 0; i < Labels.Length; i++)
                     {
-                        //if (types[i] == 1) // Joint
-                        //{
-                        //    try
-                        //    {
-                        //        var gel = (from el in model.StructuralElements
-                        //                   where el.Type == Structure.Type.Joint
-                        //                   select el).First();
-                        //        if (gel != null)
-                        //        {
-                        //            myG.GroupElements.Add(gel);
-                        //        }
+                        if (types[i] == 1) // Joint
+                        {
+                            try
+                            {
+                                var gel = (from el in model.StructuralElements
+                                           where el.Label == Labels[i] && el.Type == Structure.Type.Joint
+                                           select el).First();
+                                if (gel != null)
+                                {
+                                    myG.GroupElements.Add(gel);
+                                }
 
-                        //    }
-                        //    catch (Exception) { }
+                            }
+                            catch (Exception) { }
 
-                        //}
-                        //else if (types[i] == 2) // frame
-                        //{
-                        //    try
-                        //    {
-                        //        var gel = (from el in model.StructuralElements
-                        //                   where el.Type == Structure.Type.Frame
-                        //                   select el).First();
-                        //        if (gel != null)
-                        //        {
-                        //            myG.GroupElements.Add(gel);
-                        //        }
+                        }
+                        else if (types[i] == 2) // frame
+                        {
+                            try
+                            {
+                                var gel = (from el in model.StructuralElements
+                                           where el.Type == Structure.Type.Frame && el.Label == Labels[i]
+                                           select el).First();
+                                if (gel != null)
+                                {
+                                    myG.GroupElements.Add(gel);
+                                }
 
-                        //    }
-                        //    catch (Exception) { }
-                        //}
-                        //else if (types[i] == 3) // cable
-                        //{
-                        //    //TODO: After cable object defined
-                        //}
-                        //else if (types[i] == 5) // shell
-                        //{
-                        //    var gel = (from el in model.StructuralElements
-                        //               where el.Type == Structure.Type.Shell
-                        //               select el).First();
-                        //    if (gel != null)
-                        //    {
-                        //        myG.GroupElements.Add(gel);
-                        //    }
-                        //}
+                            }
+                            catch (Exception) { }
+                        }
+                        else if (types[i] == 3) // cable
+                        {
+                            //TODO: After cable object defined
+                        }
+                        else if (types[i] == 5) // shell
+                        {
+                            var gel = (from el in model.StructuralElements
+                                       where el.Type == Structure.Type.Shell && el.Label == Labels[i]
+                                       select el).First();
+                            if (gel != null)
+                            {
+                                myG.GroupElements.Add(gel);
+                            }
+                        }
 
-                        var gel = (from el in model.StructuralElements
-                                   where el.Label == Labels[i]
-                                   select el).First();
-                        myG.GroupElements.Add(gel);
                     }
                 }
                 else
