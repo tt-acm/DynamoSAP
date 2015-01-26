@@ -1,4 +1,4 @@
-File C:\Users\EErtugrul\Documents\GitHub\DynamoSAP\samples\2a_Dome.$2k was saved on 1/26/15 at 14:27:51
+File C:\Users\EErtugrul\Documents\GitHub\DynamoSAP\samples\2a_Dome.$2k was saved on 1/26/15 at 14:30:54
  
 TABLE:  "ACTIVE DEGREES OF FREEDOM"
    UX=Yes   UY=Yes   UZ=Yes   RX=Yes   RY=Yes   RZ=Yes
@@ -2740,9 +2740,6 @@ TABLE:  "GRID LINES"
  
 TABLE:  "GROUPS 1 - DEFINITIONS"
    GroupName=ALL   Selection=Yes   SectionCut=Yes   Steel=Yes   Concrete=Yes   Aluminum=Yes   ColdFormed=Yes   Stage=Yes   Bridge=Yes   AutoSeismic=No   AutoWind=No   SelDesSteel=No   SelDesAlum=No   SelDesCold=No   MassWeight=Yes   Color=Red
-   GroupName=TTX_WALL   Selection=Yes   SectionCut=Yes   Steel=Yes   Concrete=Yes   Aluminum=Yes   ColdFormed=Yes   Stage=Yes   Bridge=Yes   AutoSeismic=No   AutoWind=No   SelDesSteel=No   SelDesAlum=No   SelDesCold=No   MassWeight=Yes   Color=Cyan
- 
-TABLE:  "GROUPS 2 - ASSIGNMENTS"
  
 TABLE:  "JOINT COORDINATES"
    Joint=1   CoordSys=GLOBAL   CoordType=Cartesian   XorR=1.79328593414918   Y=-1.54852635508797E-07   Z=4.96380188152066   SpecialJt=No

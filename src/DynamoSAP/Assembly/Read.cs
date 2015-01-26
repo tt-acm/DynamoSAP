@@ -494,7 +494,7 @@ namespace DynamoSAP.Assembly
             }
             if (counter == SapGroups.Count)
             {
-                throw new Exception("The group(s) have no members assigned");
+                //throw new Exception("The group(s) have no members assigned");
             }
 
         }
