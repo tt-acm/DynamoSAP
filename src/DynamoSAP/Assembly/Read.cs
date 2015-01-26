@@ -152,7 +152,7 @@ namespace DynamoSAP.Assembly
                 double[][] LoadCombosMultipliers = null;
 
 
-                StructureMapper.GetLoadCombos(ref SapModel, ref LoadCombosNames, ref LoadCasesTypes, ref LoadCombosCases, ref LoadCombosMultipliers);
+                //StructureMapper.GetLoadCombos(ref SapModel, ref LoadCombosNames, ref LoadCasesTypes, ref LoadCombosCases, ref LoadCombosMultipliers);
                 if (LoadCombosNames != null)
                 {
                     foreach (string lcname in LoadCombosNames)
