@@ -166,10 +166,10 @@ namespace DynamoSAP.Definitions
             if (LoadType == "Moment") ltype = 2;
 
             //Add one to direction to fix the issue with the enumeration starting at 0 instead of 1
-            Direction++;
+            int dir = Direction + 1;
 
             CheckCoordSysAndDir(Direction, CoordSystem);
-            Load l = new Load(LoadPattern, ltype, Direction, Distance, Value, CoordSystem, RelativeDistance);
+            Load l = new Load(LoadPattern, ltype, dir, Distance, Value, CoordSystem, RelativeDistance);
             l.LoadType = "PointLoad";
             return l;
         }
@@ -210,10 +210,10 @@ namespace DynamoSAP.Definitions
             if (LoadType == "Moment") ltype = 2;
 
             //Add one to direction to fix the issue with the enumeration starting at 0 instead of 1
-            Direction++;
+            int dir = Direction + 1;
 
             CheckCoordSysAndDir(Direction, CoordSystem);
-            Load l = new Load(LoadPattern, ltype, Direction, Distance, Distance2, Value, Value2, CoordSystem, RelativeDistance);
+            Load l = new Load(LoadPattern, ltype, dir, Distance, Distance2, Value, Value2, CoordSystem, RelativeDistance);
             l.LoadType = "DistributedLoad";
             return l;
         }
