@@ -337,24 +337,48 @@ namespace SAPConnection
             }
         }
 
-        public static void GetLoadCombos(ref cSapModel Model, ref string[] LoadComboNames, ref string[] LoadComboTypes, ref string[][] LoadComboCase, ref double[][] Multipliers)
+        public static void GetLoadCombos(ref cSapModel Model, ref string[] LoadComboNames, ref string[][] LoadComboTypes, ref string[][] LoadComboCase, ref double[][] Multipliers, ref string[][] LoadComboDefinitions)
         {
             int NumberNames = 0;
             int ret = Model.RespCombo.GetNameList(ref NumberNames, ref LoadComboNames);
 
+            LoadComboTypes=new string[NumberNames][];
+            LoadComboCase = new string[NumberNames][];
+            Multipliers = new double[NumberNames][];
+            LoadComboDefinitions = new string[NumberNames][];
 
             foreach (string lc in LoadComboNames)
             {
                 int pos = Array.IndexOf(LoadComboNames, lc);
+
                 
                 int numberItems=0;
                 eCType[] cType =null;
                 string[] cName=null;
                 double[] sf = null;
                 ret = Model.RespCombo.GetCaseList(lc, ref numberItems, ref cType, ref cName, ref sf);
-                LoadComboTypes[pos] = cType.ToString();
-                LoadComboCase[pos] = cName;
-                Multipliers[pos] = sf;
+               
+                LoadComboTypes[pos] = new string[numberItems];
+                LoadComboCase[pos] = new string[numberItems];
+                Multipliers[pos] = new double[numberItems];
+                LoadComboDefinitions[pos] = new string[numberItems];
+                foreach (string cn in cName)
+                {
+                    int pos2 = Array.IndexOf(cName, cn);
+                    try
+                    {
+                        LoadComboTypes[pos][pos2] = cType[pos2].ToString();
+                        LoadComboCase[pos][pos2] = cn;
+                        Multipliers[pos][pos2] = sf[pos2];
+                        LoadComboDefinitions[pos][pos2] = cName[pos2];
+                       
+                    }
+                    catch (Exception ex)
+                    {
+
+                        string t = ex.Message;
+                    }
+                }
             }
         }
 

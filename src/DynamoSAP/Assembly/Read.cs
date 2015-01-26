@@ -147,36 +147,55 @@ namespace DynamoSAP.Assembly
                 //1.c GET LOAD COMBOS
 
                 string[] LoadCombosNames = null;
-                string[] LoadCombosTypes = null;
+                string[][] LoadCombosTypes = null;
                 string[][] LoadCombosCases = null;
+                string[][] LoadCombosDefinitions = null;
                 double[][] LoadCombosMultipliers = null;
 
 
-                StructureMapper.GetLoadCombos(ref SapModel, ref LoadCombosNames, ref LoadCasesTypes, ref LoadCombosCases, ref LoadCombosMultipliers);
+                StructureMapper.GetLoadCombos(ref SapModel, ref LoadCombosNames, ref LoadCombosTypes, ref LoadCombosCases, ref LoadCombosMultipliers, ref LoadCombosDefinitions);
                 if (LoadCombosNames != null)
                 {
+
+                    
+
                     foreach (string lcname in LoadCombosNames)
                     {
                         int pos = Array.IndexOf(LoadCombosNames, lcname);
 
                         List<Definition> LoadDefinitions = new List<Definition>();
 
-                        //foreach (string cCase in LoadCombosCases[pos])
-                        //{
-                        //    Definition def = new Definition();
-                        //    if (LoadCasesTypes[pos] == "LoadCase")
-                        //    {
-                        //        def.Type = Definitions.Type.LoadCase;
-                        //        ((LoadCase)def).name = cCase;
-                        //    }
-                        //    else if()
-                            
-                        //    LoadDefinitions.Add(cCase);
-                        //}
-                        //create a new load
-                        LoadCombo lc = new LoadCombo(lcname, LoadCasesTypes[pos], LoadDefinitions, LoadCombosMultipliers[pos].ToList());
+                        foreach (string comboType in LoadCombosTypes[pos])
+                        {
+                            int pos2 = Array.IndexOf(LoadCombosTypes[pos], comboType);
+                            Definition def = new Definition();
+                            if (comboType == "LoadCase")
+                            {
+                                //find the existing Load Case
+                                foreach (Definition d in model.ModelDefinitions)
+                                {
+                                    if (d.Type == Definitions.Type.LoadCase)
+                                    {
+                                        if (((LoadCase)d).name == LoadCombosDefinitions[pos][pos2])
+                                        {
+                                            def = d;
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                def.Type = Definitions.Type.LoadCombo;
+                                ((LoadCombo)def).name = comboType;
+                            }
 
-                        model.ModelDefinitions.Add(lc);
+                            LoadDefinitions.Add(def);
+                        }
+
+                        //create a new load combo
+                        LoadCombo loadcombo = new LoadCombo(lcname, LoadCombosTypes[pos][0], LoadDefinitions, LoadCombosMultipliers[pos].ToList());
+
+                        model.ModelDefinitions.Add(loadcombo);
                         
                     }
                 }
