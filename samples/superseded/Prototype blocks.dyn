@@ -1,4 +1,4 @@
-<Workspace Version="0.7.3.3034" X="-1217.23689613036" Y="179.022421853415" zoom="0.580774950195609" Description="" Category="" Name="Home">
+<Workspace Version="0.7.3.3034" X="-1262.2529805065" Y="313.947676886129" zoom="0.536224037879456" Description="" Category="" Name="Home">
   <Elements>
     <DSCoreNodesUI.Formula type="DSCoreNodesUI.Formula" guid="e5b7c525-5fff-496b-9d32-bae148690fd2" nickname="LOAD PATTERN" x="182.210568508015" y="435.745097759498" isVisible="true" isUpstreamVisible="true" lacing="Shortest">
       <FormulaText>Name + Type + Multiplier</FormulaText>
@@ -38,13 +38,13 @@
     <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="aed1542c-ab13-438f-b703-8dcf22e7ef79" nickname="File Path to save the results" x="2305.35264780439" y="663.60816184559" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;myFilePath&quot;;" ShouldFocus="false" />
     <Dynamo.Nodes.Watch type="Dynamo.Nodes.Watch" guid="c6b12c17-a5fd-4708-abbc-78a5c360b0f1" nickname="List of results (table?)" x="4445.18398667115" y="480.825264461941" isVisible="true" isUpstreamVisible="true" lacing="Disabled" />
     <Dynamo.Nodes.Watch3D type="Dynamo.Nodes.Watch3D" guid="9545ff00-fa22-4432-821c-3fec9306c431" nickname="Watch 3D" x="3191.70578108489" y="-82.7510048629013" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <view width="210" height="263">
-        <camera pos_x="19.8647035986435" pos_y="20.0523880893985" pos_z="19.1246254672681" look_x="-19.6809057184367" look_y="-19.6809057184367" look_z="-19.6809057184367" />
+      <view width="220" height="326">
+        <camera pos_x="20.6975697527233" pos_y="20.6975697527233" pos_z="20.6965697527233" look_x="-20.6975697527233" look_y="-20.6975697527233" look_z="-20.6975697527233" />
       </view>
     </Dynamo.Nodes.Watch3D>
     <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="38429079-66f0-4c81-862d-8a4af7089a61" nickname="Code Block" x="3631.74433634812" y="323.650948074121" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="SucCess;" ShouldFocus="false" />
     <Dynamo.Nodes.Watch3D type="Dynamo.Nodes.Watch3D" guid="02c39abe-0af8-46d0-b694-e9c8be70d79c" nickname="Watch 3D" x="4604.64623282257" y="-31.5925304404814" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <view width="210" height="263">
+      <view width="220" height="326">
         <camera pos_x="20.6975697527233" pos_y="20.6975697527233" pos_z="20.6965697527233" look_x="-20.6975697527233" look_y="-20.6975697527233" look_z="-20.6975697527233" />
       </view>
     </Dynamo.Nodes.Watch3D>
@@ -62,7 +62,7 @@
     </DSCoreNodesUI.BoolSelector>
     <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="c71eb4c9-16b0-40e0-b81c-25548cfebf82" nickname="VERIFY ANALYSIS/DESIGN SECTIONS" x="4046.58877935229" y="682.96207032351" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="SAPModel+LoadCase;" ShouldFocus="false" />
     <Dynamo.Nodes.Watch3D type="Dynamo.Nodes.Watch3D" guid="f960e90a-a642-4e59-969f-3243daf90292" nickname="Watch 3D" x="4424.81361771486" y="680.018883536888" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <view width="220" height="326">
+      <view width="230" height="389">
         <camera pos_x="20.6975697527233" pos_y="20.6975697527233" pos_z="20.6965697527233" look_x="-20.6975697527233" look_y="-20.6975697527233" look_z="-20.6975697527233" />
       </view>
     </Dynamo.Nodes.Watch3D>
