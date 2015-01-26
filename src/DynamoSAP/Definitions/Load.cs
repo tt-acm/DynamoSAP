@@ -168,7 +168,7 @@ namespace DynamoSAP.Definitions
             //Add one to direction to fix the issue with the enumeration starting at 0 instead of 1
             int dir = Direction + 1;
 
-            CheckCoordSysAndDir(Direction, CoordSystem);
+            CheckCoordSysAndDir(dir, CoordSystem);
             Load l = new Load(LoadPattern, ltype, dir, Distance, Value, CoordSystem, RelativeDistance);
             l.LoadType = "PointLoad";
             return l;
@@ -212,7 +212,7 @@ namespace DynamoSAP.Definitions
             //Add one to direction to fix the issue with the enumeration starting at 0 instead of 1
             int dir = Direction + 1;
 
-            CheckCoordSysAndDir(Direction, CoordSystem);
+            CheckCoordSysAndDir(dir, CoordSystem);
             Load l = new Load(LoadPattern, ltype, dir, Distance, Distance2, Value, Value2, CoordSystem, RelativeDistance);
             l.LoadType = "DistributedLoad";
             return l;

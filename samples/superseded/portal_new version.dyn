@@ -1,4 +1,4 @@
-<Workspace Version="0.7.5.3566" X="-7442.51523038537" Y="39.2702828438914" zoom="0.84728009018279" Description="" Category="" Name="Home">
+<Workspace Version="0.7.5.3566" X="-5752.74014864182" Y="693.116905035748" zoom="1.06067842354341" Description="" Category="" Name="Home">
   <Elements>
     <Dynamo.Nodes.DoubleInput type="Dynamo.Nodes.DoubleInput" guid="5380bc8d-364f-4eb4-b383-6f61a4dc2f1f" nickname="Number" x="-3409.76000176355" y="99.5545466247776" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Double value="0" />
@@ -80,7 +80,7 @@
       <System.Double value="1.25" />
     </Dynamo.Nodes.DoubleInput>
     <Dynamo.Nodes.IntegerSlider type="Dynamo.Nodes.IntegerSlider" guid="76d14eb4-d52d-43d8-9bbe-b82173f0ea96" nickname="Load Direction 4=X, 5=Y, 6=Z" x="5644.91951356137" y="287.203976891386" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <System.Int32>6</System.Int32>
+      <System.Int32>5</System.Int32>
       <Range min="0" max="100" />
     </Dynamo.Nodes.IntegerSlider>
     <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="876e127b-1d84-44c3-a9dc-f9dd3ee32297" nickname="Double Slider" x="5648.39800727769" y="386.782149099961" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
@@ -180,7 +180,7 @@
     </Dynamo.Nodes.DoubleInput>
     <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="930b27c0-63ed-4111-9ca3-367c776882cc" nickname="Code Block" x="5292.05537105462" y="-582.022369510372" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;Move_Load_Sample&quot;;" ShouldFocus="false" />
     <Dynamo.Nodes.IntegerSlider type="Dynamo.Nodes.IntegerSlider" guid="89a76027-5a30-4599-af31-665733abc885" nickname="Load Direction 4=X, 5=Y, 6=Z" x="5609.80017561942" y="-288.364785810704" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <System.Int32>5</System.Int32>
+      <System.Int32>3</System.Int32>
       <Range min="0" max="100" />
     </Dynamo.Nodes.IntegerSlider>
     <Dynamo.Nodes.DoubleInput type="Dynamo.Nodes.DoubleInput" guid="477ddf1e-1100-49f4-88a2-0aae0a991c0e" nickname="Number" x="6649.57579604537" y="1201.36427869564" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
@@ -305,10 +305,7 @@
       <System.Int32>5</System.Int32>
       <Range min="0" max="100" />
     </Dynamo.Nodes.IntegerSlider>
-    <Dynamo.Nodes.DoubleInput type="Dynamo.Nodes.DoubleInput" guid="850687fc-6691-4a1a-8b9d-04a0b036d5f2" nickname="Type 1=Force, 2=Moment" x="5653.53265168317" y="205.342266536107" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <System.Double value="1" />
-    </Dynamo.Nodes.DoubleInput>
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="1cc651eb-d0c3-45b7-8b72-cbb5f1fc9312" nickname="Flatten" x="8180.07812222019" y="585.794421557162" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="" function="Flatten@var[]..[]" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="1cc651eb-d0c3-45b7-8b72-cbb5f1fc9312" nickname="Flatten" x="7797.4861161945" y="1563.10865477129" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="" function="Flatten@var[]..[]" />
     <DSCoreNodesUI.CreateList type="DSCoreNodesUI.CreateList" guid="5ec3e456-366e-4c51-a8ea-320aa937008d" nickname="List.Create" x="7312.29289126473" y="1559.34639281062" isVisible="true" isUpstreamVisible="true" lacing="Disabled" inputcount="1" />
     <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="f52e69b4-f519-400e-bc77-1e37b3c8d2c4" nickname="Double Slider" x="11190.6144206463" y="241.899618647116" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Double>0.05</System.Double>
@@ -344,6 +341,8 @@
       <PortInfo index="2" default="True" />
       <PortInfo index="3" default="True" />
     </Dynamo.Nodes.DSFunction>
+    <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="00339b7f-2a1b-41f4-b8c0-5da4d8ba25d2" nickname="Code Block" x="5629.57975799323" y="198.327612789174" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;Force&quot;;" ShouldFocus="false" />
+    <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="631070b7-38ca-4dc9-afaa-3a76dab081dd" nickname="Code Block" x="5675.5946876224" y="-634.725985726738" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;Force&quot;;" ShouldFocus="false" />
   </Elements>
   <Connectors>
     <Dynamo.Models.ConnectorModel start="5380bc8d-364f-4eb4-b383-6f61a4dc2f1f" start_index="0" end="e3724b6c-debb-47c5-b7a7-393f5ce72c63" end_index="5" portType="0" />
@@ -401,7 +400,6 @@
     <Dynamo.Models.ConnectorModel start="76d14eb4-d52d-43d8-9bbe-b82173f0ea96" start_index="0" end="c29293af-9d03-4e38-be2b-edf50b438942" end_index="2" portType="0" />
     <Dynamo.Models.ConnectorModel start="876e127b-1d84-44c3-a9dc-f9dd3ee32297" start_index="0" end="c29293af-9d03-4e38-be2b-edf50b438942" end_index="3" portType="0" />
     <Dynamo.Models.ConnectorModel start="43036d64-86a7-4dda-8ee7-334e212e0b5a" start_index="0" end="c29293af-9d03-4e38-be2b-edf50b438942" end_index="4" portType="0" />
-    <Dynamo.Models.ConnectorModel start="0d32d5a0-84d2-43eb-9752-21ab6f00a71d" start_index="0" end="dd4a15e5-1c4c-480f-89f7-051f486bf5b7" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="c6db30e3-71fe-4fc9-b33d-193f57ff873f" start_index="0" end="2a730f66-4d78-47c2-a24a-a0164aeb64ee" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="c6db30e3-71fe-4fc9-b33d-193f57ff873f" start_index="0" end="1db519d7-0be1-4f5d-86f6-48cbe80ba4d9" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="6d1624e0-8858-430a-8547-d9f6708fb94c" start_index="0" end="a2b2036c-00e8-4907-821b-071d809a075c" end_index="0" portType="0" />
@@ -520,7 +518,6 @@
     <Dynamo.Models.ConnectorModel start="0f0d281a-049c-4305-a7b6-4c758d44ea4d" start_index="0" end="f1be2af4-7042-4c25-8588-a570ab6edc2d" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="0f0d281a-049c-4305-a7b6-4c758d44ea4d" start_index="0" end="dd818646-3973-4821-b960-cd4bd9a8fbf7" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="0f0d281a-049c-4305-a7b6-4c758d44ea4d" start_index="0" end="f020da36-0711-4b8b-88e2-2832a2c3007d" end_index="1" portType="0" />
-    <Dynamo.Models.ConnectorModel start="850687fc-6691-4a1a-8b9d-04a0b036d5f2" start_index="0" end="c29293af-9d03-4e38-be2b-edf50b438942" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="5ec3e456-366e-4c51-a8ea-320aa937008d" start_index="0" end="1cc651eb-d0c3-45b7-8b72-cbb5f1fc9312" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="f52e69b4-f519-400e-bc77-1e37b3c8d2c4" start_index="0" end="982cd2d8-aa2a-473b-9d6b-ed6f11ed29c4" end_index="4" portType="0" />
     <Dynamo.Models.ConnectorModel start="1b4b701d-466d-4fa7-a22e-736fb984778b" start_index="0" end="726e0ce6-8f50-4c89-a6ab-333784f69f71" end_index="4" portType="0" />
@@ -532,6 +529,8 @@
     <Dynamo.Models.ConnectorModel start="2dd14c0c-bdbe-4aa7-877e-c283c15d60ee" start_index="0" end="cd1169d8-0948-4fb7-a73d-98dc983779de" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="7fef8298-9893-41dc-a5c8-c95e7f360733" start_index="0" end="ba42bd28-eaf6-4013-bfb8-2fb852705f54" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="ba42bd28-eaf6-4013-bfb8-2fb852705f54" start_index="0" end="2dd14c0c-bdbe-4aa7-877e-c283c15d60ee" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="00339b7f-2a1b-41f4-b8c0-5da4d8ba25d2" start_index="0" end="c29293af-9d03-4e38-be2b-edf50b438942" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="631070b7-38ca-4dc9-afaa-3a76dab081dd" start_index="0" end="dd4a15e5-1c4c-480f-89f7-051f486bf5b7" end_index="1" portType="0" />
   </Connectors>
   <Notes>
     <Dynamo.Models.NoteModel text="RELEASE" x="6144.16755001816" y="-1192.27139559094" />
@@ -552,7 +551,7 @@
     <Dynamo.Models.NoteModel text="ALL FRAMES IN THE PROJECT" x="8135.42657667328" y="69.7062731758539" />
     <Dynamo.Models.NoteModel text="ALL LOAD PATTERNS IN THE PROJECT" x="8123.21906084832" y="235.159570449827" />
     <Dynamo.Models.NoteModel text="ALL LOAD CASES IN THE PROJECT" x="8142.18010872494" y="391.26229861333" />
-    <Dynamo.Models.NoteModel text="ALL RESTRAINTS IN THE PROJECT" x="8145.55687475077" y="547.365026776834" />
+    <Dynamo.Models.NoteModel text="ALL RESTRAINTS IN THE PROJECT" x="7762.96486872508" y="1524.67925999097" />
     <Dynamo.Models.NoteModel text="TRANSLATION INTO SAP" x="8946.25865551774" y="314.290609626438" />
   </Notes>
 </Workspace>
