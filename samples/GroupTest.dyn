@@ -1,0 +1,26 @@
+<Workspace Version="0.7.5.3566" X="-1640.26056878048" Y="5.8096626926515" zoom="1.38571068305883" Description="" Category="" Name="Home">
+  <Elements>
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="473133a3-b8f2-4b8a-9096-3515a5899846" nickname="Read.SAPModel" x="675" y="345.5" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Assembly.Read.SAPModel@bool" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="4fef19ac-b165-4fc5-bf41-b9381579de62" nickname="StructuralModel.Decompose" x="972" y="347.5" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Decompose@DynamoSAP.Assembly.StructuralModel" />
+    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="d76c8b21-d930-4443-8eb5-59ca73ed8390" nickname="Boolean" x="488" y="353.5" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <System.Boolean>True</System.Boolean>
+    </DSCoreNodesUI.BoolSelector>
+    <DynamoSAP_UI.CoordinateSystem type="DynamoSAP_UI.CoordinateSystem" guid="3c78504e-e105-42e6-a5df-e93749544a7e" nickname="CoordinateSystem" x="168" y="456.5" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="1:Local" />
+    <Dynamo.Nodes.Watch type="Dynamo.Nodes.Watch" guid="b0e239e0-cb28-4749-851b-dedd8f2eaa64" nickname="Watch" x="415" y="577.5" isVisible="true" isUpstreamVisible="true" lacing="Disabled" />
+    <DynamoSAP_UI.LoadType type="DynamoSAP_UI.LoadType" guid="fcab5de6-d2a3-4758-94eb-659821570589" nickname="LoadType" x="113" y="582.5" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="1:Moment" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="2f8e48de-32a8-4658-9391-158745ec504c" nickname="Group.Decompose" x="1465.15806940887" y="541.61696142115" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Definitions.Group.Decompose@DynamoSAP.Definitions.Group" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="41ad7a20-cd21-46af-9342-7928c11eb774" nickname="LoadCase.Decompose" x="1733.27701229199" y="-64.8897286948956" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Definitions.LoadCase.Decompose@DynamoSAP.Definitions.LoadCase" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="9285b394-4679-4690-9196-85b1af4f13f2" nickname="LoadPattern.Decompose" x="1476.62854786873" y="-298.579499930156" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Definitions.LoadPattern.Decompose@DynamoSAP.Definitions.LoadPattern" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="aa2c6100-be8d-4b87-ab8e-24ba0f3f51fe" nickname="LoadCombo.Decompose" x="1474.04484766904" y="228.848251618676" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Definitions.LoadCombo.Decompose@DynamoSAP.Definitions.LoadCombo" />
+  </Elements>
+  <Connectors>
+    <Dynamo.Models.ConnectorModel start="473133a3-b8f2-4b8a-9096-3515a5899846" start_index="0" end="4fef19ac-b165-4fc5-bf41-b9381579de62" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="4fef19ac-b165-4fc5-bf41-b9381579de62" start_index="3" end="9285b394-4679-4690-9196-85b1af4f13f2" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="4fef19ac-b165-4fc5-bf41-b9381579de62" start_index="4" end="41ad7a20-cd21-46af-9342-7928c11eb774" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="4fef19ac-b165-4fc5-bf41-b9381579de62" start_index="5" end="aa2c6100-be8d-4b87-ab8e-24ba0f3f51fe" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="4fef19ac-b165-4fc5-bf41-b9381579de62" start_index="6" end="2f8e48de-32a8-4658-9391-158745ec504c" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="d76c8b21-d930-4443-8eb5-59ca73ed8390" start_index="0" end="473133a3-b8f2-4b8a-9096-3515a5899846" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="fcab5de6-d2a3-4758-94eb-659821570589" start_index="0" end="b0e239e0-cb28-4749-851b-dedd8f2eaa64" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+</Workspace>

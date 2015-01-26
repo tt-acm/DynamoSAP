@@ -1,4 +1,4 @@
-<Workspace Version="0.7.5.3566" X="-2877.27728757695" Y="465.914003281131" zoom="1.0023436449529" Description="" Category="" Name="Home">
+<Workspace Version="0.7.5.3566" X="-1400.15310704061" Y="1124.29673879507" zoom="1.09473564585984" Description="" Category="" Name="Home">
   <Elements>
     <Dynamo.Nodes.Function type="Dynamo.Nodes.Function" guid="0ddf228c-2d92-4626-bea7-b471db37d221" nickname="LunchBox Space Truss Structure" x="381.971924383632" y="201.178284480371" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <ID value="0fa38004-ba41-4f01-9b13-d78249a137d2" />
@@ -214,7 +214,7 @@
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="80af6239-f893-4eb7-98d0-72d5696f5ccf" nickname="Joint.FromPoint" x="1313.92853122134" y="-333.628259998483" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Structure.Joint.FromPoint@Autodesk.DesignScript.Geometry.Point" />
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="72478d84-5e39-4a01-b66b-a75fd9ebc6bf" nickname="Joint.SetRestraint" x="1578.4053282735" y="-165.245135748745" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Structure.Joint.SetRestraint@DynamoSAP.Structure.Joint,DynamoSAP.Definitions.Restraint" />
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="2ae4d98a-c55b-4169-81a9-898d1d073a21" nickname="Joint.SetRestraint" x="1630.02678835451" y="58.9536912455523" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Structure.Joint.SetRestraint@DynamoSAP.Structure.Joint,DynamoSAP.Definitions.Restraint" />
-    <Dynamo.Nodes.Function type="Dynamo.Nodes.Function" guid="a779861f-aad0-488c-aad6-7300face6e95" nickname="LunchBox Diamond Grid by Face" x="1526.6558742333" y="-893.988042426786" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    <Dynamo.Nodes.Function type="Dynamo.Nodes.Function" guid="a779861f-aad0-488c-aad6-7300face6e95" nickname="LunchBox Diamond Grid by Face" x="1500.70486112823" y="-1001.14061266706" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <ID value="f4b9a5ab-998b-4dc0-963d-ef3c4c3171e5" />
       <Name value="LunchBox Diamond Grid by Face" />
       <Description value="Create a Diamond XYZ grid on a face.  The face surface must have an untrimmed UV parameter space." />
@@ -233,11 +233,11 @@
       </Outputs>
     </Dynamo.Nodes.Function>
     <Dynamo.Nodes.IntegerSlider type="Dynamo.Nodes.IntegerSlider" guid="a3426063-7263-4356-8f6d-797cfb70c50a" nickname="Integer Slider" x="1057.37551523736" y="-1019.08606612324" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <System.Int32>6</System.Int32>
+      <System.Int32>8</System.Int32>
       <Range min="0" max="100" />
     </Dynamo.Nodes.IntegerSlider>
     <Dynamo.Nodes.IntegerSlider type="Dynamo.Nodes.IntegerSlider" guid="a0d352cf-2d98-4ed1-af39-a414cceda112" nickname="Integer Slider" x="1048.68088841772" y="-904.741019336615" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <System.Int32>6</System.Int32>
+      <System.Int32>8</System.Int32>
       <Range min="0" max="100" />
     </Dynamo.Nodes.IntegerSlider>
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="d8833ecd-13b6-4d8f-8b89-2800d7709f2f" nickname="Shell.FromSurface" x="1952.51452962467" y="-484.764371567269" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Structure.Shell.FromSurface@Autodesk.DesignScript.Geometry.Surface,DynamoSAP.Definitions.ShellProp" />
@@ -249,8 +249,8 @@
       <PortInfo index="5" default="True" />
       <PortInfo index="6" default="True" />
     </Dynamo.Nodes.DSFunction>
-    <DynamoSAP_UI.ShellTypes type="DynamoSAP_UI.ShellTypes" guid="00f0847c-b0fd-4720-b2af-7e1dd59a78c4" nickname="ShellTypes" x="1089.06706375641" y="-546.357893322353" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="0:Membrane" />
-    <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="0396d139-0a1e-43bb-bb0a-61bb5dcb56b5" nickname="Code Block" x="1149.62582000285" y="-656.688595031502" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;MyShellProperties&quot;;" ShouldFocus="false" />
+    <DynamoSAP_UI.ShellTypes type="DynamoSAP_UI.ShellTypes" guid="00f0847c-b0fd-4720-b2af-7e1dd59a78c4" nickname="ShellTypes" x="777.019134483012" y="-629.421011186495" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="0:Membrane" />
+    <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="0396d139-0a1e-43bb-bb0a-61bb5dcb56b5" nickname="Code Block" x="837.577890729452" y="-739.751712895644" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;MyShellProperties&quot;;" ShouldFocus="false" />
     <DSCoreNodesUI.CreateList type="DSCoreNodesUI.CreateList" guid="3cb96f1e-2e0d-4707-9bd0-8b77fa203ec3" nickname="List.Create" x="2205.15539745786" y="-715.538846639483" isVisible="true" isUpstreamVisible="true" lacing="Disabled" inputcount="2" />
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="920d10b7-37ac-4546-9f44-7947ede9bf45" nickname="Flatten" x="2602.89876268764" y="-462.579854389444" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="" function="Flatten@var[]..[]" />
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="2c8e8fc8-bafe-4533-84eb-76b45603cabd" nickname="Shell.FromSurface" x="1942.91189679451" y="-1263.46170998482" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Structure.Shell.FromSurface@Autodesk.DesignScript.Geometry.Surface,DynamoSAP.Definitions.ShellProp" />
