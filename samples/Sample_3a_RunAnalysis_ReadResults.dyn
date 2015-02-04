@@ -1,4 +1,4 @@
-<Workspace Version="0.7.5.3566" X="57.5588377008787" Y="383.404867569674" zoom="0.74129110633719" Description="" Category="" Name="Home">
+<Workspace Version="0.7.5.3566" X="12.533279505686" Y="760.460681474406" zoom="0.592264520828307" Description="" Category="" Name="Home">
   <Elements>
     <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="908a9553-1ee1-459a-a5eb-3c2cfcc1a2f2" nickname="Boolean" x="-354.544771965561" y="-201.237228606407" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Boolean>True</System.Boolean>
@@ -27,7 +27,7 @@
       <System.Boolean>True</System.Boolean>
     </DSCoreNodesUI.BoolSelector>
     <Dynamo.Nodes.Watch type="Dynamo.Nodes.Watch" guid="59c1f7fe-6a84-4396-b89c-1861ad748993" nickname="Watch" x="960.180792875404" y="366.981761574693" isVisible="true" isUpstreamVisible="true" lacing="Disabled" />
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="6ba73349-8d06-4f1f-ba4f-d3d23f59bba4" nickname="Frame.DisplayLoads" x="538.646223911708" y="-1086.43005598928" isVisible="false" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Structure.Frame.DisplayLoads@DynamoSAP.Assembly.StructuralModel,string,double,bool,double">
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="6ba73349-8d06-4f1f-ba4f-d3d23f59bba4" nickname="Frame.DisplayLoads" x="538.646223911708" y="-1086.43005598928" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Structure.Frame.DisplayLoads@DynamoSAP.Assembly.StructuralModel,string,double,bool,double">
       <PortInfo index="1" default="True" />
       <PortInfo index="2" default="True" />
       <PortInfo index="3" default="True" />
