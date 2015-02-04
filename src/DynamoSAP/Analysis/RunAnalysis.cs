@@ -128,6 +128,10 @@ namespace DynamoSAP.Analysis
             Analysis AnalysisResults = new Analysis();
             if (Get)
             {
+                if (LCaseOrLPattern == "MODAL")
+                {
+                    throw new Exception("MODAL case is not supported. Select another load case");
+                }
                 // loop over frames get results and populate to dictionary
                 frameResults = SAPConnection.AnalysisMapper.GetFrameForces(ref mySapModel, LCaseOrLPattern);
                 AnalysisResults.FrameResults = frameResults;
