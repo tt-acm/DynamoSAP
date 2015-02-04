@@ -1,14 +1,14 @@
-<Workspace Version="0.7.5.3566" X="74.2944829523494" Y="533.666935233391" zoom="0.470221708880841" Description="" Category="" Name="Home">
+<Workspace Version="0.7.5.3566" X="57.5588377008787" Y="383.404867569674" zoom="0.74129110633719" Description="" Category="" Name="Home">
   <Elements>
-    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="908a9553-1ee1-459a-a5eb-3c2cfcc1a2f2" nickname="Boolean" x="-295.521606515115" y="-179.762639084698" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="908a9553-1ee1-459a-a5eb-3c2cfcc1a2f2" nickname="Boolean" x="-354.544771965561" y="-201.237228606407" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Boolean>True</System.Boolean>
     </DSCoreNodesUI.BoolSelector>
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="39d253c0-b3fc-4e82-9c74-5e645578bab3" nickname="Analysis.GetResults" x="894.24435464733" y="297.041122281378" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Analysis.Analysis.GetResults@string,bool" />
-    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="f9295c91-41ce-4b94-b21c-af7fa005191c" nickname="Boolean" x="598.30040629276" y="437.966576908991" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="39d253c0-b3fc-4e82-9c74-5e645578bab3" nickname="Analysis.GetResults" x="960.09264479089" y="239.57903913614" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Analysis.Analysis.GetResults@string,bool" />
+    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="f9295c91-41ce-4b94-b21c-af7fa005191c" nickname="Boolean" x="558.758046263111" y="442.224655469494" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Boolean>True</System.Boolean>
     </DSCoreNodesUI.BoolSelector>
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="7c6666ae-22a4-4f3c-a2c8-d1924d4edd6a" nickname="List.GetItemAtIndex" x="597.445513208145" y="311.683327570655" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DSCoreNodes.dll" function="DSCore.List.GetItemAtIndex@var[]..[],int" />
-    <Dynamo.Nodes.IntegerSlider type="Dynamo.Nodes.IntegerSlider" guid="51ac3be2-d1af-4e53-8ae5-24f21f9d91ba" nickname="Integer Slider" x="268.134895446595" y="333.887532577202" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="7c6666ae-22a4-4f3c-a2c8-d1924d4edd6a" nickname="List.GetItemAtIndex" x="557.903153178496" y="248.871315359523" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DSCoreNodes.dll" function="DSCore.List.GetItemAtIndex@var[]..[],int" />
+    <Dynamo.Nodes.IntegerSlider type="Dynamo.Nodes.IntegerSlider" guid="51ac3be2-d1af-4e53-8ae5-24f21f9d91ba" nickname="Integer Slider" x="284.931411665119" y="275.099725812368" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Int32>3</System.Int32>
       <Range min="0" max="5" />
     </Dynamo.Nodes.IntegerSlider>
@@ -20,12 +20,23 @@
       <Range min="0" max="10" />
     </Dynamo.Nodes.DoubleSlider>
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="b24e8e64-0cc1-43a1-a98c-3bfcf4f9099e" nickname="Analysis.Run" x="-24.8783825352078" y="-198.834648866039" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Analysis.Analysis.Run@bool" />
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" nickname="StructuralModel.Decompose" x="631.89247727458" y="-777.740317946584" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Decompose@DynamoSAP.Assembly.StructuralModel" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" nickname="StructuralModel.Decompose" x="540.248830035154" y="-775.921628454375" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Decompose@DynamoSAP.Assembly.StructuralModel" />
     <Dynamo.Nodes.Watch type="Dynamo.Nodes.Watch" guid="b0ad963d-3cc8-41d9-a5f0-a433d83966cd" nickname="Watch" x="1636.08242458294" y="130.488203415535" isVisible="true" isUpstreamVisible="true" lacing="Disabled" />
-    <Dynamo.Nodes.Watch type="Dynamo.Nodes.Watch" guid="f1e08fd8-3431-4ce0-8eaf-8c74804ce9a9" nickname="Watch" x="588.781242319983" y="36.6647879275367" isVisible="true" isUpstreamVisible="true" lacing="Disabled" />
+    <Dynamo.Nodes.Watch type="Dynamo.Nodes.Watch" guid="f1e08fd8-3431-4ce0-8eaf-8c74804ce9a9" nickname="Watch" x="560.713728997281" y="-20.9264646541271" isVisible="true" isUpstreamVisible="true" lacing="Disabled" />
     <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="ac0b4e05-4fea-4ec5-bae9-fb327f9982f7" nickname="Boolean" x="941.563703457543" y="-299.232750393524" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Boolean>True</System.Boolean>
     </DSCoreNodesUI.BoolSelector>
+    <Dynamo.Nodes.Watch type="Dynamo.Nodes.Watch" guid="59c1f7fe-6a84-4396-b89c-1861ad748993" nickname="Watch" x="960.180792875404" y="366.981761574693" isVisible="true" isUpstreamVisible="true" lacing="Disabled" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="6ba73349-8d06-4f1f-ba4f-d3d23f59bba4" nickname="Frame.DisplayLoads" x="538.646223911708" y="-1086.43005598928" isVisible="false" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Structure.Frame.DisplayLoads@DynamoSAP.Assembly.StructuralModel,string,double,bool,double">
+      <PortInfo index="1" default="True" />
+      <PortInfo index="2" default="True" />
+      <PortInfo index="3" default="True" />
+      <PortInfo index="4" default="True" />
+    </Dynamo.Nodes.DSFunction>
+    <Dynamo.Nodes.DoubleSlider type="Dynamo.Nodes.DoubleSlider" guid="5e0d69f3-9feb-4fc6-893f-f4dd1820c406" nickname="Double Slider" x="265.790608519816" y="-980.076782350958" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <System.Double>50</System.Double>
+      <Range min="0" max="100" />
+    </Dynamo.Nodes.DoubleSlider>
   </Elements>
   <Connectors>
     <Dynamo.Models.ConnectorModel start="908a9553-1ee1-459a-a5eb-3c2cfcc1a2f2" start_index="0" end="b24e8e64-0cc1-43a1-a98c-3bfcf4f9099e" end_index="0" portType="0" />
@@ -33,6 +44,7 @@
     <Dynamo.Models.ConnectorModel start="39d253c0-b3fc-4e82-9c74-5e645578bab3" start_index="0" end="982cd2d8-aa2a-473b-9d6b-ed6f11ed29c4" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="f9295c91-41ce-4b94-b21c-af7fa005191c" start_index="0" end="39d253c0-b3fc-4e82-9c74-5e645578bab3" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="7c6666ae-22a4-4f3c-a2c8-d1924d4edd6a" start_index="0" end="39d253c0-b3fc-4e82-9c74-5e645578bab3" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="7c6666ae-22a4-4f3c-a2c8-d1924d4edd6a" start_index="0" end="59c1f7fe-6a84-4396-b89c-1861ad748993" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="51ac3be2-d1af-4e53-8ae5-24f21f9d91ba" start_index="0" end="7c6666ae-22a4-4f3c-a2c8-d1924d4edd6a" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="80e7a42a-1418-471f-b368-551fd3752e8d" start_index="0" end="b0ad963d-3cc8-41d9-a5f0-a433d83966cd" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="c85c0cb5-8d37-44d9-bea8-1cda0b17ec4d" start_index="0" end="80e7a42a-1418-471f-b368-551fd3752e8d" end_index="2" portType="0" />
@@ -41,18 +53,24 @@
     <Dynamo.Models.ConnectorModel start="b24e8e64-0cc1-43a1-a98c-3bfcf4f9099e" start_index="0" end="982cd2d8-aa2a-473b-9d6b-ed6f11ed29c4" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="b24e8e64-0cc1-43a1-a98c-3bfcf4f9099e" start_index="0" end="80e7a42a-1418-471f-b368-551fd3752e8d" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="b24e8e64-0cc1-43a1-a98c-3bfcf4f9099e" start_index="0" end="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="b24e8e64-0cc1-43a1-a98c-3bfcf4f9099e" start_index="0" end="6ba73349-8d06-4f1f-ba4f-d3d23f59bba4" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="b24e8e64-0cc1-43a1-a98c-3bfcf4f9099e" start_index="1" end="7c6666ae-22a4-4f3c-a2c8-d1924d4edd6a" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="b24e8e64-0cc1-43a1-a98c-3bfcf4f9099e" start_index="1" end="f1e08fd8-3431-4ce0-8eaf-8c74804ce9a9" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="ac0b4e05-4fea-4ec5-bae9-fb327f9982f7" start_index="0" end="982cd2d8-aa2a-473b-9d6b-ed6f11ed29c4" end_index="3" portType="0" />
+    <Dynamo.Models.ConnectorModel start="5e0d69f3-9feb-4fc6-893f-f4dd1820c406" start_index="0" end="6ba73349-8d06-4f1f-ba4f-d3d23f59bba4" end_index="4" portType="0" />
   </Connectors>
   <Notes>
-    <Dynamo.Models.NoteModel text="Set boolean to True to run the analysis on SAP" x="-361.081296938153" y="-269.597539426852" />
+    <Dynamo.Models.NoteModel text="Set boolean to True to run the analysis on SAP" x="-361.081296938153" y="-273.360061246616" />
     <Dynamo.Models.NoteModel text="Get the structural elements and definitions in the model" x="-29.0924556379078" y="-276.410766689782" />
-    <Dynamo.Models.NoteModel text="Select a Load Case or Load Pattern to get results and visualize them" x="521.056110976839" y="248.241904468966" />
-    <Dynamo.Models.NoteModel text="Use Structural Model.Decompose to preview the geometry of the structural members" x="615.805625433388" y="-850.003025829361" />
+    <Dynamo.Models.NoteModel text="Select a Load Case or Load Pattern to get results and visualize them" x="557.973654426853" y="186.771294073267" />
+    <Dynamo.Models.NoteModel text="Use Structural Model.Decompose to preview the geometry of the structural members" x="545.713517628303" y="-852.102798052487" />
     <Dynamo.Models.NoteModel text="Visualize the results" x="1347.46741554585" y="-434.944434030079" />
-    <Dynamo.Models.NoteModel text="Get results for a specific load case or load pattern" x="866.891388543442" y="250.087405284007" />
+    <Dynamo.Models.NoteModel text="Get results for a specific load case or load pattern" x="956.250448979011" y="188.706860423434" />
     <Dynamo.Models.NoteModel text="Get the numeric values of the results" x="1314.69687967056" y="87.2383247901506" />
     <Dynamo.Models.NoteModel text="Select which type of force/moment to view" x="934.546553932435" y="-98.0698026379981" />
+    <Dynamo.Models.NoteModel text="Open the sample file supplied 3a_RunAnalysis.sdb in SAP" x="-366.794410788031" y="-338.558341881356" />
+    <Dynamo.Models.NoteModel text="Set the boolean to true to get the results" x="561.514267276028" y="397.083875673457" />
+    <Dynamo.Models.NoteModel text="Set the boolean to true to visualize the results" x="936.985748365691" y="-339.466748230582" />
+    <Dynamo.Models.NoteModel text="Use Frame.Display Loads to visualize the loads in the model. If no Load Pattern is passed, all the loads in the model are visualized" x="533.938622898201" y="-1160.97295850904" />
   </Notes>
 </Workspace>
