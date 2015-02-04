@@ -373,7 +373,7 @@ namespace DynamoSAP.Structure
                                 // Create a temporary point to hold the position of the base of the triangle of the arrow
                                 Point ptOnArrow = ln.PointAtDistance(arrowLenght / 5);
                                 triangleNormal = ln.Normal;
-                                double triangleBase = 0.10 / 1.25;
+                                double triangleBase = arrowLenght / 5;
 
                                 // Translate the point on the arrow to the sides to create the base of the triangle
                                 p3 = (Point)ptOnArrow.Translate(triangleNormal, triangleBase);
