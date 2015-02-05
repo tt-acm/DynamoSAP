@@ -28,7 +28,9 @@ namespace SAPConnection
             if (!update)
             {
                 //1. Create Frame
-                long ret = Model.FrameObj.AddByCoord(iX, iY, iZ, jX, jY, jZ, ref Id);
+                string dummy = string.Empty;
+                long ret = Model.FrameObj.AddByCoord(iX, iY, iZ, jX, jY, jZ, ref dummy);
+                Id = dummy;
             }
             else
             {

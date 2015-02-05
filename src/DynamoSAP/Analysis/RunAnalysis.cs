@@ -126,20 +126,20 @@ namespace DynamoSAP.Analysis
         /// <param name="LCaseOrLPattern">Choose a load case, load pattern or load combination</param>
         /// <param name="Get">Set Boolean to True to get the specified case;s analysis results </param>
         /// <returns></returns>
-        public static Analysis GetResults(string LCaseOrLPattern, bool Get)
+        public static Analysis GetResults(string LPattern_LCase_LCombo, bool Get)
         {
             List<FrameResults> frameResults = null;
             Analysis AnalysisResults = new Analysis();
             if (Get)
             {
-                if (LCaseOrLPattern == "MODAL")
+                if (LPattern_LCase_LCombo == "MODAL")
                 {
                     throw new Exception("MODAL case is not supported. Select another load case");
                 }
                 // loop over frames get results and populate to dictionary
-                frameResults = SAPConnection.AnalysisMapper.GetFrameForces(ref mySapModel, LCaseOrLPattern);
+                frameResults = SAPConnection.AnalysisMapper.GetFrameForces(ref mySapModel, LPattern_LCase_LCombo);
                 AnalysisResults.FrameResults = frameResults;
-                AnalysisResults.LCaseOrLPatternRun = LCaseOrLPattern;
+                AnalysisResults.LCaseOrLPatternRun = LPattern_LCase_LCombo;
             }
             return AnalysisResults;
         }
