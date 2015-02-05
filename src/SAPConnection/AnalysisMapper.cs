@@ -23,7 +23,7 @@ namespace SAPConnection
     [SupressImportIntoVM]
     public class AnalysisMapper
     {
-        public static void RunAnalysis(ref cSapModel mySapModel, string filepath, ref List<string> LoadCaseNames, ref List<string> LoadCasePatterns)
+        public static void RunAnalysis(ref cSapModel mySapModel, string filepath, ref List<string> LoadCaseNames, ref List<string> LoadPatternNames, ref List<string> LoadComboNames)
         {
             bool isLocked = mySapModel.GetModelIsLocked();
 
@@ -35,14 +35,19 @@ namespace SAPConnection
             }
             int lcnumber = 0;
             int lpnumber=0;
+            int lcombonumber=0;
             string[] LCNames = null;
             string [] LPNames=null;
+            string[] LComboNames = null;
 
             ret = mySapModel.LoadCases.GetNameList(ref lcnumber, ref LCNames);
             LoadCaseNames = LCNames.ToList();
+
             ret = mySapModel.LoadPatterns.GetNameList(ref lpnumber, ref LPNames);
-            LoadCaseNames = LCNames.ToList();
-            LoadCasePatterns = LPNames.ToList();
+            LoadPatternNames = LPNames.ToList();
+
+            ret = mySapModel.RespCombo.GetNameList(ref lcombonumber, ref LComboNames);
+            LoadComboNames = LComboNames.ToList();
                 
         }
 

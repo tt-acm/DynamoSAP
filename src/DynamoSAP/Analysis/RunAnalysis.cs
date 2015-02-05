@@ -44,11 +44,12 @@ namespace DynamoSAP.Analysis
         /// <returns name ="Load Cases"> Load Cases in the project</returns>
         /// <returns name ="Load Patterns"> Load Patterns in the project</returns>
         /// <returns name ="Filepath"> Filepath where the SAP2000 model is saved</returns>
-        [MultiReturn("Structural Model", "Load Cases", "Load Patterns", "Filepath")]
+        [MultiReturn("Structural Model", "Load Cases", "Load Patterns", "Load Combos", "Filepath")]
         public static Dictionary<string, object> Run(bool Run)
         {
             List<string> LoadCaseNames = new List<string>();
             List<string> LoadPatternNames = new List<string>();
+            List<string> LoadComboNames = new List<string>();
             StructuralModel Model = new StructuralModel();
             string SaveAs = "";
             if (Run)
@@ -72,7 +73,7 @@ namespace DynamoSAP.Analysis
                 else
                 {
                     // run analysis
-                    SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, SaveAs, ref LoadCaseNames, ref LoadPatternNames);
+                    SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, SaveAs, ref LoadCaseNames, ref LoadPatternNames, ref LoadComboNames);
                 }
             }
             return new Dictionary<string, object>
@@ -80,6 +81,7 @@ namespace DynamoSAP.Analysis
                 {"Structural Model", Model},
                 {"Load Cases", LoadCaseNames},
                 {"Load Patterns", LoadPatternNames},
+                {"Load Combos", LoadComboNames},
                 {"Filepath", SaveAs}
             };
         }
@@ -93,11 +95,12 @@ namespace DynamoSAP.Analysis
         /// <returns name ="Structural Model"> Structural Model that has been analyzed</returns>
         /// <returns name ="Load Cases"> Load Cases in the project</returns>
         /// <returns name ="Load Patterns"> Load Patterns in the project</returns>
-        [MultiReturn("Structural Model", "Load Cases", "Load Patterns")]
+        [MultiReturn("Structural Model", "Load Cases", "Load Patterns", "Load Combos")]
         public static Dictionary<string, object> Run(string FilePath, bool Run)
         {
             List<string> LoadCaseNames = new List<string>();
             List<string> LoadPatternNames = new List<string>();
+            List<string> LoadComboNames = new List<string>();
             StructuralModel Model = new StructuralModel();
             if (Run)
             {
@@ -106,13 +109,14 @@ namespace DynamoSAP.Analysis
                 SAPConnection.Initialize.OpenSAPModel(FilePath, ref mySapModel, ref units);
                 Read.StructuralModelFromSapFile(ref mySapModel, ref Model, units);
                 // run analysis
-                SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, FilePath, ref LoadCaseNames, ref LoadPatternNames);
+                SAPConnection.AnalysisMapper.RunAnalysis(ref mySapModel, FilePath, ref LoadCaseNames, ref LoadPatternNames, ref LoadComboNames);
             }
             return new Dictionary<string, object>
             {
                 {"Structural Model", Model},
                 {"Load Cases", LoadCaseNames},
-                {"Load Patterns", LoadPatternNames}
+                {"Load Patterns", LoadPatternNames},
+                {"Load Combos", LoadComboNames}
             };
         }
 
