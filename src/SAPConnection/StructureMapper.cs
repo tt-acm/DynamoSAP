@@ -533,7 +533,7 @@ namespace SAPConnection
                 Model.PointObj.GetConnectivity(pt, ref Num, ref Otype, ref OName, ref refNum);
                 if (Num == 0)
                 { // delete if not connected
-                    Model.PointObj.DeleteSpecialPoint(pt);
+                    int ret = Model.PointObj.DeleteSpecialPoint(pt);
                 }
             }
 

@@ -579,11 +579,11 @@ namespace DynamoSAP.Assembly
 
             }
 
-            // Delete unconnected points at the SAP
-            SAPConnection.StructureMapper.DeleteUnconnectedPts(ref mySapModel);
-
             // refresh View 
             SAPConnection.StructureMapper.RefreshView(ref mySapModel);
+
+            // Delete unconnected points at the SAP
+            SAPConnection.StructureMapper.DeleteUnconnectedPts(ref mySapModel);
 
             //if can't set to null, will be a hanging process
             mySapModel = null;
