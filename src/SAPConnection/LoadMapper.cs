@@ -48,7 +48,7 @@ namespace SAPConnection
             }
             else if (LCType == eLoadCaseType.CASE_MODAL.ToString())
             {
-                throw new Exception("Load Case Type not supported");
+                //throw new Exception("Load Case Type not supported");
 
                 //this needs more inputs
                 //if SubType==1 (Eigen)
