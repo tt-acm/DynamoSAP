@@ -49,21 +49,28 @@ namespace DynamoSAP.Assembly
         /// <returns></returns>
         public static StructuralModel ToSAP(StructuralModel StructuralModel, bool Bake, string Units = "kip_ft_F", bool Delete = true)
         {
-            // 1. Calculate Lenght Conversion Factor
-            string fromUnit = "m"; // Dynamo API Units
-            LengthUnit LU = DynamoUnits.Length.LengthUnit; // Display Units 
-
-            double LengthSF = SAPConnection.Utilities.UnitConversion(Units, fromUnit); // Lenght Conversion Factor
-
-            // Clear Frame & Area Dictionaries to hold 
-            SAPFrmList.Clear();
-            SAPAreaList.Clear();
-            SAPJointList.Clear();
-
-            // 2. Create new SAP Model and bake Stuctural Model 
-            if (StructuralModel != null)
+            if (Bake)
             {
-                if (Bake) CreateorUpdateSAPModel(ref StructuralModel, Units, LengthSF, Delete);
+                // 1. Calculate Lenght Conversion Factor
+                string fromUnit = "m"; // Dynamo API Units
+                LengthUnit LU = DynamoUnits.Length.LengthUnit; // Display Units 
+
+                double LengthSF = SAPConnection.Utilities.UnitConversion(Units, fromUnit); // Lenght Conversion Factor
+
+                // Clear Frame & Area Dictionaries to hold 
+                SAPFrmList.Clear();
+                SAPAreaList.Clear();
+                SAPJointList.Clear();
+
+                // 2. Create new SAP Model and bake Stuctural Model 
+                if (StructuralModel != null)
+                {
+                    CreateorUpdateSAPModel(ref StructuralModel, Units, LengthSF, Delete);
+                }
+            }
+            else
+            {
+                throw new Exception("Node not run. Please, set boolean to true");
             }
             return StructuralModel;
         }
