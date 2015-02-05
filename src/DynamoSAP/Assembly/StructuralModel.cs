@@ -188,9 +188,7 @@ namespace DynamoSAP.Assembly
         /// Collects Structural Elements, Load Patterns, Load Cases and Restraints into a Structural Model
         /// </summary>
         /// <param name="StructuralElements">Structural elements in the project. Please, input as a flat list</param>
-        /// <param name="LoadPatterns">Load Patterns in the project. Please, input as a flat list</param>
-        /// <param name="LoadCases">Load Cases in the project. Please, input as a flat list</param>
-        /// <returns>Structural Model consisting of all the elements provided</returns>
+        /// <param name="Definitions">Definitions in the project. Please, input as a flat list</param>
         public static StructuralModel Collector(List<Element> StructuralElements, List<Definition> Definitions)
         {
             CheckDuplicates(StructuralElements);
