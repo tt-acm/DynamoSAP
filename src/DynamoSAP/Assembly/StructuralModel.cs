@@ -82,8 +82,91 @@ namespace DynamoSAP.Assembly
                 {
                     errorMessage += duplicates[i] + " ";
                 }
-                // pass  this to  error log
+                // pass  this to  the error log
                 throw new Exception(errorMessage);
+            }
+
+        }
+        /// <summary>
+        /// Check that the definitions supplied are not duplicated
+        /// </summary>
+        /// <param name="definitions"></param>
+        private static void CheckDuplicateDefinitions(List<Definition> definitions)
+        {
+            int errorcounter = 0;
+            List<string> duplicates = new List<string>();
+            List<string> loadPatterns = new List<string>();
+            List<string> loadCases = new List<string>();
+            List<string> loadCombos = new List<string>();
+            List<string> Groups = new List<string>();
+
+            foreach (Definition d in definitions)
+            {
+                if (d.Type == Definitions.Type.LoadPattern)
+                {
+                    LoadPattern lp = (LoadPattern)d;
+                    if (!loadPatterns.Contains(lp.name))
+                    {
+                        loadPatterns.Add(lp.name);
+                    }
+                    else
+                    {
+                        errorcounter++;
+                        duplicates.Add("Load Pattern: " + lp.name);
+                    }
+                }
+                else if (d.Type == Definitions.Type.LoadCase)
+                {
+                    LoadCase lc = (LoadCase)d;
+                    if (!loadCases.Contains(lc.name))
+                    {
+                        loadCases.Add(lc.name);
+                    }
+                    else
+                    {
+                        errorcounter++;
+                        duplicates.Add("Load Case: " + lc.name);
+                    }
+                }
+                else if (d.Type == Definitions.Type.LoadCombo)
+                {
+                    LoadCombo lc = (LoadCombo)d;
+                    if (!loadCombos.Contains(lc.name))
+                    {
+                        loadCombos.Add(lc.name);
+                    }
+                    else
+                    {
+                        errorcounter++;
+                        duplicates.Add("Load Combo: " + lc.name);
+                    }
+                }
+
+                else if (d.Type == Definitions.Type.Group)
+                {
+                    Group g=(Group)d;
+                    if (!Groups.Contains(g.Name))
+                    {
+                        Groups.Add(g.Name);
+                    }
+                    else
+                    {
+                        errorcounter++;
+                        duplicates.Add("Group: " + g.Name);
+                    }
+                }
+
+                if (errorcounter > 0)
+                {
+                    string errorMessage = "One or more definitions have been added twice: ";
+                    for (int i = 0; i < duplicates.Count; i++)
+                    {
+                        errorMessage += duplicates[i] + " ";
+                    }
+                    // pass  this to the error log
+                    throw new Exception(errorMessage);
+                }
+
             }
 
         }
@@ -111,6 +194,7 @@ namespace DynamoSAP.Assembly
         public static StructuralModel Collector(List<Element> StructuralElements, List<Definition> Definitions)
         {
             CheckDuplicates(StructuralElements);
+            CheckDuplicateDefinitions(Definitions);
             return new StructuralModel(StructuralElements,Definitions);
         }
 
