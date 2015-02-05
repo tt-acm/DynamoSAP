@@ -1,9 +1,8 @@
-<Workspace Version="0.7.5.3566" X="-1380.29907882544" Y="331.491103360143" zoom="0.623144908471526" Description="" Category="" Name="Home">
+<Workspace Version="0.7.5.3566" X="383.515840222983" Y="549.192376753135" zoom="0.196055307167585" Description="" Category="" Name="Home">
   <Elements>
     <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="908a9553-1ee1-459a-a5eb-3c2cfcc1a2f2" nickname="Boolean" x="-354.544771965561" y="-201.237228606407" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Boolean>True</System.Boolean>
     </DSCoreNodesUI.BoolSelector>
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="b24e8e64-0cc1-43a1-a98c-3bfcf4f9099e" nickname="Analysis.Run" x="-24.8783825352078" y="-198.834648866039" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Analysis.Analysis.Run@bool" />
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" nickname="StructuralModel.Decompose" x="374.797169528218" y="-195.397316659304" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Decompose@DynamoSAP.Assembly.StructuralModel" />
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="d2198351-a284-48e9-b3e8-fdf72ae5edf9" nickname="Group.Define" x="1741.93931247549" y="-277.244213979503" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Definitions.Group.Define@string,DynamoSAP.Structure.Element[]" />
     <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="0292fe7e-0e62-4d1e-849b-0a1c6c26d618" nickname="Code Block" x="1495.92315435533" y="-287.925855356557" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;Beams&quot;;" ShouldFocus="false" />
@@ -48,13 +47,13 @@ OUT = geo</Script>
     </Dynamo.Nodes.DSFunction>
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="ce8db005-3ce6-4f00-b9cc-949e8c794fca" nickname="StructuralModel.Decompose" x="4078.77459056166" y="-186.13411638519" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Decompose@DynamoSAP.Assembly.StructuralModel" />
     <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="31b5980d-b395-4abb-858d-b782038357f4" nickname="Group.Decompose" x="4432.53342978935" y="-37.7427342950381" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Definitions.Group.Decompose@DynamoSAP.Definitions.Group" />
-    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="f0680966-7f59-4ffb-b33b-d1264355913e" nickname="Boolean" x="3224.52831617103" y="-30.8927604843038" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="f0680966-7f59-4ffb-b33b-d1264355913e" nickname="Boolean" x="3230.82942588063" y="-54.836977380794" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Boolean>False</System.Boolean>
     </DSCoreNodesUI.BoolSelector>
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="9ecccb8e-dd70-416f-b4ff-1c1304609ae9" nickname="Read.SAPModel" x="-26.8511384452174" y="-191.903671053552" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Assembly.Read.SAPModel@bool" />
   </Elements>
   <Connectors>
-    <Dynamo.Models.ConnectorModel start="908a9553-1ee1-459a-a5eb-3c2cfcc1a2f2" start_index="0" end="b24e8e64-0cc1-43a1-a98c-3bfcf4f9099e" end_index="0" portType="0" />
-    <Dynamo.Models.ConnectorModel start="b24e8e64-0cc1-43a1-a98c-3bfcf4f9099e" start_index="0" end="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="908a9553-1ee1-459a-a5eb-3c2cfcc1a2f2" start_index="0" end="9ecccb8e-dd70-416f-b4ff-1c1304609ae9" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" start_index="0" end="978f91a4-2dc8-43d7-9819-e3c9972308c3" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" start_index="0" end="fb17d302-6896-44a5-8819-8fd5eea19c8e" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" start_index="0" end="0e475cee-012c-4795-855f-4935cf4984c9" end_index="0" portType="0" />
@@ -77,6 +76,8 @@ OUT = geo</Script>
     <Dynamo.Models.ConnectorModel start="3dcfd474-e3cc-4d77-9c7f-932a8a074784" start_index="0" end="ce8db005-3ce6-4f00-b9cc-949e8c794fca" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="ce8db005-3ce6-4f00-b9cc-949e8c794fca" start_index="6" end="31b5980d-b395-4abb-858d-b782038357f4" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="f0680966-7f59-4ffb-b33b-d1264355913e" start_index="0" end="3dcfd474-e3cc-4d77-9c7f-932a8a074784" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="9ecccb8e-dd70-416f-b4ff-1c1304609ae9" start_index="0" end="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="9ecccb8e-dd70-416f-b4ff-1c1304609ae9" start_index="1" end="3dcfd474-e3cc-4d77-9c7f-932a8a074784" end_index="2" portType="0" />
   </Connectors>
   <Notes>
     <Dynamo.Models.NoteModel text="Set boolean to True to run the analysis on SAP" x="-361.081296938153" y="-273.360061246616" />
@@ -93,6 +94,6 @@ OUT = geo</Script>
     <Dynamo.Models.NoteModel text="Collect the structural members and the definitions" x="3221.18957702996" y="-296.686338190086" />
     <Dynamo.Models.NoteModel text="Bake to SAP" x="3650.17013898166" y="-308.031563741128" />
     <Dynamo.Models.NoteModel text="Check how your groups were sucessfully updated in the SAP model" x="4073.18018178078" y="-308.928380775157" />
-    <Dynamo.Models.NoteModel text="Set the boolean to true to update your model in SAP" x="3221.25117169493" y="-79.7945855066812" />
+    <Dynamo.Models.NoteModel text="Set the boolean to true to update your model in SAP" x="3647.20618806407" y="-251.184769607874" />
   </Notes>
 </Workspace>
