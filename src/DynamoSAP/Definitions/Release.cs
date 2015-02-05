@@ -63,6 +63,29 @@ namespace DynamoSAP.Definitions
             return new Release(iP, jP, iV2, jV2, iV3, jV3, iT, jT, iM2, jM2, iM3, jM3);
         }
 
+        /// <summary>
+        /// Fixed Release
+        /// </summary>
+        /// <returns></returns>
+        public static Release Fixed()
+        {
+            return new Release(false, false, false, false, false, false, false, false, false, false, false, false);
+        }
+
+        /// <summary>
+        /// Pinned Release
+        /// </summary>
+        /// <returns></returns>
+        public static Release Pinned()
+        {
+            return new Release(false, false, false, false, false, false, true, true, true, true, true, true);
+        }
+
+        public static Release BendingMoment()
+        {
+            return new Release(false, false, false, false, false, false, false, false, false, false, true, true);
+        }
+
 
         /// <summary>
         /// Decompose a Release
