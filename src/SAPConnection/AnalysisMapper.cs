@@ -34,10 +34,10 @@ namespace SAPConnection
                 ret = mySapModel.Analyze.RunAnalysis();
             }
             int lcnumber = 0;
-            int lpnumber=0;
-            int lcombonumber=0;
+            int lpnumber = 0;
+            int lcombonumber = 0;
             string[] LCNames = null;
-            string [] LPNames=null;
+            string[] LPNames = null;
             string[] LComboNames = null;
 
             ret = mySapModel.LoadCases.GetNameList(ref lcnumber, ref LCNames);
@@ -48,10 +48,10 @@ namespace SAPConnection
 
             ret = mySapModel.RespCombo.GetNameList(ref lcombonumber, ref LComboNames);
             LoadComboNames = LComboNames.ToList();
-                
+
         }
 
-        public static List<FrameResults> GetFrameForces(ref cSapModel mySapModel, string lcase)
+        public static List<FrameResults> GetFrameForces(ref cSapModel mySapModel, string patter_case_combo)
         {
             List<FrameResults> fresults = new List<FrameResults>();
 
@@ -87,57 +87,66 @@ namespace SAPConnection
 
                 ret = mySapModel.Results.Setup.DeselectAllCasesAndCombosForOutput();
 
-                //set case and combo output selections
-                ret = mySapModel.Results.Setup.SetCaseSelectedForOutput(lcase);
+                int ComboType = -1;
+                ret = mySapModel.RespCombo.GetType(patter_case_combo, ref ComboType); // 0 = Linear Additive 1 = Envelope 2 = Absolute Additive 3 = SRSS 4 = Range Additive
+
+                if (ret != 0)//if it is not a load combo
+                {
+                    //set case 
+                    ret = mySapModel.Results.Setup.SetCaseSelectedForOutput(patter_case_combo);
+                }
+
+                else
+                {
+                    //set combo 
+                    ret = mySapModel.Results.Setup.SetComboSelectedForOutput(patter_case_combo);
+                }
 
                 //get frame forces for frame objects      
                 ret = mySapModel.Results.FrameForce(frameid, eItemTypeElm.ObjectElm, ref NumberResults, ref Obj, ref ObjSta, ref Elm, ref ElmSta, ref LoadCase, ref StepType, StepNum, ref P, ref V2, ref V3, ref T, ref M2, ref M3);
 
-                int ComboType = -1;
-
-                //THIS RET IS NOT WORKING
-                ret = mySapModel.RespCombo.GetType(lcase, ref ComboType); // 0 = Linear Additive 1 = Envelope 2 = Absolute Additive 3 = SRSS 4 = Range Additive
 
                 int index = 0;
                 int endindex = 0;
-                
-                if (ComboType == 1)
+                if (ret == 0)
                 {
-                    index = Array.IndexOf(StepType, "Max");
-                    endindex = Array.LastIndexOf(StepType, "Max");
-
-                }
-                else if (ComboType == 3)
-                {
-                    //"The Selected Load Combination type is SRSS. The result won't be written to DB";
-                    break;
-                }
-                else // if there are no Load Combinations (ComboType=-1 set up in the model (ret ==1, the function was not successful)
-                    // or for Combotype 0, 2 and 4
-                {
-                    if (NumberResults != 0)
+                    if (ComboType == 1)
                     {
-                        index = Array.IndexOf(LoadCase, lcase);
-                        endindex = Array.LastIndexOf(LoadCase, lcase);
+                        index = Array.IndexOf(StepType, "Max");
+                        endindex = Array.LastIndexOf(StepType, "Max");
+
+                    }
+
+                    else if (ComboType == 3)
+                    {
+                        //"The Selected Load Combination type is SRSS";
+                        break;
                     }
                 }
 
                 if (NumberResults != 0)
                 {
-                    double previoust=0;
+                    index = Array.IndexOf(LoadCase, patter_case_combo);
+                    endindex = Array.LastIndexOf(LoadCase, patter_case_combo);
+                }
+
+
+                if (NumberResults != 0)
+                {
+                    double previoust = 0;
                     for (int j = index; j <= endindex; j++)
-                   
                     {
                         FrameAnalysisData myForces = new FrameAnalysisData(P[j], V2[j], V3[j], T[j], M2[j], M3[j]);
                         double t = ObjSta[j] / ObjSta[endindex];
-                        if(t ==previoust){
-                            t=-t;
+                        if (t == previoust)
+                        {
+                            t = -t;
                         }
                         myFrameStationResults.Add(t, myForces); // instead of j, this should be a parameter t?
-                        previoust=t;
+                        previoust = t;
                     }
                 }
-                FrameAnalysis.Add(lcase, myFrameStationResults);
+                FrameAnalysis.Add(patter_case_combo, myFrameStationResults);
 
                 FrameResults myFrameResults = new FrameResults(frameid, FrameAnalysis);
                 fresults.Add(myFrameResults);
