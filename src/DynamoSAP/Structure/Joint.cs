@@ -66,9 +66,8 @@ namespace DynamoSAP.Structure
             else
             {
                 tJoint = TracedJointManager.GetJointbyID(tJointId.IntID);
-
+                string test = tJoint.Label;
                 tJoint.BasePt = Point;
-
             }
 
             //Set the trace data on the return to be this Joint

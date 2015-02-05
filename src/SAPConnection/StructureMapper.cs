@@ -63,7 +63,9 @@ namespace SAPConnection
                 }
 
                 string[] names = ProfilePts.ToArray();
-                long reti = Model.AreaObj.AddByPoint(ProfilePts.Count(), ref names, ref Id);
+                string dummyarea = string.Empty;
+                long reti = Model.AreaObj.AddByPoint(ProfilePts.Count(), ref names, ref dummyarea);
+                Id = dummyarea;
             }
             else
             {
@@ -138,7 +140,7 @@ namespace SAPConnection
                 SurfPoints.Add(crv.StartPoint);
             }
 
-            if (!update)
+            if (!update) // Create new
             {
                 List<string> ProfilePts = new List<string>();
                 foreach (var v in SurfPoints)
@@ -149,7 +151,9 @@ namespace SAPConnection
                 }
 
                 string[] names = ProfilePts.ToArray();
-                long reti = Model.AreaObj.AddByPoint(ProfilePts.Count(), ref names, ref Id);
+                string dummyarea = string.Empty;
+                long reti = Model.AreaObj.AddByPoint(ProfilePts.Count(), ref names, ref dummyarea);
+                Id = dummyarea;
             }
             else
             {  // TODO: Update Shell
@@ -222,7 +226,7 @@ namespace SAPConnection
             {
                 string dummy = string.Empty;
                 long ret = Model.PointObj.AddCartesian(pt.X * SF, pt.Y * SF, pt.Z * SF, ref dummy);
-
+                Id = dummy;
             }
             else
             {
