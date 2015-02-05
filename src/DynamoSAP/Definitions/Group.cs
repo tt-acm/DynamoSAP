@@ -14,7 +14,7 @@ using Autodesk.DesignScript.Runtime;
 
 namespace DynamoSAP.Definitions
 {
-    public class Group:Definition
+    public class Group : Definition
     {
         //FIELDS
         [SupressImportIntoVMAttribute]
@@ -32,6 +32,55 @@ namespace DynamoSAP.Definitions
         public static Group Define(string Name, List<Element> Elements)
         {
             return new Group(Name, Elements);
+        }
+
+        /// <summary>
+        /// Add an element to an existing group
+        /// </summary>
+        /// <param name="Group">Group to add an element to</param>
+        /// <param name="Element">Element to add</param>
+        /// <returns></returns>
+        public static Group AddElement(Group Group, Element Element)
+        {
+            Group newGroup = new Group();
+            newGroup.Name = Group.Name;
+            List<Element> newGroupElements = Group.GroupElements;
+            //check that the element doesn't already exist in the group
+            if (!Group.GroupElements.Contains(Element))
+            {
+                newGroupElements.Add(Element);
+            }
+            else
+            {
+                throw new Exception("This element already exists in the group");
+            }
+
+            newGroup.GroupElements = newGroupElements;
+            return newGroup;
+        }
+
+        /// <summary>
+        /// Remove an element from a group
+        /// </summary>
+        /// <param name="Group">Group to remove element from</param>
+        /// <param name="Element">Element to remove</param>
+        /// <returns></returns>
+        public static Group RemoveElement(Group Group, Element Element)
+        {
+            Group newGroup = new Group();
+            newGroup.Name = Group.Name;
+            List<Element> newGroupElements = Group.GroupElements;
+
+            if (!Group.GroupElements.Contains(Element))
+            {
+                throw new Exception("This element is not in the group");
+            }
+            else
+            {
+                newGroupElements.Remove(Element);
+            }
+            newGroup.GroupElements = newGroupElements;
+            return newGroup;
         }
 
         /// <summary>
@@ -74,7 +123,7 @@ namespace DynamoSAP.Definitions
 
         //PRIVATE CONSTRUCTOR
         internal Group() { this.Type = Definitions.Type.Group; }
-        internal Group(string name, List<Element>elements)
+        internal Group(string name, List<Element> elements)
         {
             Name = name;
             GroupElements = elements;
