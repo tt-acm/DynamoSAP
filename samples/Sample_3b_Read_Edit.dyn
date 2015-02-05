@@ -1,0 +1,98 @@
+<Workspace Version="0.7.5.3566" X="-1380.29907882544" Y="331.491103360143" zoom="0.623144908471526" Description="" Category="" Name="Home">
+  <Elements>
+    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="908a9553-1ee1-459a-a5eb-3c2cfcc1a2f2" nickname="Boolean" x="-354.544771965561" y="-201.237228606407" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <System.Boolean>True</System.Boolean>
+    </DSCoreNodesUI.BoolSelector>
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="b24e8e64-0cc1-43a1-a98c-3bfcf4f9099e" nickname="Analysis.Run" x="-24.8783825352078" y="-198.834648866039" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Analysis.Analysis.Run@bool" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" nickname="StructuralModel.Decompose" x="374.797169528218" y="-195.397316659304" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Decompose@DynamoSAP.Assembly.StructuralModel" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="d2198351-a284-48e9-b3e8-fdf72ae5edf9" nickname="Group.Define" x="1741.93931247549" y="-277.244213979503" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Definitions.Group.Define@string,DynamoSAP.Structure.Element[]" />
+    <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="0292fe7e-0e62-4d1e-849b-0a1c6c26d618" nickname="Code Block" x="1495.92315435533" y="-287.925855356557" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;Beams&quot;;" ShouldFocus="false" />
+    <DSIronPythonNode.PythonNode type="DSIronPythonNode.PythonNode" guid="fb17d302-6896-44a5-8819-8fd5eea19c8e" nickname="Python Script" x="1220.79418647858" y="-187.461890973229" isVisible="true" isUpstreamVisible="true" lacing="Disabled" inputcount="2">
+      <Script>import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+
+#The inputs to this node will be stored as a list in the IN variable.
+dataEnteringNode = IN
+
+curves=IN[0]
+frames=IN[1]
+beams=[]
+columns=[]
+geo=[]
+
+for i in range(0,len(frames)):
+	if(curves[i].EndPoint.Z==curves[i].StartPoint.Z):
+		beams.append(frames[i])
+	else:
+		columns.append(frames[i])
+		
+geo.append(beams)
+geo.append(columns)
+#Assign your output to the OUT variable
+OUT = geo</Script>
+    </DSIronPythonNode.PythonNode>
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="978f91a4-2dc8-43d7-9819-e3c9972308c3" nickname="Frame.Decompose" x="852.747326279199" y="-182.854061508366" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Structure.Frame.Decompose@DynamoSAP.Structure.Frame" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="e47008fc-9f4f-44f9-a6e5-7167a1907d13" nickname="Group.Decompose" x="2139.06003457922" y="-600.224274441987" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Definitions.Group.Decompose@DynamoSAP.Definitions.Group" />
+    <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="ceacb23b-4496-4f54-8266-622d94f2c57b" nickname="Code Block" x="1492.75161622207" y="-185.510116217595" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="x[0];" ShouldFocus="false" />
+    <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="33f6125f-0523-4c47-9f94-964f409e82f6" nickname="Code Block" x="1497.85465368069" y="76.5649901727232" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="x[1];" ShouldFocus="false" />
+    <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="bf878834-9d1b-4821-a0b0-9e3855513557" nickname="Code Block" x="1490.10639571435" y="-19.0258764039914" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;Columns&quot;;" ShouldFocus="false" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="62f8e83e-fb7c-419f-bdff-906474a4f00a" nickname="Group.Decompose" x="2140.01879573717" y="186.862610010385" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Definitions.Group.Decompose@DynamoSAP.Definitions.Group" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="f41a3a58-49e9-4eee-94af-40fb8658a8cc" nickname="Group.Define" x="1754.90211782995" y="19.0872868935966" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Definitions.Group.Define@string,DynamoSAP.Structure.Element[]" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="0e475cee-012c-4795-855f-4935cf4984c9" nickname="StructuralModel.Collector" x="3224.98343634661" y="-232.194807653791" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Collector@DynamoSAP.Structure.Element[],DynamoSAP.Definitions.Definition[]" />
+    <DSCoreNodesUI.CreateList type="DSCoreNodesUI.CreateList" guid="5047cf02-ced1-4a3e-8bfe-573130130600" nickname="List.Create" x="2776.66338912473" y="-167.639737856702" isVisible="true" isUpstreamVisible="true" lacing="Disabled" inputcount="4" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="b300ab25-1a7d-455a-87cf-b67c8c3e4be9" nickname="Flatten" x="2990.33170126502" y="-171.446657615468" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="" function="Flatten@var[]..[]" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="3dcfd474-e3cc-4d77-9c7f-932a8a074784" nickname="Bake.ToSAP" x="3657.44635958928" y="-184.732042058838" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Assembly.Bake.ToSAP@DynamoSAP.Assembly.StructuralModel,bool,string,bool">
+      <PortInfo index="2" default="True" />
+      <PortInfo index="3" default="True" />
+    </Dynamo.Nodes.DSFunction>
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="ce8db005-3ce6-4f00-b9cc-949e8c794fca" nickname="StructuralModel.Decompose" x="4078.77459056166" y="-186.13411638519" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Decompose@DynamoSAP.Assembly.StructuralModel" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="31b5980d-b395-4abb-858d-b782038357f4" nickname="Group.Decompose" x="4432.53342978935" y="-37.7427342950381" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Definitions.Group.Decompose@DynamoSAP.Definitions.Group" />
+    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="f0680966-7f59-4ffb-b33b-d1264355913e" nickname="Boolean" x="3224.52831617103" y="-30.8927604843038" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <System.Boolean>False</System.Boolean>
+    </DSCoreNodesUI.BoolSelector>
+  </Elements>
+  <Connectors>
+    <Dynamo.Models.ConnectorModel start="908a9553-1ee1-459a-a5eb-3c2cfcc1a2f2" start_index="0" end="b24e8e64-0cc1-43a1-a98c-3bfcf4f9099e" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="b24e8e64-0cc1-43a1-a98c-3bfcf4f9099e" start_index="0" end="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" start_index="0" end="978f91a4-2dc8-43d7-9819-e3c9972308c3" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" start_index="0" end="fb17d302-6896-44a5-8819-8fd5eea19c8e" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" start_index="0" end="0e475cee-012c-4795-855f-4935cf4984c9" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" start_index="3" end="5047cf02-ced1-4a3e-8bfe-573130130600" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="79d1b8d0-0bb8-498b-b40b-cc5de1b168b7" start_index="4" end="5047cf02-ced1-4a3e-8bfe-573130130600" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="d2198351-a284-48e9-b3e8-fdf72ae5edf9" start_index="0" end="e47008fc-9f4f-44f9-a6e5-7167a1907d13" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="d2198351-a284-48e9-b3e8-fdf72ae5edf9" start_index="0" end="5047cf02-ced1-4a3e-8bfe-573130130600" end_index="2" portType="0" />
+    <Dynamo.Models.ConnectorModel start="0292fe7e-0e62-4d1e-849b-0a1c6c26d618" start_index="0" end="d2198351-a284-48e9-b3e8-fdf72ae5edf9" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="fb17d302-6896-44a5-8819-8fd5eea19c8e" start_index="0" end="ceacb23b-4496-4f54-8266-622d94f2c57b" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="fb17d302-6896-44a5-8819-8fd5eea19c8e" start_index="0" end="33f6125f-0523-4c47-9f94-964f409e82f6" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="978f91a4-2dc8-43d7-9819-e3c9972308c3" start_index="0" end="fb17d302-6896-44a5-8819-8fd5eea19c8e" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="ceacb23b-4496-4f54-8266-622d94f2c57b" start_index="0" end="d2198351-a284-48e9-b3e8-fdf72ae5edf9" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="33f6125f-0523-4c47-9f94-964f409e82f6" start_index="0" end="f41a3a58-49e9-4eee-94af-40fb8658a8cc" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="bf878834-9d1b-4821-a0b0-9e3855513557" start_index="0" end="f41a3a58-49e9-4eee-94af-40fb8658a8cc" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="f41a3a58-49e9-4eee-94af-40fb8658a8cc" start_index="0" end="5047cf02-ced1-4a3e-8bfe-573130130600" end_index="3" portType="0" />
+    <Dynamo.Models.ConnectorModel start="f41a3a58-49e9-4eee-94af-40fb8658a8cc" start_index="0" end="62f8e83e-fb7c-419f-bdff-906474a4f00a" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="0e475cee-012c-4795-855f-4935cf4984c9" start_index="0" end="3dcfd474-e3cc-4d77-9c7f-932a8a074784" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="5047cf02-ced1-4a3e-8bfe-573130130600" start_index="0" end="b300ab25-1a7d-455a-87cf-b67c8c3e4be9" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="b300ab25-1a7d-455a-87cf-b67c8c3e4be9" start_index="0" end="0e475cee-012c-4795-855f-4935cf4984c9" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="3dcfd474-e3cc-4d77-9c7f-932a8a074784" start_index="0" end="ce8db005-3ce6-4f00-b9cc-949e8c794fca" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="ce8db005-3ce6-4f00-b9cc-949e8c794fca" start_index="6" end="31b5980d-b395-4abb-858d-b782038357f4" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="f0680966-7f59-4ffb-b33b-d1264355913e" start_index="0" end="3dcfd474-e3cc-4d77-9c7f-932a8a074784" end_index="1" portType="0" />
+  </Connectors>
+  <Notes>
+    <Dynamo.Models.NoteModel text="Set boolean to True to run the analysis on SAP" x="-361.081296938153" y="-273.360061246616" />
+    <Dynamo.Models.NoteModel text="Get the structural elements and definitions in the model" x="-29.0924556379078" y="-276.410766689782" />
+    <Dynamo.Models.NoteModel text="Use Structural Model.Decompose to preview the geometry of the structural members" x="372.321937983649" y="-281.106389222678" />
+    <Dynamo.Models.NoteModel text="Open the sample file supplied 3a_RunAnalysis.sdb in SAP" x="-692.331095434484" y="-275.038988779609" />
+    <Dynamo.Models.NoteModel text="Decompose the frames to get their base curves" x="846.354639926996" y="-277.223854412402" />
+    <Dynamo.Models.NoteModel text="Get the columns and the beams in the project" x="1210.00332719761" y="-277.679133416605" />
+    <Dynamo.Models.NoteModel text="Define the beams group" x="1741.38530230269" y="-335.409193632578" />
+    <Dynamo.Models.NoteModel text="Define the columns group" x="1757.29424650185" y="-29.0352875737325" />
+    <Dynamo.Models.NoteModel text="Decompose the group to get an overview of your group" x="2134.10112301082" y="120.712667520439" />
+    <Dynamo.Models.NoteModel text="Decompose the group to get an overview of your group" x="2140.44344352722" y="-661.676002140885" />
+    <Dynamo.Models.NoteModel text="Gather the existing and the new definitions (the new groups in this case)" x="2768.32693846794" y="-297.282150944202" />
+    <Dynamo.Models.NoteModel text="Collect the structural members and the definitions" x="3221.18957702996" y="-296.686338190086" />
+    <Dynamo.Models.NoteModel text="Bake to SAP" x="3650.17013898166" y="-308.031563741128" />
+    <Dynamo.Models.NoteModel text="Check how your groups were sucessfully updated in the SAP model" x="4073.18018178078" y="-308.928380775157" />
+    <Dynamo.Models.NoteModel text="Set the boolean to true to update your model in SAP" x="3221.25117169493" y="-79.7945855066812" />
+  </Notes>
+</Workspace>
