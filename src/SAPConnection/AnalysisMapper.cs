@@ -41,13 +41,13 @@ namespace SAPConnection
             string[] LComboNames = null;
 
             ret = mySapModel.LoadCases.GetNameList(ref lcnumber, ref LCNames);
-            LoadCaseNames = LCNames.ToList();
+            if(LCNames!=null) LoadCaseNames = LCNames.ToList();
 
             ret = mySapModel.LoadPatterns.GetNameList(ref lpnumber, ref LPNames);
-            LoadPatternNames = LPNames.ToList();
+            if (LPNames != null) LoadPatternNames = LPNames.ToList();
 
             ret = mySapModel.RespCombo.GetNameList(ref lcombonumber, ref LComboNames);
-            LoadComboNames = LComboNames.ToList();
+            if(LComboNames!=null) LoadComboNames = LComboNames.ToList();
 
         }
 

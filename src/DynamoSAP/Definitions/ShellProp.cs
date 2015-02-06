@@ -42,7 +42,8 @@ namespace DynamoSAP.Definitions
         /// <returns></returns>
         public static ShellProp Define(string Name, string ShellType = "Shell_thin", bool DOF = true, string MatProp = "4000Psi", double MatAngle= 0, double Thickness = 0, double Bending = 0)
         {
-            return new ShellProp(Name, ShellType, DOF, MatProp, MatAngle, Thickness, Bending);
+            string mat = SAPConnection.MaterialMapper.DynamoToSap(MatProp);
+            return new ShellProp(Name, ShellType, DOF, mat, MatAngle, Thickness, Bending);
         }
 
         /// <summary>

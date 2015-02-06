@@ -477,7 +477,7 @@ namespace DynamoSAP.Assembly
                     }
                     catch (Exception) { }
 
-                    if (el == null) // not in Dynamo Structure so delete from SAP Model
+                    if (el == null && sapJoint.StartsWith("dyn")) // not in Dynamo Structure so delete from SAP Model
                     {
                         SAPConnection.StructureMapper.DeleteJoint(ref mySapModel, sapJoint, ref error);
                         if (error != string.Empty)
