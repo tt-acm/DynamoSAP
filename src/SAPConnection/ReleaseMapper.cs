@@ -27,19 +27,9 @@ namespace SAPConnection
             double[] StartPFixityValues = new double[6];
             double[] EndPFixityVValues = new double[6];
 
-            //for (int i = 0; i < 6; i++)
-            //{
-            //    if (ireleases[i] == true)
-            //    {
-            //        StartValue[i] = 10;
-            //    }
-            //    if (jreleases[i] == true)
-            //    {
-            //        EndValue[i] = 10;
-            //    }
-            //}
-
-            int ret = Model.FrameObj.SetReleases(name, ireleases, jreleases, StartPFixityValues, EndPFixityVValues);
+            
+            int ret = Model.FrameObj.SetReleases(name, ireleases, jreleases, StartPFixityValues, EndPFixityVValues,eItemType.Object);
+            
 
         }
 
