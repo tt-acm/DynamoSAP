@@ -417,15 +417,7 @@ namespace DynamoSAP.Assembly
             //2. Create or Update Frames (Sets Releases)
             // 2.a. Harvest the elements from SAP Model
             SAPConnection.StructureMapper.GetSAPFrameList(ref mySapModel, ref SAPFrmList); // frms
-            if (error != string.Empty)
-            {
-                report.Add(error);
-                error = string.Empty;
-            }
-
             SAPConnection.StructureMapper.GetSAPAreaList(ref mySapModel, ref SAPAreaList); // areas
-            
-
             SAPConnection.StructureMapper.GetSAPJointList(ref mySapModel, ref SAPJointList); // joints
             
             // 2a. DELETE 
