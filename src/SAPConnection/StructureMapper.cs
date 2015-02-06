@@ -23,7 +23,7 @@ namespace SAPConnection
     public class StructureMapper
     {
         // Draw Frame Object return ID
-        public static void CreateorUpdateFrm(ref cSapModel Model, double iX, double iY, double iZ, double jX, double jY, double jZ, ref string Id, bool update)
+        public static void CreateorUpdateFrm(ref cSapModel Model, double iX, double iY, double iZ, double jX, double jY, double jZ, ref string Id, bool update, ref string error)
         {
             if (!update)
             {
@@ -31,6 +31,7 @@ namespace SAPConnection
                 string dummy = string.Empty;
                 long ret = Model.FrameObj.AddByCoord(iX, iY, iZ, jX, jY, jZ, ref dummy);
                 Id = dummy;
+                if (ret == 1) error = string.Format("Error creating frame{0}", dummy);
             }
             else
             {
@@ -44,28 +45,36 @@ namespace SAPConnection
                 long ret = Model.PointObj.AddCartesian(iX, iY, iZ, ref startPoint);
                 ret = Model.PointObj.AddCartesian(jX, jY, jZ, ref endPoint);
                 ret = Model.EditFrame.ChangeConnectivity(Id, startPoint, endPoint);
+                
+                if (ret == 1) error = string.Format("Error updating frame{0}", Id);
 
             }
 
         }
 
-        public static void CreateorUpdateArea(ref cSapModel Model, Mesh m, ref string Id, bool update, double SF)
+        public static void CreateorUpdateArea(ref cSapModel Model, Mesh m, ref string Id, bool update, double SF, ref string error)
         {
-
+            int counter = 0;
             if (!update) // Create new one
             {
                 List<string> ProfilePts = new List<string>();
+                
+                long ret = 0;
                 foreach (var v in m.VertexPositions)
                 {
                     string dummy = null;
-                    long ret = Model.PointObj.AddCartesian(v.X * SF, v.Y * SF, v.Z * SF, ref dummy);
+                    ret = Model.PointObj.AddCartesian(v.X * SF, v.Y * SF, v.Z * SF, ref dummy);
+                    
                     ProfilePts.Add(dummy);
                 }
+                
 
                 string[] names = ProfilePts.ToArray();
                 string dummyarea = string.Empty;
-                long reti = Model.AreaObj.AddByPoint(ProfilePts.Count(), ref names, ref dummyarea);
+                ret = Model.AreaObj.AddByPoint(ProfilePts.Count(), ref names, ref dummyarea);
+                if (ret == 1) counter++;
                 Id = dummyarea;
+                
             }
             else
             {
@@ -74,13 +83,14 @@ namespace SAPConnection
                 int eNumberofPts = 0;
                 string[] ePtNames = null;
                 long ret = Model.AreaObj.GetPoints(Id, ref eNumberofPts, ref ePtNames);
-
+                
                 // Compare the number of points
                 if (eNumberofPts == m.VertexPositions.Count())
                 {
                     for (int i = 0; i < eNumberofPts; i++)
                     {
-                        long reto = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X * SF, m.VertexPositions[i].Y * SF, m.VertexPositions[i].Z * SF);
+                        ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X * SF, m.VertexPositions[i].Y * SF, m.VertexPositions[i].Z * SF);
+                        if (ret == 1) counter++;
                     }
                 }
                 else if (eNumberofPts > m.VertexPositions.Count()) // remove Points
@@ -90,6 +100,7 @@ namespace SAPConnection
                         if (i < m.VertexPositions.Count())
                         {
                             ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X * SF, m.VertexPositions[i].Y * SF, m.VertexPositions[i].Z * SF);
+                            if (ret == 1) counter++;
                         }
                         else
                         {
@@ -97,6 +108,7 @@ namespace SAPConnection
                             ret = Model.AreaObj.SetSelected(Id, true);
                             ret = Model.PointObj.SetSelected(ePtNames[i], true);
                             ret = Model.EditArea.PointRemove();
+                            if (ret == 1) counter++;
                         }
                     }
                 }
@@ -107,6 +119,7 @@ namespace SAPConnection
                         if (i < eNumberofPts)
                         {
                             ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], m.VertexPositions[i].X * SF, m.VertexPositions[i].Y * SF, m.VertexPositions[i].Z * SF);
+                            if (ret == 1) counter++;
                         }
                         else
                         {
@@ -121,20 +134,23 @@ namespace SAPConnection
                             int tempnumb = 0;
                             string[] TempPtNames = null;
                             ret = Model.AreaObj.GetPoints(Id, ref tempnumb, ref TempPtNames);
-
-
                             ret = Model.EditPoint.ChangeCoordinates_1(TempPtNames[i], m.VertexPositions[i].X * SF, m.VertexPositions[i].Y * SF, m.VertexPositions[i].Z * SF);
+                            if (ret == 1) counter++;
                         }
                     }
 
                 }
 
             }
+
+            if (counter > 0) error = string.Format("Error creating Mesh{0}", Id);
         }
-        public static void CreateorUpdateArea(ref cSapModel Model, Surface s, ref string Id, bool update, double SF)
+        public static void CreateorUpdateArea(ref cSapModel Model, Surface s, ref string Id, bool update, double SF, ref string error)
         {
             Curve[] PerimeterCrvs = s.PerimeterCurves();
             List<Point> SurfPoints = new List<Point>();
+            long ret = 0;
+            int counter = 0;
             foreach (var crv in PerimeterCrvs)
             {
                 SurfPoints.Add(crv.StartPoint);
@@ -146,29 +162,32 @@ namespace SAPConnection
                 foreach (var v in SurfPoints)
                 {
                     string dummy = null;
-                    long ret = Model.PointObj.AddCartesian(v.X * SF, v.Y * SF, v.Z * SF, ref dummy);
+                    ret = Model.PointObj.AddCartesian(v.X * SF, v.Y * SF, v.Z * SF, ref dummy);
                     ProfilePts.Add(dummy);
                 }
 
                 string[] names = ProfilePts.ToArray();
                 string dummyarea = string.Empty;
-                long reti = Model.AreaObj.AddByPoint(ProfilePts.Count(), ref names, ref dummyarea);
+                ret = Model.AreaObj.AddByPoint(ProfilePts.Count(), ref names, ref dummyarea);
+                if (ret == 1) counter++;
                 Id = dummyarea;
             }
             else
             {  // TODO: Update Shell
 
+               
                 // Existing
                 int eNumberofPts = 0;
                 string[] ePtNames = null;
-                long ret = Model.AreaObj.GetPoints(Id, ref eNumberofPts, ref ePtNames);
+                ret = Model.AreaObj.GetPoints(Id, ref eNumberofPts, ref ePtNames);
 
                 // Compare the number of points
                 if (eNumberofPts == SurfPoints.Count())
                 {
                     for (int i = 0; i < eNumberofPts; i++)
                     {
-                        long reto = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], SurfPoints[i].X * SF, SurfPoints[i].Y * SF, SurfPoints[i].Z * SF);
+                        ret = Model.EditPoint.ChangeCoordinates_1(ePtNames[i], SurfPoints[i].X * SF, SurfPoints[i].Y * SF, SurfPoints[i].Z * SF);
+                        if (ret == 1) counter++;
                     }
                 }
                 else if (eNumberofPts > SurfPoints.Count()) // remove Points
@@ -187,6 +206,7 @@ namespace SAPConnection
                             ret = Model.EditArea.PointRemove();
                         }
                     }
+                    if (ret == 1) counter++;
                 }
                 else if (eNumberofPts < SurfPoints.Count()) // add points
                 {
@@ -214,10 +234,12 @@ namespace SAPConnection
                             ret = Model.EditPoint.ChangeCoordinates_1(TempPtNames[i], SurfPoints[i].X * SF, SurfPoints[i].Y * SF, SurfPoints[i].Z * SF);
                         }
                     }
+                    if (ret == 1) counter++;
 
                 }
 
             }
+            if (counter > 0) error = string.Format("Error creating Mesh{0}", Id);
         }
 
         public static void CreateorUpdateJoint(ref cSapModel Model, Point pt, ref string Id, bool update, double SF)
@@ -253,12 +275,12 @@ namespace SAPConnection
         }
 
         //Check if Section exists
-        public static bool IsSectionExistsFrm(ref cSapModel mySapModel, string DSection)
+        public static bool IsSectionExistsFrm(ref cSapModel mySapModel, string DSection, ref string error)
         {
             int number = 0;
             string[] SectionNames = null;
             long ret = mySapModel.PropFrame.GetNameList(ref number, ref SectionNames);
-
+            if (ret == 1) error = "Error getting the  section property names";
             if (SectionNames.Contains(DSection))
             {
                 return true;
@@ -266,25 +288,29 @@ namespace SAPConnection
             return false;
         }
 
-        public static void ImportPropFrm(ref cSapModel mySapModel, string SectionName, string MatProp, string SecCatalog)
+        public static void ImportPropFrm(ref cSapModel mySapModel, string SectionName, string MatProp, string SecCatalog, ref string error)
         {
             long ret = mySapModel.PropFrame.ImportProp(SectionName, MatProp, SecCatalog, SectionName);
+            if (ret == 1) error = string.Format("Error importing the section property {0}",SectionName);
         }
 
-        public static void SetSectionFrm(ref cSapModel mySapModel, string Name, string SectionProfile)
+        public static void SetSectionFrm(ref cSapModel mySapModel, string Name, string SectionProfile, ref string error)
         {
             long ret = mySapModel.FrameObj.SetSection(Name, SectionProfile);
+            if (ret == 1) error = string.Format("Error setting section {0}",Name);
         }
 
         // Area  prop
-        public static void SetPropArea(ref cSapModel Model, string PropName, string ShellType, bool DOF, string MatProp, double MatAngle, double Thickness, double Bending)
+        public static void SetPropArea(ref cSapModel Model, string PropName, string ShellType, bool DOF, string MatProp, double MatAngle, double Thickness, double Bending, ref string error)
         {
             int type = (int)((ShellType)Enum.Parse(typeof(ShellType), ShellType));
             long ret = Model.PropArea.SetShell_1(PropName, type, DOF, MatProp, MatAngle, Thickness, Bending);
+            if (ret == 1) error = string.Format("Error setting the area property {0}", PropName);
         }
-        public static void SetShellPropArea(ref cSapModel Model, string AreaId, string PropName)
+        public static void SetShellPropArea(ref cSapModel Model, string AreaId, string PropName, ref string error)
         {
             long ret = Model.AreaObj.SetProperty(AreaId, PropName);
+            if (ret == 1) error = string.Format("Error setting the area property of shell {0}", AreaId);
         }
 
         // READ FROM SAPMODEL
@@ -496,9 +522,10 @@ namespace SAPConnection
         /// </summary>
         /// <param name="Model"></param>
         /// <param name="Label"></param>
-        public static void DeleteArea(ref cSapModel Model, string Label)
+        public static void DeleteArea(ref cSapModel Model, string Label, ref string error)
         {
             long ret = Model.AreaObj.Delete(Label);
+            if (ret == 1) error = string.Format("Error deleting shell {0}", Label);
         }
 
         /// <summary>
@@ -506,12 +533,13 @@ namespace SAPConnection
         /// </summary>
         /// <param name="Model"></param>
         /// <param name="Label"></param>
-        public static void DeleteJoint(ref cSapModel Model, string Label)
+        public static void DeleteJoint(ref cSapModel Model, string Label, ref string error)
         {
             long ret = Model.PointObj.DeleteSpecialPoint(Label);
+            if (ret == 1) error = string.Format("Error deleting joint {0}", Label);
         }
 
-        public static void GetSAPAreaList(ref cSapModel Model, ref List<string> myAreaList)
+        public static void GetSAPAreaList(ref cSapModel Model, ref List<string> myAreaList,ref string error)
         {
             string[] IDs = null;
             int NumbOfAreas = 0;
@@ -519,6 +547,16 @@ namespace SAPConnection
             if (IDs != null)
             {
                 myAreaList = IDs.ToList();
+            }
+
+            if (ret == 1)
+            {
+                string myIds = string.Empty;
+                foreach (string s in myAreaList)
+                {
+                    myIds += s + ", ";
+                }
+                error = string.Format("Error deleting joints {0}", myIds);
             }
         }
 

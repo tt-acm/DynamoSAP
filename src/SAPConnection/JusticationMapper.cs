@@ -20,7 +20,7 @@ namespace SAPConnection
     [SupressImportIntoVM]
     public class JustificationMapper
     {
-        public static bool DynamoToSAPFrm(ref cSapModel Model, string Label , string Just)
+        public static bool DynamoToSAPFrm(ref cSapModel Model, string Label , string Just, ref string error)
         {
             //int cardinalPoint = 0; // use Just
             double[] offset1 = new double[3];
@@ -80,13 +80,14 @@ namespace SAPConnection
             }
 
             int ret = Model.FrameObj.SetInsertionPoint(Label, justification, false, true, ref offset1, ref offset2);
-
+            if (ret == 1) error = string.Format("Error setting the justification of frame {0}", Label);
             return true;
         }
 
-        public static void SetRotationFrm(ref cSapModel Model, string Label, double Angle)
+        public static void SetRotationFrm(ref cSapModel Model, string Label, double Angle, ref string error)
         {
             int  ret = Model.FrameObj.SetLocalAxes(Label, Angle);
+            if (ret == 1) error = string.Format("Error setting the rotation of frame {0}", Label);
         }
 
         public static string SapToDynamoFrm(ref cSapModel Model, string frmId)
