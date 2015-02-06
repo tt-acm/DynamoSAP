@@ -105,9 +105,10 @@ namespace DynamoSAP.Structure
         /// <returns></returns>
         public static Shell FromSurface(Surface Surface, ShellProp ShellProp)
         {
+            // TODO: IsPlanar logic should be added here! HANDLETHE ERROR.
             Shell tShell;
             ShellID tShellid = DSNodeServices.TraceUtils.GetTraceData(TRACE_ID) as ShellID;
-
+           
             if (tShellid == null)
             {
                 // trace cache log didnoy return an objec, create new one !

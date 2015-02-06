@@ -363,7 +363,7 @@ namespace DynamoSAP.Assembly
             // 2a. DELETE 
             if (delete)
             {
-                //Frms from SAP not in Structural elements
+                //Delete Frms from SAP not in Structural elements
                 foreach (var sapfrm in SAPFrmList)
                 {
                     Element el = null;
@@ -382,7 +382,7 @@ namespace DynamoSAP.Assembly
 
                 }
 
-                // Areas from SAP not in Structural elements
+                // Delete Areas from SAP not in Structural elements
                 foreach (var sapArea in SAPAreaList)
                 {
                     //Element el = null;
@@ -400,7 +400,7 @@ namespace DynamoSAP.Assembly
                     //}
                 }
 
-                //Frms from SAP not in Structural elements
+                // Delete Joints from SAP not in Structural elements
                 foreach (var sapJoint in SAPJointList)
                 {
                     Element el = null;
