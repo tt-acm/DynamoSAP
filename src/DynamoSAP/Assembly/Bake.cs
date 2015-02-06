@@ -100,7 +100,7 @@ namespace DynamoSAP.Assembly
                     ref dummy, false);
 
                 // Set custom Label to Frame in dynamo & Frame! User can match by using Label & ID
-                bool renamed = SAPConnection.StructureMapper.ChangeNameSAPFrm(ref mySapModel, dummy, String.Format("dyn_{0}", f.ID.ToString()));
+                bool renamed = SAPConnection.StructureMapper.ChangeNameSAPFrm(ref mySapModel, dummy, f.Label);
                 if (!renamed)
                 {
                     f.Label = dummy;
