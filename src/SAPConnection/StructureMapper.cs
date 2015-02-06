@@ -539,7 +539,7 @@ namespace SAPConnection
             if (ret == 1) error = string.Format("Error deleting joint {0}", Label);
         }
 
-        public static void GetSAPAreaList(ref cSapModel Model, ref List<string> myAreaList,ref string error)
+        public static void GetSAPAreaList(ref cSapModel Model, ref List<string> myAreaList)
         {
             string[] IDs = null;
             int NumbOfAreas = 0;
@@ -549,15 +549,6 @@ namespace SAPConnection
                 myAreaList = IDs.ToList();
             }
 
-            if (ret == 1)
-            {
-                string myIds = string.Empty;
-                foreach (string s in myAreaList)
-                {
-                    myIds += s + ", ";
-                }
-                error = string.Format("Error deleting joints {0}", myIds);
-            }
         }
 
         public static void GetSAPJointList(ref cSapModel Model, ref List<string> myJointList)

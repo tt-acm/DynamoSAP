@@ -129,7 +129,7 @@ namespace DynamoSAP.Assembly
                     f.BaseCrv.EndPoint.Z * SF,
                     ref id, true, ref error);
             }
-            if (error != null || error != string.Empty)
+            if (error != string.Empty)
             {
                 report.Add(error);
                 error = string.Empty;
@@ -137,7 +137,7 @@ namespace DynamoSAP.Assembly
 
             // 3. Get or Define Section Profile
             bool exists = SAPConnection.StructureMapper.IsSectionExistsFrm(ref mySapModel, f.SecProp.SectName, ref error);
-            if (error != null || error != string.Empty)
+            if (error != string.Empty)
             {
                 report.Add(error);
                 error = string.Empty;
@@ -148,7 +148,7 @@ namespace DynamoSAP.Assembly
                 string MatProp = SAPConnection.MaterialMapper.DynamoToSap(f.SecProp.MatProp);
                 //Import new section property
                 SAPConnection.StructureMapper.ImportPropFrm(ref mySapModel, f.SecProp.SectName, MatProp, f.SecProp.SectCatalog, ref error);
-                if (error != null || error != string.Empty)
+                if (error != string.Empty)
                 {
                     report.Add(error);
                     error = string.Empty;
@@ -156,7 +156,7 @@ namespace DynamoSAP.Assembly
             }
             //Assign section profile toFrame
             SAPConnection.StructureMapper.SetSectionFrm(ref mySapModel, f.Label, f.SecProp.SectName, ref error);
-            if (error != null || error != string.Empty)
+            if (error != string.Empty)
             {
                 report.Add(error);
                 error = string.Empty;
@@ -164,7 +164,7 @@ namespace DynamoSAP.Assembly
 
             // 3. Set Justification TODO: Vertical & Lateral Justification
             SAPConnection.JustificationMapper.DynamoToSAPFrm(ref mySapModel, f.Label, f.Just, ref error); // TO DO: lateral and vertical justificaton
-            if (error != null || error != string.Empty)
+            if (error != string.Empty)
             {
                 report.Add(error);
                 error = string.Empty;
@@ -172,7 +172,7 @@ namespace DynamoSAP.Assembly
 
             // 4. Set Rotation
             SAPConnection.JustificationMapper.SetRotationFrm(ref mySapModel, f.Label, f.Angle, ref error);
-            if (error != null || error != string.Empty)
+            if (error != string.Empty)
             {
                 report.Add(error);
                 error = string.Empty;
@@ -196,7 +196,7 @@ namespace DynamoSAP.Assembly
             string error = string.Empty;
             SAPConnection.ReleaseMapper.Set(ref mySapModel, frm.Label, iireleases, jjreleases, ref error);
 
-            if (error != null || error != string.Empty) report.Add(error);
+            if (error != string.Empty) report.Add(error);
         }
 
         // Set Loads to a frame
@@ -227,7 +227,7 @@ namespace DynamoSAP.Assembly
                 if (s.BaseMesh != null)
                 {
                     SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseMesh, ref dummy, false, SF, ref error);
-                    if (error != null || error != string.Empty)
+                    if (error != string.Empty)
                     {
                         report.Add(error);
                         error = string.Empty;
@@ -236,7 +236,7 @@ namespace DynamoSAP.Assembly
                 else
                 {
                     SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseSurface, ref dummy, false, SF, ref error);
-                    if (error != null || error != string.Empty)
+                    if (error != string.Empty)
                     {
                         report.Add(error);
                         error = string.Empty;
@@ -256,7 +256,7 @@ namespace DynamoSAP.Assembly
                 if (s.BaseMesh != null)
                 {
                     SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseMesh, ref id, true, SF, ref error);
-                    if (error != null || error != string.Empty)
+                    if (error != string.Empty)
                     {
                         report.Add(error);
                         error = string.Empty;
@@ -265,7 +265,7 @@ namespace DynamoSAP.Assembly
                 else
                 {
                     SAPConnection.StructureMapper.CreateorUpdateArea(ref mySapModel, s.BaseSurface, ref id, true, SF, ref error);
-                    if (error != null || error != string.Empty)
+                    if (error != string.Empty)
                     {
                         report.Add(error);
                         error = string.Empty;
@@ -283,14 +283,14 @@ namespace DynamoSAP.Assembly
                 s.shellProp.Thickness * SF,
                 s.shellProp.Bending,
                 ref error);
-            if (error != null || error != string.Empty)
+            if (error != string.Empty)
             {
                 report.Add(error);
                 error = string.Empty;
             }
 
             SAPConnection.StructureMapper.SetShellPropArea(ref mySapModel, s.Label, s.shellProp.PropName, ref error);
-            if (error != null || error != string.Empty) report.Add(error);
+            if (error != string.Empty) report.Add(error);
 
         }
 
@@ -417,25 +417,17 @@ namespace DynamoSAP.Assembly
             //2. Create or Update Frames (Sets Releases)
             // 2.a. Harvest the elements from SAP Model
             SAPConnection.StructureMapper.GetSAPFrameList(ref mySapModel, ref SAPFrmList); // frms
-            if (error != null || error != string.Empty)
+            if (error != string.Empty)
             {
                 report.Add(error);
                 error = string.Empty;
             }
 
-            SAPConnection.StructureMapper.GetSAPAreaList(ref mySapModel, ref SAPAreaList, ref error); // areas
-            if (error != null || error != string.Empty)
-            {
-                report.Add(error);
-                error = string.Empty;
-            }
+            SAPConnection.StructureMapper.GetSAPAreaList(ref mySapModel, ref SAPAreaList); // areas
+            
 
             SAPConnection.StructureMapper.GetSAPJointList(ref mySapModel, ref SAPJointList); // joints
-            if (error != null || error != string.Empty)
-            {
-                report.Add(error);
-                error = string.Empty;
-            }
+            
             // 2a. DELETE 
             if (delete)
             {
@@ -473,7 +465,7 @@ namespace DynamoSAP.Assembly
                     //if (el == null)
                     //{
                     SAPConnection.StructureMapper.DeleteArea(ref mySapModel, sapArea, ref error);
-                    if (error != null || error != string.Empty)
+                    if (error != string.Empty)
                     {
                         report.Add(error);
                         error = string.Empty;
@@ -496,7 +488,7 @@ namespace DynamoSAP.Assembly
                     if (el == null) // not in Dynamo Structure so delete from SAP Model
                     {
                         SAPConnection.StructureMapper.DeleteJoint(ref mySapModel, sapJoint, ref error);
-                        if (error != null || error != string.Empty)
+                        if (error != string.Empty)
                         {
                             report.Add(error);
                             error = string.Empty;

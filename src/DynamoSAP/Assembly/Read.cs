@@ -101,8 +101,8 @@ namespace DynamoSAP.Assembly
             model.ModelDefinitions = new List<Definition>();
 
             List<LoadPattern> TempLPatterns = new List<LoadPattern>();
-           
 
+            string error = string.Empty; 
             if (SapModel != null)
             {
 
@@ -359,6 +359,7 @@ namespace DynamoSAP.Assembly
                 // 2.b Get Shells from SAP Model
                 List<string> AreaIds = new List<string>();
                 SAPConnection.StructureMapper.GetSAPAreaList(ref SapModel, ref AreaIds);
+                
                 for (int i = 0; i < AreaIds.Count; i++)
                 {
                     Surface S = null;
