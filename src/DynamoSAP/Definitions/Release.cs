@@ -38,6 +38,7 @@ namespace DynamoSAP.Definitions
         internal bool r3i;
         internal bool r3j;
 
+
         //QUERY NODES
 
 
@@ -64,28 +65,56 @@ namespace DynamoSAP.Definitions
         }
 
         /// <summary>
-        /// Fixed Release
+        /// Pinned Release Conditions
         /// </summary>
         /// <returns></returns>
-        public static Release Fixed()
+        public static bool[] PinnedPoint()
         {
-            return new Release(false, false, false, false, false, false, false, false, false, false, false, false);
+            bool[] pinned = new bool[6];
+            for (int i = 0; i < 3; i++)
+            {
+                pinned[i] = false;
+            }
+            for (int i = 3; i < 6; i++)
+            {
+                pinned[i] = true;
+            }
+            return pinned;
         }
+        /// <summary>
+        /// Bending Release Conditions
+        /// </summary>
+        /// <returns></returns>
+        public static bool[] BendingPoint()
+        {
+            bool[] bending = new bool[6];
+            for (int i = 0; i < 5; i++)
+            {
+                bending[i] = false;
+            }
+            for (int i = 5; i < 6; i++)
+            {
+                bending[i] = true;
+            }
+            return bending;
+        }
+
+        public static bool[] Fixed()
+        {
+            return new bool[6];
+        }
+
 
         /// <summary>
-        /// Pinned Release
+        /// Set the release condition of the end points of a frame
         /// </summary>
+        /// <param name="StartPointRelease">Use PinnedPoint or BendingPoint nodes</param>
+        /// <param name="EndPointRelease">Use PinnedPoint or BendingPoint nodes</param>
         /// <returns></returns>
-        public static Release Pinned()
+        public static Release SetEndPoints(bool[] StartPointRelease, bool[] EndPointRelease)
         {
-            return new Release(false, false, false, false, false, false, true, true, true, true, true, true);
+            return new Release(StartPointRelease[0], EndPointRelease[0], StartPointRelease[1], EndPointRelease[1], StartPointRelease[2], EndPointRelease[2], StartPointRelease[3], EndPointRelease[3], StartPointRelease[4], EndPointRelease[4], StartPointRelease[5], EndPointRelease[5]);
         }
-
-        public static Release BendingMoment()
-        {
-            return new Release(false, false, false, false, false, false, false, false, false, false, true, true);
-        }
-
 
         /// <summary>
         /// Decompose a Release
