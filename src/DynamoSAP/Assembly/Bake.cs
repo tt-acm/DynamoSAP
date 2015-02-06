@@ -36,6 +36,7 @@ namespace DynamoSAP.Assembly
         private static List<string> SAPAreaList = new List<string>();
         private static List<string> SAPJointList = new List<string>();
         private static List<string> SAPGroupList = new List<string>();
+        private static List<string> report = new List<string>();
 
         //// DYNAMO NODES ////
 
@@ -47,7 +48,8 @@ namespace DynamoSAP.Assembly
         /// <param name="Units"></param>
         /// <param name="Delete"> Set false to update partial SAP Model! </param>
         /// <returns></returns>
-        public static StructuralModel ToSAP(StructuralModel StructuralModel, bool Bake, string Units = "kip_ft_F", bool Delete = true)
+        [MultiReturn("Structural Model","Report")]
+        public static Dictionary<string,object> ToSAP(StructuralModel StructuralModel, bool Bake, string Units = "kip_ft_F", bool Delete = true)
         {
             if (Bake)
             {
@@ -61,6 +63,7 @@ namespace DynamoSAP.Assembly
                 SAPFrmList.Clear();
                 SAPAreaList.Clear();
                 SAPJointList.Clear();
+                report.Clear();
 
                 // 2. Create new SAP Model and bake Stuctural Model 
                 if (StructuralModel != null)
@@ -72,7 +75,13 @@ namespace DynamoSAP.Assembly
             {
                 throw new Exception("Node not run. Please, set boolean to true");
             }
-            return StructuralModel;
+            //return StructuralModel;
+
+            return new Dictionary<string, object>
+            {
+                {"Structural Model", StructuralModel},
+                {"Report", report}
+            };
         }
 
         // Private Constructor
@@ -153,8 +162,10 @@ namespace DynamoSAP.Assembly
 
             bool[] iireleases = ireleases.ToArray();
             bool[] jjreleases = jreleases.ToArray();
+            string error = string.Empty;
+            SAPConnection.ReleaseMapper.Set(ref mySapModel, frm.Label, iireleases, jjreleases, ref error);
 
-            SAPConnection.ReleaseMapper.Set(ref mySapModel, frm.Label, iireleases, jjreleases);
+            if(error!=null || error!=string.Empty) report.Add(error);
         }
 
         // Set Loads to a frame
