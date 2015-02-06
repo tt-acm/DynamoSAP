@@ -359,7 +359,7 @@ namespace DynamoSAP.Assembly
                     try
                     {
                         el = (from f in StructuralModel.StructuralElements
-                              where f.Label == sapfrm
+                              where f.Label == sapfrm && f.Type == Structure.Type.Frame
                               select f).First();
                     }
                     catch (Exception) { }
@@ -389,7 +389,27 @@ namespace DynamoSAP.Assembly
                     //}
                 }
 
+                //Frms from SAP not in Structural elements
+                foreach (var sapJoint in SAPJointList)
+                {
+                    Element el = null;
+                    try
+                    {
+                        el = (from f in StructuralModel.StructuralElements
+                              where f.Label == sapJoint && f.Type == Structure.Type.Joint
+                              select f).First();
+                    }
+                    catch (Exception) { }
+
+                    if (el == null) // not in Dynamo Structure so delete from SAP Model
+                    {
+                        SAPConnection.StructureMapper.DeleteJoint(ref mySapModel, sapJoint);
+                    }
+
+                }
+
             }
+
 
             //2. CREATE OR UPDATE SIMULTENOUSLY
             //2.b. Create or Update 

@@ -501,6 +501,16 @@ namespace SAPConnection
             long ret = Model.AreaObj.Delete(Label);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Model"></param>
+        /// <param name="Label"></param>
+        public static void DeleteJoint(ref cSapModel Model, string Label)
+        {
+            long ret = Model.PointObj.DeleteSpecialPoint(Label);
+        }
+
         public static void GetSAPAreaList(ref cSapModel Model, ref List<string> myAreaList)
         {
             string[] IDs = null;
