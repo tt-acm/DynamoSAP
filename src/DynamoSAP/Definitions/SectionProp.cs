@@ -85,7 +85,7 @@ namespace DynamoSAP.Definitions
         internal SectionProp(string _name, string _matprop , string _seccatalog)
         {
             SectName = _name;
-            SectCatalog = _seccatalog;
+            SectCatalog = _seccatalog + ".PRO";
             MatProp = _matprop;
         }
 

@@ -290,6 +290,7 @@ namespace SAPConnection
 
         public static void ImportPropFrm(ref cSapModel mySapModel, string SectionName, string MatProp, string SecCatalog, ref string error)
         {
+
             long ret = mySapModel.PropFrame.ImportProp(SectionName, MatProp, SecCatalog, SectionName);
             if (ret == 1) error = string.Format("Error importing the section property {0}",SectionName);
         }

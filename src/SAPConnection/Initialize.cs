@@ -36,7 +36,7 @@ namespace SAPConnection
             eUnits Units = (eUnits)Enum.Parse(typeof(eUnits), units);
 
             //Start Application
-            mySAPObject.ApplicationStart(Units, true); 
+            mySAPObject.ApplicationStart(Units, true);
 
             //Create SapModel object
             mySapModel = mySAPObject.SapModel;
@@ -91,6 +91,9 @@ namespace SAPConnection
                     mySapModel = Obj.SapModel;
                     units = mySapModel.GetPresentUnits().ToString();
                 }
+
+                //SET UP ... SET UP ... SET UP ... SET UP
+                DefineMaterials(ref mySapModel);
             }
 
         }
