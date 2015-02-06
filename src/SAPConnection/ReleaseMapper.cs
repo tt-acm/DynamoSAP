@@ -20,7 +20,7 @@ namespace SAPConnection
     [SupressImportIntoVM]
     public class ReleaseMapper
     {
-        public static void Set(ref cSapModel Model, string name, bool[] ireleases, bool[] jreleases)
+        public static void Set(ref cSapModel Model, string name, bool[] ireleases, bool[] jreleases, ref string error)
         {
             //not sure how this works or if this approach even makes sense...
             
@@ -29,7 +29,8 @@ namespace SAPConnection
 
             
             int ret = Model.FrameObj.SetReleases(name, ireleases, jreleases, StartPFixityValues, EndPFixityVValues,eItemType.Object);
-            
+
+            if (ret == 1) error=string.Format("Error setting the release for frame {0}. Try changing the conditions",name);
 
         }
 
