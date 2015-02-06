@@ -207,20 +207,22 @@ namespace DynamoSAP.Assembly
             List<Element> Frms = new List<Element>();
             List<Element> Shells = new List<Element>();
             List<Element> Joints = new List<Element>();
-
-            foreach (var el in structuralModel.StructuralElements)
+            if (structuralModel.StructuralElements.Count > 0)
             {
-                if (el.Type == Structure.Type.Frame)
+                foreach (var el in structuralModel.StructuralElements)
                 {
-                    Frms.Add(el);
-                }
-                else if (el.Type == Structure.Type.Shell)
-                {
-                    Shells.Add(el);
-                }
-                else if (el.Type == Structure.Type.Joint)
-                {
-                    Joints.Add(el);
+                    if (el.Type == Structure.Type.Frame)
+                    {
+                        Frms.Add(el);
+                    }
+                    else if (el.Type == Structure.Type.Shell)
+                    {
+                        Shells.Add(el);
+                    }
+                    else if (el.Type == Structure.Type.Joint)
+                    {
+                        Joints.Add(el);
+                    }
                 }
             }
 
@@ -228,24 +230,26 @@ namespace DynamoSAP.Assembly
             List<Definition> LoadCases= new List<Definition>();
             List<Definition> LoadCombos = new List<Definition>();
             List<Definition> Groups = new List<Definition>();
-
-            foreach (var def in structuralModel.ModelDefinitions)
+            if (structuralModel.ModelDefinitions.Count > 0)
             {
-                if (def.Type == Definitions.Type.LoadCase)
+                foreach (var def in structuralModel.ModelDefinitions)
                 {
-                    LoadCases.Add(def);
-                }
-                else if (def.Type == Definitions.Type.LoadPattern)
-                {
-                    LoadPatterns.Add(def);
-                }
-                else if (def.Type == Definitions.Type.Group)
-                {
-                    Groups.Add(def);
-                }
-                else if (def.Type == Definitions.Type.LoadCombo)
-                {
-                    LoadCombos.Add(def);
+                    if (def.Type == Definitions.Type.LoadCase)
+                    {
+                        LoadCases.Add(def);
+                    }
+                    else if (def.Type == Definitions.Type.LoadPattern)
+                    {
+                        LoadPatterns.Add(def);
+                    }
+                    else if (def.Type == Definitions.Type.Group)
+                    {
+                        Groups.Add(def);
+                    }
+                    else if (def.Type == Definitions.Type.LoadCombo)
+                    {
+                        LoadCombos.Add(def);
+                    }
                 }
             }
 
