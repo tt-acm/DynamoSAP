@@ -207,7 +207,7 @@ namespace DynamoSAP.Assembly
             List<Element> Frms = new List<Element>();
             List<Element> Shells = new List<Element>();
             List<Element> Joints = new List<Element>();
-            if (structuralModel.StructuralElements.Count > 0)
+            if (structuralModel.StructuralElements!=null && structuralModel.StructuralElements.Count > 0)
             {
                 foreach (var el in structuralModel.StructuralElements)
                 {
@@ -230,7 +230,7 @@ namespace DynamoSAP.Assembly
             List<Definition> LoadCases= new List<Definition>();
             List<Definition> LoadCombos = new List<Definition>();
             List<Definition> Groups = new List<Definition>();
-            if (structuralModel.ModelDefinitions.Count > 0)
+            if (structuralModel.ModelDefinitions!=null && structuralModel.ModelDefinitions.Count > 0)
             {
                 foreach (var def in structuralModel.ModelDefinitions)
                 {
