@@ -52,7 +52,7 @@ namespace SAPConnection
         public static void CreateorUpdateArea(ref cSapModel Model, Mesh m, ref string Id, bool update, double SF)
         {
 
-            if (!update)
+            if (!update) // Create new one
             {
                 List<string> ProfilePts = new List<string>();
                 foreach (var v in m.VertexPositions)
