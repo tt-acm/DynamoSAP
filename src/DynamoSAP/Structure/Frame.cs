@@ -245,6 +245,36 @@ namespace DynamoSAP.Structure
                 }
             }
 
+            double max = -10000000.0;
+            double min = 10000000.0;
+
+            // Loop through all the elements in the structural model
+            // get the max and minimum values of distributed loads on the frame
+            foreach (Element e in StructuralModel.StructuralElements)
+            {
+                // If the object is a frame
+                if (e.GetType().ToString().Contains("Frame"))
+                {
+                    Frame f = e as Frame;
+                    if (f.Loads != null && f.Loads.Count > 0)
+                    {
+                        foreach (Load load in f.Loads)
+                        {
+                            if (load.LoadType == "DistributedLoad")
+                            {
+                                if (load.Val > max) max = load.Val;
+                                if (load.Val < min) min = load.Val;
+                                if (load.Val2 > max) max = load.Val2;
+                                if (load.Val2 < min) min = load.Val2;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            double refval = Math.Abs(max);
+            if (Math.Abs(max) < Math.Abs(min)) refval = Math.Abs(min);
 
             // Loop through all the elements in the structural model
             foreach (Element e in StructuralModel.StructuralElements)
@@ -260,24 +290,24 @@ namespace DynamoSAP.Structure
                     if (f.Loads != null && f.Loads.Count > 0)
                     {
 
-                        // get the max and minimum values of distributed loads on the frame
-                        double max = -10000000.0;
-                        double min = 10000000.0;
+                        //// get the max and minimum values of distributed loads on the frame
+                        //double max = -10000000.0;
+                        //double min = 10000000.0;
 
-                        foreach (Load load in f.Loads)
-                        {
-                            if (load.LoadType == "DistributedLoad")
-                            {
-                                if (load.Val > max) max = load.Val;
-                                if (load.Val < min) min = load.Val;
-                                if (load.Val2 > max) max = load.Val2;
-                                if (load.Val2 < min) min = load.Val2;
-                            }
+                        //foreach (Load load in f.Loads)
+                        //{
+                        //    if (load.LoadType == "DistributedLoad")
+                        //    {
+                        //        if (load.Val > max) max = load.Val;
+                        //        if (load.Val < min) min = load.Val;
+                        //        if (load.Val2 > max) max = load.Val2;
+                        //        if (load.Val2 < min) min = load.Val2;
+                        //    }
 
-                        }
+                        //}
 
-                        double refval = Math.Abs(max);
-                        if (Math.Abs(max) < Math.Abs(min)) refval = Math.Abs(min);
+                        //double refval = Math.Abs(max);
+                        //if (Math.Abs(max) < Math.Abs(min)) refval = Math.Abs(min);
 
                         //Loop through all the loads on the frame
                         foreach (Load load in f.Loads)
