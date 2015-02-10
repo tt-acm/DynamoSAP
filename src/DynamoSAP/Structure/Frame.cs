@@ -244,12 +244,12 @@ namespace DynamoSAP.Structure
                     break;
                 }
             }
-            double arrowLenght = length / 6;
+
 
             // Loop through all the elements in the structural model
             foreach (Element e in StructuralModel.StructuralElements)
             {
-                double sz = Size;
+
                 //List to hold the load visualization objects per structural member
                 List<Object> LoadObjects = new List<Object>();
 
@@ -259,6 +259,26 @@ namespace DynamoSAP.Structure
                     Frame f = e as Frame;
                     if (f.Loads != null && f.Loads.Count > 0)
                     {
+
+                        // get the max and minimum values of distributed loads on the frame
+                        double max = -10000000.0;
+                        double min = 10000000.0;
+
+                        foreach (Load load in f.Loads)
+                        {
+                            if (load.LoadType == "DistributedLoad")
+                            {
+                                if (load.Val > max) max = load.Val;
+                                if (load.Val < min) min = load.Val;
+                                if (load.Val2 > max) max = load.Val2;
+                                if (load.Val2 < min) min = load.Val2;
+                            }
+
+                        }
+
+                        double refval = Math.Abs(max);
+                        if (Math.Abs(max) < Math.Abs(min)) refval = Math.Abs(min);
+
                         //Loop through all the loads on the frame
                         foreach (Load load in f.Loads)
                         {
@@ -279,7 +299,8 @@ namespace DynamoSAP.Structure
                             }
 
                             Curve c = f.BaseCrv;
-                            if (load.Val > 0) sz = -sz; // make negative and change the direction of the arrow
+                            double sz = Size;
+                            //if (load.Val > 0) sz = -Size; // make negative and change the direction of the arrow
 
                             // List to hold parameter values where arrows will be drawn
                             List<double> dd = new List<double>();
@@ -317,6 +338,9 @@ namespace DynamoSAP.Structure
                             List<IndexGroup> igs = new List<IndexGroup>();
                             igs.Add(IndexGroup.ByIndices(0, 1, 2));
 
+                            double arrowLenght = length / 6;
+                            double triangleBase = arrowLenght / 5;
+
                             //Loop through all the parameter values along the curve.
                             // If it is a point load it will only have one value
                             for (int i = 0; i < dd.Count; i++)
@@ -329,6 +353,16 @@ namespace DynamoSAP.Structure
                                 Point p2 = null;
                                 Point p3 = null;
                                 Point p4 = null;
+
+                                arrowLenght = -length / 6;
+                                double b = load.Val;
+                                if (load.Dist != 0) b = load.Val - (load.Val2 - load.Val) / (load.Dist2 - load.Dist) * dd[0];
+                                double valueAtd = ((load.Val2 - load.Val) / (load.Dist2 - load.Dist)) * dd[i] + b;
+                                if (isDistributed)
+                                {
+                                    arrowLenght *= valueAtd / refval;
+                                }
+
 
                                 //Calculate the vector needed to create the line of the arrow
                                 // if it's the local X Direction
@@ -366,72 +400,113 @@ namespace DynamoSAP.Structure
                                 {
                                     throw new Exception("The direction of some of the loads is not supported");
                                 }
-                                // Create the line of the arrow
-                                p2 = (Point)p1.Translate(v);
-                                Line ln = Line.ByStartPointEndPoint(p1, p2);
 
-                                // Create a temporary point to hold the position of the base of the triangle of the arrow
-                                Point ptOnArrow = ln.PointAtDistance(arrowLenght / 5);
-                                triangleNormal = ln.Normal;
-                                double triangleBase = arrowLenght / 5;
 
-                                // Translate the point on the arrow to the sides to create the base of the triangle
-                                p3 = (Point)ptOnArrow.Translate(triangleNormal, triangleBase);
-                                p4 = (Point)ptOnArrow.Translate(triangleNormal, -triangleBase);
+                                if (Math.Round(v.Length, 3) != 0.0)
+                                {
 
-                                // Add the points to the list
-                                pps.Add(p1); pps.Add(p3); pps.Add(p4);
+                                    // Create the line of the arrow
+                                    p2 = (Point)p1.Translate(v);
+                                    Line ln = Line.ByStartPointEndPoint(p1, p2);
 
-                                //Create the triangular mesh of the arrow
-                                Mesh m = Mesh.ByPointsFaceIndices(pps, igs);
+                                    // Create a temporary point to hold the position of the base of the triangle of the arrow
+                                    arrowLenght = length / 6;
+                                    Point ptOnArrow = ln.PointAtDistance(arrowLenght / 5);
+                                    triangleNormal = ln.Normal;
 
-                                //Add the arrow objects to the list
-                                LoadObjects.Add(ln);
-                                LoadObjects.Add(m);
+
+                                    // Translate the point on the arrow to the sides to create the base of the triangle
+                                    p3 = (Point)ptOnArrow.Translate(triangleNormal, triangleBase);
+                                    p4 = (Point)ptOnArrow.Translate(triangleNormal, -triangleBase);
+
+                                    // Add the points to the list
+                                    pps.Add(p1); pps.Add(p3); pps.Add(p4);
+
+                                    //Create the triangular mesh of the arrow
+                                    Mesh m = Mesh.ByPointsFaceIndices(pps, igs);
+
+                                    //Add the arrow objects to the list
+                                    LoadObjects.Add(ln);
+                                    LoadObjects.Add(m);
+                                }
 
                                 // Calculate the location of the labels                                
                                 if (isDistributed)
                                 {
+                                    //if it is the start value
                                     if (i == 0)
                                     {
-                                        A = p2;
+                                        if (p2 == null) A = p1;
+                                        else A = p2;
+                                        if (f.Loads.Count > 1)
+                                        {
+                                            if (Math.Round(v.Length, 3) != 0.0)
+                                            {
+                                                if (ShowValues)
+                                                {
+                                                    labelLocation = (Point)A.Translate(v.Normalized().Scale(arrowLenght / 4));
+                                                    labelLocation.Translate(triangleNormal, 2 * triangleBase);
+
+                                                    string value = Math.Round(load.Val, 2).ToString(); // value of the load rounded to two decimals
+                                                    createLabel(LoadObjects, labelLocation, value, TextSize);
+                                                }
+                                            }
+
+                                        }
                                     }
+
+                                    //if it is the end value
                                     else if (i == dd.Count - 1)
                                     {
-                                        B = p2;
+                                        if (p2 == null) B = p1;
+                                        else B = p2;
                                         //If it is a distributed load, create a top line
                                         Line topLine = Line.ByStartPointEndPoint(A, B);
                                         LoadObjects.Add(topLine);
+
+                                        if (f.Loads.Count > 1)
+                                        {
+                                            if (Math.Round(v.Length, 3) != 0.0)
+                                            {
+                                                if (ShowValues)
+                                                {
+                                                    labelLocation = (Point)B.Translate(v.Normalized().Scale(arrowLenght / 4));
+                                                    labelLocation.Translate(triangleNormal, -2 * triangleBase);
+
+                                                    string value = Math.Round(load.Val2, 2).ToString(); // value of the load rounded to two decimals
+                                                    createLabel(LoadObjects, labelLocation, value, TextSize);
+                                                }
+                                            }
+                                        }
                                     }
-                                    else if (i == Convert.ToInt32(dd.Count / 2)) // if it is the middle point
+                                    else if (i == Convert.ToInt32(dd.Count / 2) && f.Loads.Count == 1) // if it is the middle point of a uniform distributed load
                                     {
                                         labelLocation = (Point)p2.Translate(v.Normalized().Scale(arrowLenght / 4));
+                                        if (ShowValues)
+                                        {
+                                            string value = Math.Round(load.Val, 2).ToString(); // value of the load rounded to two decimals
+                                            createLabel(LoadObjects, labelLocation, value, TextSize);
+                                        }
                                     }
                                 }
+
+                                //if it is a pointLoad
                                 else
                                 {
-                                    labelLocation = (Point)p2.Translate(v.Normalized().Scale(arrowLenght / 4));
+
+                                    // If the user wants to see the values of the forces
+                                    if (ShowValues)
+                                    {
+                                        labelLocation = (Point)p2.Translate(v.Normalized().Scale(arrowLenght / 4));
+                                        string value = Math.Round(load.Val, 2).ToString(); // value of the load rounded to two decimals
+                                        createLabel(LoadObjects, labelLocation, value, TextSize);
+
+                                    }
+
                                 }
                             }
 
-                            // If the user wants to see the values of the forces
-                            if (ShowValues)
-                            {
-                                //List to hold the curves of the label
-                                List<Curve> textCurves = new List<Curve>();
-                                //Create label
-                                string value = Math.Round(load.Val, 2).ToString(); // value of the load rounded to two decimals
 
-                                //create XZ Plane to host the text
-                                Plane pl = Plane.ByOriginXAxisYAxis(labelLocation, CoordinateSystem.Identity().XAxis, CoordinateSystem.Identity().ZAxis);
-
-                                // Call the function to create the text
-                                textCurves = Text.FromStringOriginAndScale(value, pl, TextSize).ToList();
-                                foreach (Curve textc in textCurves)
-                                {
-                                    LoadObjects.Add(textc);
-                                }
-                            }
                         }
                     }
                 }
@@ -448,7 +523,22 @@ namespace DynamoSAP.Structure
             return LoadViz;
         }
 
+        private static void createLabel(List<Object> LoadObjects, Point labelLocation, string value, double TextSize)
+        {
 
+            //List to hold the curves of the label
+            List<Curve> textCurves = new List<Curve>();
+
+            //create XZ Plane to host the text
+            Plane pl = Plane.ByOriginXAxisYAxis(labelLocation, CoordinateSystem.Identity().XAxis, CoordinateSystem.Identity().ZAxis);
+
+            // Call the function to create the text
+            textCurves = Text.FromStringOriginAndScale(value, pl, TextSize).ToList();
+            foreach (Curve textc in textCurves)
+            {
+                LoadObjects.Add(textc);
+            }
+        }
         // DECOMPOSE NODE
 
         /// <summary>
