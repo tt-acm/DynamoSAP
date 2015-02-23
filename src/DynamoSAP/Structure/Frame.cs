@@ -311,8 +311,7 @@ namespace DynamoSAP.Structure
 
                             Curve c = f.BaseCrv;
                             double sz = Size;
-                            //if (load.Val > 0) sz = -Size; // make negative and change the direction of the arrow
-
+                            
                             // List to hold parameter values where arrows will be drawn
                             List<double> dd = new List<double>();
                             bool isDistributed = false;
@@ -449,7 +448,7 @@ namespace DynamoSAP.Structure
                                     {
                                         if (p2 == null) A = p1;
                                         else A = p2;
-                                        if (f.Loads.Count > 1)
+                                        if (load.Val != load.Val2)
                                         {
                                             if (Math.Round(v.Length, 3) != 0.0)
                                             {
@@ -475,8 +474,8 @@ namespace DynamoSAP.Structure
                                         Line topLine = Line.ByStartPointEndPoint(A, B);
                                         LoadObjects.Add(topLine);
 
-                                        if (f.Loads.Count > 1)
-                                        {
+                                        if (load.Val != load.Val2)
+                                        { 
                                             if (Math.Round(v.Length, 3) != 0.0)
                                             {
                                                 if (ShowValues)
@@ -490,7 +489,7 @@ namespace DynamoSAP.Structure
                                             }
                                         }
                                     }
-                                    else if (i == Convert.ToInt32(dd.Count / 2) && f.Loads.Count == 1) // if it is the middle point of a uniform distributed load
+                                    else if (i == Convert.ToInt32(dd.Count / 2) && load.Val==load.Val2) // if it is the middle point of a uniform distributed load
                                     {
                                         labelLocation = (Point)p2.Translate(v.Normalized().Scale(arrowLenght / 4));
                                         if (ShowValues)
