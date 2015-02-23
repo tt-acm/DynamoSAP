@@ -419,7 +419,7 @@ namespace DynamoSAP.Assembly
             SAPConnection.StructureMapper.GetSAPFrameList(ref mySapModel, ref SAPFrmList); // frms
             SAPConnection.StructureMapper.GetSAPAreaList(ref mySapModel, ref SAPAreaList); // areas
             SAPConnection.StructureMapper.GetSAPJointList(ref mySapModel, ref SAPJointList); // joints
-            
+
             // 2a. DELETE 
             if (delete)
             {
@@ -670,16 +670,22 @@ namespace DynamoSAP.Assembly
                     CreateorUpdateGroup(g, ref mySapModel, update);
                 }
 
-                // Delete from SAP Model
+            }
+
+            if (delete)
+            {
                 foreach (var g in SAPGroupList)
                 {
+                    // Delete from SAP Model
                     if (!tempNames.Contains(g))
                     {
                         SAPConnection.GroupMapper.Delete(ref mySapModel, g);
                     }
-                }
-
+                    
+                } 
             }
+
+
 
             // refresh View 
             SAPConnection.StructureMapper.RefreshView(ref mySapModel);
