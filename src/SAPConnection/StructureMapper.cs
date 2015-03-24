@@ -578,7 +578,8 @@ namespace SAPConnection
                 if (Num == 0)
                 { // delete if not connected
                     int ret = Model.PointObj.SetSpecialPoint(pt, false);
-                    ret = Model.PointObj.DeleteSpecialPoint(pt, eItemType.Object);
+                    ret = Model.EditPoint.ChangeCoordinates_1(pt, 0, 0, 0);  // this will merge them into one location at least !
+                    ret = Model.PointObj.DeleteSpecialPoint(pt);
                 }
             }
 
