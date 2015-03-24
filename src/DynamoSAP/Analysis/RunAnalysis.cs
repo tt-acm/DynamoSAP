@@ -123,7 +123,7 @@ namespace DynamoSAP.Analysis
         /// <summary>
         /// Get the results from the analysis run with the Analysis.Run component
         /// </summary>
-        /// <param name="LCaseOrLPattern">Choose a load case, load pattern or load combination</param>
+        /// <param name="LPattern_LCase_LCombo">Choose a load case, load pattern or load combination</param>
         /// <param name="Get">Set Boolean to True to get the specified case;s analysis results </param>
         /// <returns></returns>
         public static Analysis GetResults(string LPattern_LCase_LCombo, bool Get)
@@ -158,10 +158,25 @@ namespace DynamoSAP.Analysis
             for (int i = 0; i < StructuralModel.StructuralElements.Count; i++)
             {
                 List<double> ff = new List<double>();
+                FrameResults frmresult = null;
                 // linq inqury
-                FrameResults frmresult = (from frm in AnalysisResults.FrameResults
-                                          where frm.ID == StructuralModel.StructuralElements[i].Label
-                                          select frm).First();
+                try
+                {
+                    frmresult = (from frm in AnalysisResults.FrameResults
+                                 where frm.ID == StructuralModel.StructuralElements[i].Label
+                                 select frm).First();
+
+                }
+                catch { }
+
+                //if it is a joint, the element will not have frame results
+                //Add 0.0 to maintain the order of the structural elements in the Structural Model
+                if (frmresult == null || frmresult.Results.Count == 0)
+                {
+                    ff.Add(0.0);
+                    Forces.Add(ff);
+                    continue;
+                }
 
                 foreach (FrameAnalysisData fad in frmresult.Results[AnalysisResults.LCaseOrLPatternRun].Values)
                 {
@@ -208,7 +223,7 @@ namespace DynamoSAP.Analysis
         /// <param name="Visualize">Set Boolean to True to draw the meshes</param>
         /// <returns>Forces and moments  in the form of meshes for each station in each structural member in the model</returns>
         /// 
-        public static List<List<Mesh>> VisualizeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType,  bool Visualize, double Scale=1.0)
+        public static List<List<Mesh>> VisualizeResults(StructuralModel StructuralModel, Analysis AnalysisResults, string ForceType, bool Visualize, double Scale = 1.0)
         {
             List<List<double>> myForces = DecomposeResults(StructuralModel, AnalysisResults, ForceType);
             double max = 0.0;
@@ -221,23 +236,38 @@ namespace DynamoSAP.Analysis
             }
             // Define a coefficient to visualize the forces
             Frame fs = (Frame)StructuralModel.StructuralElements[0];
-            double lenght= 0.5 * fs.BaseCrv.Length;
-            double coefficient =  lenght/ max;
-            
+            double lenght = 0.5 * fs.BaseCrv.Length;
+            double coefficient = lenght / max;
+
             List<List<Mesh>> VizMeshes = new List<List<Mesh>>();
             List<Line> frameNormals = new List<Line>();
             if (Visualize)
             {
+                int j = 0;
                 for (int i = 0; i < StructuralModel.StructuralElements.Count; i++)
+                //for (int i = 0; i < AnalysisResults.FrameResults.Count; i++)
                 {
-
-                    // Linq inqury
-                    FrameResults frmresult = (from frm in AnalysisResults.FrameResults
-                                              where frm.ID == StructuralModel.StructuralElements[i].Label
-                                              select frm).First();
 
                     //List of meshes per structural element in the model
                     List<Mesh> frameResultsMesh = new List<Mesh>();
+
+                    // Linq inqury
+                    FrameResults frmresult = null;
+                    try
+                    {
+                        frmresult = (from frm in AnalysisResults.FrameResults
+                                     where frm.ID == StructuralModel.StructuralElements[i].Label
+                                     select frm).First();
+                    }
+                    catch { }
+
+                    if (frmresult == null || frmresult.Results.Count == 0)
+                    {
+                        //Add an empty list to match the tree that contains Joints
+                        VizMeshes.Add(frameResultsMesh);
+                        continue;
+                    }
+
 
                     // Get the frame's curve specified by the frameID
                     // Frame f = (Frame)StructuralModel.StructuralElements[i];
@@ -287,36 +317,36 @@ namespace DynamoSAP.Analysis
 
                         if (ForceType == "Axial") // Get Axial P
                         {
-                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].P;
+                            v2 = AnalysisResults.FrameResults[j].Results[AnalysisResults.LCaseOrLPatternRun][newt].P;
                             translateCoord = v2 * coefficient * (-Scale);
                         }
 
                         else if (ForceType == "Shear22") // Get Shear V2
                         {
-                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].V2;
+                            v2 = AnalysisResults.FrameResults[j].Results[AnalysisResults.LCaseOrLPatternRun][newt].V2;
                             translateCoord = v2 * coefficient * (-Scale);
                         }
                         else if (ForceType == "Shear33") // Get Shear V3
                         {
-                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].V3;
+                            v2 = AnalysisResults.FrameResults[j].Results[AnalysisResults.LCaseOrLPatternRun][newt].V3;
                             translateCoord = v2 * coefficient * coefficient * Scale;
                         }
 
                         else if (ForceType == "Torsion") // Get Torsion T
                         {
-                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].T;
+                            v2 = AnalysisResults.FrameResults[j].Results[AnalysisResults.LCaseOrLPatternRun][newt].T;
                             translateCoord = v2 * coefficient * (-Scale);
                         }
 
                         else if (ForceType == "Moment22") // Get Moment M2
                         {
-                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].M2;
+                            v2 = AnalysisResults.FrameResults[j].Results[AnalysisResults.LCaseOrLPatternRun][newt].M2;
                             translateCoord = v2 * coefficient * (-Scale);
                         }
 
                         else if (ForceType == "Moment33") // Get Moment M3
                         {
-                            v2 = AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun][newt].M3;
+                            v2 = AnalysisResults.FrameResults[j].Results[AnalysisResults.LCaseOrLPatternRun][newt].M3;
                             translateCoord = v2 * coefficient * Scale;
                         }
 
@@ -433,18 +463,19 @@ namespace DynamoSAP.Analysis
                     }
 
                     // If all the values were zero, show empty list in output for that specific member
-                    if (zeroCount == AnalysisResults.FrameResults[i].Results[AnalysisResults.LCaseOrLPatternRun].Keys.Count)
+                    if (zeroCount == AnalysisResults.FrameResults[j].Results[AnalysisResults.LCaseOrLPatternRun].Keys.Count)
                     {
                         frameResultsMesh.Clear();
                     }
 
                     VizMeshes.Add(frameResultsMesh);
+                    j++;
 
 
                 }
             }
             return VizMeshes;
-            
+
         }
 
 
