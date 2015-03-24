@@ -32,7 +32,10 @@ namespace SAPConnection
             int num = 0;
             string[] Names = null;
             long ret = Model.GroupDef.GetNameList(ref num, ref Names);
-            myGroupList = Names.ToList();
+            if (Names != null)
+            {
+                myGroupList = Names.ToList();
+            }
         }
 
         public static void ClearGroupAssigment (ref cSapModel Model, string GroupName)
