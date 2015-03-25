@@ -261,7 +261,7 @@ namespace DynamoSAP.Analysis
                     }
                     catch { }
 
-                    if (frmresult == null || frmresult.Results.Count == 0)
+                    if (frmresult == null || StructuralModel.StructuralElements[i].Type!= Structure.Type.Frame)
                     {
                         //Add an empty list to match the tree that contains Joints
                         VizMeshes.Add(frameResultsMesh);
