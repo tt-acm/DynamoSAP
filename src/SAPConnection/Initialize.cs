@@ -71,7 +71,7 @@ namespace SAPConnection
             units = mySapModel.GetPresentUnits().ToString();
         }
 
-        public static void GrabOpenSAP(ref cSapModel mySapModel, string units)
+        public static void GrabOpenSAP(ref cSapModel mySapModel, ref string ModelUnits, string DynInputUnits = "kip_ft_F")
         {
             Process[] SapInstances = Process.GetProcessesByName("SAP2000");
 
@@ -90,8 +90,9 @@ namespace SAPConnection
                     Obj = (SapObject)getObj;
                     mySapModel = Obj.SapModel;
                     // get enum from Units & Set to model
-                    eUnits Units = (eUnits)Enum.Parse(typeof(eUnits), units);
+                    eUnits Units = (eUnits)Enum.Parse(typeof(eUnits), DynInputUnits);
                     mySapModel.SetPresentUnits(Units);
+                    ModelUnits = mySapModel.GetPresentUnits().ToString();
                 }
 
                 //SET UP ... SET UP ... SET UP ... SET UP

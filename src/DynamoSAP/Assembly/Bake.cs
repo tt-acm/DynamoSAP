@@ -396,9 +396,10 @@ namespace DynamoSAP.Assembly
 
             // check if any SAP file is open, grab 
             SAP2000v16.SapObject mySapObject = null;
+            string ModelUnits = string.Empty;
 
             // Open & instantiate SAP file
-            Initialize.GrabOpenSAP(ref mySapModel, Units);
+            Initialize.GrabOpenSAP(ref mySapModel, ref ModelUnits, Units);
 
             if (mySapModel == null)
             {
