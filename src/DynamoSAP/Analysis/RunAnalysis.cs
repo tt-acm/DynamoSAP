@@ -231,13 +231,14 @@ namespace DynamoSAP.Analysis
             {
                 for (int j = 0; j < myForces[i].Count; j++)
                 {
-                    if (myForces[i][j] > max) max = myForces[i][j];
+                    if (myForces[i][j] >= max) max = myForces[i][j];
                 }
             }
             // Define a coefficient to visualize the forces
             Frame fs = (Frame)StructuralModel.StructuralElements[0];
             double lenght = 0.5 * fs.BaseCrv.Length;
-            double coefficient = lenght / max;
+            double coefficient = 0.0;
+            if (max != 0) coefficient = lenght / max;
 
             List<List<Mesh>> VizMeshes = new List<List<Mesh>>();
             List<Line> frameNormals = new List<Line>();
