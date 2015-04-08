@@ -32,7 +32,7 @@ namespace SAPConnection
             //Create SAP2000 Object
             mySAPObject = new SAP2000v16.SapObject();
 
-            //
+            // get enum from Units
             eUnits Units = (eUnits)Enum.Parse(typeof(eUnits), units);
 
             //Start Application
@@ -71,7 +71,7 @@ namespace SAPConnection
             units = mySapModel.GetPresentUnits().ToString();
         }
 
-        public static void GrabOpenSAP(ref cSapModel mySapModel, ref string units)
+        public static void GrabOpenSAP(ref cSapModel mySapModel, string units)
         {
             Process[] SapInstances = Process.GetProcessesByName("SAP2000");
 
@@ -89,7 +89,9 @@ namespace SAPConnection
                 {
                     Obj = (SapObject)getObj;
                     mySapModel = Obj.SapModel;
-                    units = mySapModel.GetPresentUnits().ToString();
+                    // get enum from Units & Set to model
+                    eUnits Units = (eUnits)Enum.Parse(typeof(eUnits), units);
+                    mySapModel.SetPresentUnits(Units);
                 }
 
                 //SET UP ... SET UP ... SET UP ... SET UP
