@@ -40,7 +40,7 @@ namespace DynamoSAP.Definitions
             string ModelUnits = string.Empty;
             // Open & instantiate SAP file
             string sc = catalog + ".PRO";
-            Initialize.GrabOpenSAP(ref mySapModel, ref ModelUnits);
+            Initialize.GrabOpenSAP(ref mySapModel, ref ModelUnits, "");
             if (mySapModel == null)
             {
                 throw new Exception("Make sure a SAP Model is open!");

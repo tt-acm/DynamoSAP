@@ -72,12 +72,12 @@ namespace DynamoSAP.Assembly
                 StructuralModel Model = new StructuralModel();
 
                 cSapModel mySapModel = null;
-                string units = string.Empty;
+                string modelunits = string.Empty;
 
                 // Open & instantiate SAP file
-                Initialize.GrabOpenSAP(ref mySapModel, ref units);
+                Initialize.GrabOpenSAP(ref mySapModel, ref modelunits, "");
 
-                StructuralModelFromSapFile(ref mySapModel, ref Model, units);
+                StructuralModelFromSapFile(ref mySapModel, ref Model, modelunits);
 
                 // Return outputs
                 return new Dictionary<string, object>

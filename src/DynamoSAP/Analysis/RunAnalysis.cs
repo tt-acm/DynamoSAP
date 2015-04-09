@@ -54,11 +54,11 @@ namespace DynamoSAP.Analysis
             string SaveAs = "";
             if (Run)
             {
-                string units = string.Empty;
+                string modelunits = string.Empty;
 
-                SAPConnection.Initialize.GrabOpenSAP(ref mySapModel, ref units);
+                SAPConnection.Initialize.GrabOpenSAP(ref mySapModel, ref modelunits, "");
 
-                Read.StructuralModelFromSapFile(ref mySapModel, ref Model, units);
+                Read.StructuralModelFromSapFile(ref mySapModel, ref Model, modelunits);
 
                 SaveAs = SAPConnection.Initialize.GetModelFilename(ref mySapModel);
 

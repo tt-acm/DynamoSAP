@@ -90,8 +90,11 @@ namespace SAPConnection
                     Obj = (SapObject)getObj;
                     mySapModel = Obj.SapModel;
                     // get enum from Units & Set to model
-                    eUnits Units = (eUnits)Enum.Parse(typeof(eUnits), DynInputUnits);
-                    mySapModel.SetPresentUnits(Units);
+                    if (! String.IsNullOrEmpty(DynInputUnits))
+                    {
+                        eUnits Units = (eUnits)Enum.Parse(typeof(eUnits), DynInputUnits);
+                        mySapModel.SetPresentUnits(Units);
+                    }
                     ModelUnits = mySapModel.GetPresentUnits().ToString();
                 }
 
