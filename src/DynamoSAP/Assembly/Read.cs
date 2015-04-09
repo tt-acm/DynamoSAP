@@ -83,7 +83,7 @@ namespace DynamoSAP.Assembly
                 return new Dictionary<string, object>
                 {
                     {"StructuralModel", Model},
-                    {"units", units}
+                    {"units", modelunits}
                 };
             }
             else
