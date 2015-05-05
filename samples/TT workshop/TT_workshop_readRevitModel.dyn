@@ -1,0 +1,75 @@
+<Workspace Version="0.7.5.3566" X="-662.075508720558" Y="-331.695056935362" zoom="0.597487094815786" Description="" Category="" Name="Home">
+  <Elements>
+    <DSRevitNodesUI.Categories type="DSRevitNodesUI.Categories" guid="b1fa606e-5c6e-4f66-a2ef-b8f558d03e89" nickname="Categories" x="421.249651097561" y="834.600205877874" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="821:StructuralFraming" />
+    <DSRevitNodesUI.ElementsOfCategory type="DSRevitNodesUI.ElementsOfCategory" guid="47bb84c1-f249-4adc-b2a3-28459364bfde" nickname="All Elements of Category" x="697.702924102243" y="944.210571790189" isVisible="true" isUpstreamVisible="true" lacing="Disabled" />
+    <DSRevitNodesUI.Categories type="DSRevitNodesUI.Categories" guid="b1765b3c-076c-4fd0-9835-ee29c4ec7a58" nickname="Categories" x="426.189099994825" y="946.287770283973" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="816:StructuralColumns" />
+    <DSRevitNodesUI.ElementsOfCategory type="DSRevitNodesUI.ElementsOfCategory" guid="06e97de2-179f-4b2c-8bee-fb73acd32305" nickname="All Elements of Category" x="699.924952288386" y="849.386268395955" isVisible="true" isUpstreamVisible="true" lacing="Disabled" />
+    <Dynamo.Nodes.Function type="Dynamo.Nodes.Function" guid="2d3d1082-ffe2-453c-a961-99f584023685" nickname="Element.Location" x="1523.55863255972" y="1142.51934809418" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <ID value="0b59c4d8-afe4-4063-bf7e-2195fa33e8a9" />
+      <Name value="Element.Location" />
+      <Description value="Returns the location of an element as an XYZ (or if it's line-based the start and end point of the line), along with some booleans to help filtering the results. Use this for some element types (e.g. walls or lines) that do not work with the built-in Get Family Instance Location node. " />
+      <Inputs>
+        <Input value="Element(s)" />
+      </Inputs>
+      <Outputs>
+        <Output value="Points" />
+        <Output value="Curve Endpoints" />
+        <Output value="Curves" />
+        <Output value="Is Point" />
+        <Output value="Is Curve" />
+        <Output value="Has Location" />
+      </Outputs>
+    </Dynamo.Nodes.Function>
+    <Dynamo.Nodes.Function type="Dynamo.Nodes.Function" guid="0ba02a98-120e-4c7a-87c7-1fc0cb92d78f" nickname="Element.Location" x="1111.49260073521" y="671.123828190262" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <ID value="0b59c4d8-afe4-4063-bf7e-2195fa33e8a9" />
+      <Name value="Element.Location" />
+      <Description value="Returns the location of an element as an XYZ (or if it's line-based the start and end point of the line), along with some booleans to help filtering the results. Use this for some element types (e.g. walls or lines) that do not work with the built-in Get Family Instance Location node. " />
+      <Inputs>
+        <Input value="Element(s)" />
+      </Inputs>
+      <Outputs>
+        <Output value="Points" />
+        <Output value="Curve Endpoints" />
+        <Output value="Curves" />
+        <Output value="Is Point" />
+        <Output value="Is Curve" />
+        <Output value="Has Location" />
+      </Outputs>
+    </Dynamo.Nodes.Function>
+    <Dynamo.Nodes.Function type="Dynamo.Nodes.Function" guid="e8f37822-0172-4ff7-b999-5879420b4b71" nickname="Element.Level" x="1048.86664048864" y="1077.6887288067" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <ID value="23a94b80-4bd0-436f-a1b1-f77654b4428c" />
+      <Name value="Element.Level" />
+      <Description value="Gets an element's level" />
+      <Inputs>
+        <Input value="element(s)" />
+      </Inputs>
+      <Outputs>
+        <Output value="host(s)" />
+      </Outputs>
+    </Dynamo.Nodes.Function>
+    <DSRevitNodesUI.Levels type="DSRevitNodesUI.Levels" guid="741ad061-797a-417f-9483-d825e8aca9ed" nickname="Levels" x="647.795860150804" y="1353.49356679244" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="1:02 - Floor" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="04197489-743c-4726-b146-da7c184b1b97" nickname="Level.Elevation" x="860.967726960502" y="1438.10301908289" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="RevitNodes.dll" function="Revit.Elements.Level.Elevation" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="9e4acd54-3f09-4430-80e2-843e56d16d06" nickname="Geometry.Translate" x="1812.5493592141" y="1295.25589183928" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Geometry.Translate@Autodesk.DesignScript.Geometry.Vector" />
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="88c95d69-8940-4eb0-9491-f9d740c8c2a6" nickname="Vector.ByCoordinates" x="1096.1160748846" y="1507.32893459325" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Vector.ByCoordinates@double,double,double,bool">
+      <PortInfo index="0" default="True" />
+      <PortInfo index="1" default="True" />
+      <PortInfo index="2" default="True" />
+      <PortInfo index="3" default="True" />
+    </Dynamo.Nodes.DSFunction>
+    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="59afd9b0-87e7-4d9a-b1aa-f234bd0f2131" nickname="Line.ByStartPointEndPoint" x="2120.22009481573" y="1239.21586499755" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Line.ByStartPointEndPoint@Autodesk.DesignScript.Geometry.Point,Autodesk.DesignScript.Geometry.Point" />
+  </Elements>
+  <Connectors>
+    <Dynamo.Models.ConnectorModel start="b1fa606e-5c6e-4f66-a2ef-b8f558d03e89" start_index="0" end="06e97de2-179f-4b2c-8bee-fb73acd32305" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="47bb84c1-f249-4adc-b2a3-28459364bfde" start_index="0" end="2d3d1082-ffe2-453c-a961-99f584023685" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="47bb84c1-f249-4adc-b2a3-28459364bfde" start_index="0" end="e8f37822-0172-4ff7-b999-5879420b4b71" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="b1765b3c-076c-4fd0-9835-ee29c4ec7a58" start_index="0" end="47bb84c1-f249-4adc-b2a3-28459364bfde" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="06e97de2-179f-4b2c-8bee-fb73acd32305" start_index="0" end="0ba02a98-120e-4c7a-87c7-1fc0cb92d78f" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="2d3d1082-ffe2-453c-a961-99f584023685" start_index="0" end="9e4acd54-3f09-4430-80e2-843e56d16d06" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="2d3d1082-ffe2-453c-a961-99f584023685" start_index="0" end="59afd9b0-87e7-4d9a-b1aa-f234bd0f2131" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="741ad061-797a-417f-9483-d825e8aca9ed" start_index="0" end="04197489-743c-4726-b146-da7c184b1b97" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="04197489-743c-4726-b146-da7c184b1b97" start_index="0" end="88c95d69-8940-4eb0-9491-f9d740c8c2a6" end_index="2" portType="0" />
+    <Dynamo.Models.ConnectorModel start="9e4acd54-3f09-4430-80e2-843e56d16d06" start_index="0" end="59afd9b0-87e7-4d9a-b1aa-f234bd0f2131" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="88c95d69-8940-4eb0-9491-f9d740c8c2a6" start_index="0" end="9e4acd54-3f09-4430-80e2-843e56d16d06" end_index="1" portType="0" />
+  </Connectors>
+  <Notes />
+</Workspace>
