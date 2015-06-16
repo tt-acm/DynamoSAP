@@ -55,7 +55,8 @@ namespace DynamoSAP.Assembly
             {
                 // 1. Calculate Lenght Conversion Factor
                 string fromUnit = "m"; // Dynamo API Units
-                LengthUnit LU = DynamoUnits.Length.LengthUnit; // Display Units 
+                LengthUnit LU = new LengthUnit();
+                   //LengthUnit LU= DynamoUnits.Length.LengthUnit; // Display Units 
 
                 double LengthSF = SAPConnection.Utilities.UnitConversion(Units, fromUnit); // Lenght Conversion Factor
 

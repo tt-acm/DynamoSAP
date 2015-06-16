@@ -32,19 +32,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DSCoreNodesUI">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.7\nodes\DSCoreNodesUI.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.8\nodes\DSCoreNodesUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DynamoCore">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.7\DynamoCore.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Prism">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.7\Microsoft.Practices.Prism.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.8\DynamoCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ProtoCore">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.7\ProtoCore.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.8\ProtoCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SAP2000v16">

@@ -281,7 +281,7 @@ namespace SAPConnection
             string[] SectionNames = null;
             long ret = mySapModel.PropFrame.GetNameList(ref number, ref SectionNames);
             if (ret == 1) error = "Error getting the  section property names";
-            if (SectionNames.Contains(DSection))
+            if (SectionNames != null && SectionNames.Contains(DSection))
             {
                 return true;
             }

@@ -7,55 +7,185 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
-using DSCoreNodesUI;
 using Dynamo.Models;
 using SAP2000v16;
+using DSCoreNodesUI;
+using Dynamo.Nodes;
+using ProtoCore.AST.AssociativeAST;
 
 namespace DynamoSAP_UI
 {
-    [NodeName("LoadPatternTypes")]
+    public abstract class DynamoSAPStringDropdownBase : DSDropDownBase
+	{
+        /// <summary>
+        /// Constructor for this abstract class.  Pass in the name of the node, and the enum to convert
+        /// </summary>
+        /// <param name="value">The name of the node</param>
+        /// <param name="e">The enum to populate the dropdown list with</param>
+        public DynamoSAPStringDropdownBase(string value, Enum e)
+            : base(value) 
+        {
+            stringsFromEnum(e);
+        }
+
+        /// <summary>
+        /// A local variable to store the list of strings representing the enum
+        /// </summary>
+        private List<string> myDropdownItems = new List<string>();
+
+        /// <summary>
+        /// Populate our local list of strings using the enum that was passed into the constructor
+        /// </summary>
+        /// <param name="e"></param>
+        private void stringsFromEnum(Enum e) 
+        {
+            foreach (var i in Enum.GetValues(e.GetType()))
+            {
+                myDropdownItems.Add(i.ToString());
+            }
+        }
+
+        /// <summary>
+        /// The populate items override.  Not sure why this gets called before the constructor, but it does!
+        /// </summary>
+        public override void PopulateItems()
+        {
+            Items.Clear();
+            foreach (var i in myDropdownItems)
+            {
+                Items.Add(new DynamoDropDownItem(i, i)); 
+            }
+            SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// Absolutely no clue what this does.  I found an example here and modified it: https://github.com/DynamoDS/DynamoRevit/blob/Revit2015/src/Libraries/RevitNodesUI/RevitDropDown.cs
+        /// Ian also helped with this link... https://github.com/DynamoDS/Dynamo/commit/19d37337742f87bbf4bc6283de10ee7bbf7927a1  looks like everything is working again now
+        /// </summary>
+        /// <param name="inputAstNodes"></param>
+        /// <returns></returns>
+        public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
+        {
+            if (Items.Count == 0 || Items.Count == -1)
+            {
+                PopulateItems();
+            }
+
+            var stringNode = AstFactory.BuildStringNode((string)Items[SelectedIndex].Item);
+            var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), stringNode);
+
+            return new List<AssociativeNode> { assign };
+        }
+    }
+
+    public abstract class DynamoSAPIntDropdownBase : DSDropDownBase
+    {
+        /// <summary>
+        /// Constructor for this abstract class.  Pass in the name of the node, and the enum to convert
+        /// </summary>
+        /// <param name="value">The name of the node</param>
+        /// <param name="e">The enum to populate the dropdown list with</param>
+        public DynamoSAPIntDropdownBase(string value, Enum e)
+            : base(value)
+        {
+            stringsFromEnum(e);
+        }
+
+        /// <summary>
+        /// A local variable to store the list of strings representing the enum
+        /// </summary>
+        private List<string> myDropdownItems = new List<string>();
+
+        /// <summary>
+        /// Populate our local list of strings using the enum that was passed into the constructor
+        /// </summary>
+        /// <param name="e"></param>
+        private void stringsFromEnum(Enum e)
+        {
+            foreach (var i in Enum.GetValues(e.GetType()))
+            {
+                myDropdownItems.Add(i.ToString());
+            }
+        }
+
+        /// <summary>
+        /// The populate items override.  Not sure why this gets called before the constructor, but it does!
+        /// </summary>
+        public override void PopulateItems()
+        {
+            Items.Clear();
+            for (int i = 0; i < myDropdownItems.Count; i++)
+            {
+                Items.Add(new DynamoDropDownItem(myDropdownItems[i], i));
+            }
+            SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// Absolutely no clue what this does.  I found an example here and modified it: https://github.com/DynamoDS/DynamoRevit/blob/Revit2015/src/Libraries/RevitNodesUI/RevitDropDown.cs
+        /// Ian also helped with this link... https://github.com/DynamoDS/Dynamo/commit/19d37337742f87bbf4bc6283de10ee7bbf7927a1  looks like everything is working again now
+        /// </summary>
+        /// <param name="inputAstNodes"></param>
+        /// <returns></returns>
+        public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
+        {
+            if (Items.Count == 0 || Items.Count == -1)
+            {
+                PopulateItems();
+            }
+
+            var intNode = AstFactory.BuildIntNode((int)Items[SelectedIndex].Item);
+            var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), intNode);
+
+            return new List<AssociativeNode> { assign };
+        }
+    }
+
+
+	[NodeName("LoadPatternTypes")]
     [NodeCategory("DynamoSAP.Definitions.LoadPattern")]
     [NodeDescription("Select Load Pattern type to use with Set Load Pattern node")]
     [IsDesignScriptCompatible]
-    public class LoadPatternTypes : EnumAsString<eLoadPatternType>
+    public class LoadPatternTypes : DynamoSAPStringDropdownBase
     {
-        public LoadPatternTypes(WorkspaceModel workspace) : base(workspace) { }
+        public LoadPatternTypes() : base(">", new eLoadPatternType()) { }
     }
 
     [NodeName("LoadCaseTypes")]
     [NodeCategory("DynamoSAP.Definitions.LoadCase")]
     [NodeDescription("Select Load Case type to use with Set Load Case node")]
     [IsDesignScriptCompatible]
-    public class LoadCaseTypes : EnumAsString<eLoadCaseType>
+    public class LoadCaseTypes : DynamoSAPStringDropdownBase
     {
-        public LoadCaseTypes(WorkspaceModel workspace) : base(workspace) { }
+        public LoadCaseTypes() : base(">", new eLoadCaseType()) { }
     }
 
     [NodeName("LoadComboTypes")]
     [NodeCategory("DynamoSAP.Definitions.LoadCombo")]
     [NodeDescription("Select Load Combo type to use with Set Load Combo node")]
     [IsDesignScriptCompatible]
-    public class LoadComboTypes : EnumAsString<eCType>
+    public class LoadComboTypes : DynamoSAPStringDropdownBase
     {
-        public LoadComboTypes(WorkspaceModel workspace) : base(workspace) { }
+        public LoadComboTypes() : base(">", new eCType()) { }
     }
 
     [NodeName("CoordinateSystem")]
     [NodeCategory("DynamoSAP.Definitions.Load")]
     [NodeDescription("Select the Coordinate System to use with Load nodes")]
     [IsDesignScriptCompatible]
-    public class CoordinateSystem : EnumAsString<CSystem>
+    public class CoordinateSystem : DynamoSAPStringDropdownBase
     {
-        public CoordinateSystem(WorkspaceModel workspace) : base(workspace) { }
+        public CoordinateSystem() : base(">", new CSystem()) { }
     }
 
     [NodeName("LoadDirection")]
     [NodeCategory("DynamoSAP.Definitions.Load")]
     [NodeDescription("Select the Direction of the Load ")]
     [IsDesignScriptCompatible]
-    public class LoadDirection : EnumAsInt<LDir>
+    //public class LoadDirection : EnumAsInt<LDir>
+    public class LoadDirection : DynamoSAPIntDropdownBase
     {
-        public LoadDirection(WorkspaceModel workspace) : base(workspace) { }
+        public LoadDirection():base(">",new LDir()){}
     }
 
 
@@ -63,18 +193,18 @@ namespace DynamoSAP_UI
     [NodeCategory("DynamoSAP.Definitions.Load")]
     [NodeDescription("Select the Load Type to use with Load nodes")]
     [IsDesignScriptCompatible]
-    public class LoadType : EnumAsString<LType>
+    public class LoadType : DynamoSAPStringDropdownBase
     {
-        public LoadType(WorkspaceModel workspace) : base(workspace) { }
+        public LoadType() : base(">", new LType()) { }
     }
 
     [NodeName("Justifications")]
     [NodeCategory("DynamoSAP.Structure.Frame")]
     [NodeDescription("Select Justification to use with Create Frame nodes")]
     [IsDesignScriptCompatible]
-    public class JustificationTypes : EnumAsString<Justification>
+    public class JustificationTypes : DynamoSAPIntDropdownBase
     {
-        public JustificationTypes(WorkspaceModel workspace) : base(workspace) { }
+        public JustificationTypes() : base(">", new Justification()) { }
     }
 
     public enum CSystem
@@ -122,9 +252,9 @@ namespace DynamoSAP_UI
     [NodeCategory("DynamoSAP.Analysis.Analysis")]
     [NodeDescription("Select Force Type to use with Decompose Result component")]
     [IsDesignScriptCompatible]
-    public class ForceTypes : EnumAsString<ForceType>
+    public class ForceTypes : DynamoSAPStringDropdownBase
     {
-        public ForceTypes(WorkspaceModel workspace) : base(workspace) { }
+        public ForceTypes() : base(">", new ForceType()) { }
     }
 
     public enum ForceType
@@ -142,9 +272,9 @@ namespace DynamoSAP_UI
     [NodeCategory("DynamoSAP.Definitions.SectionProp")]
     [NodeDescription("Select Section Catalog as input Sections Node to retrive the section names of selected catalog")]
     [IsDesignScriptCompatible]
-    public class SectionCatalogs : EnumAsString<SectionCatalog>
+    public class SectionCatalogs : DynamoSAPStringDropdownBase
     {
-        public SectionCatalogs(WorkspaceModel workspace) : base(workspace) { }
+        public SectionCatalogs() : base(">", new SectionCatalog()) { }
     }
     public enum SectionCatalog
     {
@@ -178,9 +308,9 @@ namespace DynamoSAP_UI
     [NodeCategory("DynamoSAP.Definitions")]
     [NodeDescription("Select Materials to set Section Property")]
     [IsDesignScriptCompatible]
-    public class Materials : EnumAsString<Material>
+    public class Materials : DynamoSAPStringDropdownBase
     {
-        public Materials(WorkspaceModel workspace) : base(workspace) { }
+        public Materials() : base(">", new Material()) { }
     }
 
     public enum Material
@@ -200,18 +330,18 @@ namespace DynamoSAP_UI
     [NodeCategory("DynamoSAP.Assembly")]
     [NodeDescription("Select units")]
     [IsDesignScriptCompatible]
-    public class Units : EnumAsString<eUnits>
+    public class Units : DynamoSAPStringDropdownBase
     {
-        public Units(WorkspaceModel workspace) : base(workspace) { }
+        public Units() : base(">", new eUnits()) { }
     }
 
     [NodeName("ShellTypes")]
     [NodeCategory("DynamoSAP.Definitions.ShellProp")]
     [NodeDescription("Shell Types")]
     [IsDesignScriptCompatible]
-    public class ShellTypes : EnumAsString<ShellType>
+    public class ShellTypes : DynamoSAPIntDropdownBase
     {
-        public ShellTypes(WorkspaceModel workspace) : base(workspace) { }
+        public ShellTypes() : base(">", new ShellType()) { }
     }
 
 
@@ -223,5 +353,6 @@ namespace DynamoSAP_UI
         Plate_thick,
         Membrane,
         Shell_layered
-    }
+    } 
+	
 }

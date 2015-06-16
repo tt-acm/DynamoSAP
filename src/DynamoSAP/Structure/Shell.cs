@@ -20,7 +20,7 @@ using DynamoSAP.Definitions;
 
 namespace DynamoSAP.Structure
 {
-    [DSNodeServices.RegisterForTrace]
+    [DynamoServices.RegisterForTrace]
     public class Shell : Element
     {
         // FIELDS
@@ -74,7 +74,7 @@ namespace DynamoSAP.Structure
         public static Shell FromMesh(Mesh Mesh, ShellProp ShellProp)
         {
             Shell tShell;
-            ShellID tShellid = DSNodeServices.TraceUtils.GetTraceData(TRACE_ID) as ShellID;
+            ShellID tShellid = DynamoServices.TraceUtils.GetTraceData(TRACE_ID) as ShellID;
 
             if (tShellid == null)
             {
@@ -92,7 +92,7 @@ namespace DynamoSAP.Structure
             }
 
             // Set the trace data on the return to be this Shell
-            DSNodeServices.TraceUtils.SetTraceData(TRACE_ID, new ShellID { IntID = tShell.ID });
+            DynamoServices.TraceUtils.SetTraceData(TRACE_ID, new ShellID { IntID = tShell.ID });
 
             return tShell;
         }
@@ -107,7 +107,7 @@ namespace DynamoSAP.Structure
         {
             // TODO: IsPlanar logic should be added here! HANDLETHE ERROR.
             Shell tShell;
-            ShellID tShellid = DSNodeServices.TraceUtils.GetTraceData(TRACE_ID) as ShellID;
+            ShellID tShellid = DynamoServices.TraceUtils.GetTraceData(TRACE_ID) as ShellID;
            
             if (tShellid == null)
             {
@@ -125,7 +125,7 @@ namespace DynamoSAP.Structure
             }
 
             // Set the trace data on the return to be this Shell
-            DSNodeServices.TraceUtils.SetTraceData(TRACE_ID, new ShellID { IntID = tShell.ID });
+            DynamoServices.TraceUtils.SetTraceData(TRACE_ID, new ShellID { IntID = tShell.ID });
 
             return tShell;
         }

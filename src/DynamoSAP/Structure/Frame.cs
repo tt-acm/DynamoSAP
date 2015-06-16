@@ -20,7 +20,7 @@ using DynamoSAP.Definitions;
 
 namespace DynamoSAP.Structure
 {
-    [DSNodeServices.RegisterForTrace]
+    [DynamoServices.RegisterForTrace]
     public class Frame : Element
     {
         // FIELDS
@@ -76,7 +76,7 @@ namespace DynamoSAP.Structure
         public static Frame FromLine(Line Line, SectionProp SectionProp, string Justification = "MiddleCenter", double Rotation = 0)
         {
             Frame tFrm;
-            FrmID tFrmid = DSNodeServices.TraceUtils.GetTraceData(TRACE_ID) as FrmID;
+            FrmID tFrmid = DynamoServices.TraceUtils.GetTraceData(TRACE_ID) as FrmID;
 
             if (tFrmid == null)
             {
@@ -96,7 +96,7 @@ namespace DynamoSAP.Structure
             }
 
             //Set the trace data on the return to be this Frame
-            DSNodeServices.TraceUtils.SetTraceData(TRACE_ID, new FrmID { IntID = tFrm.ID });
+            DynamoServices.TraceUtils.SetTraceData(TRACE_ID, new FrmID { IntID = tFrm.ID });
 
             return tFrm;
         }
@@ -113,7 +113,7 @@ namespace DynamoSAP.Structure
         public static Frame FromEndPoints(Point i, Point j, SectionProp SectionProp, string Justification = "MiddleCenter", double Rotation = 0)
         {
             Frame tFrm;
-            FrmID tFrmid = DSNodeServices.TraceUtils.GetTraceData(TRACE_ID) as FrmID;
+            FrmID tFrmid = DynamoServices.TraceUtils.GetTraceData(TRACE_ID) as FrmID;
 
             if (tFrmid == null)
             {
@@ -133,7 +133,7 @@ namespace DynamoSAP.Structure
             }
 
             //Set the trace data on the return to be this Frame
-            DSNodeServices.TraceUtils.SetTraceData(TRACE_ID, new FrmID { IntID = tFrm.ID });
+            DynamoServices.TraceUtils.SetTraceData(TRACE_ID, new FrmID { IntID = tFrm.ID });
 
             return tFrm;
         }

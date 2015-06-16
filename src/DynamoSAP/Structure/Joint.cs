@@ -20,7 +20,7 @@ using DynamoSAP.Definitions;
 
 namespace DynamoSAP.Structure
 {
-    [DSNodeServices.RegisterForTrace]
+    [DynamoServices.RegisterForTrace]
     public class Joint:Element
     {
         //FIELD
@@ -54,7 +54,7 @@ namespace DynamoSAP.Structure
         public static Joint FromPoint(Point Point)
         {
             Joint tJoint;
-            JointID tJointId = DSNodeServices.TraceUtils.GetTraceData(TRACE_ID) as JointID;
+            JointID tJointId = DynamoServices.TraceUtils.GetTraceData(TRACE_ID) as JointID;
 
             if (tJointId == null)
             {
@@ -71,7 +71,7 @@ namespace DynamoSAP.Structure
             }
 
             //Set the trace data on the return to be this Joint
-            DSNodeServices.TraceUtils.SetTraceData(TRACE_ID, new JointID { IntID = tJoint.ID });
+            DynamoServices.TraceUtils.SetTraceData(TRACE_ID, new JointID { IntID = tJoint.ID });
             
             return tJoint;
         }

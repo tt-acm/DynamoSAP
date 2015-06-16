@@ -93,13 +93,24 @@ namespace SAPConnection
                     if (! String.IsNullOrEmpty(DynInputUnits))
                     {
                         eUnits Units = (eUnits)Enum.Parse(typeof(eUnits), DynInputUnits);
-                        mySapModel.SetPresentUnits(Units);
+                        try
+                        {
+                            int ret = mySapModel.SetPresentUnits(Units);
+                        }
+                        catch(Exception ex) {
+                            string message = ex.Message;
+                        }
+                       
                     }
                     ModelUnits = mySapModel.GetPresentUnits().ToString();
                 }
 
                 //SET UP ... SET UP ... SET UP ... SET UP
-                DefineMaterials(ref mySapModel);
+                try
+                {
+                    DefineMaterials(ref mySapModel);
+                }
+                catch { }
             }
 
         }
@@ -134,38 +145,66 @@ namespace SAPConnection
             string[] MatNames = null;
             ret = SapModel.PropMaterial.GetNameList(ref number, ref MatNames);
 
-            if (!MatNames.Contains("A36"))
+            if (MatNames!=null)
             {
-                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A36);
-            }
-            if (!MatNames.Contains("A53GrB"))
-            {
-                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A53GrB);
-            }
-            if (!MatNames.Contains("A500GrB42"))
-            {
-                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A500GrB_Fy42);
-            }
-            if (!MatNames.Contains("A500GrB46"))
-            {
-                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A500GrB_Fy46);
-            }
-            if (!MatNames.Contains("A572Gr50"))
-            {
-                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A572Gr50);
-            }
-            if (!MatNames.Contains("A913Gr50"))
-            {
-                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A913Gr50);
-            }
-            if (!MatNames.Contains("A992Fy50"))
-            {
-                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A992_Fy50);
+                if (!MatNames.Contains("A36"))
+                {
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A36);
+                    
+                }
+                if (!MatNames.Contains("A53GrB"))
+                {
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A53GrB);
+                }
+                if (!MatNames.Contains("A500GrB42"))
+                {
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A500GrB_Fy42);
+                }
+                if (!MatNames.Contains("A500GrB46"))
+                {
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A500GrB_Fy46);
+                }
+                if (!MatNames.Contains("A572Gr50"))
+                {
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A572Gr50);
+                }
+                if (!MatNames.Contains("A913Gr50"))
+                {
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A913Gr50);
+                }
+                if (!MatNames.Contains("A992Fy50"))
+                {
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A992_Fy50);
 
+                }
+                if (!MatNames.Contains("4000Psi"))
+                {
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_CONCRETE, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A992_Fy50, eMatTypeConcrete.MATERIAL_CONCRETE_SUBTYPE_FC4000_NORMALWEIGHT);
+                } 
             }
-            if (!MatNames.Contains("4000Psi"))
+            else
             {
-                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_CONCRETE, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A992_Fy50, eMatTypeConcrete.MATERIAL_CONCRETE_SUBTYPE_FC4000_NORMALWEIGHT);
+                
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A36);
+                
+              
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A53GrB);
+               
+              
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A500GrB_Fy42);
+                
+              
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A500GrB_Fy46);
+               
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A572Gr50);
+                
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A913Gr50);
+                
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A992_Fy50);
+
+               
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_CONCRETE, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A992_Fy50, eMatTypeConcrete.MATERIAL_CONCRETE_SUBTYPE_FC4000_NORMALWEIGHT);
+               
             }
 
             return true;
