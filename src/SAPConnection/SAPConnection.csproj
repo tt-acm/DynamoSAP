@@ -43,6 +43,10 @@
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Computers and Structures\SAP2000 16\SAP2000v16.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="SAP2000v17">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Computers and Structures\SAP2000 17\SAP2000v17.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
