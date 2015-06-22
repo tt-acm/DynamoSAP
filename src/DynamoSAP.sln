@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAPConnection", "SAPConnect
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamoSAP_UI", "DynamoSAP_UI\DynamoSAP_UI.csproj", "{EABB6380-E55A-4726-8355-46DFD260E878}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAPConnection17", "SAPConnection16.1\SAPConnection17.csproj", "{43AB40E8-C48F-4FFD-BFD1-C69A549F8F79}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,10 +31,6 @@ Global
 		{EABB6380-E55A-4726-8355-46DFD260E878}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EABB6380-E55A-4726-8355-46DFD260E878}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EABB6380-E55A-4726-8355-46DFD260E878}.Release|Any CPU.Build.0 = Release|Any CPU
-		{43AB40E8-C48F-4FFD-BFD1-C69A549F8F79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43AB40E8-C48F-4FFD-BFD1-C69A549F8F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43AB40E8-C48F-4FFD-BFD1-C69A549F8F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43AB40E8-C48F-4FFD-BFD1-C69A549F8F79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
