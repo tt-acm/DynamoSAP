@@ -1,4 +1,4 @@
-<Workspace Version="0.8.0.950" X="-2473.38103909607" Y="-808.215822550602" zoom="1.13425429537977" Name="Home" RunType="Manual" RunPeriod="100" HasRunWithoutCrash="False">
+<Workspace Version="0.8.0.950" X="42.9772583209639" Y="-75.9610398746484" zoom="0.555705468414249" Name="Home" RunType="Manual" RunPeriod="100" HasRunWithoutCrash="True">
   <NamespaceResolutionMap />
   <Elements>
     <Dynamo.Nodes.Function guid="0ddf228c-2d92-4626-bea7-b471db37d221" type="Dynamo.Nodes.Function" nickname="LunchBox Space Truss Structure" x="1414" y="808" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
@@ -20,11 +20,11 @@
       </Outputs>
     </Dynamo.Nodes.Function>
     <Dynamo.Nodes.DSFunction guid="dbd85f0e-2d06-4c58-a45b-f1263c8f14bf" type="Dynamo.Nodes.DSFunction" nickname="Surface.ByLoft" x="1122" y="808" isVisible="false" isUpstreamVisible="true" lacing="Shortest" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Surface.ByLoft@Autodesk.DesignScript.Geometry.Curve[]" />
-    <DSCoreNodesUI.Input.IntegerSlider guid="7a8debab-36c9-47d0-b1e8-83d5d8809f68" type="DSCoreNodesUI.Input.IntegerSlider" nickname="Integer Slider" x="1137.78561978722" y="910.209499382941" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    <DSCoreNodesUI.Input.IntegerSlider guid="7a8debab-36c9-47d0-b1e8-83d5d8809f68" type="DSCoreNodesUI.Input.IntegerSlider" nickname="Integer Slider" x="1016.36665600506" y="934.078184570887" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Int32>4</System.Int32>
       <Range min="0" max="100" step="1" />
     </DSCoreNodesUI.Input.IntegerSlider>
-    <DSCoreNodesUI.Input.IntegerSlider guid="7dfc6256-4854-4a57-bc65-4807876875ba" type="DSCoreNodesUI.Input.IntegerSlider" nickname="Integer Slider" x="1133.5728858392" y="1011.35262704329" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    <DSCoreNodesUI.Input.IntegerSlider guid="7dfc6256-4854-4a57-bc65-4807876875ba" type="DSCoreNodesUI.Input.IntegerSlider" nickname="Integer Slider" x="1012.15392205704" y="1035.22131223124" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Int32>5</System.Int32>
       <Range min="0" max="100" step="1" />
     </DSCoreNodesUI.Input.IntegerSlider>
@@ -97,16 +97,16 @@
       <PortInfo index="1" default="True" />
       <PortInfo index="2" default="True" />
     </Dynamo.Nodes.DSFunction>
-    <Dynamo.Nodes.DSFunction guid="908f785f-bb2d-43a4-a66e-ade9d838090b" type="Dynamo.Nodes.DSFunction" nickname="SectionProp.Sections" x="1384.87954988495" y="1261.46168428995" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Definitions.SectionProp.Sections@string" />
+    <Dynamo.Nodes.DSFunction guid="908f785f-bb2d-43a4-a66e-ade9d838090b" type="Dynamo.Nodes.DSFunction" nickname="SectionProp.Sections" x="1384.87954988495" y="1255.69864259612" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\bin\AnyCPU\Debug\DynamoSAP.dll" function="DynamoSAP.Definitions.SectionProp.Sections@string" />
     <Dynamo.Nodes.CodeBlockNodeModel guid="34143359-e344-45d4-97dd-305666ebd49c" type="Dynamo.Nodes.CodeBlockNodeModel" nickname="Code Block" x="1567.38384700247" y="1262.78438294442" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="x[1902];" ShouldFocus="false" />
-    <Dynamo.Nodes.DSFunction guid="dfc30e9c-7ec4-43a3-b89b-41772822cf53" type="Dynamo.Nodes.DSFunction" nickname="SectionProp.Define" x="1949.93268955539" y="1260.637178176" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Definitions.SectionProp.Define@string,string,string">
+    <Dynamo.Nodes.DSFunction guid="dfc30e9c-7ec4-43a3-b89b-41772822cf53" type="Dynamo.Nodes.DSFunction" nickname="SectionProp.Define" x="1949.93268955539" y="1260.637178176" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\bin\AnyCPU\Debug\DynamoSAP.dll" function="DynamoSAP.Definitions.SectionProp.Define@string,string,string">
       <PortInfo index="0" default="True" />
       <PortInfo index="1" default="True" />
       <PortInfo index="2" default="True" />
     </Dynamo.Nodes.DSFunction>
-    <DSCoreNodesUI.CreateList guid="6a658860-e427-46c8-b024-574725e4a2db" type="DSCoreNodesUI.CreateList" nickname="List.Create" x="1726" y="810" isVisible="true" isUpstreamVisible="true" lacing="Disabled" inputcount="5" />
-    <Dynamo.Nodes.DSFunction guid="a6bc0f86-a159-4f79-934d-238323b65de8" type="Dynamo.Nodes.DSFunction" nickname="StructuralModel.Collector" x="2558" y="901" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Collector@DynamoSAP.Structure.Element[]" />
-    <Dynamo.Nodes.DSFunction guid="d86c67da-ff87-4c04-8976-c7a00a640518" type="Dynamo.Nodes.DSFunction" nickname="Bake.ToSAP" x="2936" y="901" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.Bake.ToSAP@DynamoSAP.Assembly.StructuralModel,bool,string,bool">
+    <DSCoreNodesUI.CreateList guid="6a658860-e427-46c8-b024-574725e4a2db" type="DSCoreNodesUI.CreateList" nickname="List.Create" x="1723.71880848719" y="806.578212730787" isVisible="true" isUpstreamVisible="true" lacing="Disabled" inputcount="5" />
+    <Dynamo.Nodes.DSFunction guid="a6bc0f86-a159-4f79-934d-238323b65de8" type="Dynamo.Nodes.DSFunction" nickname="StructuralModel.Collector" x="2558" y="901" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\bin\AnyCPU\Debug\DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Collector@DynamoSAP.Structure.Element[]" />
+    <Dynamo.Nodes.DSFunction guid="d86c67da-ff87-4c04-8976-c7a00a640518" type="Dynamo.Nodes.DSFunction" nickname="Bake.ToSAP" x="2936" y="901" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\bin\AnyCPU\Debug\DynamoSAP.dll" function="DynamoSAP.Assembly.Bake.ToSAP@DynamoSAP.Assembly.StructuralModel,bool,string,bool">
       <PortInfo index="2" default="True" />
       <PortInfo index="3" default="True" />
     </Dynamo.Nodes.DSFunction>
@@ -114,14 +114,14 @@
       <System.Boolean>True</System.Boolean>
     </DSCoreNodesUI.BoolSelector>
     <Dynamo.Nodes.DSFunction guid="770d0f5e-e80c-4c70-97d4-f89c97d51ae6" type="Dynamo.Nodes.DSFunction" nickname="Flatten" x="1950.31063545984" y="807.244648923149" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="" function="Flatten@var[]..[]" />
-    <Dynamo.Nodes.DSFunction guid="73b79339-e8d9-4841-ac63-12d45e184b2f" type="Dynamo.Nodes.DSFunction" nickname="Frame.FromLine" x="2282" y="901" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Structure.Frame.FromLine@Autodesk.DesignScript.Geometry.Line,DynamoSAP.Definitions.SectionProp,string,double">
+    <Dynamo.Nodes.DSFunction guid="73b79339-e8d9-4841-ac63-12d45e184b2f" type="Dynamo.Nodes.DSFunction" nickname="Frame.FromLine" x="2282" y="901" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\bin\AnyCPU\Debug\DynamoSAP.dll" function="DynamoSAP.Structure.Frame.FromLine@Autodesk.DesignScript.Geometry.Line,DynamoSAP.Definitions.SectionProp,string,double">
       <PortInfo index="2" default="True" />
       <PortInfo index="3" default="True" />
     </Dynamo.Nodes.DSFunction>
     <Dynamo.Nodes.Watch guid="ba2e32bc-89b3-4566-9555-de98e9e98c2b" type="Dynamo.Nodes.Watch" nickname="Section Name" x="1728.68729058189" y="1258.69216179761" isVisible="true" isUpstreamVisible="true" lacing="Disabled" />
-    <DynamoSAP_UI.Materials guid="89e9e6aa-5ea9-4641-8bee-743b2173ada1" type="DynamoSAP_UI.Materials" nickname="Materials" x="1229.72401292066" y="1649.27731511401" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="0:A36" />
-    <DynamoSAP_UI.SectionCatalogs guid="579cbea6-5b14-4023-bfef-44fde2eff3ee" type="DynamoSAP_UI.SectionCatalogs" nickname="SectionCatalogs" x="1227.9502289019" y="1742.40097609902" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="4:AISC14" />
-    <DynamoSAP_UI.Units guid="aa80e305-bb4a-418b-87f4-022dd0268680" type="DynamoSAP_UI.Units" nickname="Units" x="2566.84556665778" y="1125.22420960751" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="9:N_m_C" />
+    <DynamoSAP_UI.Materials guid="89e9e6aa-5ea9-4641-8bee-743b2173ada1" type="DynamoSAP_UI.Materials" nickname="Materials" x="1229.72401292066" y="1650.23737972056" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="6:A992Fy50" />
+    <DynamoSAP_UI.SectionCatalogs guid="579cbea6-5b14-4023-bfef-44fde2eff3ee" type="DynamoSAP_UI.SectionCatalogs" nickname="SectionCatalogs" x="1229.44840553009" y="1753.63730081047" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="4:AISC14" />
+    <DynamoSAP_UI.Units guid="aa80e305-bb4a-418b-87f4-022dd0268680" type="DynamoSAP_UI.Units" nickname="Units" x="2566.84556665778" y="1131.24528327651" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="3:kip_ft_F" />
   </Elements>
   <Connectors>
     <Dynamo.Models.ConnectorModel start="0ddf228c-2d92-4626-bea7-b471db37d221" start_index="0" end="6a658860-e427-46c8-b024-574725e4a2db" end_index="0" portType="0" />
