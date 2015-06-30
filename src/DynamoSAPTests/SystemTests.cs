@@ -440,5 +440,112 @@ namespace DynamoSAPTests
             Assert.Pass();
         }
 
+
+        /// <summary>
+        /// Open blank SAP Model, Edit 
+        /// </summary>
+        [Test, TestModel(@".\TestModel.rvt")]
+        public void Edit_AddGroup()
+        {
+            // Launch SAP2000v16 and Open a blank model
+
+            string filePath = @"C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\2a_Dome.sdb";
+            //Create SAP2000 Object
+            SapObject mySapObject = new SAP2000v16.SapObject();
+            //Start Application
+            mySapObject.ApplicationStart();
+            //Create SapModel object
+            cSapModel mySapModel = mySapObject.SapModel;
+            mySapModel.InitializeNewModel();
+            mySapModel.File.OpenFile(filePath);
+
+
+            //Open and Run the sample file
+            OpenAndRunDynamoDefinition(@".\Sample_4a_Read_Edit_AddGroup.dyn");
+
+            // Test Logic is here --->
+            //check for errors and assert accordingly
+            string failreport = CompileErrorsIntoString();
+
+            // Set SAP instances to null;
+            mySapObject.ApplicationExit(false);
+            mySapObject = null;
+            mySapModel = null;
+
+            if (string.IsNullOrEmpty(failreport))
+            {
+                Assert.Pass();
+            }
+            else
+            {
+                Assert.Fail(failreport);
+            }
+
+        }
+
+        /// <summary>
+        /// Open blank SAP Model, Edit 
+        /// </summary>
+        [Test, TestModel(@".\TestModel.rvt")]
+        public void Edit_AddLoadCase()
+        {
+            // Launch SAP2000v16 and Open a blank model
+
+            string filePath = @"C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\2a_Dome.sdb";
+            //Create SAP2000 Object
+            SapObject mySapObject = new SAP2000v16.SapObject();
+            //Start Application
+            mySapObject.ApplicationStart();
+            //Create SapModel object
+            cSapModel mySapModel = mySapObject.SapModel;
+            mySapModel.InitializeNewModel();
+            mySapModel.File.OpenFile(filePath);
+
+
+            //Open and Run the sample file
+            OpenAndRunDynamoDefinition(@".\Sample_4b_Read_Edit_AddLoadCase.dyn");
+
+            // Test Logic is here --->
+            //check for errors and assert accordingly
+            string failreport = CompileErrorsIntoString();
+
+            // Set SAP instances to null;
+            mySapObject.ApplicationExit(false);
+            mySapObject = null;
+            mySapModel = null;
+
+            if (string.IsNullOrEmpty(failreport))
+            {
+                Assert.Pass();
+            }
+            else
+            {
+                Assert.Fail(failreport);
+            }
+
+        }
+
+        /// <summary>
+        /// A utility function to loop over a sample file and list any nodes in error or warning state.
+        /// </summary>
+        /// <returns></returns>
+        private string CompileErrorsIntoString()
+        {
+            //a string to return
+            string errors = null;
+
+            //loop over the active collection of nodes.
+            foreach (var i in AllNodes)
+            {
+                if (IsNodeInErrorOrWarningState(i.GUID.ToString()))
+                {
+                    errors += "The node called '" + i.NickName + "' failed or threw a warning." + System.Environment.NewLine;
+                }
+            }
+
+            //return the errors string
+            return errors;
+        }
+
     }
 }
