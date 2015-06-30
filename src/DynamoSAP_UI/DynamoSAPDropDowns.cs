@@ -9,130 +9,181 @@ using System.Linq;
 using System.Xml;
 using Dynamo.Models;
 using SAP2000v16;
+using Dynamo.Utilities;
 using DSCoreNodesUI;
 using Dynamo.Nodes;
 using ProtoCore.AST.AssociativeAST;
 
 namespace DynamoSAP_UI
 {
-    public abstract class DynamoSAPStringDropdownBase : DSDropDownBase
-	{
-        /// <summary>
-        /// Constructor for this abstract class.  Pass in the name of the node, and the enum to convert
-        /// </summary>
-        /// <param name="value">The name of the node</param>
-        /// <param name="e">The enum to populate the dropdown list with</param>
-        public DynamoSAPStringDropdownBase(string value, Enum e)
-            : base(value) 
-        {
-            stringsFromEnum(e);
-        }
+	[NodeName("LoadPatternTypes")]
+    [NodeCategory("DynamoSAP.Definitions.LoadPattern")]
+    [NodeDescription("Select Load Pattern type to use with Set Load Pattern node")]
+    [IsDesignScriptCompatible]
+    public class LoadPatternTypes : DSDropDownBase
+    {
+        public LoadPatternTypes() : base(">") { }
 
-        /// <summary>
-        /// A local variable to store the list of strings representing the enum
-        /// </summary>
-        private List<string> myDropdownItems = new List<string>();
-
-        /// <summary>
-        /// Populate our local list of strings using the enum that was passed into the constructor
-        /// </summary>
-        /// <param name="e"></param>
-        private void stringsFromEnum(Enum e) 
-        {
-            foreach (var i in Enum.GetValues(e.GetType()))
-            {
-                myDropdownItems.Add(i.ToString());
-            }
-        }
-
-        /// <summary>
-        /// The populate items override.  Not sure why this gets called before the constructor, but it does!
-        /// </summary>
         public override void PopulateItems()
         {
+            //clear items
             Items.Clear();
-            foreach (var i in myDropdownItems)
+
+            //set up the collection
+            var newItems = new List<DynamoDropDownItem>();
+            foreach (var j in Enum.GetValues(new eLoadPatternType().GetType())) 
             {
-                Items.Add(new DynamoDropDownItem(i, i)); 
+                newItems.Add(new DynamoDropDownItem(j.ToString(), j.ToString()));
             }
+            Items.AddRange(newItems);
+
+            //set the selected index to 0
             SelectedIndex = 0;
         }
-
-        /// <summary>
-        /// Absolutely no clue what this does.  I found an example here and modified it: https://github.com/DynamoDS/DynamoRevit/blob/Revit2015/src/Libraries/RevitNodesUI/RevitDropDown.cs
-        /// Ian also helped with this link... https://github.com/DynamoDS/Dynamo/commit/19d37337742f87bbf4bc6283de10ee7bbf7927a1  looks like everything is working again now
-        /// </summary>
-        /// <param name="inputAstNodes"></param>
-        /// <returns></returns>
         public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
         {
-            if (Items.Count == 0 || Items.Count == -1)
-            {
-                PopulateItems();
-            }
+            // Build an AST node for the type of object contained in your Items collection.
 
-            var stringNode = AstFactory.BuildStringNode((string)Items[SelectedIndex].Item);
-            var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), stringNode);
+            var intNode = AstFactory.BuildStringNode((string)Items[SelectedIndex].Item);
+            var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), intNode);
 
             return new List<AssociativeNode> { assign };
         }
     }
 
-    public abstract class DynamoSAPIntDropdownBase : DSDropDownBase
+    [NodeName("LoadCaseTypes")]
+    [NodeCategory("DynamoSAP.Definitions.LoadCase")]
+    [NodeDescription("Select Load Case type to use with Set Load Case node")]
+    [IsDesignScriptCompatible]
+    public class LoadCaseTypes : DSDropDownBase
     {
-        /// <summary>
-        /// Constructor for this abstract class.  Pass in the name of the node, and the enum to convert
-        /// </summary>
-        /// <param name="value">The name of the node</param>
-        /// <param name="e">The enum to populate the dropdown list with</param>
-        public DynamoSAPIntDropdownBase(string value, Enum e)
-            : base(value)
-        {
-            stringsFromEnum(e);
-        }
+        public LoadCaseTypes() : base(">") { }
 
-        /// <summary>
-        /// A local variable to store the list of strings representing the enum
-        /// </summary>
-        private List<string> myDropdownItems = new List<string>();
-
-        /// <summary>
-        /// Populate our local list of strings using the enum that was passed into the constructor
-        /// </summary>
-        /// <param name="e"></param>
-        private void stringsFromEnum(Enum e)
-        {
-            foreach (var i in Enum.GetValues(e.GetType()))
-            {
-                myDropdownItems.Add(i.ToString());
-            }
-        }
-
-        /// <summary>
-        /// The populate items override.  Not sure why this gets called before the constructor, but it does!
-        /// </summary>
         public override void PopulateItems()
         {
+            //clear items
             Items.Clear();
-            for (int i = 0; i < myDropdownItems.Count; i++)
+
+            //set up the collection
+            var newItems = new List<DynamoDropDownItem>();
+            foreach (var j in Enum.GetValues(new eLoadCaseType().GetType())) 
             {
-                Items.Add(new DynamoDropDownItem(myDropdownItems[i], i));
+                newItems.Add(new DynamoDropDownItem(j.ToString(), j.ToString()));
             }
+            Items.AddRange(newItems);
+
+            //set the selected index to 0
             SelectedIndex = 0;
         }
-
-        /// <summary>
-        /// Absolutely no clue what this does.  I found an example here and modified it: https://github.com/DynamoDS/DynamoRevit/blob/Revit2015/src/Libraries/RevitNodesUI/RevitDropDown.cs
-        /// Ian also helped with this link... https://github.com/DynamoDS/Dynamo/commit/19d37337742f87bbf4bc6283de10ee7bbf7927a1  looks like everything is working again now
-        /// </summary>
-        /// <param name="inputAstNodes"></param>
-        /// <returns></returns>
         public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
         {
-            if (Items.Count == 0 || Items.Count == -1)
+            // Build an AST node for the type of object contained in your Items collection.
+
+            var intNode = AstFactory.BuildStringNode((string)Items[SelectedIndex].Item);
+            var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), intNode);
+
+            return new List<AssociativeNode> { assign };
+        }
+    }
+
+    [NodeName("LoadComboTypes")]
+    [NodeCategory("DynamoSAP.Definitions.LoadCombo")]
+    [NodeDescription("Select Load Combo type to use with Set Load Combo node")]
+    [IsDesignScriptCompatible]
+    public class LoadComboTypes : DSDropDownBase
+    {
+       public LoadComboTypes() : base(">") { }
+
+        public override void PopulateItems()
+        {
+            //clear items
+            Items.Clear();
+
+            //set up the collection
+            var newItems = new List<DynamoDropDownItem>();
+            foreach (var j in Enum.GetValues(new eCType().GetType())) 
             {
-                PopulateItems();
+                newItems.Add(new DynamoDropDownItem(j.ToString(), j.ToString()));
             }
+            Items.AddRange(newItems);
+
+            //set the selected index to 0
+            SelectedIndex = 0;
+        }
+        public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
+        {
+            // Build an AST node for the type of object contained in your Items collection.
+
+            var intNode = AstFactory.BuildStringNode((string)Items[SelectedIndex].Item);
+            var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), intNode);
+
+            return new List<AssociativeNode> { assign };
+        }
+    }
+
+    [NodeName("CoordinateSystem")]
+    [NodeCategory("DynamoSAP.Definitions.Load")]
+    [NodeDescription("Select the Coordinate System to use with Load nodes")]
+    [IsDesignScriptCompatible]
+    public class CoordinateSystem : DSDropDownBase
+    {
+       public CoordinateSystem() : base(">") { }
+
+        public override void PopulateItems()
+        {
+            //clear items
+            Items.Clear();
+
+            //set up the collection
+            var newItems = new List<DynamoDropDownItem>();
+            foreach (var j in Enum.GetValues(new CSystem().GetType())) 
+            {
+                newItems.Add(new DynamoDropDownItem(j.ToString(), j.ToString()));
+            }
+            Items.AddRange(newItems);
+
+            //set the selected index to 0
+            SelectedIndex = 0;
+        }
+        public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
+        {
+            // Build an AST node for the type of object contained in your Items collection.
+
+            var intNode = AstFactory.BuildStringNode((string)Items[SelectedIndex].Item);
+            var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), intNode);
+
+            return new List<AssociativeNode> { assign };
+        }
+    }
+
+    [NodeName("LoadDirection")]
+    [NodeCategory("DynamoSAP.Definitions.Load")]
+    [NodeDescription("Select the Direction of the Load ")]
+    [IsDesignScriptCompatible]
+    //public class LoadDirection : EnumAsInt<LDir>
+    public class LoadDirection : DSDropDownBase
+    {
+       public LoadDirection() : base(">") { }
+
+        public override void PopulateItems()
+        {
+            //clear items
+            Items.Clear();
+
+            //set up the collection
+            var newItems = new List<DynamoDropDownItem>();
+            foreach (var j in Enum.GetValues(new LDir().GetType())) 
+            {
+                newItems.Add(new DynamoDropDownItem(j.ToString(), j));
+            }
+            Items.AddRange(newItems);
+
+            //set the selected index to 0
+            SelectedIndex = 0;
+        }
+        public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
+        {
+            // Build an AST node for the type of object contained in your Items collection.
 
             var intNode = AstFactory.BuildIntNode((int)Items[SelectedIndex].Item);
             var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), intNode);
@@ -142,69 +193,74 @@ namespace DynamoSAP_UI
     }
 
 
-	[NodeName("LoadPatternTypes")]
-    [NodeCategory("DynamoSAP.Definitions.LoadPattern")]
-    [NodeDescription("Select Load Pattern type to use with Set Load Pattern node")]
-    [IsDesignScriptCompatible]
-    public class LoadPatternTypes : DynamoSAPStringDropdownBase
-    {
-        public LoadPatternTypes() : base(">", new eLoadPatternType()) { }
-    }
-
-    [NodeName("LoadCaseTypes")]
-    [NodeCategory("DynamoSAP.Definitions.LoadCase")]
-    [NodeDescription("Select Load Case type to use with Set Load Case node")]
-    [IsDesignScriptCompatible]
-    public class LoadCaseTypes : DynamoSAPStringDropdownBase
-    {
-        public LoadCaseTypes() : base(">", new eLoadCaseType()) { }
-    }
-
-    [NodeName("LoadComboTypes")]
-    [NodeCategory("DynamoSAP.Definitions.LoadCombo")]
-    [NodeDescription("Select Load Combo type to use with Set Load Combo node")]
-    [IsDesignScriptCompatible]
-    public class LoadComboTypes : DynamoSAPStringDropdownBase
-    {
-        public LoadComboTypes() : base(">", new eCType()) { }
-    }
-
-    [NodeName("CoordinateSystem")]
-    [NodeCategory("DynamoSAP.Definitions.Load")]
-    [NodeDescription("Select the Coordinate System to use with Load nodes")]
-    [IsDesignScriptCompatible]
-    public class CoordinateSystem : DynamoSAPStringDropdownBase
-    {
-        public CoordinateSystem() : base(">", new CSystem()) { }
-    }
-
-    [NodeName("LoadDirection")]
-    [NodeCategory("DynamoSAP.Definitions.Load")]
-    [NodeDescription("Select the Direction of the Load ")]
-    [IsDesignScriptCompatible]
-    //public class LoadDirection : EnumAsInt<LDir>
-    public class LoadDirection : DynamoSAPIntDropdownBase
-    {
-        public LoadDirection():base(">",new LDir()){}
-    }
-
-
     [NodeName("LoadType")]
     [NodeCategory("DynamoSAP.Definitions.Load")]
     [NodeDescription("Select the Load Type to use with Load nodes")]
     [IsDesignScriptCompatible]
-    public class LoadType : DynamoSAPStringDropdownBase
+    public class LoadType : DSDropDownBase
     {
-        public LoadType() : base(">", new LType()) { }
+       public LoadType() : base(">") { }
+
+        public override void PopulateItems()
+        {
+            //clear items
+            Items.Clear();
+
+            //set up the collection
+            var newItems = new List<DynamoDropDownItem>();
+            foreach (var j in Enum.GetValues(new LType().GetType())) 
+            {
+                newItems.Add(new DynamoDropDownItem(j.ToString(), j.ToString()));
+            }
+            Items.AddRange(newItems);
+
+            //set the selected index to 0
+            SelectedIndex = 0;
+        }
+        public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
+        {
+            // Build an AST node for the type of object contained in your Items collection.
+
+            var intNode = AstFactory.BuildStringNode((string)Items[SelectedIndex].Item);
+            var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), intNode);
+
+            return new List<AssociativeNode> { assign };
+        }
     }
 
     [NodeName("Justifications")]
     [NodeCategory("DynamoSAP.Structure.Frame")]
     [NodeDescription("Select Justification to use with Create Frame nodes")]
     [IsDesignScriptCompatible]
-    public class JustificationTypes : DynamoSAPIntDropdownBase
+    public class JustificationTypes : DSDropDownBase
     {
-        public JustificationTypes() : base(">", new Justification()) { }
+        public JustificationTypes() : base(">") { }
+
+        public override void PopulateItems()
+        {
+            //clear items
+            Items.Clear();
+
+            //set up the collection
+            var newItems = new List<DynamoDropDownItem>();
+            foreach (var j in Enum.GetValues(new Justification().GetType())) 
+            {
+                newItems.Add(new DynamoDropDownItem(j.ToString(), j.ToString()));
+            }
+            Items.AddRange(newItems);
+
+            //set the selected index to 0
+            SelectedIndex = 0;
+        }
+        public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
+        {
+            // Build an AST node for the type of object contained in your Items collection.
+
+            var intNode = AstFactory.BuildStringNode((string)Items[SelectedIndex].Item);
+            var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), intNode);
+
+            return new List<AssociativeNode> { assign };
+        }
     }
 
     public enum CSystem
@@ -252,9 +308,35 @@ namespace DynamoSAP_UI
     [NodeCategory("DynamoSAP.Analysis.Analysis")]
     [NodeDescription("Select Force Type to use with Decompose Result component")]
     [IsDesignScriptCompatible]
-    public class ForceTypes : DynamoSAPStringDropdownBase
+    public class ForceTypes : DSDropDownBase
     {
-        public ForceTypes() : base(">", new ForceType()) { }
+        public ForceTypes() : base(">") { }
+
+        public override void PopulateItems()
+        {
+            //clear items
+            Items.Clear();
+
+            //set up the collection
+            var newItems = new List<DynamoDropDownItem>();
+            foreach (var j in Enum.GetValues(new ForceType().GetType())) 
+            {
+                newItems.Add(new DynamoDropDownItem(j.ToString(), j.ToString()));
+            }
+            Items.AddRange(newItems);
+
+            //set the selected index to 0
+            SelectedIndex = 0;
+        }
+        public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
+        {
+            // Build an AST node for the type of object contained in your Items collection.
+
+            var intNode = AstFactory.BuildStringNode((string)Items[SelectedIndex].Item);
+            var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), intNode);
+
+            return new List<AssociativeNode> { assign };
+        }
     }
 
     public enum ForceType
@@ -272,9 +354,35 @@ namespace DynamoSAP_UI
     [NodeCategory("DynamoSAP.Definitions.SectionProp")]
     [NodeDescription("Select Section Catalog as input Sections Node to retrive the section names of selected catalog")]
     [IsDesignScriptCompatible]
-    public class SectionCatalogs : DynamoSAPStringDropdownBase
+    public class SectionCatalogs : DSDropDownBase
     {
-        public SectionCatalogs() : base(">", new SectionCatalog()) { }
+       public SectionCatalogs() : base(">") { }
+
+        public override void PopulateItems()
+        {
+            //clear items
+            Items.Clear();
+
+            //set up the collection
+            var newItems = new List<DynamoDropDownItem>();
+            foreach (var j in Enum.GetValues(new SectionCatalog().GetType())) 
+            {
+                newItems.Add(new DynamoDropDownItem(j.ToString(), j.ToString()));
+            }
+            Items.AddRange(newItems);
+
+            //set the selected index to 0
+            SelectedIndex = 0;
+        }
+        public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
+        {
+            // Build an AST node for the type of object contained in your Items collection.
+
+            var intNode = AstFactory.BuildStringNode((string)Items[SelectedIndex].Item);
+            var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), intNode);
+
+            return new List<AssociativeNode> { assign };
+        }
     }
     public enum SectionCatalog
     {
@@ -308,9 +416,35 @@ namespace DynamoSAP_UI
     [NodeCategory("DynamoSAP.Definitions")]
     [NodeDescription("Select Materials to set Section Property")]
     [IsDesignScriptCompatible]
-    public class Materials : DynamoSAPStringDropdownBase
+    public class Materials : DSDropDownBase
     {
-        public Materials() : base(">", new Material()) { }
+        public Materials() : base(">") { }
+
+        public override void PopulateItems()
+        {
+            //clear items
+            Items.Clear();
+
+            //set up the collection
+            var newItems = new List<DynamoDropDownItem>();
+            foreach (var j in Enum.GetValues(new Material().GetType())) 
+            {
+                newItems.Add(new DynamoDropDownItem(j.ToString(), j.ToString()));
+            }
+            Items.AddRange(newItems);
+
+            //set the selected index to 0
+            SelectedIndex = 0;
+        }
+        public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
+        {
+            // Build an AST node for the type of object contained in your Items collection.
+
+            var intNode = AstFactory.BuildStringNode((string)Items[SelectedIndex].Item);
+            var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), intNode);
+
+            return new List<AssociativeNode> { assign };
+        }
     }
 
     public enum Material
@@ -330,18 +464,70 @@ namespace DynamoSAP_UI
     [NodeCategory("DynamoSAP.Assembly")]
     [NodeDescription("Select units")]
     [IsDesignScriptCompatible]
-    public class Units : DynamoSAPStringDropdownBase
+    public class Units : DSDropDownBase
     {
-        public Units() : base(">", new eUnits()) { }
+        public Units() : base(">") { }
+
+        public override void PopulateItems()
+        {
+            //clear items
+            Items.Clear();
+
+            //set up the collection
+            var newItems = new List<DynamoDropDownItem>();
+            foreach (var j in Enum.GetValues(new eUnits().GetType())) 
+            {
+                newItems.Add(new DynamoDropDownItem(j.ToString(), j.ToString()));
+            }
+            Items.AddRange(newItems);
+
+            //set the selected index to 0
+            SelectedIndex = 0;
+        }
+        public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
+        {
+            // Build an AST node for the type of object contained in your Items collection.
+
+            var intNode = AstFactory.BuildStringNode((string)Items[SelectedIndex].Item);
+            var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), intNode);
+
+            return new List<AssociativeNode> { assign };
+        }
     }
 
     [NodeName("ShellTypes")]
     [NodeCategory("DynamoSAP.Definitions.ShellProp")]
     [NodeDescription("Shell Types")]
     [IsDesignScriptCompatible]
-    public class ShellTypes : DynamoSAPIntDropdownBase
+    public class ShellTypes : DSDropDownBase
     {
-        public ShellTypes() : base(">", new ShellType()) { }
+        public ShellTypes() : base(">") { }
+
+        public override void PopulateItems()
+        {
+            //clear items
+            Items.Clear();
+
+            //set up the collection
+            var newItems = new List<DynamoDropDownItem>();
+            foreach (var j in Enum.GetValues(new ShellType().GetType())) 
+            {
+                newItems.Add(new DynamoDropDownItem(j.ToString(), j));
+            }
+            Items.AddRange(newItems);
+
+            //set the selected index to 0
+            SelectedIndex = 0;
+        }
+        public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
+        {
+            // Build an AST node for the type of object contained in your Items collection.
+
+            var intNode = AstFactory.BuildIntNode((int)Items[SelectedIndex].Item);
+            var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), intNode);
+
+            return new List<AssociativeNode> { assign };
+        }
     }
 
 
