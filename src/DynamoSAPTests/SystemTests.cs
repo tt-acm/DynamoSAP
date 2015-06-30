@@ -362,5 +362,83 @@ namespace DynamoSAPTests
 
         }
 
+
+        /// <summary>
+        /// Open sample  SAP , Run Analysis and Read Results
+        /// </summary>
+        [Test, TestModel(@".\TestModel.rvt")]
+        public void RunAnalysis()
+        {
+            // Launch SAP2000v16 and Open a blank model
+            string filePath = @"C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\3a_RunAnalysis.sdb";
+            //Create SAP2000 Object
+            SapObject mySapObject = new SAP2000v16.SapObject();
+            //Start Application
+            mySapObject.ApplicationStart();
+            //Create SapModel object
+            cSapModel mySapModel = mySapObject.SapModel;
+            mySapModel.InitializeNewModel();
+            mySapModel.File.OpenFile(filePath);
+
+            //Open and Run the sample file
+            OpenAndRunDynamoDefinition(@".\Sample_3a_RunAnalysis_ReadResults.dyn");
+
+            // Test Logic is here --->
+            string failreport = string.Empty;
+
+            // Check Node Run Analysis
+            if (IsNodeInErrorOrWarningState("b24e8e64-0cc1-43a1-a98c-3bfcf4f9099e"))
+            {
+                failreport = string.Format(failreport + "{0}{1}", Environment.NewLine, "The node called '" + "Analysis.Run" + "' failed or threw a warning.");
+            }
+
+            // Check Node StructuralModel.Decompose
+            if (IsNodeInErrorOrWarningState("79d1b8d0-0bb8-498b-b40b-cc5de1b168b7"))
+            {
+                failreport = string.Format(failreport + "{0}{1}", Environment.NewLine, "The node called '" + "StructuralModel.Decompose" + "' failed or threw a warning.");
+            }            
+            
+            // Check Node Frame.DisplayLoads
+            if (IsNodeInErrorOrWarningState("6ba73349-8d06-4f1f-ba4f-d3d23f59bba4"))
+            {
+                failreport = string.Format(failreport + "{0}{1}", Environment.NewLine, "The node called '" + "Frame.DisplayLoads" + "' failed or threw a warning.");
+            }
+
+            // Check Node Analysis.GetResults
+            if (IsNodeInErrorOrWarningState("39d253c0-b3fc-4e82-9c74-5e645578bab3"))
+            {
+                failreport = string.Format(failreport + "{0}{1}", Environment.NewLine, "The node called '" + "Analysis.GetResults" + "' failed or threw a warning.");
+            }
+
+            // Check dropdown Force Type 
+            var loadType = (string)GetPreviewValue("a1a18410-1bf5-4492-8bad-40faee974fe9");
+            if (loadType != "Force") failreport = string.Format(failreport + "{0}{1}", Environment.NewLine, "The node called '" + "Force Type Dropdown" + "' returns wrong value !");
+
+            // Check Node Analysis.Decomposeresults
+            if (IsNodeInErrorOrWarningState("80e7a42a-1418-471f-b368-551fd3752e8d"))
+            {
+                failreport = string.Format(failreport + "{0}{1}", Environment.NewLine, "The node called '" + "Analysis.DecomposeResults" + "' failed or threw a warning.");
+            }
+
+            // Check Node Analysis.VisualizeResults
+            if (IsNodeInErrorOrWarningState("982cd2d8-aa2a-473b-9d6b-ed6f11ed29c4"))
+            {
+                failreport = string.Format(failreport + "{0}{1}", Environment.NewLine, "The node called '" + "Analysis.VisualizeResults" + "' failed or threw a warning.");
+            }
+
+            // Set SAP instances to null;
+            mySapObject.ApplicationExit(false);
+            mySapObject = null;
+            mySapModel = null;
+
+            if (!string.IsNullOrEmpty(failreport))
+            {
+                Assert.Fail(failreport);
+            }
+
+            //if we got here, nothing failed.
+            Assert.Pass();
+        }
+
     }
 }

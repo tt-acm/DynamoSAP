@@ -1,0 +1,4 @@
+  RespType: Case     ,  File: .Y04,  Records:           0        2644
+  RespType: Displ    ,  File: .Y00,  Records:           0       81600
+  RespType: JFJoint  ,  File: .Y01,  Records:           0       81600
+  RespType: JFSpring ,  File: .Y02,  Records:           0       81600
