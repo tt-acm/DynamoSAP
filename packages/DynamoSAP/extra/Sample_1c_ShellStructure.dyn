@@ -1,4 +1,4 @@
-<Workspace Version="0.8.0.950" X="-2026.89347046372" Y="-857.071344484594" zoom="1.09351600764287" Name="Home" RunType="Manual" RunPeriod="100" HasRunWithoutCrash="False">
+<Workspace Version="0.8.0.950" X="-1218.53893317966" Y="-1375.01889967533" zoom="1.06385393214288" Name="Home" RunType="Manual" RunPeriod="100" HasRunWithoutCrash="True">
   <NamespaceResolutionMap />
   <Elements>
     <Dynamo.Nodes.DSFunction guid="dbd85f0e-2d06-4c58-a45b-f1263c8f14bf" type="Dynamo.Nodes.DSFunction" nickname="Surface.ByLoft" x="1122" y="808" isVisible="false" isUpstreamVisible="true" lacing="Shortest" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Surface.ByLoft@Autodesk.DesignScript.Geometry.Curve[]" />
@@ -97,8 +97,8 @@
       <PortInfo index="6" default="True" />
     </Dynamo.Nodes.DSFunction>
     <Dynamo.Nodes.DSFunction guid="0c217e34-2531-4450-a066-f839b64b1a1e" type="Dynamo.Nodes.DSFunction" nickname="Shell.FromSurface" x="1954.81320539053" y="902.28980934175" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Structure.Shell.FromSurface@Autodesk.DesignScript.Geometry.Surface,DynamoSAP.Definitions.ShellProp" />
-    <DynamoSAP_UI.Materials guid="85752b37-b7a0-49fe-ab3f-271de0a391b5" type="DynamoSAP_UI.Materials" nickname="Materials" x="1213.14099733018" y="1675.36686883963" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="0:A36" />
-    <DynamoSAP_UI.ShellTypes guid="e0c739ee-8e95-4531-95b8-d5bb71501b6c" type="DynamoSAP_UI.ShellTypes" nickname="ShellTypes" x="1212.52941467174" y="1572.9719501046" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="0:Shell_thin" />
+    <DynamoSAP_UI.Materials guid="85752b37-b7a0-49fe-ab3f-271de0a391b5" type="DynamoSAP_UI.Materials" nickname="Materials" x="1210.32106133205" y="1697.92635682466" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="7:Concrete_4000Psi" />
+    <DynamoSAP_UI.ShellTypes guid="e0c739ee-8e95-4531-95b8-d5bb71501b6c" type="DynamoSAP_UI.ShellTypes" nickname="ShellTypes" x="1250.12856131345" y="1581.43175809898" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="0:Shell_thin" />
     <Dynamo.Nodes.CodeBlockNodeModel guid="42ad877b-bfb3-4a95-adcb-1776b091b53b" type="Dynamo.Nodes.CodeBlockNodeModel" nickname="Code Block" x="1265.27456418131" y="1479.30687219577" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;Dyn_Con_12&quot;;" ShouldFocus="false" />
     <Dynamo.Nodes.CodeBlockNodeModel guid="4c6fd40f-e1d5-4d76-a783-59de9ccbfb3d" type="Dynamo.Nodes.CodeBlockNodeModel" nickname="Code Block" x="1404.90256176493" y="1722.46020127871" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="12;" ShouldFocus="false" />
     <Dynamo.Nodes.Function guid="45ec03b4-7bcb-4ee3-be0b-967d62104c29" type="Dynamo.Nodes.Function" nickname="LunchBox Triangle Grid by Face" x="1553.10092359849" y="856.356334350757" isVisible="true" isUpstreamVisible="true" lacing="Disabled">

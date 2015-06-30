@@ -1,4 +1,4 @@
-<Workspace Version="0.8.0.950" X="-490.664796252535" Y="-603.61879160267" zoom="0.418773965075769" Name="Home" RunType="Manual" RunPeriod="100" HasRunWithoutCrash="True">
+<Workspace Version="0.8.0.950" X="-1195.40067204425" Y="-1795.99794730731" zoom="1.17275381391578" Name="Home" RunType="Manual" RunPeriod="100" HasRunWithoutCrash="False">
   <NamespaceResolutionMap />
   <Elements>
     <Dynamo.Nodes.Function guid="0ddf228c-2d92-4626-bea7-b471db37d221" type="Dynamo.Nodes.Function" nickname="LunchBox Space Truss Structure" x="1414" y="808" isVisible="true" isUpstreamVisible="true" lacing="Disabled">

@@ -114,7 +114,7 @@ namespace DynamoSAPTests
 
             // Check dropdown Load Pattern Types 
             var loadPatternType = (string)GetPreviewValue("c7adc7d3-fff5-49bc-b5ee-586546d3f1ba");
-            if (loadPatternType != "LTYPE_LIVE") failreport = string.Format(failreport + "{0}{1}", Environment.NewLine, "The node called '" + "LoadPatternTypes Dropdown" + "' returns wrong value !");
+            if (loadPatternType != "LTYPE_DEAD") failreport = string.Format(failreport + "{0}{1}", Environment.NewLine, "The node called '" + "LoadPatternTypes Dropdown" + "' returns wrong value !");
 
             // Check Node SetLoadPattern
             if (IsNodeInErrorOrWarningState("89e67ebd-f8a6-4bec-a92e-1dfee2046852"))
@@ -411,8 +411,8 @@ namespace DynamoSAPTests
             }
 
             // Check dropdown Force Type 
-            var loadType = (string)GetPreviewValue("a1a18410-1bf5-4492-8bad-40faee974fe9");
-            if (loadType != "Force") failreport = string.Format(failreport + "{0}{1}", Environment.NewLine, "The node called '" + "Force Type Dropdown" + "' returns wrong value !");
+            var forceType = (string)GetPreviewValue("a1a18410-1bf5-4492-8bad-40faee974fe9");
+            if (forceType != "Axial") failreport = string.Format(failreport + "{0}{1}", Environment.NewLine, "The node called '" + "Force Type Dropdown" + "' returns wrong value !");
 
             // Check Node Analysis.Decomposeresults
             if (IsNodeInErrorOrWarningState("80e7a42a-1418-471f-b368-551fd3752e8d"))

@@ -1,0 +1,918 @@
+' 0:< Initial VM: Avail 8388380 MB, Used 20 MB, Peak 42; RAM: Avail 3617 MB, Used 41 MB, Peak 42 
+'C 30-Jun-2015 15:48:12.161;   0:< started recording journal file 
+' Build: 20140709_2115(x64)
+Dim Jrn
+Set Jrn = CrsJournalScript
+' 0:<  ->desktop InitApplication 
+' 0:<  <-desktop InitApplication 
+' 0:<  ->desktop InitNativeInstance 
+' 0:< Options::loadOptions: m_strDataLibraryLocations=TT Families=..\..\..\..\ProgramData\Autodesk\RVT 2014\Libraries\TT, US Imperial Families=..\..\..\..\ProgramData\Autodesk\RVT 2014\Libraries\US Imperial, US Imperial Detail Library=..\..\..\..\ProgramData\Autodesk\RVT 2014\Libraries\US Imperial\Detail Items, US Metric Families=..\..\..\..\ProgramData\Autodesk\RVT 2014\Libraries\US Metric, US Metric Detail Library=..\..\..\..\ProgramData\Autodesk\RVT 2014\Libraries\US Metric\Detail Items, TT Project Templates=..\..\..\..\ProgramData\Autodesk\RVT 2014\Templates\TT\Project Templates, US Imperial Project Templates=..\..\..\..\ProgramData\Autodesk\RVT 2014\Templates\US Imperial, US Metric Project Templates=..\..\..\..\ProgramData\Autodesk\RVT 2014\Templates\US Metric, UK Metric Project Templates=..\..\..\..\ProgramData\Autodesk\RVT 2014\Templates\UK, Imperial Library=C:\ProgramData\Autodesk\RVT 2014\Libraries\US Imperial\,Imperial Detail Library=C:\ProgramData\Autodesk\RVT 2014\Libraries\US Imperial\Detail Items (defaultLib==\Library) 
+' 0:< ::0:: Delta VM: Avail -16 -> 8388364 MB, Used +3 -> 24 MB; RAM: Avail -8 -> 3609 MB, Used +6 -> 47 MB, Peak +6 -> 47 MB 
+'C 30-Jun-2015 15:48:12.280;   0:< License initialization complete 
+' 0:< ::0:: Delta VM: Avail -926 -> 8387439 MB, Used +174 -> 198 MB, Peak +156 -> 198 MB; RAM: Avail -173 -> 3437 MB, Used +190 -> 238 MB, Peak +190 -> 238 MB 
+' 0:< Autodesk Revit 2014 
+' 0:< 64-bit load point = C:\Program Files\Autodesk\Revit 2014 
+' 0:< this journal = C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\journal.0037.txt 
+' 0:< ::0:: Delta VM: Avail -55 -> 8387385 MB, Used +7 -> 206 MB, Peak +40 -> 238 MB; RAM: Avail -12 -> 3425 MB, Used +11 -> 249 MB, Peak +12 -> 250 MB 
+' 0:< Failed to load add-in manifest file: Root element is missing. 
+' 0:< Added new API pushbutton 35011, name Navisworks 2014, class NavisWorks11.LcRevitExportCommand, assembly C:\Program Files\Common Files\Autodesk Shared\Navisworks\2014\nwexportrevit2014\nwexportrevit2014_11.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
+' 0:< Added new API pushbutton 35012, name Navisworks SwitchBack 2014, class NavisWorks11.LcActivateSwitchBack, assembly C:\Program Files\Common Files\Autodesk Shared\Navisworks\2014\nwexportrevit2014\nwexportrevit2014_11.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
+' 0:< Added new API pushbutton 35013, name Navisworks 2015, class NavisWorks12.LcRevitExportCommand, assembly C:\Program Files\Common Files\Autodesk Shared\Navisworks\2015\nwexportrevit2014\nwexportrevit2014_12.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
+' 0:< Added new API pushbutton 35014, name Navisworks SwitchBack 2015, class NavisWorks12.LcActivateSwitchBack, assembly C:\Program Files\Common Files\Autodesk Shared\Navisworks\2015\nwexportrevit2014\nwexportrevit2014_12.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
+' 0:< Added new API pushbutton 35015, name RTF.Applications.RevitTestFramework, class RTF.Applications.RevitTestFramework, assembly C:\Users\eertugrul\Documents\GitHub\RevitTestFramework\bin\AnyCPU\Debug\RTFRevit.dll, vendorId Dynamo, vendor description Dynamo. 
+' 0:< Added new API pushbutton 35016, name TT Carbon Calculator Extractor, class TTMaterialBatch.Batch, assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\TTCarbonCalcExtractor\TTMaterialBatch.dll, vendorId TT, vendor description Thornton Tomasetti. 
+' 0:< Journal Init 
+' 0:< Log Summary 
+' 0:< .Count 
+' 0:< ...DBG_SOMETHING = 1 
+' 0:< ...DBG_WARNING = 1 
+' 0:< ...ProjectRecsCreated = 1 
+' 0:< .ThreadPool 
+' 0:< ...ActivePoolSize = 21 
+' 0:< ...ConfiguredPoolSize = automatic 
+' 0:< ...ParallelCores = 4 
+' 0:< ...RequestedPoolSize = automatic 
+' 0:< .Tuning 
+' 0:< ...ElemTable = 1 (Serial except when multithreaded) 
+' 0:< ...Global = 0 (Scalable) 
+' 0:< ...PoolGlobal = 1 (Pool) 
+' 0:< ...PoolLocking = 1 (Locking) 
+' 0:< ...PoolScalable = 1 (Pool) 
+' 0:< ...PoolTreeNodes = 0 (Allocator) 
+' 0:< ...Scalable = 0 (Scalable) 
+'H 30-Jun-2015 15:48:15.293;   0:< 
+Jrn.Data "JournalDefaultTemplate"  _
+        , "TT Imperial Template=$AllUsersAppData\Templates\TT\Project Templates\TT_Template_Imperial_RS2014.rte, TT Metric Template=$AllUsersAppData\Templates\TT\Project Templates\TT_Template_Metric_RS2014.rte"
+'H 30-Jun-2015 15:48:15.293;   0:< 
+Jrn.Data "JournalDefaultViewDiscipline"  _
+        , "Structure"
+'H 30-Jun-2015 15:48:15.293;   0:< 
+Jrn.Directive "Version"  _
+        , "2014.000", "2.143"
+'H 30-Jun-2015 15:48:15.293;   0:< 
+Jrn.Directive "Username"  _
+        , "EErtugrul"
+'H 30-Jun-2015 15:48:15.293;   0:< 
+Jrn.Directive "CategoryDisciplineFilter"  _
+        , 2
+'H 30-Jun-2015 15:48:15.293;   0:< 
+Jrn.Directive "DisciplineOption"  _
+        , 7677
+'H 30-Jun-2015 15:48:15.294;   0:< 
+Jrn.Directive "TabDisplayOptions"  _
+        , "StayOnModifyInProject", 0
+'H 30-Jun-2015 15:48:15.294;   0:< 
+Jrn.Directive "TabDisplayOptions"  _
+        , "StayOnModifyInFamily", 1
+'H 30-Jun-2015 15:48:15.294;   0:< 
+Jrn.Directive "TabDisplayOptions"  _
+        , "ActiveCtOnSelection", 1
+'H 30-Jun-2015 15:48:15.294;   0:< 
+Jrn.Directive "AllowLinkSelection"  _
+        , 1
+'H 30-Jun-2015 15:48:15.294;   0:< 
+Jrn.Directive "AllowFaceSelection"  _
+        , 0
+'H 30-Jun-2015 15:48:15.294;   0:< 
+Jrn.Directive "AllowUnderlaySelection"  _
+        , 1
+'H 30-Jun-2015 15:48:15.294;   0:< 
+Jrn.Directive "AllowPinnedSelection"  _
+        , 1
+' 0:< API_SUCCESS { Registered an external service.: ServiceId(a9bdf0fd-2632-429e-bc35-50ebc2b824d2); VendorId(ADSK); Description(Navisworks Export Service) } 
+' 0:< API_SUCCESS { Registered an external service.: ServiceId(de6db8de-dea6-40bd-9503-4ffe62ff6143); VendorId(ADSK); Description(The external service to view and modify code checking parameter in analytical elements.) } 
+' 0:< API_SUCCESS { Registered an external service.: ServiceId(d8b95737-f943-414c-9ad7-86785bf1acbc); VendorId(ADSK); Description(IFC) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(d8b95737-f943-414c-9ad7-86785bf1acbc); ServerId(ef8d0493-7f36-42b5-b9aa-8aaac716482b); Name(Default IFC); VendorId(ADSK); Description(Default IFC) } 
+' 0:< API_SUCCESS { Registered an external service.: ServiceId(98d317e2-e943-4cc0-a3da-2edf32a5d942); VendorId(ADSK); Description(IFC) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(98d317e2-e943-4cc0-a3da-2edf32a5d942); ServerId(660a7370-f6d6-43c8-8456-6b2eea785110); Name(Default IFC); VendorId(ADSK); Description(Default IFC) } 
+' 0:< API_SUCCESS { Registered an external service.: ServiceId(785d0bd7-3088-489a-af7a-593fc32e2540); VendorId(ADSK); Description(Duct fitting and accessory pressure drop service) } 
+' 0:< API_SUCCESS { Registered an external service.: ServiceId(b8656566-e4ef-4e6a-bedb-9ecc6b5a2780); VendorId(ADSK); Description(Pipe fitting and accessory pressure drop service) } 
+' 0:< API_SUCCESS { Registered an external service.: ServiceId(8c707bd6-ecd6-4150-a0df-bd6c85dd9bb0); VendorId(ADSK); Description(Duct Straight Segment Pressure Drop Calculation) } 
+' 0:< API_SUCCESS { Registered an external service.: ServiceId(62d13e0c-9fe1-4d8e-a0c7-1f93d24cf3f3); VendorId(ADSK); Description(Pipe Straight Segment Pressure Drop Calculation) } 
+' 0:< API_SUCCESS { Registered an external service.: ServiceId(bf0da776-5307-4747-8285-f358e92a90d0); VendorId(ADSK); Description(Convert Fixture Units to Flow for Plumbing Fixtures, which is applicable to Domestic Water System Flow Calculation) } 
+' 0:< API_SUCCESS { Registered an external service.: ServiceId(52009bda-c817-4aef-aa31-36dc3742516e); VendorId(ADSK); Description(Duct fitting and accessory pressure drop UI service) } 
+' 0:< API_SUCCESS { Registered an external service.: ServiceId(1931b323-1d29-4083-b1ce-bfdcddd011af); VendorId(ADSK); Description(Pipe fitting and accessory pressure drop UI service) } 
+' 0:< ::0:: Delta VM: Avail -72 -> 8387313 MB, Used +24 -> 230 MB; RAM: Avail -33 -> 3392 MB, Used +31 -> 281 MB, Peak +30 -> 281 MB 
+' 0:< To make IFC server work. 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(bf0da776-5307-4747-8285-f358e92a90d0); ServerId(56121d7d-e1d7-42a3-bed8-f4d1d32058c8); Name(Plumbing Fixture Flow); VendorId(ADSK); Description(Calculation of flow using the Plumbing Fixture Flow method.) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(62d13e0c-9fe1-4d8e-a0c7-1f93d24cf3f3); ServerId(ea275fb1-5d7b-47d6-b828-bf856df9bfd5); Name(Pipe Pressure Drop); VendorId(ADSK); Description(Calculation of pressure drop using Darcy-Weisbach method.) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(8c707bd6-ecd6-4150-a0df-bd6c85dd9bb0); ServerId(042a10e0-8d24-46a4-9596-d192b3125d0c); Name(Duct Pressure Drop); VendorId(ADSK); Description(Calculation of duct pressure drop using Darcy method.) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(785d0bd7-3088-489a-af7a-593fc32e2540); ServerId(76eff5da-2e71-45f7-b940-cc5716328ba0); Name(Not Defined); VendorId(ADSK); Description(The Pressure Drop on the fitting will be treated as 0.) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(785d0bd7-3088-489a-af7a-593fc32e2540); ServerId(8baf7d75-8b9b-46d0-b8ce-3ad1c19e6b19); Name(Coefficient from ASHRAE Table); VendorId(ADSK); Description(Version 5.0.0 of the ASHRAE duct fitting database has been implemented for duct fittings. When using this calculation method, the duct fitting coefficient will be read from the mapped ASHRAE table.) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(785d0bd7-3088-489a-af7a-593fc32e2540); ServerId(5a598293-1504-46cc-a9c0-de55c82848b9); Name(Specific Coefficient); VendorId(ADSK); Description(Customize the Loss Coefficient on the fitting, then using the following method to calculate duct fitting pressure drop. this method only available for two connector fittings, like elbow, transitions, etc.) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(785d0bd7-3088-489a-af7a-593fc32e2540); ServerId(46245996-eebb-4536-ac17-9c1cd917d8cf); Name(Specific Loss); VendorId(ADSK); Description(Customize the Pressure Drop on the fitting, this method only available for two connector fittings, like elbow, transitions, etc.) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(b8656566-e4ef-4e6a-bedb-9ecc6b5a2780); ServerId(61e7b8e1-16d1-4fe4-82f0-327af736323f); Name(Not Defined); VendorId(ADSK); Description(The Pressure Drop on the fitting will be treated as 0.) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(b8656566-e4ef-4e6a-bedb-9ecc6b5a2780); ServerId(51dd5e98-a9dd-464b-b286-4a37953610bf); Name(K Coefficient from Table); VendorId(ADSK); Description(CIBSE/ASHRAE/Crane standards are used for pipe fitting loss definition based on the pipe fitting types.) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(b8656566-e4ef-4e6a-bedb-9ecc6b5a2780); ServerId(32d58662-b467-4f7b-b728-f6ad7b7ba5e3); Name(Specific Coefficient); VendorId(ADSK); Description(Customize the Loss Coefficient on the fitting, then using the following method to calculate pipe fitting pressure drop. This method only available for two connector fittings, like elbow, transitions, etc.) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(b8656566-e4ef-4e6a-bedb-9ecc6b5a2780); ServerId(16f4f7be-0ac0-461d-a9a4-1d3511cd280e); Name(Specific Loss); VendorId(ADSK); Description(Customize the Pressure Drop on the fitting, this method only available for two connector fittings, like elbow, transitions, etc.) } 
+' 0:< Added new API external application RaaS, class Autodesk.RaaS.RevitAddin.EApplication, assembly RaaSApplication.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
+' 0:< API registering ApplicationClosing event by application RaaS (d4f6554b-5d68-4a13-beec-4a0647c34408). 
+' 0:< API_SUCCESS { Replacing command id 'ID_PHOTO_RENDER_IN_CLOUD' Executed implementation with implementation from application 'RaaS' dll 'C:\Program Files\Autodesk\Revit 2014\AddIns\RaaSForRevit\RaaSApplication.dll'. } 
+' 0:< API_SUCCESS { API registering command  Executed event by application RaaS (d4f6554b-5d68-4a13-beec-4a0647c34408). } 
+' 0:< API_SUCCESS { Replacing command id 'ID_PHOTO_RENDER_IN_CLOUD' CanExecute implementation with implementation from application 'RaaS' dll 'C:\Program Files\Autodesk\Revit 2014\AddIns\RaaSForRevit\RaaSApplication.dll'. } 
+' 0:< API_SUCCESS { API registering command  CanExecute event by application RaaS (d4f6554b-5d68-4a13-beec-4a0647c34408). } 
+' 0:< API_SUCCESS { Replacing command id 'ID_PHOTO_RENDER_GALLERY' Executed implementation with implementation from application 'RaaS' dll 'C:\Program Files\Autodesk\Revit 2014\AddIns\RaaSForRevit\RaaSApplication.dll'. } 
+' 0:< API_SUCCESS { API registering command  Executed event by application RaaS (d4f6554b-5d68-4a13-beec-4a0647c34408). } 
+' 0:< API_SUCCESS { Replacing command id 'ID_PHOTO_RENDER_GALLERY' CanExecute implementation with implementation from application 'RaaS' dll 'C:\Program Files\Autodesk\Revit 2014\AddIns\RaaSForRevit\RaaSApplication.dll'. } 
+' 0:< API_SUCCESS { API registering command  CanExecute event by application RaaS (d4f6554b-5d68-4a13-beec-4a0647c34408). } 
+' 0:< Added new API external application AutoLoad, class AutoLoader.AutoLoader, assembly AutoLoader.dll, vendorId ADSK, vendor description . 
+'H 30-Jun-2015 15:48:16.719;   0:< 
+Jrn.Directive "IdleTimeTaskSymbol"  _
+        , "0.ExternalEvent"
+' 0:< Added new API external application FittingAndAccessoryCalculationUIServers, class FittingAndAccessoryCalculationUIServers.ServerApp, assembly FittingAndAccessoryCalculationUIServers.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(52009bda-c817-4aef-aa31-36dc3742516e); ServerId(607992d7-359d-4593-b497-8aa238e2c564); Name(Duct not defined pressure drop UI server); VendorId(ADSK); Description(Duct not defined pressure drop UI server) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(52009bda-c817-4aef-aa31-36dc3742516e); ServerId(9641a039-441e-42e2-93a6-c0e2177cc23c); Name(Duct specific coefficient pressure drop UI server); VendorId(ADSK); Description(Duct specific coefficient pressure drop UI server) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(52009bda-c817-4aef-aa31-36dc3742516e); ServerId(d3b5e81d-9b8c-40da-8efb-99dd37fda611); Name(Duct specific loss pressure drop UI server); VendorId(ADSK); Description(Duct specific loss pressure drop UI server) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(52009bda-c817-4aef-aa31-36dc3742516e); ServerId(25fa8de2-67c4-47d1-91f6-bd6f0803a5ed); Name(Duct coefficient from table pressure drop UI server); VendorId(ADSK); Description(Duct coefficient from table pressure drop UI server) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(1931b323-1d29-4083-b1ce-bfdcddd011af); ServerId(62917391-e14d-4897-ad0c-05342d71e4f9); Name(Pipe not defined pressure drop UI server); VendorId(ADSK); Description(Pipe not defined pressure drop UI server) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(1931b323-1d29-4083-b1ce-bfdcddd011af); ServerId(247265b6-7b71-4147-97c6-cc52b39c12aa); Name(Pipe specific coefficient pressure drop UI server); VendorId(ADSK); Description(Pipe specific coefficient pressure drop UI server) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(1931b323-1d29-4083-b1ce-bfdcddd011af); ServerId(5978b92a-3f0b-4691-bbc8-caf2fae20a71); Name(Pipe specific loss pressure drop UI server); VendorId(ADSK); Description(Pipe specific loss pressure drop UI server) } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(1931b323-1d29-4083-b1ce-bfdcddd011af); ServerId(cda19b6f-fbd5-4725-a0ce-f159bf5d02fe); Name(Pipe K coefficient from table pressure drop UI server); VendorId(ADSK); Description(Pipe K coefficient from table pressure drop UI server) } 
+' 0:< Added new API external application PressureLossReport, class PressureLossReport.PressureLossReportApplication, assembly PressureLossReport.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
+' 0:< API_SUCCESS { Replacing command id 'ID_MEP_DUCT_PRESSURE_LOSS_REPORT' CanExecute implementation with implementation from application 'PressureLossReport' dll 'C:\Program Files\Autodesk\Revit 2014\AddIns\MEPCalculation\PressureLossReport.dll'. } 
+' 0:< API_SUCCESS { API registering command Duct Pressure Loss Report CanExecute event by application PressureLossReport (b00d3753-d3bc-4255-9c97-e389de87a5d6). } 
+' 0:< API_SUCCESS { Replacing command id 'ID_MEP_DUCT_PRESSURE_LOSS_REPORT' Executed implementation with implementation from application 'PressureLossReport' dll 'C:\Program Files\Autodesk\Revit 2014\AddIns\MEPCalculation\PressureLossReport.dll'. } 
+' 0:< API_SUCCESS { API registering command Duct Pressure Loss Report Executed event by application PressureLossReport (b00d3753-d3bc-4255-9c97-e389de87a5d6). } 
+' 0:< API_SUCCESS { Replacing command id 'ID_MEP_PIPE_PRESSURE_LOSS_REPORT' CanExecute implementation with implementation from application 'PressureLossReport' dll 'C:\Program Files\Autodesk\Revit 2014\AddIns\MEPCalculation\PressureLossReport.dll'. } 
+' 0:< API_SUCCESS { API registering command Pipe Pressure Loss Report CanExecute event by application PressureLossReport (b00d3753-d3bc-4255-9c97-e389de87a5d6). } 
+' 0:< API_SUCCESS { Replacing command id 'ID_MEP_PIPE_PRESSURE_LOSS_REPORT' Executed implementation with implementation from application 'PressureLossReport' dll 'C:\Program Files\Autodesk\Revit 2014\AddIns\MEPCalculation\PressureLossReport.dll'. } 
+' 0:< API_SUCCESS { API registering command Pipe Pressure Loss Report Executed event by application PressureLossReport (b00d3753-d3bc-4255-9c97-e389de87a5d6). } 
+' 0:< API_SUCCESS { Replacing command id 'ID_MEP_SELECT_DUCT_PRESSURE_LOSS_REPORT' CanExecute implementation with implementation from application 'PressureLossReport' dll 'C:\Program Files\Autodesk\Revit 2014\AddIns\MEPCalculation\PressureLossReport.dll'. } 
+' 0:< API_SUCCESS { API registering command Duct Pressure Loss Report CanExecute event by application PressureLossReport (b00d3753-d3bc-4255-9c97-e389de87a5d6). } 
+' 0:< API_SUCCESS { Replacing command id 'ID_MEP_SELECT_DUCT_PRESSURE_LOSS_REPORT' Executed implementation with implementation from application 'PressureLossReport' dll 'C:\Program Files\Autodesk\Revit 2014\AddIns\MEPCalculation\PressureLossReport.dll'. } 
+' 0:< API_SUCCESS { API registering command Duct Pressure Loss Report Executed event by application PressureLossReport (b00d3753-d3bc-4255-9c97-e389de87a5d6). } 
+' 0:< API_SUCCESS { Replacing command id 'ID_MEP_SELECT_PIPE_PRESSURE_LOSS_REPORT' CanExecute implementation with implementation from application 'PressureLossReport' dll 'C:\Program Files\Autodesk\Revit 2014\AddIns\MEPCalculation\PressureLossReport.dll'. } 
+' 0:< API_SUCCESS { API registering command Pipe Pressure Loss Report CanExecute event by application PressureLossReport (b00d3753-d3bc-4255-9c97-e389de87a5d6). } 
+' 0:< API_SUCCESS { Replacing command id 'ID_MEP_SELECT_PIPE_PRESSURE_LOSS_REPORT' Executed implementation with implementation from application 'PressureLossReport' dll 'C:\Program Files\Autodesk\Revit 2014\AddIns\MEPCalculation\PressureLossReport.dll'. } 
+' 0:< API_SUCCESS { API registering command Pipe Pressure Loss Report Executed event by application PressureLossReport (b00d3753-d3bc-4255-9c97-e389de87a5d6). } 
+' 0:< Added new API external application ACMToolsRibbonTab2014, class ACMToolsRibbonTab2014.ACMToolsRibbonTabApp, assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\ACMToolsRibbonTab2014\ACMToolsRibbonTab2014.dll, vendorId TT, vendor description Thornton Tomasetti. 
+' 0:< Added new API pushbutton 6400 name  text Parameter 
+'Browser class TT.PB.CS.C1 assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\ACMToolsRibbonTab2014\..\TT_RS2014_Framework\TT_PB_Commands.dll 
+' 0:< Added new API pushbutton 6401 name  text Beam 
+'Moment Switcher class TT.RS2014_Moment_Switcher.C1 assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\ACMToolsRibbonTab2014\..\TT_RS2014_Framework\TT_RS2014_Moment_Switcher_Commands.dll 
+' 0:< Added new API pushbutton 6402 name  text Member
+'Flipper class TT.RS2014_Model_Fixer.C2 assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\ACMToolsRibbonTab2014\..\TT_RS2014_Framework\TT_RS2014_Model_Fixer_Commands.dll 
+' 0:< Added new API pushbutton 6403 name  text Parameter
+'Explorer class TT.FIM_Toolbar_2014.CS.C1 assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\ACMToolsRibbonTab2014\..\TT_RS2014_Framework\TT_FIM_Commands_2014.dll 
+' 0:< Added new API pushbutton 6404 name  text Beams to
+'Braces class TT.RS2014_BEAM2BRACE.C1 assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\ACMToolsRibbonTab2014\..\TT_RS2014_Framework\TT_RS2014_BEAM2BRACE_Commands.dll 
+' 0:< Added new API pushbutton 6405 name  text Grid
+'Framing Check class TT.Grid_Checker_2014.CS.C1 assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\ACMToolsRibbonTab2014\..\TT_RS2014_Framework\TT_Grid_Checker_2014_Commands.dll 
+' 0:< Added new API pushbutton 6406 name  text Mega Purge class TT.Mega_Purge_2014.CS.C1 assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\ACMToolsRibbonTab2014\..\TT_RS2014_Framework\TT_Mega_Purge_2014_Commands.dll 
+' 0:< Added new API external application Batch Print Application, class Revit.PrintHarness.PrintHarnessApplication, assembly C:\Program Files (x86)\Autodesk\Autodesk Batch Print for Revit 2014\BatchPrint.dll, vendorId ADSK, vendor description Autodesk, subscription.autodesk.com. 
+' 0:< Added new API pushbutton 6407 name  text Batch Print class Revit.PrintHarness.PrintHarnessAPI assembly C:\Program Files (x86)\Autodesk\Autodesk Batch Print for Revit 2014\BatchPrint.dll 
+' 0:< Added new API external application eTransmit for Revit, class eTransmitForRevit.eTransmitApplication, assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\eTransmit for Autodesk Revit 2014\eTransmitForRevit.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
+' 0:< Added new API pushbutton 6408 name  text Transmit a model class eTransmitForRevit.eTransmitCommand assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\eTransmit for Autodesk Revit 2014\eTransmitForRevit.dll 
+' 0:< Added new API pushbutton 6409 name  text Help class eTransmitForRevit.eTransmitHelp assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\eTransmit for Autodesk Revit 2014\eTransmitForRevit.dll 
+' 0:< Added new API pushbutton 6410 name  text About class eTransmitForRevit.eTransmitAbout assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\eTransmit for Autodesk Revit 2014\eTransmitForRevit.dll 
+' 0:< Added new API external application GlobeLink Application, class GEExternalApp.ExternalApp, assembly C:\Program Files (x86)\Autodesk\Autodesk Globe Link for Revit 2014\GEExternalApp.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
+' 0:< Added new API pushbutton 6411 name  text Acquirement class GEAcquirement.Acquirement assembly C:\Program Files (x86)\Autodesk\Autodesk Globe Link for Revit 2014\GlobeLinkForRevit.dll 
+' 0:< Added new API pushbutton 6412 name  text Import class GEImport.Import assembly C:\Program Files (x86)\Autodesk\Autodesk Globe Link for Revit 2014\GlobeLinkForRevit.dll 
+' 0:< Added new API pushbutton 6413 name  text Publish class GEPublish.Publish assembly C:\Program Files (x86)\Autodesk\Autodesk Globe Link for Revit 2014\GlobeLinkForRevit.dll 
+' 0:< Added new API pushbutton 6414 name  text Export class GEExport.Export assembly C:\Program Files (x86)\Autodesk\Autodesk Globe Link for Revit 2014\GlobeLinkForRevit.dll 
+' 0:< Added new API external application Model Review, class BIMStandardsManager.ExternalApp, assembly C:\Program Files (x86)\Autodesk\Autodesk Revit Model Review 2014\ModelReview.dll, vendorId ADSK, vendor description Autodesk, subscription.autodesk.com. 
+' 0:< ::0:: Delta VM: Avail -15 -> 8387298 MB, Used -3 -> 227 MB; RAM: Avail -2 -> 3391 MB, Used +2 -> 283 MB, Peak +6 -> 287 MB 
+' 0:< Added new API pushbutton 6415 name  text Check class BIMStandardsManager.Command assembly C:\Program Files (x86)\Autodesk\Autodesk Revit Model Review 2014\ModelReview.dll 
+' 0:< Added new API pushbutton 6416 name  text Manage class BIMStandardsManager.CommandConfig assembly C:\Program Files (x86)\Autodesk\Autodesk Revit Model Review 2014\ModelReview.dll 
+' 0:< Added new API pushbutton 6417 name  text View class BIMStandardsManager.CommandReview assembly C:\Program Files (x86)\Autodesk\Autodesk Revit Model Review 2014\ModelReview.dll 
+' 0:< Added new API pushbutton 6418 name  text About... class BIMStandardsManager.CommandAbout assembly C:\Program Files (x86)\Autodesk\Autodesk Revit Model Review 2014\ModelReview.dll 
+' 0:< Added new API external application Model Review Events, class BIMStandardsManager.CommandEventsApp, assembly C:\Program Files (x86)\Autodesk\Autodesk Revit Model Review 2014\ModelReview.dll, vendorId ADSK, vendor description Autodesk, subscription.autodesk.com. 
+' 0:< API registering DocumentOpened event by application Model Review Events (1469753f-186d-4dc2-b0e9-431b302e62f9). 
+' 0:< API registering DocumentSaving event by application Model Review Events (1469753f-186d-4dc2-b0e9-431b302e62f9). 
+' 0:< API registering DocumentSavingAs event by application Model Review Events (1469753f-186d-4dc2-b0e9-431b302e62f9). 
+' 0:< API registering DocumentSynchronizingWithCentral event by application Model Review Events (1469753f-186d-4dc2-b0e9-431b302e62f9). 
+' 0:< Added new API external application AREXRevitStart, class REX.AREXRevitStart.AREXRevitStart, assembly C:\Program Files\Common Files\\Autodesk Shared\Extensions 2014\Products\Revit\AREXRevitStart.dll, vendorId ADSK, vendor description . 
+' 0:< API registering ApplicationInitialized event by application AREXRevitStart (26a4f622-eb0a-4829-a9c3-9194b77a7fe4). 
+' 0:< Added new API external application RevitDBLink, class Revit.Addon.RevitDBLink.CS.App, assembly C:\Program Files (x86)\Autodesk\Autodesk Revit DB Link 2014\RevitDBLink.dll, vendorId ADSK, vendor description Autodesk, subscription.autodesk.com. 
+' 0:< Added new API pushbutton 6419 name  text Revit DB Link class Revit.Addon.RevitDBLink.CS.Command assembly C:\Program Files (x86)\Autodesk\Autodesk Revit DB Link 2014\RevitDBLink.dll 
+' 0:< Added new API external application AREXRevitStart, class REX.AREXRevitStart.AREXRevitStart, assembly C:\Program Files\Common Files\\Autodesk Shared\Extensions 2014\Products\Revit\AREXRevitStart.dll, vendorId ADSK, vendor description . 
+' 0:< API registering ApplicationInitialized event by application AREXRevitStart (c0566ed7-4309-4082-b3ba-ea6b7b4d292a). 
+' 0:< Added new API external application AREXRevitStart, class REX.AREXRevitStart.AREXRevitStart, assembly C:\Program Files\Common Files\\Autodesk Shared\Extensions 2014\Products\Revit\AREXRevitStart.dll, vendorId ADSK, vendor description . 
+' 0:< API registering ApplicationInitialized event by application AREXRevitStart (1aa95c7e-ebf6-4205-b465-993f7efdc2e1). 
+' 0:< Added new API external application AREXRevitStart, class REX.AREXRevitStart.AREXRevitStart, assembly C:\Program Files\Common Files\\Autodesk Shared\Extensions 2014\Products\Revit\AREXRevitStart.dll, vendorId ADSK, vendor description . 
+' 0:< API registering ApplicationInitialized event by application AREXRevitStart (be4833f0-363a-4442-82f9-fc2805b4220f). 
+' 0:< Added new API external application Worksharing Monitor Application, class WorkSharingLib.ExternalApplication, assembly C:\Program Files (x86)\Autodesk\Autodesk Worksharing Monitor for Revit 2014\WorkSharingLib.dll, vendorId ADSK, vendor description Autodesk, subscription.autodesk.com. 
+' 0:< API registering DocumentOpened event by application Worksharing Monitor Application (04e9bc6c-9b81-4c82-a31a-7559fe7a1579). 
+' 0:< API registering DocumentClosing event by application Worksharing Monitor Application (04e9bc6c-9b81-4c82-a31a-7559fe7a1579). 
+' 0:< API registering DocumentSaved event by application Worksharing Monitor Application (04e9bc6c-9b81-4c82-a31a-7559fe7a1579). 
+' 0:< API registering DocumentSavedAs event by application Worksharing Monitor Application (04e9bc6c-9b81-4c82-a31a-7559fe7a1579). 
+' 0:< Added new API external application Worksharing Monitor Launch App, class WorksharingCommand.WorksharingApp, assembly C:\Program Files (x86)\Autodesk\Autodesk Worksharing Monitor for Revit 2014\WorkSharingCommand.dll, vendorId ADSK, vendor description Autodesk, subscription.autodesk.com. 
+' 0:< Added new API pushbutton 6420 name  text Launch WSM class WorksharingCommand.WorksharingCommand assembly C:\Program Files (x86)\Autodesk\Autodesk Worksharing Monitor for Revit 2014\WorkSharingCommand.dll 
+' 0:< Added new API external application BluebeamAddin, class Bluebeam.BbRevit.RevitAddin, assembly C:\Program Files\Bluebeam Software\Bluebeam Revu\Pushbutton PDF\Revit\Revit2014\BbRevitAddin2014.dll, vendorId BBSI, vendor description Bluebeam Revit Plugin. 
+' 0:< ::0:: Delta VM: Avail -30 -> 8387269 MB, Used +5 -> 233 MB; RAM: Avail -6 -> 3385 MB, Used +5 -> 289 MB, Peak +2 -> 289 MB 
+' 0:< Added new API pushbutton 6421 name  text Create PDF class Bluebeam.BbRevit.CreatePDFCommand assembly C:\Program Files\Bluebeam Software\Bluebeam Revu\Pushbutton PDF\Revit\Revit2014\BbRevitAddin2014.dll 
+' 0:< Added new API pushbutton 6422 name  text Change
+'Settings class Bluebeam.BbRevit.ChangeSettingsCommand assembly C:\Program Files\Bluebeam Software\Bluebeam Revu\Pushbutton PDF\Revit\Revit2014\BbRevitAddin2014.dll 
+' 0:< Added new API pushbutton 6423 name  text Create 3D PDF class Bluebeam.BbRevit.ThreeD2PDFCommand assembly C:\Program Files\Bluebeam Software\Bluebeam Revu\Pushbutton PDF\Revit\Revit2014\BbRevitAddin2014.dll 
+' 0:< Added new API pushbutton 6424 name  text Create U3D class Bluebeam.BbRevit.ThreeD2U3DCommand assembly C:\Program Files\Bluebeam Software\Bluebeam Revu\Pushbutton PDF\Revit\Revit2014\BbRevitAddin2014.dll 
+' 0:< Added new API pushbutton 6425 name  text Copy 3D to Clipboard class Bluebeam.BbRevit.ThreeD2ClipboardCommand assembly C:\Program Files\Bluebeam Software\Bluebeam Revu\Pushbutton PDF\Revit\Revit2014\BbRevitAddin2014.dll 
+' 0:< Added new API pushbutton 6426 name  text 3D PDF Settings class Bluebeam.BbRevit.ThreeDSettingsCommand assembly C:\Program Files\Bluebeam Software\Bluebeam Revu\Pushbutton PDF\Revit\Revit2014\BbRevitAddin2014.dll 
+' 0:< Added new API pushbutton 6427 name  text Show Log class Bluebeam.BbRevit.ShowLogCommand assembly C:\Program Files\Bluebeam Software\Bluebeam Revu\Pushbutton PDF\Revit\Revit2014\BbRevitAddin2014.dll 
+' 0:< Added new API pushbutton 6428 name  text How Do I class Bluebeam.BbRevit.HelpCommand assembly C:\Program Files\Bluebeam Software\Bluebeam Revu\Pushbutton PDF\Revit\Revit2014\BbRevitAddin2014.dll 
+' 0:< Added new API pushbutton 6429 name  text About class Bluebeam.BbRevit.AboutCommand assembly C:\Program Files\Bluebeam Software\Bluebeam Revu\Pushbutton PDF\Revit\Revit2014\BbRevitAddin2014.dll 
+' 0:< Added new API external application COINS Section Box App, class Coins.Revit.SectionBoxApp.CoinsSectionBoxMenu, assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\Coins\CoinsSectionBoxApp2014.dll, vendorId COIN, vendor description COINS, www.coins-global.com. 
+' 0:< Added new API pushbutton 6430 name  text Auto
+'Section Box class Coins.Revit.RevitTools.Commands.CmdViewSectionBoxAdd assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\Coins\CoinsSectionBoxApp2014.dll 
+' 0:< Added new API pushbutton 6431 name  text Toggle
+'Section Box class Coins.Revit.RevitTools.Commands.CmdViewSectionBoxRemove assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\Coins\CoinsSectionBoxApp2014.dll 
+' 0:< Added new API pushbutton 6432 name  text Quick Auto
+'Section class Coins.Revit.RevitTools.Commands.CmdViewSectionBoxQuickAdd assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\Coins\CoinsSectionBoxApp2014.dll 
+' 0:< Added new API external application CORE.Revit.2014, class CORE.Revit.App, assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll, vendorId TT, vendor description Thornton Tomasetti. 
+' 0:< Added new API pushbutton 6433 name  text Office to Revit Importer class TTOfficeToRevit.OfficeApp assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6434 name  text Mass Import DWG's class AutoViewSheetCreation.ImportDWGApp assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6435 name  text Mass Create Sheets class AutoViewSheetCreation.SheetCreateApp assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6436 name  text Mass Place Views on Sheets class AutoViewSheetCreation.PlaceViewsOnSheetApp assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6437 name  text Revit-Excel Sheet Link class AutoViewSheetCreation.SheetLinkApp assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6438 name  text Opening Framing Tool class CORE.Revit.OpeningEditApp assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6439 name  text Draw origin class CORE.Revit.DrawOrigin assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6440 name  text Batch Export IFC class CORE.Revit.BatchProcesses.ExportIFC assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6441 name  text Batch Export NWD class CORE.Revit.BatchProcesses.ExportNWD assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6442 name  text Import Parameter from Excel class CORE.Revit.OfficeToRevit.ReadExcelParameters assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6443 name  text Export Parameter to Excel class CORE.Revit.OfficeToRevit.WriteExcelParameters assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6444 name  text Compare Models class CORE.Revit.CompareModels.CompareModels assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6445 name  text Import Excel sheet to schedule class CORE.Revit.ExcelTableToRevitSchedule assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6446 name  text Import Word document class CORE.Revit.WordFileToTextNote assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6447 name  text Filter by Parameter class CORE.Revit.FilterSelectionByParameterValues assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6448 name  text Family Palette class CORE.Revit.FamilyPalette.Command assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6449 name  text View
+'Bookmarks class CORE.Revit.ViewBookmarkApp assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6450 name  text Create Framing Reference Planes class CORE.Revit.CreateFramingReferencePlanes assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6451 name  text Set Framing Reference Plane class CORE.Revit.SetFramingReferencePlane assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6452 name  text Connectivity
+'Visualization class CORE.Revit.FramingGraphAnalysis.ConnectivityVisualization assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6453 name  text Column
+'Splitter class CORE.Revit.ColumnSplitter assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6454 name  text Wall
+'Splitter class CORE.Revit.Split.WallsByLevel assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API pushbutton 6455 name  text Carbon Calculator
+'Extractor class TTMaterialBatch.Batch assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll 
+' 0:< Added new API external application CORE.Revit.2014.ConnectivityVisualization, class CORE.Revit.FramingGraphAnalysis.VisualizationApplication, assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\CORE.Revit.2014\CORE.Revit.2014.dll, vendorId TT, vendor description Thornton Tomasetti. 
+' 0:< Added new API external application Dynamo For Revit, class Dynamo.Applications.VersionLoader, assembly C:\Program Files\Dynamo 0.8\Revit_2014\DynamoRevitVersionSelector.dll, vendorId ADSK, vendor description Dynamo. 
+' 0:< Added new API pushbutton 6456 name  text Dynamo 0.8 class Dynamo.Applications.DynamoRevit assembly C:\Program Files\Dynamo 0.8\Revit_2014\DynamoRevitDS.dll 
+' 0:< Third Party Updater 'Dynamo For Revit: Sun and Shadow Settings Updater' registered for all documents. 
+' 0:< Added new API external application LightThresholds, class LightThresholds.AppInterface, assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\Daylight\Revit Daylighting Analysis\LightThresholds.dll, vendorId ADSK, vendor description . 
+' 0:< Added new API pushbutton 6457 name  text Run
+'Analysis class LightThresholds.LightAnalysisCommand assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\Daylight\Revit Daylighting Analysis\LightThresholds.dll 
+' 0:< Added new API pushbutton 6458 name  text Generate
+'Results class LightThresholds.LightResults assembly C:\ProgramData\ThorntonTomasetti\Revit\Addins\2014\Daylight\Revit Daylighting Analysis\LightThresholds.dll 
+' 0:< API registering DocumentClosing event by application LightThresholds (050e7709-060d-457d-9352-e90b85fbb5d9). 
+' 0:< API registering DocumentOpened event by application LightThresholds (050e7709-060d-457d-9352-e90b85fbb5d9). 
+' 0:< Added new API external application File exporter for Navisworks 2014, class NavisWorks11.LcRevitExportApplication, assembly C:\Program Files\Common Files\Autodesk Shared\Navisworks\2014\nwexportrevit2014\nwexportrevit2014_11.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
+' 0:< ::0:: Delta VM: Avail -38 -> 8387231 MB, Used +5 -> 238 MB, Peak +7 -> 246 MB; RAM: Avail -11 -> 3374 MB, Used +13 -> 302 MB, Peak +13 -> 302 MB 
+' 0:< API_SUCCESS { Replacing command id 'ID_EXPORT_NAVISWORKS' Executed implementation with implementation from application 'File exporter for Navisworks 2014' dll 'C:\Program Files\Common Files\Autodesk Shared\Navisworks\2014\nwexportrevit2014\nwexportrevit2014_11.dll'. } 
+' 0:< API_SUCCESS { API registering command  Executed event by application File exporter for Navisworks 2014 (bb21724a-50ca-496f-bc8d-847f1cd7f56c). } 
+' 0:< API_SUCCESS { Replacing command id 'ID_EXPORT_NAVISWORKS' CanExecute implementation with implementation from application 'File exporter for Navisworks 2014' dll 'C:\Program Files\Common Files\Autodesk Shared\Navisworks\2014\nwexportrevit2014\nwexportrevit2014_11.dll'. } 
+' 0:< API_SUCCESS { API registering command  CanExecute event by application File exporter for Navisworks 2014 (bb21724a-50ca-496f-bc8d-847f1cd7f56c). } 
+' 0:< API_SUCCESS { An external server has been registered.: ServiceId(a9bdf0fd-2632-429e-bc35-50ebc2b824d2); ServerId(68e1934c-ec3b-410c-8c82-434f0cf25446); Name(nwexportrevit 2014); VendorId(Autodesk Navisworks); Description(File exporter for Navisworks 2014) } 
+' 0:< Added new API external application File exporter for Navisworks 2015, class NavisWorks12.LcRevitExportApplication, assembly C:\Program Files\Common Files\Autodesk Shared\Navisworks\2015\nwexportrevit2014\nwexportrevit2014_12.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
+' 0:< ::0:: Delta VM: Avail -22 -> 8387209 MB, Used +3 -> 242 MB, Peak +4 -> 250 MB; RAM: Avail -4 -> 3371 MB, Used +2 -> 304 MB, Peak +2 -> 305 MB 
+' 0:< Added new API external application Dynamo Test Framework App, class RTF.Applications.RevitTestFrameworkExternalApp, assembly C:\Users\eertugrul\Documents\GitHub\RevitTestFramework\bin\AnyCPU\Debug\RTFRevit.dll, vendorId Dynamo, vendor description Dynamo. 
+' 0:< Added new API external application TTXrevit Application, class TTXrevit.TTXrevit_APP, assembly C:\ProgramData\ThorntonTomasetti\Revit\TTX\2014\TTXrevit2014.dll, vendorId XXXX, vendor description XXXX. 
+' 0:< Added new API pushbutton 6459 name  text TTX class TTXrevit.TTXREVIT_2013_ENTRY assembly C:\ProgramData\ThorntonTomasetti\Revit\TTX\2014\TTXrevit2014.dll 
+' 0:< Added new API pushbutton 6460 name  text TTX Profile Mapper class TTXrevit.TTXREVIT_PROFILE_MAPPER assembly C:\ProgramData\ThorntonTomasetti\Revit\TTX\2014\TTXrevit2014.dll 
+' 0:< Added new API pushbutton 6461 name  text TTX Update Visualization class TTXrevit.TTXREVIT_2013_VISUALIZER assembly C:\ProgramData\ThorntonTomasetti\Revit\TTX\2014\TTXrevit2014.dll 
+' 0:< Added new API external application TTXRevit Update Visualization, class TTXrevit.VizApplication, assembly C:\ProgramData\ThorntonTomasetti\Revit\TTX\2014\TTXrevit2014.dll, vendorId XXXX, vendor description XXXX. 
+' 0:< API registering Idling event by application TTXRevit Update Visualization (f6102e9b-8a8f-4eea-8303-4cc8f5918e43). 
+'H 30-Jun-2015 15:48:18.213;   0:< 
+Jrn.Directive "IdleTimeTaskSymbol"  _
+        , "1.OnIdleTask"
+' 0:< ::0:: Delta VM: Avail -4 -> 8387206 MB, Used +1 -> 243 MB, Peak +4 -> 254 MB; RAM: Avail -4 -> 3367 MB, Used +3 -> 307 MB, Peak +13 -> 318 MB 
+'C 30-Jun-2015 15:48:18.556;   0:< ->processShellCommand 
+'C 30-Jun-2015 15:48:18.557;   0:< <-processShellCommand 
+' 0:<  ->DesktopMFCApp::doStartupWarnings 
+'C 30-Jun-2015 15:48:18.562;   0:< manage licensing 
+' 0:< ::0:: Delta VM: Avail +1 -> 8387207 MB, Used +2 -> 246 MB; RAM: Avail -14 -> 3354 MB, Used +5 -> 313 MB 
+' 0:< License mode: Network 
+' 0:< Server: distributed 
+' 0:< Server List: 27007@adsk_us1.license.thorntontomasetti.com;27007@adsk_global1.license.thorntontomasetti.com 
+' 0:< Status: Network licensing connection is established. 
+' 0:< Type: Network 
+' 0:< Usage: Commercial 
+' 0:< Behavior: Permanent 
+' 0:< Expiration: Tuesday, June 30, 2015 
+' 0:< (Borrowed) 
+'C 30-Jun-2015 15:48:22.321;   0:< manage involvement 
+' 0:< ::0:: Delta VM: Avail -14 -> 8387194 MB, Used +1 -> 247 MB; RAM: Avail -1 -> 3353 MB, Used +2 -> 315 MB 
+'C 30-Jun-2015 15:48:22.389;   0:< manage debug modes 
+'C 30-Jun-2015 15:48:22.389;   0:< postConditionalWarnings 
+'C 30-Jun-2015 15:48:22.389;   0:< giveAtomRegistrationWarnings 
+'C 30-Jun-2015 15:48:22.389;   0:< warnings->consumeAll 
+'C 30-Jun-2015 15:48:22.389;   0:< Process result of DebugModes-Changed Task Dialog 
+'C 30-Jun-2015 15:48:22.389;   0:< isMaterialLibraryAvailable 
+'C 30-Jun-2015 15:48:22.389;   0:< start up warnings for AddIns 
+' 0:<  <-DesktopMFCApp::doStartupWarnings 
+' 0:<  <-desktop InitNativeInstance 
+' 0:<  ->desktop InitManagedInstance 
+' 1:< ::0:: Delta VM: Avail -16 -> 8387178 MB, Used +5 -> 252 MB; RAM: Avail -9 -> 3345 MB, Used +8 -> 324 MB, Peak +7 -> 325 MB 
+' 1:< Added new API pushbutton 6462 name  text Modify class REX.AREXRevitMngr.Modifier assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Products\Revit\AREXRevitMngr.dll 
+' 1:< Added new API pushbutton 6463 name  text Delete class REX.AREXRevitMngr.Remover assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Products\Revit\AREXRevitMngr.dll 
+' 1:< Added new API pushbutton 6464 name  text Preferences class REX.AREXRevitMngr.Preferences assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Products\Revit\AREXRevitMngr.dll 
+' 1:< Added new API pushbutton 6465 name  text Structure Generator class REX.ABuildingGeneration.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Modeling\ABuildingGeneration\ABuildingGeneration.dll 
+' 1:< Added new API pushbutton 6466 name  text Conceptual Form Simulation class REX.ABuildingAnalysis.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Simulation\ABuildingAnalysis\ABuildingAnalysis.dll 
+' 1:< Added new API pushbutton 6467 name  text Floor Vibrations Analyzer class REX.VibrationsAnalyzer.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\RSA\VibrationsAnalyzer\VibrationsAnalyzer.dll 
+' 1:< Added new API pushbutton 6468 name  text Gravity Column Designer class REX.REXColumnDesigner.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\RSA\GravityColumnDesigner\GravityColumnDesigner.dll 
+' 1:< Added new API pushbutton 6469 name  text Load Takedown class REX.ABuildingSimulation.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\RSA\ABuildingSimulation\ABuildingSimulation.dll 
+' 1:< Added new API pushbutton 6470 name  text Static Analysis of Beams class REX.DBeamAnalysis.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Simulation\DBeamAnalysis\DBeamAnalysis.dll 
+' 1:< Added new API pushbutton 6471 name  text Static Analysis of Frames class REX.DFrameAnalysis.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Simulation\DFrameAnalysis\DFrameAnalysis.dll 
+' 1:< Added new API pushbutton 6472 name  text Static Analysis of Slabs class REX.DPlateAnalysis.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Simulation\DPlateAnalysis\DPlateAnalysis.dll 
+' 1:< Added new API pushbutton 6473 name  text Static Analysis of Trusses class REX.DTrussAnalysis.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Simulation\DTrussAnalysis\DTrussAnalysis.dll 
+' 1:< Added new API pushbutton 6474 name  text Automatic Reinforcement Generation class REX.DReinfAuto.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Reinforcement\DReinfAuto\DReinfAuto.dll 
+' 1:< Added new API pushbutton 6475 name  text Beams class REX.DReinfBeam.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Reinforcement\DReinfBeam\DReinfBeam.dll 
+' 1:< Added new API pushbutton 6476 name  text Columns class REX.DReinfColumn.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Reinforcement\DReinfColumn\DReinfColumn.dll 
+' 1:< Added new API pushbutton 6477 name  text Continuous Footings class REX.DReinfFootingCont.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Reinforcement\DReinfFootingCont\DReinfFootingCont.dll 
+' 1:< Added new API pushbutton 6478 name  text Interferences of Reinforcing Bars class REX.DReinfRebarCollisions.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Reinforcement\DReinfRebarCollisions\DReinfRebarCollisions.dll 
+' 1:< Added new API pushbutton 6479 name  text Parapets class REX.DReinfParapet.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Reinforcement\DReinfParapet\DReinfParapet.dll 
+' 1:< Added new API pushbutton 6480 name  text Pile Caps class REX.DReinfPileCap.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Reinforcement\DReinfPileCap\DReinfPileCap.dll 
+' 1:< Added new API pushbutton 6481 name  text Piles class REX.DReinfPile.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Reinforcement\DReinfPile\DReinfPile.dll 
+' 1:< Added new API pushbutton 6482 name  text Retaining Walls class REX.DReinfRetainingWall.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Reinforcement\DReinfRetainingWall\DReinfRetainingWall.dll 
+' 1:< Added new API pushbutton 6483 name  text Slab Corners class REX.DReinfSlabCorner.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Reinforcement\DReinfSlabCorner\DReinfSlabCorner.dll 
+' 1:< Added new API pushbutton 6484 name  text Slab Openings class REX.DReinfSlabOpening.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Reinforcement\DReinfSlabOpening\DReinfSlabOpening.dll 
+' 1:< Added new API pushbutton 6485 name  text Spread Footings class REX.DReinfFootingSpread.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Reinforcement\DReinfFootingSpread\DReinfFootingSpread.dll 
+' 1:< Added new API pushbutton 6486 name  text Wall Corners class REX.DReinfWallCorner.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Reinforcement\DReinfWallCorner\DReinfWallCorner.dll 
+' 1:< Added new API pushbutton 6487 name  text Walls class REX.DReinfWall.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Reinforcement\DReinfWall\DReinfWall.dll 
+' 1:< Added new API pushbutton 6488 name  text Formwork Drawings Link class REX.DSynchAsdFormwork.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\ASD\DSynchAsdFormwork\DSynchAsdFormwork.dll 
+' 1:< Added new API pushbutton 6489 name  text Reinforcement Drawings class REX.DReinfDrawing.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\ASD\DReinfDrawing\DReinfDrawing.dll 
+' 1:< Added new API pushbutton 6490 name  text Steel Detailing Link class REX.DSynchAsdSteel.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\ASD\DSynchAsdSteel\DSynchAsdSteel.dll 
+' 1:< Added new API pushbutton 6491 name  text Beam to Column - End-plated class REX.DSteelConnB2CEP.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\SteelConnections\DSteelConnB2CEP\DSteelConnB2CEP.dll 
+' 1:< Added new API pushbutton 6492 name  text Column Base class REX.DSteelConnColumnB.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\SteelConnections\DSteelConnColumnB\DSteelConnColumnB.dll 
+' 1:< Added new API pushbutton 6493 name  text Content Generator class REX.DRevitContentGenerator.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Tools\DRevitContentGenerator\DRevitContentGenerator.dll 
+' 1:< Added new API pushbutton 6494 name  text Element Positioning class REX.DElementsPositioning.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Tools\DElementsPositioning\DElementsPositioning.dll 
+' 1:< Added new API pushbutton 6495 name  text Freeze Drawings class REX.DRevitFreezeDrawing.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Tools\DRevitFreezeDrawing\DRevitFreezeDrawing.dll 
+' 1:< Added new API pushbutton 6496 name  text Shared/Project Parameters class REX.DRevitSharedParameters.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Tools\DRevitSharedParameters\DRevitSharedParameters.dll 
+' 1:< Added new API pushbutton 6497 name  text Text Generator class REX.DRevitTextGenerator.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Tools\DRevitTextGenerator\DRevitTextGenerator.dll 
+' 1:< Added new API pushbutton 6498 name  text Reinforcement Code Check class REX.DReinfDesign.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\RSA\DReinfDesign\DReinfDesign.dll 
+' 1:< ::0:: Delta VM: Avail -22 -> 8387156 MB, Used +1 -> 253 MB; RAM: Avail -3 -> 3342 MB, Used +3 -> 328 MB, Peak +2 -> 328 MB 
+' 1:< Third Party Updater 'AREXRevitStart: REXExtension: DReinfBeam' registered for all documents. 
+' 1:< Third Party Updater 'AREXRevitStart: REXExtension: DReinfColumn' registered for all documents. 
+' 1:< Third Party Updater 'AREXRevitStart: REXExtension: DReinfFootingSpread' registered for all documents. 
+' 1:< Third Party Updater 'AREXRevitStart: REXExtension: DReinfWall' registered for all documents. 
+' 1:< API registering DocumentOpened event by application AREXRevitStart (c0566ed7-4309-4082-b3ba-ea6b7b4d292a). 
+' 1:< API registering DocumentCreated event by application AREXRevitStart (c0566ed7-4309-4082-b3ba-ea6b7b4d292a). 
+' 1:< API registering DisplayingOptionsDialog event by application AREXRevitStart (c0566ed7-4309-4082-b3ba-ea6b7b4d292a). 
+' 0:<  <-desktop InitManagedInstance 
+'C 30-Jun-2015 15:48:26.736;   0:< appPriv idle 
+'C 30-Jun-2015 15:48:26.794;   0:< started journal file playback of "C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\Edit_AddLoadCase.txt" 
+ ' 14.662123  0:<<Event timer/ALL_GAPS  14.662123/TurnOff_GAPs 29% 
+ 'E 30-Jun-2015 15:48:26.813;   0:< 
+ Jrn.Command "StartupPage" , "Open this project , ID_FILE_MRU_FIRST"
+ 'H 30-Jun-2015 15:48:26.813;   0:< 
+ Jrn.Data "MRUFileName"  _
+         , "TestModel.rvt"
+ ' 1:< ::1:: Delta VM: Avail -26 -> 8387131 MB, Used +1 -> 254 MB, Peak +0 -> 255 MB; RAM: Avail -2 -> 3340 MB, Used +3 -> 331 MB, Peak +3 -> 332 MB 
+ ' 1:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
+ ' 1:< RAM Statistics:     3340 /     8075       331=InUse      332=Peak  
+ ' 1:< VM  Statistics:  8387131 /  8388607       254=InUse      255=Peak  
+ 'C 30-Jun-2015 15:48:26.859;   2:< File: Open 
+ ' 3:< ::1:: Delta VM: Avail -16 -> 8387115 MB, Used +0 -> 255 MB; RAM: Avail 3340 MB, Used +0 -> 332 MB 
+ ' 3:< DataStorageInterface created 0x0000000013064B40 
+ ' 3:< Connecting session [$eefca1bf] to Worksharing Log [C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\journal.0037.txt] 
+ '  0.000017      4:<<<WorksharingLog::getSlog [] 
+ ' 3:< Additional IP address/name found for host NY1ML02: fe80::c061:abb9:4926:2d67%12  
+ ' 3:< Additional IP address/name found for host NY1ML02: 10.21.1.84  
+ ' 3:< Additional IP address/name found for host NY1ML02: 192.168.1.139  
+ ' 4:< MasterLocks 0x00000000081B38E0 ensureAppropriateStorage DataStorageInterface WAS m_oDataStorage 0x0000000013064B40 m_pDataStorage 0x0000000013064B40 
+ ' 4:< DataStorageInterface created 0x0000000013064C40 
+ ' 4:< DataStorageInterface destroyed 0x0000000013064B40 
+ ' 4:< MasterLocks 0x00000000081B38E0 ensureAppropriateStorage DataStorageInterface m_oDataStorage 0x0000000013064C40 m_pDataStorage 0x0000000013064C40 
+ ' 4:< MasterLocks 0x00000000081B38E0 DummyStorage stole m_oDataStorage 0x0000000013064C40 but left m_pDataStorage 0x0000000013064C40 
+ ' 4:< LPSTORAGE ACQUIRED: DocumentStorage=0x12e70790, plpRootStg=0x12e70858, lpRootStg=0x12f60890 
+ '  0.001747      4:<<acquireFileLock 
+ '  0.002928     3:<<OpenDocumentTask::acquireFileLock 
+ '  0.093586        6:<<<DictionaryAnalysis::initialize 
+ '  0.017537        6:<<<loadAllClasses 
+ '  0.000063        6:<<<RegisterPreDocLoadCallback::invokeCallbacks 
+ '  0.000053         7:<<<LoadModel DSI 
+ '  0.000108        6:<<loading DocumentStorageIndex 
+  'Warning: Event timer reset skipped - DocumentStorageIndexImpl::loadDocument()  
+  'E 30-Jun-2015 15:48:26.974;   6:< 
+  ' [Jrn.BasicFileInfo] Rvt.Attr.Worksharing: Not enabled Rvt.Attr.UserName:  Rvt.Attr.CentralModelPath:  Rvt.Attr.RevitBuildVersion: Autodesk Revit 2014 (Build: 20140709_2115(x64)) Rvt.Attr.LastSavePath: C:\Users\EErtugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\TestModel.rvt Rvt.Attr.ProjectSpark: notProjectSpark Rvt.Attr.LocaleWhenSaved: ENU 
+  ' 7:< [ISL] On open, Adler Checksum: 0xfa44f72b [C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\TestModel.rvt] 
+  '  0.000577         7:<<<Checking Checksum 
+  ' 6:< [ISL] Read last modification time: 30-Jun-2015 09:44:29 (UTC: 30-Jun-2015 13:44:29) 
+  '  0.006372         7:<<<app infos and other global data 
+  ' 6:< File was saved in Autodesk Revit 2014 (Build: 20140709_2115(x64)) 
+  ' 7:< ::2:: Delta VM: Avail -2 -> 8387114 MB, Used +0 -> 256 MB, Peak +0 -> 256 MB; RAM: Avail -11 -> 3330 MB, Used +9 -> 342 MB, Peak +9 -> 342 MB 
+  '  0.000022          8:<<<ET::repairModificationDatesOutOfSequence 
+  ' 7:< Loaded ElemTable: Size=1948 
+  '  0.028605         7:<<ElemTable 
+  '  0.000095         7:<<<ContentDocuments 
+  '  0.000088         7:<<<History 
+  '  0.000050         7:<<<increment table 
+  '  0.000059         7:<<<WorksetTable 
+  '  0.000011         7:<<<partitionStorageLock.open 
+  '  0.000025          8:<<<loadLatestVersionsEstimate 
+  ' 8:< ::2:: Delta VM: Avail -16 -> 8387098 MB, Used 256 MB; RAM: Avail -5 -> 3325 MB, Used +5 -> 347 MB, Peak +5 -> 347 MB 
+  ' 8:< Loaded elemStream#0: uncompSize=909300, compSize=129283, count=1948 
+  '  0.018871          8:<<<loadLatestVersion 
+  '  0.000349           9:<<<ElementReceiver::commitSwapouts()  
+  '  0.000395          8:<<els.commit 
+  '  0.019418         7:<<loadSelectedPartitions 
+  '  0.056984        6:<<DocumentStorageIndexImpl::loadDocument()  
+  ' 7:< Current project ADocument version:2659 
+  '  0.013424           9:<<<updating dependencies in delayed deletion 
+  '  0.000045           9:<<<getAllNonexistentParents in delayed deletion 
+  '  0.002533           9:<<<findAppInfoNonexistentParents in delayed deletion 
+  '  0.016171          8:<<delayed deletion 
+  '  0.000386          8:<<<forceResetOfElemRecOwnerCache 
+  '  0.024701         7:<<ADocumentUpgrade::docUpgrade 
+  '  0.193747      4:<<LoadSerialize 
+  '  0.193865     3:<<LoadFromStorage 
+  '  0.000382      4:<<<forceResetOfElemRecOwnerCache 
+  ' 4:< Unnecessary nesting;Document\PostLoadDocument.cpp;160;String_Revit_DelayedPropagatoinRegen ;N++E(N); 
+  ' 5:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
+  ' 5:< RAM Statistics:     3322 /     8075       349=InUse      349=Peak  
+  ' 5:< VM  Statistics:  8387098 /  8388607       256=InUse      257=Peak  
+  ' 5:< 000000000E0B2E10 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 5:< 000000000E0B2E60 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 5:< 000000000E0B2E38 CompactMemoryManager Memory Statistics: 2 MB with 2 MB view 
+  ' 5:< 000000000E0B2E88 CompactMemoryManager Memory Statistics: 2 MB with 2 MB view 
+  ' 5:< 000000000E0B2EB0 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 5:< 000000000E0B2ED8 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 5:< 000000000E0B2F00 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 5:< 000000000E0B2F28 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 5:< Element Expansion Statistics: 
+  ' 5:<  0% Opening Plans                    (0) 
+  ' 5:<  0% Opening RC Plans                 (0) 
+  ' 5:<  0% Opening 3d Views                 (0) 
+  ' 5:<  0% Opening Elevations and Sections  (0) 
+  ' 5:<  0% In Regnerate                     (0) 
+  ' 5:<  0% In Autojoin                      (0) 
+  ' 5:<  0% In Overlap Checking              (0) 
+  ' 5:<  0% Reviewing PostedWarnings         (0) 
+  ' 5:<  100% Other                            (125735) 
+  ' 5:< total bytes expanded: 125735 
+  ' 5:< ;EES;0;0;0;0;0;0;0;0;100; 
+  '  0.000008        6:<<<ppg constructor 
+  '  0.000008        6:<<<updating dependencies in dp 
+  '  0.000002         7:<<<updating dependencies in delayed deletion 
+  '  0.000069         7:<<<getAllNonexistentParents in delayed deletion 
+  '  0.002463         7:<<<findAppInfoNonexistentParents in delayed deletion 
+  '  0.002659        6:<<delayed deletion 
+  '  0.006336       5:<<ADocumentMerge::delayedPropagation 
+  '  0.000158        6:<<<EndOrAbortUndoTransaction() -- trackers regen;DOPT; 
+  '  0.000021        6:<<<EndOrAbortUndoTransaction()--AtomViewReferencingUpdate();DOPT; 
+  '  0.000002         7:<<<EndOrAbortUndoTransaction()--end of transaction checks--invisible elements;DOPT; 
+  ' 6:< Connecting session [$0c753ed9] to Worksharing Log [C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\journal.0037.txt] 
+  '  0.000012         7:<<<WorksharingLog::getSlog [] 
+  ' 6:< Additional IP address/name found for host NY1ML02: fe80::c061:abb9:4926:2d67%12  
+  ' 6:< Additional IP address/name found for host NY1ML02: 10.21.1.84  
+  ' 6:< Additional IP address/name found for host NY1ML02: 192.168.1.139  
+  '  0.000012          8:<<<;PERF;MISC;regenerating 
+  '  0.001118        6:<<EndOrAbortUndoTransaction()--end of transaction checks;DOPT;/ALL_GAPS   0.001092/TurnOff_GAPs 3% 
+  '  0.000928        6:<<<ElemTable::expandElementsInParallel 
+  '  0.002606       5:<<EndOrAbortUndoTransaction();DOPT;/ALL_GAPS   0.000381/TurnOff_GAPs 3% 
+  '  0.009334      4:<<delayed propagation on open 
+  '  0.000006      4:<<<updating dependencies on open 
+  '  0.000005        6:<<<EndOrAbortUndoTransaction() -- trackers regen;DOPT; 
+  '  0.000001        6:<<<EndOrAbortUndoTransaction()--AtomViewReferencingUpdate();DOPT; 
+  '  0.000000         7:<<<EndOrAbortUndoTransaction()--end of transaction checks--invisible elements;DOPT; 
+  '  0.000003          8:<<<;PERF;MISC;regenerating 
+  '  0.000098        6:<<EndOrAbortUndoTransaction()--end of transaction checks;DOPT;/ALL_GAPS   0.000094/TurnOff_GAPs 34% 
+  '  0.000335       5:<<EndOrAbortUndoTransaction();DOPT;/ALL_GAPS   0.000231/TurnOff_GAPs 3% 
+  '  0.000398      4:<<reloadLinkedInstances [0/0] 
+  '  0.000003       5:<<<;PERF;MISC;regenerating 
+  '  0.000004       5:<<<EndOrAbortUndoTransaction() -- trackers regen;DOPT; 
+  '  0.000001       5:<<<EndOrAbortUndoTransaction()--AtomViewReferencingUpdate();DOPT; 
+  '  0.000001        6:<<<EndOrAbortUndoTransaction()--end of transaction checks--invisible elements;DOPT; 
+  '  0.000003         7:<<<;PERF;MISC;regenerating 
+  '  0.000091       5:<<EndOrAbortUndoTransaction()--end of transaction checks;DOPT;/ALL_GAPS   0.000087/TurnOff_GAPs 35% 
+  '  0.000277      4:<<EndOrAbortUndoTransaction();DOPT;/ALL_GAPS   0.000182/TurnOff_GAPs 3% 
+  ' 3:< Unnecessary nesting;Document\PostLoadDocument.cpp;398;ID_SETTINGS_SNAPPING ;N++E(N); 
+  '  0.000004       5:<<<EndOrAbortUndoTransaction() -- trackers regen;DOPT; 
+  '  0.000001       5:<<<EndOrAbortUndoTransaction()--AtomViewReferencingUpdate();DOPT; 
+  '  0.000000        6:<<<EndOrAbortUndoTransaction()--end of transaction checks--invisible elements;DOPT; 
+  '  0.000003         7:<<<;PERF;MISC;regenerating 
+  '  0.000091       5:<<EndOrAbortUndoTransaction()--end of transaction checks;DOPT;/ALL_GAPS   0.000088/TurnOff_GAPs 35% 
+  '  0.000279      4:<<EndOrAbortUndoTransaction();DOPT;/ALL_GAPS   0.000184/TurnOff_GAPs 3% 
+  ' 4:< At line number 5 of source journal
+  'DBG_INFO: Couldn't obtain time/date stamp for  so that cannot correct file create/access/modify time!, the GetLastError is 6: line 1959 of FileUtil.cpp. 
+  '  0.000073      4:<<<pKeynoteTable->readFile 
+  '  0.000003       5:<<<;PERF;MISC;regenerating 
+  '  0.000004       5:<<<EndOrAbortUndoTransaction() -- trackers regen;DOPT; 
+  '  0.000001       5:<<<EndOrAbortUndoTransaction()--AtomViewReferencingUpdate();DOPT; 
+  '  0.000001        6:<<<EndOrAbortUndoTransaction()--end of transaction checks--invisible elements;DOPT; 
+  '  0.000003         7:<<<;PERF;MISC;regenerating 
+  '  0.000090       5:<<EndOrAbortUndoTransaction()--end of transaction checks;DOPT;/ALL_GAPS   0.000087/TurnOff_GAPs 35% 
+  '  0.000280      4:<<EndOrAbortUndoTransaction();DOPT;/ALL_GAPS   0.000185/TurnOff_GAPs 3% 
+  '  0.011748     3:<<[Cloud]postLoadDocument 
+  '  0.208846    2:<<DocumentStorage::onOpenDocument [C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\TestModel.rvt] 
+  'Warning: Event timer reset skipped - [Cloud]standardOpenDocumentFile 
+  'H 30-Jun-2015 15:48:27.106;   1:< 
+  Jrn.Directive "DocSymbol"  _
+          , "[TestModel.rvt]"
+  ' 2:< Before : Create Display Manager 
+  ' 2:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
+  ' 2:< RAM Statistics:     3320 /     8075       350=InUse      351=Peak  
+  ' 2:< VM  Statistics:  8387092 /  8388607       257=InUse      257=Peak  
+  ' 2:< ::2:: Delta VM: Avail -32 -> 8387066 MB, Used +1 -> 258 MB, Peak +2 -> 258 MB; RAM: Avail -10 -> 3316 MB, Used +7 -> 355 MB, Peak +7 -> 355 MB 
+  ' 2:< Revit Graphics Information 
+  ' 2:< 	Current Mode : DirectX Hardware 
+  ' 2:< 	Use Hardware: ON 
+  ' 2:< 	Use Overlays : ON 
+  ' 2:< useNullDevice=false 
+  ' 2:< START CanUseHardware(forced) 
+  ' 3:< ::2:: Delta VM: Avail -41 -> 8387025 MB, Used +32 -> 291 MB, Peak +34 -> 292 MB; RAM: Avail -11 -> 3305 MB, Used +9 -> 364 MB, Peak +11 -> 366 MB 
+  ' 3:< DX Device: DirectX 11, WARP 
+  'C 30-Jun-2015 15:48:27.193;   3:< START video card certification 
+  ' 3:< OPERATING SYSTEM INFORMATION:  
+  ' 3:<    BuildNumber : 7601 
+  ' 3:<    BuildType : Multiprocessor Free 
+  ' 3:<    Caption : Microsoft Windows 7 Enterprise  
+  ' 3:<    CodeSet : 1252 
+  ' 3:<    CountryCode : 1 
+  ' 3:<    CSDVersion : Service Pack 1 
+  ' 3:<    FreePhysicalMemory : 3421324 
+  ' 3:<    FreeSpaceInPagingFiles : 8038724 
+  ' 3:<    FreeVirtualMemory : 11488860 
+  ' 3:<    MaxProcessMemorySize : 8589934464 
+  ' 3:<    OSLanguage : 1033 
+  ' 3:<    OSType : 18 
+  ' 3:<    ServicePackMajorVersion : 1 
+  ' 3:<    ServicePackMinorVersion : 0 
+  ' 3:<    TotalVirtualMemorySize : 16536244 
+  ' 3:<    TotalVisibleMemorySize : 8269040 
+  ' 3:<    Version : 6.1.7601 
+  ' 3:< ::2:: Delta VM: Avail 8387025 MB, Used +5 -> 296 MB, Peak +10 -> 303 MB; RAM: Avail -7 -> 3298 MB, Used +5 -> 370 MB, Peak +10 -> 376 MB 
+  ' 3:< 
+  'Current driver version: 1.8.0.0
+  'Certified driver(s):  
+  ' 3:< VIDEO CARD ENVIRONMENT: CARD="Intel(R) HD Graphics 3000" ManufacturerID="8086" DeviceID="0126" osID="2000" DRIVER="1.8.0.0" DEVICE="DX11" FL_Caps="50" (Shader Model) 
+  'C 30-Jun-2015 15:48:27.284;   3:< FINISH video card certification 
+  '  0.121928     3:<<<CanUseHardware(forced) 
+  ' 2:< 
+  'Can use hardware=y
+  'Hardware support flags:
+  'FeatureLevelLow=n
+  'DrvOlderThanTested=n
+  'DrvNewerThanTested=n
+  'CardIsNotListed=y
+  'NotCertifiedEnv=n
+  '3GBSwitchIsOn=n
+  'SoftwareModeForced=n 
+  ' 2:< FINISH CanUseHardware(forced) 
+  ' 2:< After : Create Display Manager 
+  ' 2:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
+  ' 2:< RAM Statistics:     3299 /     8075       370=InUse      376=Peak  
+  ' 2:< VM  Statistics:  8387025 /  8388607       296=InUse      303=Peak  
+   ' 2:< Activate "[TestModel.rvt]" , Floor Plan: Level 1 
+   ' 2:< View Open: Element expansion used 0.000000 seconds averaging 0.000000 seconds/hit for 0 hits. 
+' 2:< ::2:: Delta VM: Avail -8 -> 8387018 MB, Used +16 -> 313 MB, Peak +14 -> 317 MB; RAM: Avail -23 -> 3276 MB, Used +22 -> 392 MB, Peak +20 -> 396 MB 
+'C 30-Jun-2015 15:48:29.275;   2:< Protein : Register Preview Factories 
+'C 30-Jun-2015 15:48:29.275;   2:< Protein : Initialize Renderer Module 
+'C 30-Jun-2015 15:48:29.275;   2:< Protein : Load the MR Renderer plug-in 
+' 2:< ::2:: Delta VM: Avail -27 -> 8386991 MB, Used +1 -> 315 MB; RAM: Avail -2 -> 3275 MB, Used +1 -> 394 MB 
+'C 30-Jun-2015 15:48:29.286;   2:< Protein : initialize RPC plug-ins 
+'C 30-Jun-2015 15:48:29.295;   2:< Protein : Open Protein content Libraries 
+' 2:< ::2:: Delta VM: Avail -9 -> 8386982 MB, Used +10 -> 325 MB, Peak +8 -> 325 MB; RAM: Avail -11 -> 3265 MB, Used +11 -> 406 MB, Peak +9 -> 406 MB 
+'C 30-Jun-2015 15:48:29.347;   2:< Protein : Load Library:  
+' 2:< C:\Program Files (x86)\Common Files\Autodesk Shared\Materials\2014\assetlibrary_base.adsklib 
+'C 30-Jun-2015 15:48:29.347;   2:< Protein : Texture Path:  
+' 2:< C:/Program Files (x86)/Common Files/Autodesk Shared/Materials/Textures/ 
+' 2:< Protein Build       4.0.32.600 
+' 2:< MSI Version         4.0.32.600 
+' 2:< Version Control DLL 4.0.0.0 
+'C 30-Jun-2015 15:48:30.360;   2:< Protein: RPC Message 
+' 2:< This plugin is unable to acquire a license.
+'Only demo content will be fully functional. 
+' 2:< ::2:: Delta VM: Avail 8386982 MB, Used +0 -> 326 MB, Peak +0 -> 326 MB; RAM: Avail -32 -> 3233 MB, Used +1 -> 407 MB, Peak +1 -> 407 MB 
+'C 30-Jun-2015 15:48:30.661;   2:< Protein : Notify Plugins to load the content on the asset library 
+'C 30-Jun-2015 15:48:30.661;   2:< Protein : Register the Protein RenderingAsset Manager 
+'  3.396535!!!! 3:!!!BIG_GAP [Cloud]openOntoDesktop 
+' 2:< At line number 5 of source journal
+'DBG_INFO: Detected unfrozen change of selection.: line 571 of n:\build\2014_ship_x64_inst_20140709_2115\source\revit\revitui\modscope\ModScope.cpp. 
+' 2:< <<Begin build CT>>
+'
+'Edit mode: IDR_COMMON
+'Command: 
+'Category: 0
+'Bar list: 
+'	
+'Presenter list: 
+'	
+'Product: Unknown
+'
+'
+'Edit mode context, but no edit mode set.
+'<<End build CT>> 
+  ' 2:< View Open: Element expansion used 0.000000 seconds averaging 0.000000 seconds/hit for 0 hits. 
+  '  3.865021    2:<<[Cloud]openOntoDesktop 
+  ' 2:< Third Party Updater 'LightThresholds: Daylighting Analysis Status Updater' registered for document 'TestModel.rvt'. 
+  ' 2:< API registering DocumentClosing event by application LightThresholds (050e7709-060d-457d-9352-e90b85fbb5d9). 
+  ' 1:<  0 ModelServerState "Created": Current server = "Not Queried", Model server = "", Model server state = "Not Applicable" 
+  ' 1:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
+  ' 1:< RAM Statistics:     3229 /     8075       412=InUse      412=Peak  
+  ' 1:< VM  Statistics:  8386978 /  8388607       328=InUse      329=Peak  
+  ' 1:< 000000000E0B2E38 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 1:< 000000000E0B2E88 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 1:< 000000000E0B2F28 CompactMemoryManager Memory Statistics: 2 MB with 2 MB view 
+  ' 1:< 000000000E0B2F00 CompactMemoryManager Memory Statistics: 2 MB with 2 MB view 
+  ' 1:< 000000000E0B2ED8 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 1:< 000000000E0B2EB0 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 1:< 000000000E0B2E60 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 1:< 000000000E0B2E10 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 1:< Element Expansion Statistics: 
+  ' 1:<  5% Opening Plans                    (9931) 
+  ' 1:<  0% Opening RC Plans                 (0) 
+  ' 1:<  0% Opening 3d Views                 (0) 
+  ' 1:<  0% Opening Elevations and Sections  (0) 
+  ' 1:<  0% In Regnerate                     (0) 
+  ' 1:<  0% In Autojoin                      (0) 
+  ' 1:<  0% In Overlap Checking              (0) 
+  ' 1:<  0% Reviewing PostedWarnings         (0) 
+  ' 1:<  95% Other                            (171181) 
+  ' 1:< total bytes expanded: 181112 
+  ' 1:< ;EES;5;0;0;0;0;0;0;0;95; 
+  ' 1:<  0 ModelServerState "Destroyed": Current server = "Not Queried", Model server = "", Model server state = "Not Applicable" 
+  ' 1:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
+  ' 1:< RAM Statistics:     3228 /     8075       412=InUse      412=Peak  
+  ' 1:< VM  Statistics:  8386978 /  8388607       328=InUse      329=Peak  
+  '  4.423732-- 1:<<[Cloud]standardOpenDocumentFile/ALL_GAPS   0.349865/TurnOff_GAPs 43% 
+   '  4.463948  0:<<Event timer/ALL_GAPS   0.390081/TurnOff_GAPs 39% 
+   'E 30-Jun-2015 15:48:31.277;   0:< 
+   ' [Jrn.File Input Information] COMMON.FILE_INPUT.FILE_TYPE: .rvt 0307200.000000
+ 'E 30-Jun-2015 15:48:31.278;   0:< 
+ Jrn.Size        0 ,    677 ,    661
+ 'E 30-Jun-2015 15:48:31.278;   0:< 
+ Jrn.Size        0 ,    656 ,    640
+ 'E 30-Jun-2015 15:48:31.280;   0:< 
+ Jrn.Size        0 ,    676 ,    660
+ 'E 30-Jun-2015 15:48:31.280;   0:< 
+ Jrn.Size        0 ,    655 ,    639
+ 'E 30-Jun-2015 15:48:31.293;   0:< 
+ Jrn.Size        0 ,    561 ,    634
+ 'E 30-Jun-2015 15:48:31.294;   0:< 
+ Jrn.Size        0 ,    540 ,    613
+' 0:< ::9:: Delta VM: Avail -19 -> 8386964 MB, Used +16 -> 342 MB, Peak +17 -> 344 MB; RAM: Avail -21 -> 3213 MB, Used +21 -> 429 MB, Peak +21 -> 429 MB 
+'  0.828400   1:<<<;PERF;MISC;drawing 
+'C 30-Jun-2015 15:48:32.176;   0:< idle0_doc 
+' 0:< <<Begin build CT>>
+'
+'Edit mode: IDR_COMMON
+'Command: ID_BUTTON_SELECT
+'Category: 0
+'Bar list: 
+'	Dialog_Revit_DynamicLabelDBar
+'	Dialog_Essentials_FilterSelectionNew
+'Presenter list: 
+'	PP_DebugTab_Binding_Demo
+'Product: Revit
+'
+'
+'***********************************************************
+'***********************************************************
+'<<End build CT>> 
+' 0:< ::9:: Delta VM: Avail -3 -> 8386962 MB, Used +0 -> 343 MB; RAM: Avail +27 -> 3240 MB, Used +2 -> 431 MB, Peak +2 -> 431 MB 
+' 0:<    Process affinity mask : F 
+' 0:<    System affinity mask : F 
+ '  1.131014  0:<<Event timer 
+ 'E 30-Jun-2015 15:48:32.408;   0:< 
+ 
+ Jrn.RibbonEvent "Execute external command:487f9ff0-5b34-4e7e-97bf-70fbff69194f:RTF.Applications.RevitTestFramework"
+' 1:< ::10:: Delta VM: Avail -51 -> 8386912 MB, Used +91 -> 434 MB, Peak +93 -> 438 MB; RAM: Avail -98 -> 3143 MB, Used +102 -> 533 MB, Peak +105 -> 537 MB 
+' 1:< API registering DocumentChanged event by application RTF.Applications.RevitTestFramework (487f9ff0-5b34-4e7e-97bf-70fbff69194f). 
+' 1:< API registering ViewActivating event by application RTF.Applications.RevitTestFramework (487f9ff0-5b34-4e7e-97bf-70fbff69194f). 
+' 1:< API registering ViewActivated event by application RTF.Applications.RevitTestFramework (487f9ff0-5b34-4e7e-97bf-70fbff69194f). 
+' 1:< API registering DocumentClosing event by application RTF.Applications.RevitTestFramework (487f9ff0-5b34-4e7e-97bf-70fbff69194f). 
+' 1:< API registering DocumentClosed event by application RTF.Applications.RevitTestFramework (487f9ff0-5b34-4e7e-97bf-70fbff69194f). 
+' 1:< API registering DocumentOpened event by application RTF.Applications.RevitTestFramework (487f9ff0-5b34-4e7e-97bf-70fbff69194f). 
+' 1:< API registering ViewActivating event by application RTF.Applications.RevitTestFramework (487f9ff0-5b34-4e7e-97bf-70fbff69194f). 
+' 1:< PROCESSOR INFORMATION:  
+' 1:<    AddressWidth : 64 
+' 1:<    Architecture : 9 
+' 1:<    Availability : 3 
+' 1:<    Caption : Intel64 Family 6 Model 42 Stepping 7 
+' 1:<    CurrentClockSpeed : 2801 
+' 1:<    DataWidth : 64 
+' 1:<    Description : Intel64 Family 6 Model 42 Stepping 7 
+' 1:<    Family : 198 
+' 1:<    L2CacheSize : 256 
+' 1:<    Level : 6 
+' 1:<    Manufacturer : GenuineIntel 
+' 1:<    MaxClockSpeed : 2801 
+' 1:<    Name : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz 
+' 1:<    ProcessorType : 3 
+' 1:<    Revision : 10759 
+' 1:<    Role : CPU 
+' 1:<    SocketDesignation : CPU 
+' 1:<    StatusInfo : 3 
+' 1:<    Version :  
+' 2:< ::10:: Delta VM: Avail -7 -> 8386906 MB, Used +0 -> 435 MB; RAM: Avail -64 -> 3079 MB, Used +1 -> 535 MB 
+'  6.474320!!! 2:!!!BIG_GAP API External Command Time 
+' 1:< ::10:: Delta VM: Avail -80 -> 8386826 MB, Used +29 -> 465 MB, Peak +34 -> 472 MB; RAM: Avail -36 -> 3044 MB, Used +43 -> 578 MB, Peak +48 -> 585 MB 
+' 1:< API unregistering ViewActivating event by application RTF.Applications.RevitTestFramework (487f9ff0-5b34-4e7e-97bf-70fbff69194f). 
+' 15.403555   1:<<API External Command Time 
+' 15.441117  0:<<Event timer 
+'H 30-Jun-2015 15:48:47.850;   0:< 
+Jrn.Data "APIStringStringMapJournalData"  _
+        , 6, "debug", "False" _
+        , "fixtureName", "DynamoSAP_SystemTesting", "resultsPath" _
+        , "C:\Users\eertugrul\Desktop\delete_\RTF Test\DynSAPTest.xml", "testAssembly", "C:\Users\eertugrul\Documents\GitHub\DynamoSAP\bin\AnyCPU\Debug\DynamoSAPTests.dll" _
+        , "testName", "Edit_AddLoadCase", "workingDirectory" _
+        , "C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra"
+ 'E 30-Jun-2015 15:48:47.916;   0:< 
+ Jrn.Command "Internal" , "Flush undo and redo stacks , ID_FLUSH_UNDO"
+ ' 0:< Unnecessary nesting;ArrowUI_4;-1;ID_FLUSH_UNDO ;N++EB(NB); 
+'C 30-Jun-2015 15:48:47.927;   0:< idle0_doc 
+' 0:< VIDEO CONTROLLER INFORMATION:  
+' 0:<    AdapterCompatibility : RealVNC 
+' 0:<    Caption : VNC Mirror Driver 
+' 0:<    CurrentBitsPerPixel : 32 
+' 0:<    CurrentHorizontalResolution : 1600 
+' 0:<    CurrentNumberOfColors : 4294967296 
+' 0:<    CurrentRefreshRate : 60 
+' 0:<    CurrentVerticalResolution : 900 
+' 0:<    Description : VNC Mirror Driver 
+' 0:<    DriverDate : 20080314000000.000000-000 
+' 0:<    DriverVersion : 1.8.0.0 
+' 0:<    MaxRefreshRate : 60 
+' 0:<    MinRefreshRate : 50 
+' 0:<    Monochrome : 0 
+' 0:<    Name : VNC Mirror Driver 
+' 0:<    VideoArchitecture : 5 
+' 0:<    VideoMemoryType : 2 
+' 0:<    VideoModeDescription : 1600 x 900 x 4294967296 colors 
+' 0:< VIDEO CONTROLLER INFORMATION:  
+' 0:<    AdapterCompatibility : Intel Corporation 
+' 0:<    AdapterDACType : Internal 
+' 0:<    AdapterRAM : -2084569088 
+' 0:<    Caption : Intel(R) HD Graphics 3000 
+' 0:<    Description : Intel(R) HD Graphics 3000 
+' 0:<    DriverDate : 20131031000000.000000-000 
+' 0:<    DriverVersion : 9.17.10.3347 
+' 0:<    Monochrome : 0 
+' 0:<    Name : Intel(R) HD Graphics 3000 
+' 0:<    VideoArchitecture : 5 
+' 0:<    VideoMemoryType : 2 
+' 0:<    VideoProcessor : Intel(R) HD Graphics Family 
+ '  0.121504  0:<<Event timer/ALL_GAPS   0.121504/Threshold_GAPs 6% 
+ 'E 30-Jun-2015 15:48:47.972;   0:< 
+ Jrn.Command "SystemMenu" , "Quit the application; prompts to save projects , ID_APP_EXIT"
+ ' 1:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
+ ' 1:< RAM Statistics:     3049 /     8075       579=InUse      585=Peak  
+ ' 1:< VM  Statistics:  8386818 /  8388607       465=InUse      472=Peak  
+ ' 1:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
+ ' 1:< RAM Statistics:     3046 /     8075       579=InUse      585=Peak  
+ ' 1:< VM  Statistics:  8386818 /  8388607       465=InUse      472=Peak  
+ ' 1:< Third Party Updater 'LightThresholds: Daylighting Analysis Status Updater' has been unregistered. 
+ ' 0:< CrsTimer event occurred for 0 times in DesktopMFCView [Floor Plan: Level 1] 
+ ' 0:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
+ ' 0:< RAM Statistics:     3047 /     8075       578=InUse      585=Peak  
+ ' 0:< VM  Statistics:  8386820 /  8388607       464=InUse      472=Peak ;oCD; 
+ ' 0:< ::12:: Delta VM: Avail -21 -> 8386806 MB, Used -1 -> 464 MB; RAM: Avail +1 -> 3046 MB, Used +1 -> 580 MB 
+ ' 0:< Before : Destroy Display Manager 
+ ' 0:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
+ ' 0:< RAM Statistics:     3046 /     8075       580=InUse      585=Peak  
+ ' 0:< VM  Statistics:  8386806 /  8388607       464=InUse      472=Peak  
+ ' 0:< After : Destroy Display Manager 
+ ' 0:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
+ ' 0:< RAM Statistics:     3046 /     8075       580=InUse      585=Peak  
+ ' 0:< VM  Statistics:  8386806 /  8388607       464=InUse      472=Peak  
+ ' 0:< DummyStorage destroying DataStorageInterface 0x0000000013064C40 
+ ' 0:< DataStorageInterface destroyed 0x0000000013064C40 
+' 0:< ::12:: Delta VM: Avail +5 -> 8386811 MB, Used 464 MB; RAM: Avail +55 -> 3102 MB, Used +1 -> 581 MB, Peak +7 -> 593 MB 
+' 0:< PRINTER INFORMATION:  
+' 0:<    Caption : WebEx Document Loader 
+' 0:<    Default : 0 
+' 0:<    DeviceID : WebEx Document Loader 
+' 0:<    Direct : 0 
+' 0:<    DriverName : WebEx Document Loader 
+' 0:<    EnableBIDI : 0 
+' 0:<    EnableDevQueryPrint : -1 
+' 0:<    HorizontalResolution : 90 
+' 0:<    Local : -1 
+' 0:<    Name : WebEx Document Loader 
+' 0:<    Network : 0 
+' 0:<    PortName : WebEx Document Loader Port 
+' 0:<    PrintJobDataType : NT EMF 1.003 
+' 0:<    PrintProcessor : winprint 
+' 0:<    RawOnly : 0 
+' 0:<    Shared : 0 
+' 0:<    SpoolEnabled : -1 
+' 0:<    VerticalResolution : 90 
+' 0:< PRINTER INFORMATION:  
+' 0:<    Caption : Send To OneNote 2010 
+' 0:<    Default : -1 
+' 0:<    DeviceID : Send To OneNote 2010 
+' 0:<    Direct : 0 
+' 0:<    DriverName : Send To Microsoft OneNote 2010 Driver 
+' 0:<    EnableBIDI : 0 
+' 0:<    EnableDevQueryPrint : 0 
+' 0:<    HorizontalResolution : 600 
+' 0:<    Local : -1 
+' 0:<    Name : Send To OneNote 2010 
+' 0:<    Network : 0 
+' 0:<    PortName : nul: 
+' 0:<    PrintJobDataType : RAW 
+' 0:<    PrintProcessor : winprint 
+' 0:<    RawOnly : 0 
+' 0:<    Shared : 0 
+' 0:<    SpoolEnabled : -1 
+' 0:<    VerticalResolution : 600 
+' 0:<    Caption : Microsoft XPS Document Writer 
+' 0:<    Default : 0 
+' 0:<    DeviceID : Microsoft XPS Document Writer 
+' 0:<    Direct : 0 
+' 0:<    DriverName : Microsoft XPS Document Writer 
+' 0:<    EnableBIDI : 0 
+' 0:<    EnableDevQueryPrint : 0 
+' 0:<    HorizontalResolution : 600 
+' 0:<    Local : -1 
+' 0:<    Name : Microsoft XPS Document Writer 
+' 0:<    Network : 0 
+' 0:<    PortName : XPSPort: 
+' 0:<    PrintJobDataType : RAW 
+' 0:<    PrintProcessor : winprint 
+' 0:<    RawOnly : 0 
+' 0:<    Shared : 0 
+' 0:<    SpoolEnabled : -1 
+' 0:<    VerticalResolution : 600 
+' 0:<    Caption : Fax 
+' 0:<    Default : 0 
+' 0:<    DeviceID : Fax 
+' 0:<    Direct : 0 
+' 0:<    DriverName : Microsoft Shared Fax Driver 
+' 0:<    EnableBIDI : 0 
+' 0:<    EnableDevQueryPrint : 0 
+' 0:<    HorizontalResolution : 200 
+' 0:<    Local : -1 
+' 0:<    Name : Fax 
+' 0:<    Network : 0 
+' 0:<    PortName : SHRFAX: 
+' 0:<    PrintJobDataType : RAW 
+' 0:<    PrintProcessor : winprint 
+' 0:<    RawOnly : 0 
+' 0:<    Shared : 0 
+' 0:<    SpoolEnabled : -1 
+' 0:<    VerticalResolution : 200 
+' 0:<    Caption : Bluebeam PDF 
+' 0:<    Default : 0 
+' 0:<    DeviceID : Bluebeam PDF 
+' 0:<    Direct : 0 
+' 0:<    DriverName : BluebeamPSDriver 
+' 0:<    EnableBIDI : 0 
+' 0:<    EnableDevQueryPrint : 0 
+' 0:<    HorizontalResolution : 600 
+' 0:<    Local : -1 
+' 0:<    Name : Bluebeam PDF 
+' 0:<    Network : 0 
+' 0:<    PortName : BLUEBEAMPDFPORT 
+' 0:<    PrintJobDataType : RAW 
+' 0:<    PrintProcessor : winprint 
+' 0:<    RawOnly : 0 
+' 0:<    Shared : 0 
+' 0:<    SpoolEnabled : -1 
+' 0:<    VerticalResolution : 600 
+' 0:<  ->desktop ExitManagedInstance 
+' 0:<  <-desktop ExitManagedInstance 
+' 0:<  ->desktop ExitNativeInstance 
+' 0:< API unregistering DocumentClosing event by application LightThresholds (050e7709-060d-457d-9352-e90b85fbb5d9). 
+' 0:< API unregistering DocumentOpened event by application LightThresholds (050e7709-060d-457d-9352-e90b85fbb5d9). 
+' 0:< ::12:: Delta VM: Avail -3 -> 8386809 MB, Used -39 -> 426 MB; RAM: Avail +38 -> 3140 MB, Used -38 -> 544 MB 
+' 0:< Forcibly unregistering Updater with id:51c0be9b-07a8-443a-be8c-21db815b17e7 
+' 0:< Forcibly unregistering Updater with id:00000000-c00c-478e-9226-63d19d957aed 
+' 0:< Forcibly unregistering Updater with id:00000000-9a62-4ecd-adb1-9a93bf539620 
+' 0:< Forcibly unregistering Updater with id:00000000-7174-4309-88a1-27d09090ef6d 
+' 0:< Forcibly unregistering Updater with id:00000000-0a7a-49e7-bd08-6696111b3b53 
+' 0:< Forcibly removing all update triggers for all Updaters 
+' 0:< Unregistering all external services. 
+'C 30-Jun-2015 15:48:49.844;   0:< Protein : Unload plug-ins 
+'C 30-Jun-2015 15:48:49.844;   0:< Protein : Release Plugins 
+' 0:< ::12:: Delta VM: Avail +30 -> 8386839 MB, Used -6 -> 421 MB; RAM: Avail +3 -> 3144 MB, Used -5 -> 540 MB 
+'C 30-Jun-2015 15:48:49.846;   0:< Protein : Release Renderer Module 
+'C 30-Jun-2015 15:48:49.846;   0:< Protein : Destroy RenderingAsset Library Manager 
+'C 30-Jun-2015 15:48:49.854;   0:< Protein : ProteinSdkManager has been destroyed successfully 
+' 0:< ::12:: Delta VM: Avail +35 -> 8386874 MB, Used -33 -> 388 MB; RAM: Avail +18 -> 3163 MB, Used -20 -> 520 MB 
+'C 30-Jun-2015 15:48:49.865;   0:< License cleanup complete: 0, 0 
+' 0:< Journal Exit 
+' 0:< Log Summary 
+' 0:< .Count 
+' 0:< ...CloseHiddenWindowsInAllDocuments = 5 
+' 0:< ...CloseHiddenWindowsInDocumentStorage = 2 
+' 0:< ...DBG_SOMETHING = 2 
+' 0:< ...getADocuments_Arr = 22 
+' 0:< ...onUpdateWindowCloseHidden = 5 
+' 0:< ...ProjectRecsCreated = 2 
+' 0:< ...ProjectRecsLeaked = 1 
+' 0:< ...UnmatchedGViewDirectives = 1 
+' 0:< Total session time spent reclaiming memory: 0.000000 seconds.  Averaged 0.000000 seconds/call for 0 calls. 
+' 0:< Total expansion time: 0.008039 seconds, averaging 0.000001 seconds/expansion for 6411 expansions. 
+'C 30-Jun-2015 15:48:49.868;   0:< stopped at line 8 journal file playback 
+' 0:<               BackgroundLoader exec=     1 (parallel=     1)   
+' 0:<         ConsumeArchive_Element exec=     7 (parallel=     7)   self=    0.007025 sec (avg=  0.001) 
+' 0:<            ConsumeArchive_GRep exec=     1 (parallel=     1)   self=    0.001209 sec (avg=  0.001) 
+' 0:<          ConsumeArchive_Header exec=     2 (parallel=     2)   self=    0.023829 sec (avg=  0.012) 
+' 0:<      ConsumeElementVisitBucket exec=     6 (parallel=     3)   self=    0.002885 sec (avg=  0.000) 
+' 0:<                  FormOrAbandon exec=     2 (parallel=     0)   self=    4.716587 sec (avg=  2.358) 
+' 0:<                 ProduceArchive exec=    11 (parallel=    11)   self=    0.000593 sec (avg=  0.000) 
+' 0:<      ProduceElementVisitBucket exec=    12 (parallel=     7)   self=    0.000070 sec (avg=  0.000) 
+' 0:<    ReadFileAndPerformOperation exec=     3 (parallel=     0)   self=    0.000219 sec (avg=  0.000) 
+' 0:<             RunPipelineContext exec=     6 (parallel=     3)   self=    0.000095 sec (avg=  0.000) rollup=   0.003058 (avg=  0.001) 
+' 0:<          SetClassMapsAndHeader exec=     1 (parallel=     0)   
+' 0:<                 TaskFileExists exec=   177 (parallel=   170)   self=    0.037255 sec (avg=  0.000) 
+' 0:<                    TaskScatter exec=     1 (parallel=     1)   
+' 0:<               TaskScriptEngine exec=     1 (parallel=     1)   
+' 0:<                 TaskWaitCursor exec=     1 (parallel=     1)   
+' 0:< ::12:: Delta VM: Avail +23 -> 8386898 MB, Used -2 -> 387 MB; RAM: Avail +9 -> 3172 MB, Used -9 -> 511 MB 
+' 0:<  <-desktop ExitNativeInstance 
+' 0:< ::12:: Delta VM: Avail +13 -> 8386912 MB, Used 387 MB; RAM: Avail 3172 MB, Used 511 MB 
+'C 30-Jun-2015 15:48:50.386;   0:< finished recording journal file 
