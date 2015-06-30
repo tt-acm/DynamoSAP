@@ -243,10 +243,17 @@ namespace DynamoSAPTests
         public void ReadStructure_Frame()
         {
             // Launch SAP2000v16 and Open a blank model
-            SapObject mySapObject = null;
-            cSapModel mySapModel = null;
-            string units = string.Empty;
-            SAPConnection.Initialize.OpenSAPModel(@"C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\2a_Dome.sdb", ref mySapModel , ref units);
+
+            string filePath = @"C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\2a_Dome.sdb";
+            //Create SAP2000 Object
+            SapObject mySapObject = new SAP2000v16.SapObject();
+            //Start Application
+            mySapObject.ApplicationStart();
+            //Create SapModel object
+            cSapModel mySapModel = mySapObject.SapModel;
+            mySapModel.InitializeNewModel();
+            mySapModel.File.OpenFile(filePath);
+
 
             //Open and Run the sample file
             OpenAndRunDynamoDefinition(@".\Sample_2a_Read_Dome+DecomposeSapModel.dyn");
@@ -300,10 +307,15 @@ namespace DynamoSAPTests
         public void ReadStructure_Shell()
         {
             // Launch SAP2000v16 and Open a blank model
-            SapObject mySapObject = null;
-            cSapModel mySapModel = null;
-            string units = string.Empty;
-            SAPConnection.Initialize.OpenSAPModel(@"C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\2b_SimpleShellStructure.sdb", ref mySapModel, ref units);
+            string filePath = @"C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\2b_SimpleShellStructure.sdb";
+            //Create SAP2000 Object
+            SapObject mySapObject = new SAP2000v16.SapObject();
+            //Start Application
+            mySapObject.ApplicationStart();
+            //Create SapModel object
+            cSapModel mySapModel = mySapObject.SapModel;
+            mySapModel.InitializeNewModel();
+            mySapModel.File.OpenFile(filePath);
 
             //Open and Run the sample file
             OpenAndRunDynamoDefinition(@".\Sample_2b_Read_Shell+DecomposeSapModel.dyn");

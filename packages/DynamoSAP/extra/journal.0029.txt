@@ -1,5 +1,5 @@
-' 0:< Initial VM: Avail 8388380 MB, Used 20 MB, Peak 42; RAM: Avail 4141 MB, Used 41 MB, Peak 42 
-'C 30-Jun-2015 14:02:39.297;   0:< started recording journal file 
+' 0:< Initial VM: Avail 8388380 MB, Used 20 MB, Peak 42; RAM: Avail 3510 MB, Used 41 MB, Peak 42 
+'C 30-Jun-2015 14:29:17.964;   0:< started recording journal file 
 ' Build: 20140709_2115(x64)
 Dim Jrn
 Set Jrn = CrsJournalScript
@@ -7,13 +7,13 @@ Set Jrn = CrsJournalScript
 ' 0:<  <-desktop InitApplication 
 ' 0:<  ->desktop InitNativeInstance 
 ' 0:< Options::loadOptions: m_strDataLibraryLocations=TT Families=..\..\..\..\ProgramData\Autodesk\RVT 2014\Libraries\TT, US Imperial Families=..\..\..\..\ProgramData\Autodesk\RVT 2014\Libraries\US Imperial, US Imperial Detail Library=..\..\..\..\ProgramData\Autodesk\RVT 2014\Libraries\US Imperial\Detail Items, US Metric Families=..\..\..\..\ProgramData\Autodesk\RVT 2014\Libraries\US Metric, US Metric Detail Library=..\..\..\..\ProgramData\Autodesk\RVT 2014\Libraries\US Metric\Detail Items, TT Project Templates=..\..\..\..\ProgramData\Autodesk\RVT 2014\Templates\TT\Project Templates, US Imperial Project Templates=..\..\..\..\ProgramData\Autodesk\RVT 2014\Templates\US Imperial, US Metric Project Templates=..\..\..\..\ProgramData\Autodesk\RVT 2014\Templates\US Metric, UK Metric Project Templates=..\..\..\..\ProgramData\Autodesk\RVT 2014\Templates\UK, Imperial Library=C:\ProgramData\Autodesk\RVT 2014\Libraries\US Imperial\,Imperial Detail Library=C:\ProgramData\Autodesk\RVT 2014\Libraries\US Imperial\Detail Items (defaultLib==\Library) 
-' 0:< ::0:: Delta VM: Avail -16 -> 8388364 MB, Used +4 -> 24 MB; RAM: Avail -11 -> 4131 MB, Used +6 -> 47 MB, Peak +6 -> 47 MB 
-'C 30-Jun-2015 14:02:39.427;   0:< License initialization complete 
-' 0:< ::0:: Delta VM: Avail -925 -> 8387440 MB, Used +175 -> 200 MB, Peak +157 -> 200 MB; RAM: Avail -170 -> 3961 MB, Used +192 -> 240 MB, Peak +192 -> 240 MB 
+' 0:< ::0:: Delta VM: Avail -16 -> 8388364 MB, Used +4 -> 24 MB; RAM: Avail -11 -> 3500 MB, Used +6 -> 47 MB, Peak +6 -> 47 MB 
+'C 30-Jun-2015 14:29:18.082;   0:< License initialization complete 
+' 0:< ::0:: Delta VM: Avail -925 -> 8387440 MB, Used +175 -> 199 MB, Peak +157 -> 199 MB; RAM: Avail -171 -> 3330 MB, Used +191 -> 239 MB, Peak +191 -> 239 MB 
 ' 0:< Autodesk Revit 2014 
 ' 0:< 64-bit load point = C:\Program Files\Autodesk\Revit 2014 
-' 0:< this journal = C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\journal.0020.txt 
-' 0:< ::0:: Delta VM: Avail -55 -> 8387385 MB, Used +6 -> 206 MB, Peak +40 -> 240 MB; RAM: Avail -10 -> 3951 MB, Used +10 -> 250 MB, Peak +11 -> 252 MB 
+' 0:< this journal = C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\journal.0029.txt 
+' 0:< ::0:: Delta VM: Avail -55 -> 8387385 MB, Used +6 -> 206 MB, Peak +40 -> 240 MB; RAM: Avail -11 -> 3319 MB, Used +11 -> 250 MB, Peak +12 -> 252 MB 
 ' 0:< Failed to load add-in manifest file: Root element is missing. 
 ' 0:< Added new API pushbutton 35011, name Navisworks 2014, class NavisWorks11.LcRevitExportCommand, assembly C:\Program Files\Common Files\Autodesk Shared\Navisworks\2014\nwexportrevit2014\nwexportrevit2014_11.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
 ' 0:< Added new API pushbutton 35012, name Navisworks SwitchBack 2014, class NavisWorks11.LcActivateSwitchBack, assembly C:\Program Files\Common Files\Autodesk Shared\Navisworks\2014\nwexportrevit2014\nwexportrevit2014_11.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
@@ -42,43 +42,43 @@ Set Jrn = CrsJournalScript
 ' 0:< ...PoolScalable = 1 (Pool) 
 ' 0:< ...PoolTreeNodes = 0 (Allocator) 
 ' 0:< ...Scalable = 0 (Scalable) 
-'H 30-Jun-2015 14:02:44.829;   0:< 
+'H 30-Jun-2015 14:29:23.213;   0:< 
 Jrn.Data "JournalDefaultTemplate"  _
         , "TT Imperial Template=$AllUsersAppData\Templates\TT\Project Templates\TT_Template_Imperial_RS2014.rte, TT Metric Template=$AllUsersAppData\Templates\TT\Project Templates\TT_Template_Metric_RS2014.rte"
-'H 30-Jun-2015 14:02:44.830;   0:< 
+'H 30-Jun-2015 14:29:23.214;   0:< 
 Jrn.Data "JournalDefaultViewDiscipline"  _
         , "Structure"
-'H 30-Jun-2015 14:02:44.830;   0:< 
+'H 30-Jun-2015 14:29:23.214;   0:< 
 Jrn.Directive "Version"  _
         , "2014.000", "2.143"
-'H 30-Jun-2015 14:02:44.830;   0:< 
+'H 30-Jun-2015 14:29:23.214;   0:< 
 Jrn.Directive "Username"  _
         , "EErtugrul"
-'H 30-Jun-2015 14:02:44.830;   0:< 
+'H 30-Jun-2015 14:29:23.214;   0:< 
 Jrn.Directive "CategoryDisciplineFilter"  _
         , 2
-'H 30-Jun-2015 14:02:44.830;   0:< 
+'H 30-Jun-2015 14:29:23.214;   0:< 
 Jrn.Directive "DisciplineOption"  _
         , 7677
-'H 30-Jun-2015 14:02:44.830;   0:< 
+'H 30-Jun-2015 14:29:23.214;   0:< 
 Jrn.Directive "TabDisplayOptions"  _
         , "StayOnModifyInProject", 0
-'H 30-Jun-2015 14:02:44.830;   0:< 
+'H 30-Jun-2015 14:29:23.214;   0:< 
 Jrn.Directive "TabDisplayOptions"  _
         , "StayOnModifyInFamily", 1
-'H 30-Jun-2015 14:02:44.830;   0:< 
+'H 30-Jun-2015 14:29:23.214;   0:< 
 Jrn.Directive "TabDisplayOptions"  _
         , "ActiveCtOnSelection", 1
-'H 30-Jun-2015 14:02:44.830;   0:< 
+'H 30-Jun-2015 14:29:23.214;   0:< 
 Jrn.Directive "AllowLinkSelection"  _
         , 1
-'H 30-Jun-2015 14:02:44.830;   0:< 
+'H 30-Jun-2015 14:29:23.214;   0:< 
 Jrn.Directive "AllowFaceSelection"  _
         , 0
-'H 30-Jun-2015 14:02:44.830;   0:< 
+'H 30-Jun-2015 14:29:23.214;   0:< 
 Jrn.Directive "AllowUnderlaySelection"  _
         , 1
-'H 30-Jun-2015 14:02:44.830;   0:< 
+'H 30-Jun-2015 14:29:23.214;   0:< 
 Jrn.Directive "AllowPinnedSelection"  _
         , 1
 ' 0:< API_SUCCESS { Registered an external service.: ServiceId(a9bdf0fd-2632-429e-bc35-50ebc2b824d2); VendorId(ADSK); Description(Navisworks Export Service) } 
@@ -94,7 +94,7 @@ Jrn.Directive "AllowPinnedSelection"  _
 ' 0:< API_SUCCESS { Registered an external service.: ServiceId(bf0da776-5307-4747-8285-f358e92a90d0); VendorId(ADSK); Description(Convert Fixture Units to Flow for Plumbing Fixtures, which is applicable to Domestic Water System Flow Calculation) } 
 ' 0:< API_SUCCESS { Registered an external service.: ServiceId(52009bda-c817-4aef-aa31-36dc3742516e); VendorId(ADSK); Description(Duct fitting and accessory pressure drop UI service) } 
 ' 0:< API_SUCCESS { Registered an external service.: ServiceId(1931b323-1d29-4083-b1ce-bfdcddd011af); VendorId(ADSK); Description(Pipe fitting and accessory pressure drop UI service) } 
-' 0:< ::0:: Delta VM: Avail -72 -> 8387314 MB, Used +21 -> 227 MB; RAM: Avail -30 -> 3921 MB, Used +28 -> 279 MB, Peak +27 -> 279 MB 
+' 0:< ::0:: Delta VM: Avail -72 -> 8387314 MB, Used +21 -> 228 MB; RAM: Avail -31 -> 3289 MB, Used +28 -> 279 MB, Peak +27 -> 279 MB 
 ' 0:< To make IFC server work. 
 ' 0:< API_SUCCESS { An external server has been registered.: ServiceId(bf0da776-5307-4747-8285-f358e92a90d0); ServerId(56121d7d-e1d7-42a3-bed8-f4d1d32058c8); Name(Plumbing Fixture Flow); VendorId(ADSK); Description(Calculation of flow using the Plumbing Fixture Flow method.) } 
 ' 0:< API_SUCCESS { An external server has been registered.: ServiceId(62d13e0c-9fe1-4d8e-a0c7-1f93d24cf3f3); ServerId(ea275fb1-5d7b-47d6-b828-bf856df9bfd5); Name(Pipe Pressure Drop); VendorId(ADSK); Description(Calculation of pressure drop using Darcy-Weisbach method.) } 
@@ -118,7 +118,7 @@ Jrn.Directive "AllowPinnedSelection"  _
 ' 0:< API_SUCCESS { Replacing command id 'ID_PHOTO_RENDER_GALLERY' CanExecute implementation with implementation from application 'RaaS' dll 'C:\Program Files\Autodesk\Revit 2014\AddIns\RaaSForRevit\RaaSApplication.dll'. } 
 ' 0:< API_SUCCESS { API registering command  CanExecute event by application RaaS (d4f6554b-5d68-4a13-beec-4a0647c34408). } 
 ' 0:< Added new API external application AutoLoad, class AutoLoader.AutoLoader, assembly AutoLoader.dll, vendorId ADSK, vendor description . 
-'H 30-Jun-2015 14:02:46.159;   0:< 
+'H 30-Jun-2015 14:29:24.554;   0:< 
 Jrn.Directive "IdleTimeTaskSymbol"  _
         , "0.ExternalEvent"
 ' 0:< Added new API external application FittingAndAccessoryCalculationUIServers, class FittingAndAccessoryCalculationUIServers.ServerApp, assembly FittingAndAccessoryCalculationUIServers.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
@@ -173,7 +173,7 @@ Jrn.Directive "IdleTimeTaskSymbol"  _
 ' 0:< Added new API pushbutton 6413 name  text Publish class GEPublish.Publish assembly C:\Program Files (x86)\Autodesk\Autodesk Globe Link for Revit 2014\GlobeLinkForRevit.dll 
 ' 0:< Added new API pushbutton 6414 name  text Export class GEExport.Export assembly C:\Program Files (x86)\Autodesk\Autodesk Globe Link for Revit 2014\GlobeLinkForRevit.dll 
 ' 0:< Added new API external application Model Review, class BIMStandardsManager.ExternalApp, assembly C:\Program Files (x86)\Autodesk\Autodesk Revit Model Review 2014\ModelReview.dll, vendorId ADSK, vendor description Autodesk, subscription.autodesk.com. 
-' 0:< ::0:: Delta VM: Avail -15 -> 8387299 MB, Used +4 -> 231 MB; RAM: Avail -9 -> 3912 MB, Used +10 -> 289 MB, Peak +10 -> 290 MB 
+' 0:< ::0:: Delta VM: Avail -15 -> 8387299 MB, Used +4 -> 232 MB; RAM: Avail -9 -> 3281 MB, Used +9 -> 289 MB, Peak +10 -> 289 MB 
 ' 0:< Added new API pushbutton 6415 name  text Check class BIMStandardsManager.Command assembly C:\Program Files (x86)\Autodesk\Autodesk Revit Model Review 2014\ModelReview.dll 
 ' 0:< Added new API pushbutton 6416 name  text Manage class BIMStandardsManager.CommandConfig assembly C:\Program Files (x86)\Autodesk\Autodesk Revit Model Review 2014\ModelReview.dll 
 ' 0:< Added new API pushbutton 6417 name  text View class BIMStandardsManager.CommandReview assembly C:\Program Files (x86)\Autodesk\Autodesk Revit Model Review 2014\ModelReview.dll 
@@ -201,7 +201,7 @@ Jrn.Directive "IdleTimeTaskSymbol"  _
 ' 0:< Added new API external application Worksharing Monitor Launch App, class WorksharingCommand.WorksharingApp, assembly C:\Program Files (x86)\Autodesk\Autodesk Worksharing Monitor for Revit 2014\WorkSharingCommand.dll, vendorId ADSK, vendor description Autodesk, subscription.autodesk.com. 
 ' 0:< Added new API pushbutton 6420 name  text Launch WSM class WorksharingCommand.WorksharingCommand assembly C:\Program Files (x86)\Autodesk\Autodesk Worksharing Monitor for Revit 2014\WorkSharingCommand.dll 
 ' 0:< Added new API external application BluebeamAddin, class Bluebeam.BbRevit.RevitAddin, assembly C:\Program Files\Bluebeam Software\Bluebeam Revu\Pushbutton PDF\Revit\Revit2014\BbRevitAddin2014.dll, vendorId BBSI, vendor description Bluebeam Revit Plugin. 
-' 0:< ::0:: Delta VM: Avail -30 -> 8387270 MB, Used +6 -> 238 MB; RAM: Avail -5 -> 3908 MB, Used +5 -> 294 MB, Peak +4 -> 294 MB 
+' 0:< ::0:: Delta VM: Avail -30 -> 8387270 MB, Used +5 -> 238 MB; RAM: Avail -6 -> 3276 MB, Used +5 -> 294 MB, Peak +5 -> 294 MB 
 ' 0:< Added new API pushbutton 6421 name  text Create PDF class Bluebeam.BbRevit.CreatePDFCommand assembly C:\Program Files\Bluebeam Software\Bluebeam Revu\Pushbutton PDF\Revit\Revit2014\BbRevitAddin2014.dll 
 ' 0:< Added new API pushbutton 6422 name  text Change
 'Settings class Bluebeam.BbRevit.ChangeSettingsCommand assembly C:\Program Files\Bluebeam Software\Bluebeam Revu\Pushbutton PDF\Revit\Revit2014\BbRevitAddin2014.dll 
@@ -260,14 +260,14 @@ Jrn.Directive "IdleTimeTaskSymbol"  _
 ' 0:< API registering DocumentClosing event by application LightThresholds (050e7709-060d-457d-9352-e90b85fbb5d9). 
 ' 0:< API registering DocumentOpened event by application LightThresholds (050e7709-060d-457d-9352-e90b85fbb5d9). 
 ' 0:< Added new API external application File exporter for Navisworks 2014, class NavisWorks11.LcRevitExportApplication, assembly C:\Program Files\Common Files\Autodesk Shared\Navisworks\2014\nwexportrevit2014\nwexportrevit2014_11.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
-' 0:< ::0:: Delta VM: Avail -38 -> 8387232 MB, Used +5 -> 243 MB, Peak +10 -> 250 MB; RAM: Avail -12 -> 3896 MB, Used +13 -> 307 MB, Peak +13 -> 307 MB 
+' 0:< ::0:: Delta VM: Avail -38 -> 8387232 MB, Used +5 -> 243 MB, Peak +10 -> 250 MB; RAM: Avail -13 -> 3263 MB, Used +13 -> 307 MB, Peak +13 -> 308 MB 
 ' 0:< API_SUCCESS { Replacing command id 'ID_EXPORT_NAVISWORKS' Executed implementation with implementation from application 'File exporter for Navisworks 2014' dll 'C:\Program Files\Common Files\Autodesk Shared\Navisworks\2014\nwexportrevit2014\nwexportrevit2014_11.dll'. } 
 ' 0:< API_SUCCESS { API registering command  Executed event by application File exporter for Navisworks 2014 (bb21724a-50ca-496f-bc8d-847f1cd7f56c). } 
 ' 0:< API_SUCCESS { Replacing command id 'ID_EXPORT_NAVISWORKS' CanExecute implementation with implementation from application 'File exporter for Navisworks 2014' dll 'C:\Program Files\Common Files\Autodesk Shared\Navisworks\2014\nwexportrevit2014\nwexportrevit2014_11.dll'. } 
 ' 0:< API_SUCCESS { API registering command  CanExecute event by application File exporter for Navisworks 2014 (bb21724a-50ca-496f-bc8d-847f1cd7f56c). } 
 ' 0:< API_SUCCESS { An external server has been registered.: ServiceId(a9bdf0fd-2632-429e-bc35-50ebc2b824d2); ServerId(68e1934c-ec3b-410c-8c82-434f0cf25446); Name(nwexportrevit 2014); VendorId(Autodesk Navisworks); Description(File exporter for Navisworks 2014) } 
 ' 0:< Added new API external application File exporter for Navisworks 2015, class NavisWorks12.LcRevitExportApplication, assembly C:\Program Files\Common Files\Autodesk Shared\Navisworks\2015\nwexportrevit2014\nwexportrevit2014_12.dll, vendorId ADSK, vendor description Autodesk, www.autodesk.com. 
-' 0:< ::0:: Delta VM: Avail -22 -> 8387210 MB, Used +3 -> 247 MB, Peak +4 -> 255 MB; RAM: Avail -4 -> 3892 MB, Used +2 -> 309 MB, Peak +2 -> 310 MB 
+' 0:< ::0:: Delta VM: Avail -22 -> 8387210 MB, Used +3 -> 247 MB, Peak +4 -> 255 MB; RAM: Avail -3 -> 3261 MB, Used +2 -> 309 MB, Peak +2 -> 310 MB 
 ' 0:< Added new API external application Dynamo Test Framework App, class RTF.Applications.RevitTestFrameworkExternalApp, assembly C:\Users\eertugrul\Documents\GitHub\RevitTestFramework\bin\AnyCPU\Debug\RTFRevit.dll, vendorId Dynamo, vendor description Dynamo. 
 ' 0:< Added new API external application TTXrevit Application, class TTXrevit.TTXrevit_APP, assembly C:\ProgramData\ThorntonTomasetti\Revit\TTX\2014\TTXrevit2014.dll, vendorId XXXX, vendor description XXXX. 
 ' 0:< Added new API pushbutton 6459 name  text TTX class TTXrevit.TTXREVIT_2013_ENTRY assembly C:\ProgramData\ThorntonTomasetti\Revit\TTX\2014\TTXrevit2014.dll 
@@ -275,15 +275,15 @@ Jrn.Directive "IdleTimeTaskSymbol"  _
 ' 0:< Added new API pushbutton 6461 name  text TTX Update Visualization class TTXrevit.TTXREVIT_2013_VISUALIZER assembly C:\ProgramData\ThorntonTomasetti\Revit\TTX\2014\TTXrevit2014.dll 
 ' 0:< Added new API external application TTXRevit Update Visualization, class TTXrevit.VizApplication, assembly C:\ProgramData\ThorntonTomasetti\Revit\TTX\2014\TTXrevit2014.dll, vendorId XXXX, vendor description XXXX. 
 ' 0:< API registering Idling event by application TTXRevit Update Visualization (f6102e9b-8a8f-4eea-8303-4cc8f5918e43). 
-'H 30-Jun-2015 14:02:47.672;   0:< 
+'H 30-Jun-2015 14:29:26.082;   0:< 
 Jrn.Directive "IdleTimeTaskSymbol"  _
         , "1.OnIdleTask"
-' 0:< ::0:: Delta VM: Avail -4 -> 8387207 MB, Used +6 -> 253 MB, Peak +4 -> 260 MB; RAM: Avail -7 -> 3885 MB, Used +6 -> 316 MB, Peak +13 -> 323 MB 
-'C 30-Jun-2015 14:02:48.018;   0:< ->processShellCommand 
-'C 30-Jun-2015 14:02:48.019;   0:< <-processShellCommand 
+' 0:< ::0:: Delta VM: Avail -4 -> 8387207 MB, Used +5 -> 253 MB, Peak +4 -> 260 MB; RAM: Avail -7 -> 3254 MB, Used +6 -> 316 MB, Peak +13 -> 323 MB 
+'C 30-Jun-2015 14:29:26.427;   0:< ->processShellCommand 
+'C 30-Jun-2015 14:29:26.428;   0:< <-processShellCommand 
 ' 0:<  ->DesktopMFCApp::doStartupWarnings 
-'C 30-Jun-2015 14:02:48.021;   0:< manage licensing 
-' 0:< ::0:: Delta VM: Avail 8387207 MB, Used +3 -> 256 MB; RAM: Avail -28 -> 3858 MB, Used +5 -> 322 MB 
+'C 30-Jun-2015 14:29:26.430;   0:< manage licensing 
+' 0:< ::0:: Delta VM: Avail 8387207 MB, Used +3 -> 256 MB; RAM: Avail -14 -> 3240 MB, Used +5 -> 322 MB 
 ' 0:< License mode: Network 
 ' 0:< Server: distributed 
 ' 0:< Server List: 27007@adsk_us1.license.thorntontomasetti.com;27007@adsk_global1.license.thorntontomasetti.com 
@@ -293,19 +293,19 @@ Jrn.Directive "IdleTimeTaskSymbol"  _
 ' 0:< Behavior: Permanent 
 ' 0:< Expiration: Tuesday, June 30, 2015 
 ' 0:< (Borrowed) 
-'C 30-Jun-2015 14:02:51.299;   0:< manage involvement 
-' 0:< ::0:: Delta VM: Avail -14 -> 8387194 MB, Used +1 -> 257 MB; RAM: Avail -2 -> 3856 MB, Used +2 -> 325 MB, Peak +1 -> 325 MB 
-'C 30-Jun-2015 14:02:51.370;   0:< manage debug modes 
-'C 30-Jun-2015 14:02:51.370;   0:< postConditionalWarnings 
-'C 30-Jun-2015 14:02:51.370;   0:< giveAtomRegistrationWarnings 
-'C 30-Jun-2015 14:02:51.370;   0:< warnings->consumeAll 
-'C 30-Jun-2015 14:02:51.370;   0:< Process result of DebugModes-Changed Task Dialog 
-'C 30-Jun-2015 14:02:51.370;   0:< isMaterialLibraryAvailable 
-'C 30-Jun-2015 14:02:51.371;   0:< start up warnings for AddIns 
+'C 30-Jun-2015 14:29:28.713;   0:< manage involvement 
+' 0:< ::0:: Delta VM: Avail -14 -> 8387194 MB, Used +1 -> 257 MB; RAM: Avail +0 -> 3241 MB, Used +2 -> 324 MB, Peak +1 -> 324 MB 
+'C 30-Jun-2015 14:29:28.783;   0:< manage debug modes 
+'C 30-Jun-2015 14:29:28.783;   0:< postConditionalWarnings 
+'C 30-Jun-2015 14:29:28.783;   0:< giveAtomRegistrationWarnings 
+'C 30-Jun-2015 14:29:28.784;   0:< warnings->consumeAll 
+'C 30-Jun-2015 14:29:28.784;   0:< Process result of DebugModes-Changed Task Dialog 
+'C 30-Jun-2015 14:29:28.784;   0:< isMaterialLibraryAvailable 
+'C 30-Jun-2015 14:29:28.784;   0:< start up warnings for AddIns 
 ' 0:<  <-DesktopMFCApp::doStartupWarnings 
 ' 0:<  <-desktop InitNativeInstance 
 ' 0:<  ->desktop InitManagedInstance 
-' 1:< ::0:: Delta VM: Avail -21 -> 8387173 MB, Used +4 -> 261 MB, Peak +2 -> 263 MB; RAM: Avail -15 -> 3842 MB, Used +9 -> 334 MB, Peak +9 -> 335 MB 
+' 1:< ::0:: Delta VM: Avail -21 -> 8387173 MB, Used +5 -> 262 MB, Peak +5 -> 265 MB; RAM: Avail -10 -> 3231 MB, Used +9 -> 334 MB, Peak +10 -> 335 MB 
 ' 1:< Added new API pushbutton 6462 name  text Modify class REX.AREXRevitMngr.Modifier assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Products\Revit\AREXRevitMngr.dll 
 ' 1:< Added new API pushbutton 6463 name  text Delete class REX.AREXRevitMngr.Remover assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Products\Revit\AREXRevitMngr.dll 
 ' 1:< Added new API pushbutton 6464 name  text Preferences class REX.AREXRevitMngr.Preferences assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Products\Revit\AREXRevitMngr.dll 
@@ -343,7 +343,7 @@ Jrn.Directive "IdleTimeTaskSymbol"  _
 ' 1:< Added new API pushbutton 6496 name  text Shared/Project Parameters class REX.DRevitSharedParameters.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Tools\DRevitSharedParameters\DRevitSharedParameters.dll 
 ' 1:< Added new API pushbutton 6497 name  text Text Generator class REX.DRevitTextGenerator.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\Tools\DRevitTextGenerator\DRevitTextGenerator.dll 
 ' 1:< Added new API pushbutton 6498 name  text Reinforcement Code Check class REX.DReinfDesign.DirectRevitAccess assembly C:\Program Files\Common Files\Autodesk Shared\Extensions 2014\Modules\RSA\DReinfDesign\DReinfDesign.dll 
-' 1:< ::0:: Delta VM: Avail -22 -> 8387152 MB, Used +1 -> 263 MB; RAM: Avail -4 -> 3839 MB, Used +3 -> 337 MB, Peak +2 -> 337 MB 
+' 1:< ::0:: Delta VM: Avail -22 -> 8387152 MB, Used +1 -> 263 MB; RAM: Avail -3 -> 3228 MB, Used +3 -> 338 MB, Peak +2 -> 338 MB 
 ' 1:< Third Party Updater 'AREXRevitStart: REXExtension: DReinfBeam' registered for all documents. 
 ' 1:< Third Party Updater 'AREXRevitStart: REXExtension: DReinfColumn' registered for all documents. 
 ' 1:< Third Party Updater 'AREXRevitStart: REXExtension: DReinfFootingSpread' registered for all documents. 
@@ -352,86 +352,86 @@ Jrn.Directive "IdleTimeTaskSymbol"  _
 ' 1:< API registering DocumentCreated event by application AREXRevitStart (c0566ed7-4309-4082-b3ba-ea6b7b4d292a). 
 ' 1:< API registering DisplayingOptionsDialog event by application AREXRevitStart (c0566ed7-4309-4082-b3ba-ea6b7b4d292a). 
 ' 0:<  <-desktop InitManagedInstance 
-'C 30-Jun-2015 14:02:55.582;   0:< appPriv idle 
-'C 30-Jun-2015 14:02:55.644;   0:< started journal file playback of "C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\ReadStructure_Frame.txt" 
- ' 16.389299  0:<<Event timer/ALL_GAPS  16.389299/TurnOff_GAPs 25% 
- 'E 30-Jun-2015 14:02:55.676;   0:< 
+'C 30-Jun-2015 14:29:33.081;   0:< appPriv idle 
+'C 30-Jun-2015 14:29:33.141;   0:< started journal file playback of "C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\ReadStructure_Frame.txt" 
+ ' 15.205453  0:<<Event timer/ALL_GAPS  15.205453/TurnOff_GAPs 28% 
+ 'E 30-Jun-2015 14:29:33.158;   0:< 
  Jrn.Command "StartupPage" , "Open this project , ID_FILE_MRU_FIRST"
- 'H 30-Jun-2015 14:02:55.676;   0:< 
+ 'H 30-Jun-2015 14:29:33.158;   0:< 
  Jrn.Data "MRUFileName"  _
          , "TestModel.rvt"
- ' 1:< ::1:: Delta VM: Avail -26 -> 8387126 MB, Used +1 -> 264 MB, Peak +1 -> 264 MB; RAM: Avail -3 -> 3836 MB, Used +3 -> 341 MB, Peak +3 -> 341 MB 
+ ' 1:< ::1:: Delta VM: Avail -26 -> 8387126 MB, Used +1 -> 265 MB; RAM: Avail -4 -> 3224 MB, Used +3 -> 341 MB, Peak +3 -> 342 MB 
  ' 1:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
- ' 1:< RAM Statistics:     3836 /     8075       341=InUse      341=Peak  
- ' 1:< VM  Statistics:  8387126 /  8388607       264=InUse      264=Peak  
- 'C 30-Jun-2015 14:02:55.718;   2:< File: Open 
- ' 3:< ::1:: Delta VM: Avail -16 -> 8387110 MB, Used 264 MB; RAM: Avail 3836 MB, Used 341 MB 
- ' 3:< DataStorageInterface created 0x0000000013064B40 
- ' 3:< Connecting session [$6020be70] to Worksharing Log [C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\journal.0020.txt] 
+ ' 1:< RAM Statistics:     3224 /     8075       341=InUse      342=Peak  
+ ' 1:< VM  Statistics:  8387126 /  8388607       265=InUse      265=Peak  
+ 'C 30-Jun-2015 14:29:33.203;   2:< File: Open 
+ ' 3:< ::1:: Delta VM: Avail -16 -> 8387110 MB, Used 265 MB; RAM: Avail 3224 MB, Used +0 -> 342 MB 
+ ' 3:< DataStorageInterface created 0x0000000013244B40 
+ ' 3:< Connecting session [$5652cc4b] to Worksharing Log [C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\journal.0029.txt] 
  '  0.000018      4:<<<WorksharingLog::getSlog [] 
  ' 3:< Additional IP address/name found for host NY1ML02: fe80::c061:abb9:4926:2d67%12  
  ' 3:< Additional IP address/name found for host NY1ML02: 10.21.1.84  
  ' 3:< Additional IP address/name found for host NY1ML02: 192.168.1.139  
- ' 4:< MasterLocks 0x0000000007FD38E0 ensureAppropriateStorage DataStorageInterface WAS m_oDataStorage 0x0000000013064B40 m_pDataStorage 0x0000000013064B40 
- ' 4:< DataStorageInterface created 0x0000000013064C40 
- ' 4:< DataStorageInterface destroyed 0x0000000013064B40 
- ' 4:< MasterLocks 0x0000000007FD38E0 ensureAppropriateStorage DataStorageInterface m_oDataStorage 0x0000000013064C40 m_pDataStorage 0x0000000013064C40 
- ' 4:< MasterLocks 0x0000000007FD38E0 DummyStorage stole m_oDataStorage 0x0000000013064C40 but left m_pDataStorage 0x0000000013064C40 
- ' 4:< LPSTORAGE ACQUIRED: DocumentStorage=0x12e70790, plpRootStg=0x12e70858, lpRootStg=0x12f60890 
- '  0.001860      4:<<acquireFileLock 
- '  0.002955     3:<<OpenDocumentTask::acquireFileLock 
- '  0.095400        6:<<<DictionaryAnalysis::initialize 
- '  0.018992        6:<<<loadAllClasses 
+ ' 4:< MasterLocks 0x00000000132ED040 ensureAppropriateStorage DataStorageInterface WAS m_oDataStorage 0x0000000013244B40 m_pDataStorage 0x0000000013244B40 
+ ' 4:< DataStorageInterface created 0x0000000013244C40 
+ ' 4:< DataStorageInterface destroyed 0x0000000013244B40 
+ ' 4:< MasterLocks 0x00000000132ED040 ensureAppropriateStorage DataStorageInterface m_oDataStorage 0x0000000013244C40 m_pDataStorage 0x0000000013244C40 
+ ' 4:< MasterLocks 0x00000000132ED040 DummyStorage stole m_oDataStorage 0x0000000013244C40 but left m_pDataStorage 0x0000000013244C40 
+ ' 4:< LPSTORAGE ACQUIRED: DocumentStorage=0x13050790, plpRootStg=0x13050858, lpRootStg=0x13140890 
+ '  0.001737      4:<<acquireFileLock 
+ '  0.002810     3:<<OpenDocumentTask::acquireFileLock 
+ '  0.101864        6:<<<DictionaryAnalysis::initialize 
+ '  0.021242        6:<<<loadAllClasses 
  '  0.000063        6:<<<RegisterPreDocLoadCallback::invokeCallbacks 
- '  0.000077         7:<<<LoadModel DSI 
- '  0.000165        6:<<loading DocumentStorageIndex 
+ '  0.000053         7:<<<LoadModel DSI 
+ '  0.000108        6:<<loading DocumentStorageIndex 
   'Warning: Event timer reset skipped - DocumentStorageIndexImpl::loadDocument()  
-  'E 30-Jun-2015 14:02:55.837;   6:< 
+  'E 30-Jun-2015 14:29:33.330;   6:< 
   ' [Jrn.BasicFileInfo] Rvt.Attr.Worksharing: Not enabled Rvt.Attr.UserName:  Rvt.Attr.CentralModelPath:  Rvt.Attr.RevitBuildVersion: Autodesk Revit 2014 (Build: 20140709_2115(x64)) Rvt.Attr.LastSavePath: C:\Users\EErtugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\TestModel.rvt Rvt.Attr.ProjectSpark: notProjectSpark Rvt.Attr.LocaleWhenSaved: ENU 
   ' 7:< [ISL] On open, Adler Checksum: 0xfa44f72b [C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\TestModel.rvt] 
-  '  0.000621         7:<<<Checking Checksum 
+  '  0.000602         7:<<<Checking Checksum 
   ' 6:< [ISL] Read last modification time: 30-Jun-2015 09:44:29 (UTC: 30-Jun-2015 13:44:29) 
-  '  0.006926         7:<<<app infos and other global data 
+  '  0.006602         7:<<<app infos and other global data 
   ' 6:< File was saved in Autodesk Revit 2014 (Build: 20140709_2115(x64)) 
+  ' 7:< ::2:: Delta VM: Avail -2 -> 8387109 MB, Used +1 -> 266 MB, Peak +1 -> 266 MB; RAM: Avail -10 -> 3215 MB, Used +10 -> 352 MB, Peak +10 -> 352 MB 
   '  0.000022          8:<<<ET::repairModificationDatesOutOfSequence 
   ' 7:< Loaded ElemTable: Size=1948 
-  ' 6:< ::2:: Delta VM: Avail -2 -> 8387109 MB, Used +1 -> 265 MB, Peak +1 -> 265 MB; RAM: Avail -14 -> 3822 MB, Used +12 -> 354 MB, Peak +12 -> 354 MB 
-  '  0.029708         7:<<ElemTable 
-  '  0.000092         7:<<<ContentDocuments 
+  '  0.029659         7:<<ElemTable 
+  '  0.000093         7:<<<ContentDocuments 
   '  0.000083         7:<<<History 
-  '  0.000057         7:<<<increment table 
-  '  0.000057         7:<<<WorksetTable 
-  '  0.000008         7:<<<partitionStorageLock.open 
-  '  0.000023          8:<<<loadLatestVersionsEstimate 
-  ' 8:< ::2:: Delta VM: Avail -16 -> 8387093 MB, Used +0 -> 266 MB, Peak +0 -> 266 MB; RAM: Avail 3822 MB, Used +2 -> 357 MB, Peak +2 -> 357 MB 
+  '  0.000046         7:<<<increment table 
+  '  0.000055         7:<<<WorksetTable 
+  '  0.000007         7:<<<partitionStorageLock.open 
+  '  0.000025          8:<<<loadLatestVersionsEstimate 
+  ' 8:< ::2:: Delta VM: Avail -18 -> 8387091 MB, Used +0 -> 267 MB, Peak +0 -> 267 MB; RAM: Avail -5 -> 3210 MB, Used +5 -> 357 MB, Peak +5 -> 357 MB 
   ' 8:< Loaded elemStream#0: uncompSize=909300, compSize=129283, count=1948 
-  '  0.014330          8:<<<loadLatestVersion 
-  '  0.000463           9:<<<ElementReceiver::commitSwapouts()  
-  '  0.000522          8:<<els.commit 
-  '  0.015002         7:<<loadSelectedPartitions 
-  '  0.054414        6:<<DocumentStorageIndexImpl::loadDocument()  
+  '  0.013383          8:<<<loadLatestVersion 
+  '  0.000364           9:<<<ElementReceiver::commitSwapouts()  
+  '  0.000417          8:<<els.commit 
+  '  0.013951         7:<<loadSelectedPartitions 
+  '  0.052799        6:<<DocumentStorageIndexImpl::loadDocument()  
   ' 7:< Current project ADocument version:2659 
-  '  0.013837           9:<<<updating dependencies in delayed deletion 
-  '  0.000048           9:<<<getAllNonexistentParents in delayed deletion 
-  '  0.002657           9:<<<findAppInfoNonexistentParents in delayed deletion 
-  '  0.016711          8:<<delayed deletion 
-  '  0.000388          8:<<<forceResetOfElemRecOwnerCache 
-  '  0.025638         7:<<ADocumentUpgrade::docUpgrade 
-  '  0.195674      4:<<LoadSerialize 
-  '  0.195815     3:<<LoadFromStorage 
-  '  0.000386      4:<<<forceResetOfElemRecOwnerCache 
+  '  0.013481           9:<<<updating dependencies in delayed deletion 
+  '  0.000047           9:<<<getAllNonexistentParents in delayed deletion 
+  '  0.003349           9:<<<findAppInfoNonexistentParents in delayed deletion 
+  '  0.017042          8:<<delayed deletion 
+  '  0.000384          8:<<<forceResetOfElemRecOwnerCache 
+  '  0.025816         7:<<ADocumentUpgrade::docUpgrade 
+  '  0.202758      4:<<LoadSerialize 
+  '  0.202879     3:<<LoadFromStorage 
+  '  0.000381      4:<<<forceResetOfElemRecOwnerCache 
   ' 4:< Unnecessary nesting;Document\PostLoadDocument.cpp;160;String_Revit_DelayedPropagatoinRegen ;N++E(N); 
   ' 5:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
-  ' 5:< RAM Statistics:     3819 /     8075       358=InUse      359=Peak  
-  ' 5:< VM  Statistics:  8387093 /  8388607       266=InUse      266=Peak  
-  ' 5:< 000000000DF62E10 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
-  ' 5:< 000000000DF62E88 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
-  ' 5:< 000000000DF62E38 CompactMemoryManager Memory Statistics: 2 MB with 2 MB view 
-  ' 5:< 000000000DF62E60 CompactMemoryManager Memory Statistics: 2 MB with 2 MB view 
-  ' 5:< 000000000DF62EB0 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
-  ' 5:< 000000000DF62ED8 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
-  ' 5:< 000000000DF62F00 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
-  ' 5:< 000000000DF62F28 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 5:< RAM Statistics:     3208 /     8075       359=InUse      359=Peak  
+  ' 5:< VM  Statistics:  8387091 /  8388607       267=InUse      267=Peak  
+  ' 5:< 000000000E1C2E10 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 5:< 000000000E1C2E88 CompactMemoryManager Memory Statistics: 2 MB with 2 MB view 
+  ' 5:< 000000000E1C2E38 CompactMemoryManager Memory Statistics: 2 MB with 2 MB view 
+  ' 5:< 000000000E1C2E60 CompactMemoryManager Memory Statistics: 2 MB with 2 MB view 
+  ' 5:< 000000000E1C2EB0 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 5:< 000000000E1C2ED8 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 5:< 000000000E1C2F00 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 5:< 000000000E1C2F28 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
   ' 5:< Element Expansion Statistics: 
   ' 5:<  0% Opening Plans                    (0) 
   ' 5:<  0% Opening RC Plans                 (0) 
@@ -447,75 +447,75 @@ Jrn.Directive "IdleTimeTaskSymbol"  _
   '  0.000008        6:<<<ppg constructor 
   '  0.000008        6:<<<updating dependencies in dp 
   '  0.000002         7:<<<updating dependencies in delayed deletion 
-  '  0.000069         7:<<<getAllNonexistentParents in delayed deletion 
-  '  0.002306         7:<<<findAppInfoNonexistentParents in delayed deletion 
-  '  0.002482        6:<<delayed deletion 
-  '  0.005928       5:<<ADocumentMerge::delayedPropagation 
-  '  0.000145        6:<<<EndOrAbortUndoTransaction() -- trackers regen;DOPT; 
-  '  0.000022        6:<<<EndOrAbortUndoTransaction()--AtomViewReferencingUpdate();DOPT; 
+  '  0.000070         7:<<<getAllNonexistentParents in delayed deletion 
+  '  0.003483         7:<<<findAppInfoNonexistentParents in delayed deletion 
+  '  0.003663        6:<<delayed deletion 
+  '  0.007257       5:<<ADocumentMerge::delayedPropagation 
+  '  0.000143        6:<<<EndOrAbortUndoTransaction() -- trackers regen;DOPT; 
+  '  0.000021        6:<<<EndOrAbortUndoTransaction()--AtomViewReferencingUpdate();DOPT; 
   '  0.000002         7:<<<EndOrAbortUndoTransaction()--end of transaction checks--invisible elements;DOPT; 
-  ' 6:< Connecting session [$0f7ce237] to Worksharing Log [C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\journal.0020.txt] 
+  ' 6:< Connecting session [$59ded590] to Worksharing Log [C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\journal.0029.txt] 
   '  0.000012         7:<<<WorksharingLog::getSlog [] 
   ' 6:< Additional IP address/name found for host NY1ML02: fe80::c061:abb9:4926:2d67%12  
   ' 6:< Additional IP address/name found for host NY1ML02: 10.21.1.84  
   ' 6:< Additional IP address/name found for host NY1ML02: 192.168.1.139  
-  '  0.000012          8:<<<;PERF;MISC;regenerating 
-  '  0.001117        6:<<EndOrAbortUndoTransaction()--end of transaction checks;DOPT;/ALL_GAPS   0.001090/TurnOff_GAPs 4% 
-  '  0.000891        6:<<<ElemTable::expandElementsInParallel 
-  '  0.002566       5:<<EndOrAbortUndoTransaction();DOPT;/ALL_GAPS   0.000392/TurnOff_GAPs 3% 
-  '  0.008884      4:<<delayed propagation on open 
+  '  0.000013          8:<<<;PERF;MISC;regenerating 
+  '  0.001081        6:<<EndOrAbortUndoTransaction()--end of transaction checks;DOPT;/ALL_GAPS   0.001054/TurnOff_GAPs 3% 
+  '  0.000776        6:<<<ElemTable::expandElementsInParallel 
+  '  0.002399       5:<<EndOrAbortUndoTransaction();DOPT;/ALL_GAPS   0.000378/TurnOff_GAPs 3% 
+  '  0.010049      4:<<delayed propagation on open 
   '  0.000006      4:<<<updating dependencies on open 
   '  0.000005        6:<<<EndOrAbortUndoTransaction() -- trackers regen;DOPT; 
   '  0.000001        6:<<<EndOrAbortUndoTransaction()--AtomViewReferencingUpdate();DOPT; 
   '  0.000001         7:<<<EndOrAbortUndoTransaction()--end of transaction checks--invisible elements;DOPT; 
   '  0.000003          8:<<<;PERF;MISC;regenerating 
-  '  0.000097        6:<<EndOrAbortUndoTransaction()--end of transaction checks;DOPT;/ALL_GAPS   0.000094/TurnOff_GAPs 34% 
-  '  0.000333       5:<<EndOrAbortUndoTransaction();DOPT;/ALL_GAPS   0.000229/TurnOff_GAPs 3% 
-  '  0.000396      4:<<reloadLinkedInstances [0/0] 
+  '  0.000096        6:<<EndOrAbortUndoTransaction()--end of transaction checks;DOPT;/ALL_GAPS   0.000092/TurnOff_GAPs 34% 
+  '  0.000330       5:<<EndOrAbortUndoTransaction();DOPT;/ALL_GAPS   0.000229/TurnOff_GAPs 3% 
+  '  0.000393      4:<<reloadLinkedInstances [0/0] 
+  '  0.000003       5:<<<;PERF;MISC;regenerating 
+  '  0.000004       5:<<<EndOrAbortUndoTransaction() -- trackers regen;DOPT; 
+  '  0.000001       5:<<<EndOrAbortUndoTransaction()--AtomViewReferencingUpdate();DOPT; 
+  '  0.000000        6:<<<EndOrAbortUndoTransaction()--end of transaction checks--invisible elements;DOPT; 
+  '  0.000003         7:<<<;PERF;MISC;regenerating 
+  '  0.000092       5:<<EndOrAbortUndoTransaction()--end of transaction checks;DOPT;/ALL_GAPS   0.000088/TurnOff_GAPs 34% 
+  '  0.000278      4:<<EndOrAbortUndoTransaction();DOPT;/ALL_GAPS   0.000182/TurnOff_GAPs 3% 
+  ' 3:< Unnecessary nesting;Document\PostLoadDocument.cpp;398;ID_SETTINGS_SNAPPING ;N++E(N); 
+  '  0.000004       5:<<<EndOrAbortUndoTransaction() -- trackers regen;DOPT; 
+  '  0.000001       5:<<<EndOrAbortUndoTransaction()--AtomViewReferencingUpdate();DOPT; 
+  '  0.000000        6:<<<EndOrAbortUndoTransaction()--end of transaction checks--invisible elements;DOPT; 
+  '  0.000003         7:<<<;PERF;MISC;regenerating 
+  '  0.000093       5:<<EndOrAbortUndoTransaction()--end of transaction checks;DOPT;/ALL_GAPS   0.000090/TurnOff_GAPs 35% 
+  '  0.000291      4:<<EndOrAbortUndoTransaction();DOPT;/ALL_GAPS   0.000193/TurnOff_GAPs 3% 
+  ' 4:< At line number 5 of source journal
+  'DBG_INFO: Couldn't obtain time/date stamp for  so that cannot correct file create/access/modify time!, the GetLastError is 6: line 1959 of FileUtil.cpp. 
+  '  0.000072      4:<<<pKeynoteTable->readFile 
   '  0.000003       5:<<<;PERF;MISC;regenerating 
   '  0.000004       5:<<<EndOrAbortUndoTransaction() -- trackers regen;DOPT; 
   '  0.000001       5:<<<EndOrAbortUndoTransaction()--AtomViewReferencingUpdate();DOPT; 
   '  0.000000        6:<<<EndOrAbortUndoTransaction()--end of transaction checks--invisible elements;DOPT; 
   '  0.000003         7:<<<;PERF;MISC;regenerating 
   '  0.000091       5:<<EndOrAbortUndoTransaction()--end of transaction checks;DOPT;/ALL_GAPS   0.000088/TurnOff_GAPs 35% 
-  '  0.000277      4:<<EndOrAbortUndoTransaction();DOPT;/ALL_GAPS   0.000182/TurnOff_GAPs 3% 
-  ' 3:< Unnecessary nesting;Document\PostLoadDocument.cpp;398;ID_SETTINGS_SNAPPING ;N++E(N); 
-  '  0.000004       5:<<<EndOrAbortUndoTransaction() -- trackers regen;DOPT; 
-  '  0.000001       5:<<<EndOrAbortUndoTransaction()--AtomViewReferencingUpdate();DOPT; 
-  '  0.000001        6:<<<EndOrAbortUndoTransaction()--end of transaction checks--invisible elements;DOPT; 
-  '  0.000003         7:<<<;PERF;MISC;regenerating 
-  '  0.000091       5:<<EndOrAbortUndoTransaction()--end of transaction checks;DOPT;/ALL_GAPS   0.000088/TurnOff_GAPs 35% 
-  '  0.000280      4:<<EndOrAbortUndoTransaction();DOPT;/ALL_GAPS   0.000183/TurnOff_GAPs 3% 
-  ' 4:< At line number 5 of source journal
-  'DBG_INFO: Couldn't obtain time/date stamp for  so that cannot correct file create/access/modify time!, the GetLastError is 6: line 1959 of FileUtil.cpp. 
-  '  0.000073      4:<<<pKeynoteTable->readFile 
-  '  0.000003       5:<<<;PERF;MISC;regenerating 
-  '  0.000004       5:<<<EndOrAbortUndoTransaction() -- trackers regen;DOPT; 
-  '  0.000001       5:<<<EndOrAbortUndoTransaction()--AtomViewReferencingUpdate();DOPT; 
-  '  0.000001        6:<<<EndOrAbortUndoTransaction()--end of transaction checks--invisible elements;DOPT; 
-  '  0.000003         7:<<<;PERF;MISC;regenerating 
-  '  0.000090       5:<<EndOrAbortUndoTransaction()--end of transaction checks;DOPT;/ALL_GAPS   0.000087/TurnOff_GAPs 35% 
-  '  0.000329      4:<<EndOrAbortUndoTransaction();DOPT;/ALL_GAPS   0.000233/TurnOff_GAPs 2% 
-  '  0.011318     3:<<[Cloud]postLoadDocument 
-  '  0.210410    2:<<DocumentStorage::onOpenDocument [C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\TestModel.rvt] 
+  '  0.000331      4:<<EndOrAbortUndoTransaction();DOPT;/ALL_GAPS   0.000235/TurnOff_GAPs 2% 
+  '  0.012480     3:<<[Cloud]postLoadDocument 
+  '  0.218478    2:<<DocumentStorage::onOpenDocument [C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\TestModel.rvt] 
   'Warning: Event timer reset skipped - [Cloud]standardOpenDocumentFile 
-  'H 30-Jun-2015 14:02:56.007;   1:< 
+  'H 30-Jun-2015 14:29:33.464;   1:< 
   Jrn.Directive "DocSymbol"  _
           , "[TestModel.rvt]"
   ' 2:< Before : Create Display Manager 
   ' 2:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
-  ' 2:< RAM Statistics:     3816 /     8075       360=InUse      360=Peak  
-  ' 2:< VM  Statistics:  8387093 /  8388607       266=InUse      266=Peak  
-  ' 2:< ::2:: Delta VM: Avail -27 -> 8387067 MB, Used +1 -> 267 MB, Peak +1 -> 268 MB; RAM: Avail -10 -> 3812 MB, Used +7 -> 364 MB, Peak +7 -> 364 MB 
+  ' 2:< RAM Statistics:     3204 /     8075       360=InUse      361=Peak  
+  ' 2:< VM  Statistics:  8387091 /  8388607       267=InUse      267=Peak  
+  ' 2:< ::2:: Delta VM: Avail -27 -> 8387065 MB, Used +1 -> 268 MB, Peak +1 -> 269 MB; RAM: Avail -11 -> 3200 MB, Used +7 -> 365 MB, Peak +7 -> 365 MB 
   ' 2:< Revit Graphics Information 
   ' 2:< 	Current Mode : DirectX Hardware 
   ' 2:< 	Use Hardware: ON 
   ' 2:< 	Use Overlays : ON 
   ' 2:< useNullDevice=false 
   ' 2:< START CanUseHardware(forced) 
-  ' 3:< ::2:: Delta VM: Avail -41 -> 8387026 MB, Used +33 -> 301 MB, Peak +34 -> 302 MB; RAM: Avail -11 -> 3802 MB, Used +9 -> 374 MB, Peak +11 -> 375 MB 
+  ' 3:< ::2:: Delta VM: Avail -41 -> 8387024 MB, Used +32 -> 301 MB, Peak +34 -> 303 MB; RAM: Avail -11 -> 3189 MB, Used +9 -> 375 MB, Peak +11 -> 376 MB 
   ' 3:< DX Device: DirectX 11, WARP 
-  'C 30-Jun-2015 14:02:56.102;   3:< START video card certification 
+  'C 30-Jun-2015 14:29:33.565;   3:< START video card certification 
   ' 3:< OPERATING SYSTEM INFORMATION:  
   ' 3:<    BuildNumber : 7601 
   ' 3:<    BuildType : Multiprocessor Free 
@@ -523,9 +523,9 @@ Jrn.Directive "IdleTimeTaskSymbol"  _
   ' 3:<    CodeSet : 1252 
   ' 3:<    CountryCode : 1 
   ' 3:<    CSDVersion : Service Pack 1 
-  ' 3:<    FreePhysicalMemory : 3929480 
-  ' 3:<    FreeSpaceInPagingFiles : 8030960 
-  ' 3:<    FreeVirtualMemory : 11969392 
+  ' 3:<    FreePhysicalMemory : 3304520 
+  ' 3:<    FreeSpaceInPagingFiles : 8035952 
+  ' 3:<    FreeVirtualMemory : 11561672 
   ' 3:<    MaxProcessMemorySize : 8589934464 
   ' 3:<    OSLanguage : 1033 
   ' 3:<    OSType : 18 
@@ -534,13 +534,13 @@ Jrn.Directive "IdleTimeTaskSymbol"  _
   ' 3:<    TotalVirtualMemorySize : 16536244 
   ' 3:<    TotalVisibleMemorySize : 8269040 
   ' 3:<    Version : 6.1.7601 
-  ' 3:< ::2:: Delta VM: Avail +0 -> 8387027 MB, Used +4 -> 305 MB, Peak +9 -> 311 MB; RAM: Avail 3802 MB, Used +4 -> 379 MB, Peak +10 -> 385 MB 
+  ' 3:< ::2:: Delta VM: Avail +0 -> 8387025 MB, Used +4 -> 306 MB, Peak +9 -> 312 MB; RAM: Avail -7 -> 3183 MB, Used +5 -> 380 MB, Peak +10 -> 386 MB 
   ' 3:< 
   'Current driver version: 1.8.0.0
   'Certified driver(s):  
   ' 3:< VIDEO CARD ENVIRONMENT: CARD="Intel(R) HD Graphics 3000" ManufacturerID="8086" DeviceID="0126" osID="2000" DRIVER="1.8.0.0" DEVICE="DX11" FL_Caps="50" (Shader Model) 
-  'C 30-Jun-2015 14:02:56.216;   3:< FINISH video card certification 
-  '  0.149410     3:<<<CanUseHardware(forced) 
+  'C 30-Jun-2015 14:29:33.670;   3:< FINISH video card certification 
+  '  0.147612     3:<<<CanUseHardware(forced) 
   ' 2:< 
   'Can use hardware=y
   'Hardware support flags:
@@ -554,32 +554,32 @@ Jrn.Directive "IdleTimeTaskSymbol"  _
   ' 2:< FINISH CanUseHardware(forced) 
   ' 2:< After : Create Display Manager 
   ' 2:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
-  ' 2:< RAM Statistics:     3802 /     8075       379=InUse      385=Peak  
-  ' 2:< VM  Statistics:  8387027 /  8388607       305=InUse      311=Peak  
+  ' 2:< RAM Statistics:     3183 /     8075       380=InUse      386=Peak  
+  ' 2:< VM  Statistics:  8387025 /  8388607       306=InUse      312=Peak  
    ' 2:< Activate "[TestModel.rvt]" , Floor Plan: Level 1 
    ' 2:< View Open: Element expansion used 0.000000 seconds averaging 0.000000 seconds/hit for 0 hits. 
-' 2:< ::2:: Delta VM: Avail -10 -> 8387017 MB, Used +17 -> 323 MB, Peak +14 -> 326 MB; RAM: Avail -26 -> 3776 MB, Used +24 -> 403 MB, Peak +20 -> 406 MB 
-'C 30-Jun-2015 14:02:56.885;   2:< Protein : Register Preview Factories 
-'C 30-Jun-2015 14:02:56.885;   2:< Protein : Initialize Renderer Module 
-'C 30-Jun-2015 14:02:56.885;   2:< Protein : Load the MR Renderer plug-in 
-' 2:< ::2:: Delta VM: Avail -27 -> 8386991 MB, Used +2 -> 325 MB; RAM: Avail -2 -> 3775 MB, Used +1 -> 405 MB 
-'C 30-Jun-2015 14:02:56.896;   2:< Protein : initialize RPC plug-ins 
-'C 30-Jun-2015 14:02:56.904;   2:< Protein : Open Protein content Libraries 
-' 2:< ::2:: Delta VM: Avail -9 -> 8386982 MB, Used +10 -> 335 MB, Peak +10 -> 336 MB; RAM: Avail -11 -> 3765 MB, Used +11 -> 416 MB, Peak +10 -> 416 MB 
-'C 30-Jun-2015 14:02:56.957;   2:< Protein : Load Library:  
+' 2:< ::2:: Delta VM: Avail -10 -> 8387015 MB, Used +17 -> 323 MB, Peak +15 -> 327 MB; RAM: Avail -24 -> 3160 MB, Used +23 -> 403 MB, Peak +20 -> 407 MB 
+'C 30-Jun-2015 14:29:34.367;   2:< Protein : Register Preview Factories 
+'C 30-Jun-2015 14:29:34.367;   2:< Protein : Initialize Renderer Module 
+'C 30-Jun-2015 14:29:34.367;   2:< Protein : Load the MR Renderer plug-in 
+' 2:< ::2:: Delta VM: Avail -27 -> 8386989 MB, Used +1 -> 325 MB; RAM: Avail -2 -> 3158 MB, Used +1 -> 405 MB 
+'C 30-Jun-2015 14:29:34.377;   2:< Protein : initialize RPC plug-ins 
+'C 30-Jun-2015 14:29:34.385;   2:< Protein : Open Protein content Libraries 
+' 2:< ::2:: Delta VM: Avail -9 -> 8386980 MB, Used +10 -> 335 MB, Peak +9 -> 337 MB; RAM: Avail -11 -> 3148 MB, Used +11 -> 416 MB, Peak +9 -> 416 MB 
+'C 30-Jun-2015 14:29:34.436;   2:< Protein : Load Library:  
 ' 2:< C:\Program Files (x86)\Common Files\Autodesk Shared\Materials\2014\assetlibrary_base.adsklib 
-'C 30-Jun-2015 14:02:56.958;   2:< Protein : Texture Path:  
+'C 30-Jun-2015 14:29:34.436;   2:< Protein : Texture Path:  
 ' 2:< C:/Program Files (x86)/Common Files/Autodesk Shared/Materials/Textures/ 
 ' 2:< Protein Build       4.0.32.600 
 ' 2:< MSI Version         4.0.32.600 
 ' 2:< Version Control DLL 4.0.0.0 
-'C 30-Jun-2015 14:02:57.996;   2:< Protein: RPC Message 
+'C 30-Jun-2015 14:29:35.452;   2:< Protein: RPC Message 
 ' 2:< This plugin is unable to acquire a license.
 'Only demo content will be fully functional. 
-' 2:< ::2:: Delta VM: Avail 8386982 MB, Used +0 -> 336 MB; RAM: Avail -15 -> 3750 MB, Used +1 -> 418 MB, Peak +1 -> 418 MB 
-'C 30-Jun-2015 14:02:58.295;   2:< Protein : Notify Plugins to load the content on the asset library 
-'C 30-Jun-2015 14:02:58.295;   2:< Protein : Register the Protein RenderingAsset Manager 
-'  2.100549!!!! 3:!!!BIG_GAP [Cloud]openOntoDesktop 
+' 2:< ::2:: Delta VM: Avail 8386980 MB, Used +0 -> 336 MB; RAM: Avail -32 -> 3116 MB, Used +1 -> 418 MB, Peak +1 -> 418 MB 
+'C 30-Jun-2015 14:29:35.752;   2:< Protein : Notify Plugins to load the content on the asset library 
+'C 30-Jun-2015 14:29:35.753;   2:< Protein : Register the Protein RenderingAsset Manager 
+'  2.101854!!!! 3:!!!BIG_GAP [Cloud]openOntoDesktop 
 ' 2:< At line number 5 of source journal
 'DBG_INFO: Detected unfrozen change of selection.: line 571 of n:\build\2014_ship_x64_inst_20140709_2115\source\revit\revitui\modscope\ModScope.cpp. 
 ' 2:< <<Begin build CT>>
@@ -597,21 +597,22 @@ Jrn.Directive "IdleTimeTaskSymbol"  _
 'Edit mode context, but no edit mode set.
 '<<End build CT>> 
   ' 2:< View Open: Element expansion used 0.000000 seconds averaging 0.000000 seconds/hit for 0 hits. 
-  '  2.623663    2:<<[Cloud]openOntoDesktop 
+  '  2.621743    2:<<[Cloud]openOntoDesktop 
   ' 2:< Third Party Updater 'LightThresholds: Daylighting Analysis Status Updater' registered for document 'TestModel.rvt'. 
+  ' 2:< ::2:: Delta VM: Avail -5 -> 8386976 MB, Used +1 -> 337 MB, Peak +2 -> 339 MB; RAM: Avail +27 -> 3143 MB, Used +3 -> 421 MB, Peak +4 -> 422 MB 
   ' 2:< API registering DocumentClosing event by application LightThresholds (050e7709-060d-457d-9352-e90b85fbb5d9). 
   ' 1:<  0 ModelServerState "Created": Current server = "Not Queried", Model server = "", Model server state = "Not Applicable" 
   ' 1:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
-  ' 1:< RAM Statistics:     3744 /     8075       422=InUse      422=Peak  
-  ' 1:< VM  Statistics:  8386978 /  8388607       337=InUse      338=Peak  
-  ' 1:< 000000000DF62E60 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
-  ' 1:< 000000000DF62E38 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
-  ' 1:< 000000000DF62F28 CompactMemoryManager Memory Statistics: 2 MB with 2 MB view 
-  ' 1:< 000000000DF62F00 CompactMemoryManager Memory Statistics: 2 MB with 2 MB view 
-  ' 1:< 000000000DF62ED8 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
-  ' 1:< 000000000DF62EB0 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
-  ' 1:< 000000000DF62E88 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
-  ' 1:< 000000000DF62E10 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 1:< RAM Statistics:     3143 /     8075       422=InUse      422=Peak  
+  ' 1:< VM  Statistics:  8386976 /  8388607       337=InUse      339=Peak  
+  ' 1:< 000000000E1C2E60 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 1:< 000000000E1C2F28 CompactMemoryManager Memory Statistics: 2 MB with 2 MB view 
+  ' 1:< 000000000E1C2E38 CompactMemoryManager Memory Statistics: 2 MB with 2 MB view 
+  ' 1:< 000000000E1C2F00 CompactMemoryManager Memory Statistics: 2 MB with 2 MB view 
+  ' 1:< 000000000E1C2ED8 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 1:< 000000000E1C2EB0 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 1:< 000000000E1C2E88 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
+  ' 1:< 000000000E1C2E10 CompactMemoryManager Memory Statistics: 2 MB with 0 MB view 
   ' 1:< Element Expansion Statistics: 
   ' 1:<  5% Opening Plans                    (9931) 
   ' 1:<  0% Opening RC Plans                 (0) 
@@ -626,27 +627,27 @@ Jrn.Directive "IdleTimeTaskSymbol"  _
   ' 1:< ;EES;5;0;0;0;0;0;0;0;95; 
   ' 1:<  0 ModelServerState "Destroyed": Current server = "Not Queried", Model server = "", Model server state = "Not Applicable" 
   ' 1:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
-  ' 1:< RAM Statistics:     3744 /     8075       422=InUse      422=Peak  
-  ' 1:< VM  Statistics:  8386978 /  8388607       337=InUse      338=Peak  
-  '  3.266084-- 1:<<[Cloud]standardOpenDocumentFile/ALL_GAPS   0.432011/TurnOff_GAPs 34% 
-   '  3.302467  0:<<Event timer/ALL_GAPS   0.468394/TurnOff_GAPs 32% 
-   'E 30-Jun-2015 14:02:58.978;   0:< 
+  ' 1:< RAM Statistics:     3143 /     8075       422=InUse      422=Peak  
+  ' 1:< VM  Statistics:  8386976 /  8388607       337=InUse      339=Peak  
+  '  3.242626-- 1:<<[Cloud]standardOpenDocumentFile/ALL_GAPS   0.402406/TurnOff_GAPs 38% 
+   '  3.281842  0:<<Event timer/ALL_GAPS   0.441621/TurnOff_GAPs 35% 
+   'E 30-Jun-2015 14:29:36.439;   0:< 
    ' [Jrn.File Input Information] COMMON.FILE_INPUT.FILE_TYPE: .rvt 0307200.000000
- 'E 30-Jun-2015 14:02:58.979;   0:< 
+ 'E 30-Jun-2015 14:29:36.440;   0:< 
  Jrn.Size        0 ,    759 ,    661
- 'E 30-Jun-2015 14:02:58.980;   0:< 
+ 'E 30-Jun-2015 14:29:36.441;   0:< 
  Jrn.Size        0 ,    738 ,    640
- 'E 30-Jun-2015 14:02:58.982;   0:< 
+ 'E 30-Jun-2015 14:29:36.443;   0:< 
  Jrn.Size        0 ,    758 ,    660
- 'E 30-Jun-2015 14:02:58.982;   0:< 
+ 'E 30-Jun-2015 14:29:36.444;   0:< 
  Jrn.Size        0 ,    737 ,    639
- 'E 30-Jun-2015 14:02:58.998;   0:< 
+ 'E 30-Jun-2015 14:29:36.457;   0:< 
  Jrn.Size        0 ,    643 ,    634
- 'E 30-Jun-2015 14:02:58.999;   0:< 
+ 'E 30-Jun-2015 14:29:36.457;   0:< 
  Jrn.Size        0 ,    622 ,    613
-' 0:< ::9:: Delta VM: Avail -21 -> 8386962 MB, Used +16 -> 352 MB, Peak +17 -> 353 MB; RAM: Avail -23 -> 3728 MB, Used +21 -> 440 MB, Peak +21 -> 440 MB 
-'  0.828734   1:<<<;PERF;MISC;drawing 
-'C 30-Jun-2015 14:02:59.886;   0:< idle0_doc 
+' 0:< ::9:: Delta VM: Avail -17 -> 8386960 MB, Used +15 -> 353 MB, Peak +14 -> 354 MB; RAM: Avail -17 -> 3127 MB, Used +18 -> 440 MB, Peak +17 -> 440 MB 
+'  0.825687   1:<<<;PERF;MISC;drawing 
+'C 30-Jun-2015 14:29:37.336;   0:< idle0_doc 
 ' 0:< <<Begin build CT>>
 '
 'Edit mode: IDR_COMMON
@@ -663,14 +664,13 @@ Jrn.Directive "IdleTimeTaskSymbol"  _
 '***********************************************************
 '***********************************************************
 '<<End build CT>> 
-' 0:< ::9:: Delta VM: Avail -3 -> 8386960 MB, Used +0 -> 353 MB, Peak +0 -> 354 MB; RAM: Avail +10 -> 3739 MB, Used +2 -> 442 MB, Peak +2 -> 442 MB 
 ' 0:<    Process affinity mask : F 
 ' 0:<    System affinity mask : F 
- '  1.170174  0:<<Event timer 
- 'E 30-Jun-2015 14:03:00.148;   0:< 
+ '  1.141957  0:<<Event timer 
+ 'E 30-Jun-2015 14:29:37.581;   0:< 
  
  Jrn.RibbonEvent "Execute external command:487f9ff0-5b34-4e7e-97bf-70fbff69194f:RTF.Applications.RevitTestFramework"
-' 1:< ::10:: Delta VM: Avail -56 -> 8386904 MB, Used +92 -> 445 MB, Peak +91 -> 446 MB; RAM: Avail -101 -> 3638 MB, Used +102 -> 545 MB, Peak +102 -> 545 MB 
+' 1:< ::10:: Delta VM: Avail -58 -> 8386902 MB, Used +87 -> 440 MB, Peak +86 -> 440 MB; RAM: Avail -102 -> 3025 MB, Used +99 -> 539 MB, Peak +100 -> 540 MB 
 ' 1:< API registering DocumentChanged event by application RTF.Applications.RevitTestFramework (487f9ff0-5b34-4e7e-97bf-70fbff69194f). 
 ' 1:< API registering ViewActivating event by application RTF.Applications.RevitTestFramework (487f9ff0-5b34-4e7e-97bf-70fbff69194f). 
 ' 1:< API registering ViewActivated event by application RTF.Applications.RevitTestFramework (487f9ff0-5b34-4e7e-97bf-70fbff69194f). 
@@ -698,24 +698,24 @@ Jrn.Directive "IdleTimeTaskSymbol"  _
 ' 1:<    SocketDesignation : CPU 
 ' 1:<    StatusInfo : 3 
 ' 1:<    Version :  
-' 2:< ::10:: Delta VM: Avail 8386904 MB, Used +2 -> 448 MB, Peak +3 -> 449 MB; RAM: Avail -72 -> 3567 MB, Used +3 -> 548 MB, Peak +4 -> 550 MB 
-'  6.379662!!! 2:!!!BIG_GAP API External Command Time 
-' 1:< ::10:: Delta VM: Avail -78 -> 8386826 MB, Used +28 -> 477 MB, Peak +29 -> 479 MB; RAM: Avail -170 -> 3398 MB, Used +43 -> 592 MB, Peak +44 -> 594 MB 
+' 2:< ::10:: Delta VM: Avail 8386902 MB, Used +1 -> 441 MB, Peak +2 -> 443 MB; RAM: Avail -66 -> 2960 MB, Used +2 -> 542 MB, Peak +2 -> 543 MB 
+'  6.266280!!! 2:!!!BIG_GAP API External Command Time 
+' 1:< ::10:: Delta VM: Avail -86 -> 8386816 MB, Used +29 -> 471 MB, Peak +28 -> 471 MB; RAM: Avail -147 -> 2813 MB, Used +43 -> 585 MB, Peak +42 -> 585 MB 
 ' 1:< API unregistering ViewActivating event by application RTF.Applications.RevitTestFramework (487f9ff0-5b34-4e7e-97bf-70fbff69194f). 
-' 0:< ::10:: Delta VM: Avail 8386826 MB, Used -42 -> 435 MB; RAM: Avail +38 -> 3436 MB, Used -41 -> 551 MB 
-' 13.621526   1:<<API External Command Time 
-' 13.658771  0:<<Event timer 
-'H 30-Jun-2015 14:03:13.808;   0:< 
+' 0:< ::10:: Delta VM: Avail 8386816 MB, Used +0 -> 472 MB, Peak +1 -> 473 MB; RAM: Avail +113 -> 2926 MB, Used +1 -> 587 MB, Peak +1 -> 587 MB 
+' 12.943235   1:<<API External Command Time 
+' 12.978863  0:<<Event timer 
+'H 30-Jun-2015 14:29:50.560;   0:< 
 Jrn.Data "APIStringStringMapJournalData"  _
         , 6, "debug", "False" _
         , "fixtureName", "DynamoSAP_SystemTesting", "resultsPath" _
         , "C:\Users\eertugrul\Desktop\delete_\RTF Test\DynSAPTest.xml", "testAssembly", "C:\Users\eertugrul\Documents\GitHub\DynamoSAP\bin\AnyCPU\Debug\DynamoSAPTests.dll" _
         , "testName", "ReadStructure_Frame", "workingDirectory" _
         , "C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra"
- 'E 30-Jun-2015 14:03:13.875;   0:< 
+ 'E 30-Jun-2015 14:29:50.600;   0:< 
  Jrn.Command "Internal" , "Flush undo and redo stacks , ID_FLUSH_UNDO"
  ' 0:< Unnecessary nesting;ArrowUI_4;-1;ID_FLUSH_UNDO ;N++EB(NB); 
-'C 30-Jun-2015 14:03:13.887;   0:< idle0_doc 
+'C 30-Jun-2015 14:29:50.610;   0:< idle0_doc 
 ' 0:< VIDEO CONTROLLER INFORMATION:  
 ' 0:<    AdapterCompatibility : RealVNC 
 ' 0:<    Caption : VNC Mirror Driver 
@@ -747,31 +747,31 @@ Jrn.Data "APIStringStringMapJournalData"  _
 ' 0:<    VideoArchitecture : 5 
 ' 0:<    VideoMemoryType : 2 
 ' 0:<    VideoProcessor : Intel(R) HD Graphics Family 
- '  0.121860  0:<<Event timer/ALL_GAPS   0.121860/Threshold_GAPs 3% 
- 'E 30-Jun-2015 14:03:13.929;   0:< 
+ 'E 30-Jun-2015 14:29:50.635;   0:< 
  Jrn.Command "SystemMenu" , "Quit the application; prompts to save projects , ID_APP_EXIT"
  ' 1:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
- ' 1:< RAM Statistics:     3435 /     8075       552=InUse      594=Peak  
- ' 1:< VM  Statistics:  8386819 /  8388607       437=InUse      479=Peak  
+ ' 1:< RAM Statistics:     2926 /     8075       587=InUse      588=Peak  
+ ' 1:< VM  Statistics:  8386816 /  8388607       472=InUse      474=Peak  
  ' 1:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
- ' 1:< RAM Statistics:     3435 /     8075       552=InUse      594=Peak  
- ' 1:< VM  Statistics:  8386819 /  8388607       437=InUse      479=Peak  
+ ' 1:< RAM Statistics:     2925 /     8075       587=InUse      588=Peak  
+ ' 1:< VM  Statistics:  8386816 /  8388607       472=InUse      474=Peak  
  ' 1:< Third Party Updater 'LightThresholds: Daylighting Analysis Status Updater' has been unregistered. 
  ' 0:< CrsTimer event occurred for 0 times in DesktopMFCView [Floor Plan: Level 1] 
  ' 0:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
- ' 0:< RAM Statistics:     3436 /     8075       551=InUse      594=Peak  
- ' 0:< VM  Statistics:  8386820 /  8388607       435=InUse      479=Peak ;oCD; 
- ' 0:< ::12:: Delta VM: Avail -20 -> 8386807 MB, Used 435 MB; RAM: Avail -1 -> 3435 MB, Used +1 -> 553 MB 
+ ' 0:< RAM Statistics:     2924 /     8075       586=InUse      589=Peak  
+ ' 0:< VM  Statistics:  8386817 /  8388607       470=InUse      474=Peak ;oCD; 
+ ' 0:< ::12:: Delta VM: Avail -13 -> 8386804 MB, Used -2 -> 471 MB, Peak +1 -> 474 MB; RAM: Avail -4 -> 2923 MB, Used 587 MB, Peak +2 -> 589 MB 
  ' 0:< Before : Destroy Display Manager 
  ' 0:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
- ' 0:< RAM Statistics:     3435 /     8075       553=InUse      594=Peak  
- ' 0:< VM  Statistics:  8386807 /  8388607       435=InUse      479=Peak  
+ ' 0:< RAM Statistics:     2923 /     8075       587=InUse      589=Peak  
+ ' 0:< VM  Statistics:  8386804 /  8388607       471=InUse      474=Peak  
  ' 0:< After : Destroy Display Manager 
  ' 0:<   System (MB) [Available /  Total ]  [Revit Memory Usage (MB)   ] 
- ' 0:< RAM Statistics:     3435 /     8075       553=InUse      594=Peak  
- ' 0:< VM  Statistics:  8386807 /  8388607       435=InUse      479=Peak  
- ' 0:< DummyStorage destroying DataStorageInterface 0x0000000013064C40 
- ' 0:< DataStorageInterface destroyed 0x0000000013064C40 
+ ' 0:< RAM Statistics:     2923 /     8075       587=InUse      589=Peak  
+ ' 0:< VM  Statistics:  8386804 /  8388607       471=InUse      474=Peak  
+ ' 0:< DummyStorage destroying DataStorageInterface 0x0000000013244C40 
+ ' 0:< DataStorageInterface destroyed 0x0000000013244C40 
+' 0:< ::12:: Delta VM: Avail +7 -> 8386811 MB, Used 471 MB; RAM: Avail -1 -> 2922 MB, Used +1 -> 588 MB, Peak +10 -> 600 MB 
 ' 0:< PRINTER INFORMATION:  
 ' 0:<    Caption : WebEx Document Loader 
 ' 0:<    Default : 0 
@@ -865,10 +865,12 @@ Jrn.Data "APIStringStringMapJournalData"  _
 ' 0:<    SpoolEnabled : -1 
 ' 0:<    VerticalResolution : 600 
 ' 0:<  ->desktop ExitManagedInstance 
+' 0:< ::12:: Delta VM: Avail 8386811 MB, Used 471 MB; RAM: Avail +55 -> 2978 MB, Used +0 -> 589 MB 
 ' 0:<  <-desktop ExitManagedInstance 
 ' 0:<  ->desktop ExitNativeInstance 
 ' 0:< API unregistering DocumentClosing event by application LightThresholds (050e7709-060d-457d-9352-e90b85fbb5d9). 
 ' 0:< API unregistering DocumentOpened event by application LightThresholds (050e7709-060d-457d-9352-e90b85fbb5d9). 
+' 0:< ::12:: Delta VM: Avail -3 -> 8386808 MB, Used -45 -> 427 MB; RAM: Avail +44 -> 3022 MB, Used -44 -> 545 MB 
 ' 0:< Forcibly unregistering Updater with id:51c0be9b-07a8-443a-be8c-21db815b17e7 
 ' 0:< Forcibly unregistering Updater with id:00000000-c00c-478e-9226-63d19d957aed 
 ' 0:< Forcibly unregistering Updater with id:00000000-9a62-4ecd-adb1-9a93bf539620 
@@ -876,44 +878,44 @@ Jrn.Data "APIStringStringMapJournalData"  _
 ' 0:< Forcibly unregistering Updater with id:00000000-0a7a-49e7-bd08-6696111b3b53 
 ' 0:< Forcibly removing all update triggers for all Updaters 
 ' 0:< Unregistering all external services. 
-'C 30-Jun-2015 14:03:15.752;   0:< Protein : Unload plug-ins 
-'C 30-Jun-2015 14:03:15.752;   0:< Protein : Release Plugins 
-' 0:< ::12:: Delta VM: Avail +32 -> 8386840 MB, Used -5 -> 430 MB; RAM: Avail +3 -> 3439 MB, Used -3 -> 550 MB 
-'C 30-Jun-2015 14:03:15.754;   0:< Protein : Release Renderer Module 
-'C 30-Jun-2015 14:03:15.754;   0:< Protein : Destroy RenderingAsset Library Manager 
-'C 30-Jun-2015 14:03:15.782;   0:< Protein : ProteinSdkManager has been destroyed successfully 
-' 0:< ::12:: Delta VM: Avail +37 -> 8386877 MB, Used -35 -> 396 MB; RAM: Avail +21 -> 3461 MB, Used -23 -> 528 MB 
-'C 30-Jun-2015 14:03:15.792;   0:< License cleanup complete: 0, 0 
+'C 30-Jun-2015 14:29:52.519;   0:< Protein : Unload plug-ins 
+'C 30-Jun-2015 14:29:52.519;   0:< Protein : Release Plugins 
+' 0:< ::12:: Delta VM: Avail +30 -> 8386839 MB, Used -6 -> 422 MB; RAM: Avail +3 -> 3025 MB, Used -5 -> 541 MB 
+'C 30-Jun-2015 14:29:52.520;   0:< Protein : Release Renderer Module 
+'C 30-Jun-2015 14:29:52.520;   0:< Protein : Destroy RenderingAsset Library Manager 
+'C 30-Jun-2015 14:29:52.529;   0:< Protein : ProteinSdkManager has been destroyed successfully 
+' 0:< ::12:: Delta VM: Avail +37 -> 8386876 MB, Used -35 -> 387 MB; RAM: Avail +21 -> 3046 MB, Used -22 -> 519 MB 
+'C 30-Jun-2015 14:29:52.540;   0:< License cleanup complete: 0, 0 
 ' 0:< Journal Exit 
 ' 0:< Log Summary 
 ' 0:< .Count 
-' 0:< ...CloseHiddenWindowsInAllDocuments = 4 
-' 0:< ...CloseHiddenWindowsInDocumentStorage = 2 
+' 0:< ...CloseHiddenWindowsInAllDocuments = 3 
+' 0:< ...CloseHiddenWindowsInDocumentStorage = 1 
 ' 0:< ...DBG_SOMETHING = 2 
 ' 0:< ...getADocuments_Arr = 22 
-' 0:< ...onUpdateWindowCloseHidden = 4 
+' 0:< ...onUpdateWindowCloseHidden = 3 
 ' 0:< ...ProjectRecsCreated = 2 
 ' 0:< ...ProjectRecsLeaked = 1 
 ' 0:< ...UnmatchedGViewDirectives = 1 
 ' 0:< Total session time spent reclaiming memory: 0.000000 seconds.  Averaged 0.000000 seconds/call for 0 calls. 
-' 0:< Total expansion time: 0.008378 seconds, averaging 0.000001 seconds/expansion for 6411 expansions. 
-'C 30-Jun-2015 14:03:15.794;   0:< stopped at line 8 journal file playback 
+' 0:< Total expansion time: 0.008264 seconds, averaging 0.000001 seconds/expansion for 6411 expansions. 
+'C 30-Jun-2015 14:29:52.542;   0:< stopped at line 8 journal file playback 
 ' 0:<               BackgroundLoader exec=     1 (parallel=     1)   
-' 0:<         ConsumeArchive_Element exec=     7 (parallel=     7)   self=    0.007735 sec (avg=  0.001) 
-' 0:<            ConsumeArchive_GRep exec=     1 (parallel=     1)   self=    0.002417 sec (avg=  0.002) 
-' 0:<          ConsumeArchive_Header exec=     2 (parallel=     2)   self=    0.022120 sec (avg=  0.011) 
-' 0:<      ConsumeElementVisitBucket exec=     3 (parallel=     0)   self=    0.002449 sec (avg=  0.001) 
-' 0:<                  FormOrAbandon exec=     2 (parallel=     0)   self=    3.577869 sec (avg=  1.789) 
-' 0:<                 ProduceArchive exec=    11 (parallel=    11)   self=    0.000591 sec (avg=  0.000) 
-' 0:<      ProduceElementVisitBucket exec=     6 (parallel=     3)   self=    0.000065 sec (avg=  0.000) rollup=   0.000065 (avg=  0.000) 
-' 0:<    ReadFileAndPerformOperation exec=     3 (parallel=     0)   self=    0.000248 sec (avg=  0.000) 
-' 0:<             RunPipelineContext exec=     3 (parallel=     0)   self=    0.000050 sec (avg=  0.000) rollup=   0.002555 (avg=  0.001) 
+' 0:<         ConsumeArchive_Element exec=     7 (parallel=     7)   self=    0.009050 sec (avg=  0.001) 
+' 0:<            ConsumeArchive_GRep exec=     1 (parallel=     1)   self=    0.001564 sec (avg=  0.002) 
+' 0:<          ConsumeArchive_Header exec=     2 (parallel=     2)   self=    0.017301 sec (avg=  0.009) 
+' 0:<      ConsumeElementVisitBucket exec=     6 (parallel=     3)   self=    0.002708 sec (avg=  0.000) 
+' 0:<                  FormOrAbandon exec=     2 (parallel=     0)   self=    3.546565 sec (avg=  1.773) 
+' 0:<                 ProduceArchive exec=    11 (parallel=    11)   self=    0.000627 sec (avg=  0.000) 
+' 0:<      ProduceElementVisitBucket exec=    12 (parallel=     5)   self=    0.000079 sec (avg=  0.000) 
+' 0:<    ReadFileAndPerformOperation exec=     3 (parallel=     0)   self=    0.000244 sec (avg=  0.000) 
+' 0:<             RunPipelineContext exec=     6 (parallel=     3)   self=    0.000069 sec (avg=  0.000) rollup=   0.002860 (avg=  0.000) 
 ' 0:<          SetClassMapsAndHeader exec=     1 (parallel=     0)   
-' 0:<                 TaskFileExists exec=   174 (parallel=   167)   self=    0.036961 sec (avg=  0.000) 
+' 0:<                 TaskFileExists exec=   173 (parallel=   166)   self=    0.036820 sec (avg=  0.000) 
 ' 0:<                    TaskScatter exec=     1 (parallel=     1)   
 ' 0:<               TaskScriptEngine exec=     1 (parallel=     1)   
 ' 0:<                 TaskWaitCursor exec=     1 (parallel=     1)   
-' 0:< ::12:: Delta VM: Avail +23 -> 8386900 MB, Used -3 -> 393 MB; RAM: Avail +10 -> 3471 MB, Used -11 -> 518 MB 
+' 0:< ::12:: Delta VM: Avail +23 -> 8386899 MB, Used -2 -> 386 MB; RAM: Avail +8 -> 3055 MB, Used -9 -> 510 MB 
 ' 0:<  <-desktop ExitNativeInstance 
-' 0:< ::12:: Delta VM: Avail +13 -> 8386914 MB, Used 393 MB; RAM: Avail 3471 MB, Used -1 -> 517 MB 
-'C 30-Jun-2015 14:03:16.312;   0:< finished recording journal file 
+' 0:< ::12:: Delta VM: Avail +13 -> 8386913 MB, Used 386 MB; RAM: Avail +0 -> 3056 MB, Used -1 -> 509 MB 
+'C 30-Jun-2015 14:29:52.561;   0:< finished recording journal file 
