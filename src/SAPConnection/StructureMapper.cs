@@ -302,10 +302,10 @@ namespace SAPConnection
         }
 
         // Area  prop
-        public static void SetPropArea(ref cSapModel Model, string PropName, string ShellType, bool DOF, string MatProp, double MatAngle, double Thickness, double Bending, ref string error)
+        public static void SetPropArea(ref cSapModel Model, string PropName, int ShellType, bool DOF, string MatProp, double MatAngle, double Thickness, double Bending, ref string error)
         {
-            int type = (int)((ShellType)Enum.Parse(typeof(ShellType), ShellType));
-            long ret = Model.PropArea.SetShell_1(PropName, type, DOF, MatProp, MatAngle, Thickness, Bending);
+            //int type = (int)((ShellType)Enum.Parse(typeof(ShellType), ShellType));
+            long ret = Model.PropArea.SetShell_1(PropName, ShellType, DOF, MatProp, MatAngle, Thickness, Bending);
             if (ret == 1) error = string.Format("Error setting the area property {0}", PropName);
         }
         public static void SetShellPropArea(ref cSapModel Model, string AreaId, string PropName, ref string error)
@@ -584,16 +584,16 @@ namespace SAPConnection
             }
 
         }
-        public static void GetShellProp(ref cSapModel Model, string PropName, ref string ShellType, ref bool DOF, ref string MatProp, ref double MatAngle, ref double Thickness, ref double Bending)
+        public static void GetShellProp(ref cSapModel Model, string PropName, ref int ShellType, ref bool DOF, ref string MatProp, ref double MatAngle, ref double Thickness, ref double Bending)
         {
             int type = 1;
             int color = 1;
             string notes = string.Empty;
             string guid = string.Empty;
 
-            long ret = Model.PropArea.GetShell_1(PropName, ref type, ref DOF, ref MatProp, ref MatAngle, ref Thickness, ref Bending, ref color, ref notes, ref guid);
+            long ret = Model.PropArea.GetShell_1(PropName, ref ShellType, ref DOF, ref MatProp, ref MatAngle, ref Thickness, ref Bending, ref color, ref notes, ref guid);
 
-            ShellType = Enum.GetName(typeof(ShellType), type);
+            //ShellType = Enum.GetName(typeof(ShellType), type);
 
         }
         /// <summary>

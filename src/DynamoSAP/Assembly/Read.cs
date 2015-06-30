@@ -367,7 +367,7 @@ namespace DynamoSAP.Assembly
                     string propName = string.Empty;
                     SAPConnection.StructureMapper.GetShell(ref SapModel, AreaIds[i], ref S, SF, ref propName);
                     
-                    string ShellType= string.Empty;
+                    int ShellType= 1;
                     bool DOF = true;
                     string MatProp = string.Empty;
                     double MatAngle = 0;

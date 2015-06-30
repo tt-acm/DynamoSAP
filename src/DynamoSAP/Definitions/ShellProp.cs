@@ -21,7 +21,7 @@ namespace DynamoSAP.Definitions
     {
         // FIELDS
         internal string PropName { get; set; }
-        internal string ShellType { get; set; }
+        internal int ShellType { get; set; }
         internal bool DOF { get; set; }
         internal string MatProp { get; set; }
         internal double MatAngle { get; set; } // degree
@@ -40,7 +40,7 @@ namespace DynamoSAP.Definitions
         /// <param name="Thickness"> The membrabe thickness. Doesn't apply when ShellType = Shell_layered</param>
         /// <param name="Bending">The bending thickness. Doesn't apply when ShellType = Shell_layered</param>
         /// <returns></returns>
-        public static ShellProp Define(string Name, string ShellType = "Shell_thin", bool DOF = true, string MatProp = "4000Psi", double MatAngle= 0, double Thickness = 0, double Bending = 0)
+        public static ShellProp Define(string Name, int ShellType = 1, bool DOF = true, string MatProp = "4000Psi", double MatAngle= 0, double Thickness = 0, double Bending = 0)
         {
             string mat = SAPConnection.MaterialMapper.DynamoToSap(MatProp);
             return new ShellProp(Name, ShellType, DOF, mat, MatAngle, Thickness, Bending);
@@ -68,7 +68,7 @@ namespace DynamoSAP.Definitions
 
         //PRIVATE CONSTRUCTORS
         internal ShellProp() { }
-        internal ShellProp(string _name, string _shellType, bool _dof, string _matprop, double _matAngle, double _thickness, double _bending)
+        internal ShellProp(string _name, int _shellType, bool _dof, string _matprop, double _matAngle, double _thickness, double _bending)
         {
             PropName = _name;
             ShellType =_shellType;
