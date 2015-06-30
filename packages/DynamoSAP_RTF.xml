@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Runner xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <AssemblyPath>C:\Users\eertugrul\Documents\GitHub\RevitTestFramework\bin\AnyCPU\Debug\RTFRevit.dll</AssemblyPath>
+  <TestAssembly>C:\Users\eertugrul\Documents\GitHub\DynamoSAP\bin\AnyCPU\Debug\DynamoSAPTests.dll</TestAssembly>
+  <IsDebug>false</IsDebug>
+  <Results>C:\Users\eertugrul\Desktop\delete_\RTF Test\DynSAPTest.xml</Results>
+  <WorkingDirectory>C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra</WorkingDirectory>
+  <RevitPath>C:\Program Files\Autodesk\Revit 2014\revit.exe</RevitPath>
+  <CopyAddins>true</CopyAddins>
+  <Timeout>120000</Timeout>
+  <Concat>false</Concat>
+  <CancelRequested>false</CancelRequested>
+  <DryRun>false</DryRun>
+  <CleanUp>true</CleanUp>
+  <Continuous>false</Continuous>
+  <SelectionHints>
+    <SelectionHint>
+      <AssemblyName>DynamoSAPTests</AssemblyName>
+      <FixtureName>DynamoSAP_SystemTesting</FixtureName>
+      <TestName>SpaceStructure</TestName>
+    </SelectionHint>
+  </SelectionHints>
+  <GroupingType>Fixture</GroupingType>
+  <IsTesting>false</IsTesting>
+  <AdditionalResolutionDirectories>
+    <string>C:\Program Files\Dynamo 0.8</string>
+    <string> C:\Program Files\Dynamo 0.8\Revit_2014</string>
+  </AdditionalResolutionDirectories>
+</Runner>
