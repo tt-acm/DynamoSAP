@@ -116,6 +116,21 @@ Backup*/
 UpgradeLog*.XML
 
 
+### Journals and Logs
+*.txt
+*.LOG
+*.OUT
+
+### SAP Files
+*.sbk
+*.msh
+*.M3
+*.F3
+*.K3
+*.K~0
+*.K~I
+*.K~M
+
 
 ############
 ## Windows
