@@ -119,17 +119,28 @@ UpgradeLog*.XML
 ### Journals and Logs
 *.txt
 *.LOG
+*.log
 *.OUT
 
 ### SAP Files
 *.sbk
+*.$2k
 *.msh
+*.C3
 *.M3
 *.F3
 *.K3
 *.K~0
 *.K~I
 *.K~M
+*.Y
+*.Y$$
+*.Y~
+*.Y~1
+*.Y00
+*.Y01
+*.Y02
+*.Y04
 
 
 ############
