@@ -58,8 +58,8 @@ namespace DynamoSAP.Assembly
                 LengthUnit LU = new LengthUnit();
                    //LengthUnit LU= DynamoUnits.Length.LengthUnit; // Display Units 
 
-                double LengthSF = SAPConnection.Utilities.UnitConversion(Units, fromUnit); // Lenght Conversion Factor
-
+                //double LengthSF = SAPConnection.Utilities.UnitConversion(Units, fromUnit); // Lenght Conversion Factor
+                double LengthSF = 1;
                 // Clear Frame & Area Dictionaries to hold 
                 SAPFrmList.Clear();
                 SAPAreaList.Clear();
