@@ -262,7 +262,8 @@ namespace DynamoSAP.Assembly
                 //2.b Get Frames
 
                 // Calculate Length Scale Factor
-                Double SF = Utilities.UnitConversion("m", SapModelUnits); // Dynamo API Lenght Unit is 'meter'
+                //Double SF = Utilities.UnitConversion("m", SapModelUnits); // Dynamo API Lenght Unit is 'meter'
+                Double SF = 1;
 
                 List<string> FrmIds = new List<string>();
                 StructureMapper.GetSAPFrameList(ref SapModel,ref FrmIds);
