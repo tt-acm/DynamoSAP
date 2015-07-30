@@ -1,7 +1,7 @@
-<Workspace Version="0.8.0.950" X="60.2379197642986" Y="109.891042348388" zoom="0.569437555305237" Name="Home" RunType="Manual" RunPeriod="100" HasRunWithoutCrash="True">
+<Workspace Version="0.8.1.1942" X="-15.8139940607316" Y="355.926304069914" zoom="0.632260924431932" Name="Home" RunType="Manual" RunPeriod="100" HasRunWithoutCrash="True">
   <NamespaceResolutionMap />
   <Elements>
-    <DSIronPythonNode.PythonNode guid="c3ddeb4a-062c-4fb9-8b04-19c6d271866c" type="DSIronPythonNode.PythonNode" nickname="Python Script" x="898.781765594519" y="40.1324877278256" isVisible="true" isUpstreamVisible="true" lacing="Disabled" inputcount="1">
+    <DSIronPythonNode.PythonNode guid="c3ddeb4a-062c-4fb9-8b04-19c6d271866c" type="DSIronPythonNode.PythonNode" nickname="Python Script" x="904.017178511012" y="230.352490360394" isVisible="true" isUpstreamVisible="true" lacing="Disabled" inputcount="1">
       <Script>import clr
 clr.AddReference('RevitAPI')
 from Autodesk.Revit.DB import *
@@ -33,26 +33,26 @@ for item in items:
 		
 OUT = mm</Script>
     </DSIronPythonNode.PythonNode>
-    <Dynamo.Nodes.DSFunction guid="cafb0ca3-f2d0-4cd2-88b8-26f3b76ce292" type="Dynamo.Nodes.DSFunction" nickname="Frame.FromLine" x="1229.88573469731" y="145.74154258471" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Structure.Frame.FromLine@Autodesk.DesignScript.Geometry.Line,DynamoSAP.Definitions.SectionProp,string,double">
+    <Dynamo.Nodes.DSFunction guid="cafb0ca3-f2d0-4cd2-88b8-26f3b76ce292" type="Dynamo.Nodes.DSFunction" nickname="Frame.FromLine" x="1570.10406443623" y="324.051041508037" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Structure.Frame.FromLine@Autodesk.DesignScript.Geometry.Line,DynamoSAP.Definitions.SectionProp,string,double">
       <PortInfo index="2" default="True" />
       <PortInfo index="3" default="True" />
     </Dynamo.Nodes.DSFunction>
-    <Dynamo.Nodes.DSFunction guid="5353e72e-0c1b-4ead-b11f-188e2fc5e9a9" type="Dynamo.Nodes.DSFunction" nickname="SectionProp.Define" x="910.979905230377" y="291.464874450116" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Definitions.SectionProp.Define@string,string,string">
+    <Dynamo.Nodes.DSFunction guid="5353e72e-0c1b-4ead-b11f-188e2fc5e9a9" type="Dynamo.Nodes.DSFunction" nickname="SectionProp.Define" x="916.21531814687" y="481.684877082684" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Definitions.SectionProp.Define@string,string,string">
       <PortInfo index="0" default="True" />
       <PortInfo index="1" default="True" />
       <PortInfo index="2" default="True" />
     </Dynamo.Nodes.DSFunction>
-    <Dynamo.Nodes.DSFunction guid="46eb90d9-abba-4cb2-8953-789881311af4" type="Dynamo.Nodes.DSFunction" nickname="StructuralModel.Collector" x="1516.06868246531" y="144.67946026368" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Collector@DynamoSAP.Structure.Element[]" />
-    <Dynamo.Nodes.DSFunction guid="1a1082a9-e573-4ba9-a28f-b80aef031a42" type="Dynamo.Nodes.DSFunction" nickname="Bake.ToSAP" x="1953.31652401446" y="148.609468973653" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.Bake.ToSAP@DynamoSAP.Assembly.StructuralModel,bool,string,bool">
+    <Dynamo.Nodes.DSFunction guid="46eb90d9-abba-4cb2-8953-789881311af4" type="Dynamo.Nodes.DSFunction" nickname="StructuralModel.Collector" x="1856.28701220423" y="322.988959187007" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Collector@DynamoSAP.Structure.Element[]" />
+    <Dynamo.Nodes.DSFunction guid="1a1082a9-e573-4ba9-a28f-b80aef031a42" type="Dynamo.Nodes.DSFunction" nickname="Bake.ToSAP" x="2293.53485375338" y="326.91896789698" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.Bake.ToSAP@DynamoSAP.Assembly.StructuralModel,bool,string,bool">
       <PortInfo index="2" default="True" />
       <PortInfo index="3" default="True" />
     </Dynamo.Nodes.DSFunction>
-    <DSCoreNodesUI.BoolSelector guid="d76dc87b-a247-4178-ba31-fdb7896a487c" type="DSCoreNodesUI.BoolSelector" nickname="Boolean" x="1674.18355077552" y="257.903183719765" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    <DSCoreNodesUI.BoolSelector guid="d76dc87b-a247-4178-ba31-fdb7896a487c" type="DSCoreNodesUI.BoolSelector" nickname="Boolean" x="2012.91306755078" y="416.858114115574" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
       <System.Boolean>True</System.Boolean>
     </DSCoreNodesUI.BoolSelector>
-    <DynamoSAP_UI.SectionCatalogs guid="c363d646-a62c-4f31-8e38-e03d81de14e2" type="DynamoSAP_UI.SectionCatalogs" nickname="SectionCatalogs" x="209.590976809078" y="378.18897679576" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="0:AISC" />
-    <Dynamo.Nodes.DSFunction guid="c7d07170-9523-4482-9636-341b42d62af3" type="Dynamo.Nodes.DSFunction" nickname="Family.Name" x="523.98019207141" y="277.155552619216" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="RevitNodes.dll" function="Revit.Elements.Family.Name" />
-    <DSIronPythonNode.PythonNode guid="4a82ea0c-d9e1-47f6-a012-4458a508ce34" type="DSIronPythonNode.PythonNode" nickname="Python Script" x="711.365870166163" y="277.498545274777" isVisible="true" isUpstreamVisible="true" lacing="Disabled" inputcount="1">
+    <DynamoSAP_UI.SectionCatalogs guid="c363d646-a62c-4f31-8e38-e03d81de14e2" type="DynamoSAP_UI.SectionCatalogs" nickname="SectionCatalogs" x="214.826389725571" y="568.408979428329" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="4:AISC14" />
+    <Dynamo.Nodes.DSFunction guid="c7d07170-9523-4482-9636-341b42d62af3" type="Dynamo.Nodes.DSFunction" nickname="Family.Name" x="529.215604987903" y="467.375555251784" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="RevitNodes.dll" function="Revit.Elements.Family.Name" />
+    <DSIronPythonNode.PythonNode guid="4a82ea0c-d9e1-47f6-a012-4458a508ce34" type="DSIronPythonNode.PythonNode" nickname="Python Script" x="715.372711488026" y="467.718547907345" isVisible="true" isUpstreamVisible="true" lacing="Disabled" inputcount="1">
       <Script>import clr
 clr.AddReference('RevitAPI')
 from Autodesk.Revit.DB import *
@@ -76,621 +76,65 @@ for item in items:
 		
 OUT = mm</Script>
     </DSIronPythonNode.PythonNode>
-    <Dynamo.Nodes.DSModelElementsSelection guid="06482030-8ab6-42d0-9946-14543ac10958" type="Dynamo.Nodes.DSModelElementsSelection" nickname="Select Model Elements" x="209.203981414945" y="52.7218264576386" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a2e3" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a2e4" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a30f" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a310" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a33a" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a33b" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a359" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a35a" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3a8" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3a9" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3aa" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3ab" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3ac" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3ad" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3ae" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3af" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3c9" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3ca" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3cb" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3cc" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3cd" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3ce" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3cf" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3d0" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3ea" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3eb" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3ec" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3ed" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3ee" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3ef" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3f0" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a3f1" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a40b" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a40c" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a40d" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a40e" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a40f" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a410" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a411" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a412" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a413" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a414" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a415" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a416" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a417" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a418" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a419" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a41a" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a41b" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a41c" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a41d" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a41e" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a41f" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a420" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a421" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a422" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a423" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a424" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a425" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a426" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a427" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a428" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a429" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a42a" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a44f" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a450" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a451" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a452" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a453" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a454" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a455" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a456" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a457" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a458" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a459" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a45a" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a45b" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a45c" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a45d" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a45e" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a45f" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a460" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a461" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a462" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a463" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a464" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a465" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a466" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a487" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a488" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a50f" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a510" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a51e" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a51f" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a53c" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a53d" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a569" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a56a" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5a5" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5a6" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5b4" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5b5" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5c5" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5c6" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5d4" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5d5" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5f3" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5f4" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5f5" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5f6" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5f7" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5f8" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5f9" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5fa" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5fb" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5fc" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5fd" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5fe" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a5ff" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a600" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a601" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a602" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a603" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a604" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a605" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a606" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a607" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a608" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a609" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a60a" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a60b" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a60c" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a60d" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a60e" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a60f" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a610" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a657" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a658" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a659" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a65a" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a66c" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a66d" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a66e" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a66f" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a698" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a699" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6b7" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6b8" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6b9" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6ba" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6bb" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6bc" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6bd" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6be" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6bf" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6c0" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6c1" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6c2" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6c3" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6c4" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6c5" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6c6" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6c7" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6c8" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6c9" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6ca" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6cb" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6cc" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6cd" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6ce" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6cf" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6d0" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6d1" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6d2" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6d3" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a6d4" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a739" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a73a" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a73b" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a73c" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a969" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a96a" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a98c" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a98d" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a99a" />
-      <instance id="abb0062b-2ff6-48e3-8b95-885d27c660a9-0005a99b" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005a9f5" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005a9f6" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005a9f7" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005a9f8" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005a9f9" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005a9fa" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005a9fb" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005a9fc" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005aa5c" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005aa5d" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005aa6a" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005aa6b" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005aa78" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005aa79" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005aa86" />
-      <instance id="6225f377-44b2-448e-9f6f-79d660181f3d-0005aa87" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005aad4" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005aad5" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005aae0" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005aae1" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab23" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab24" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab25" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab26" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab3e" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab3f" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab40" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab41" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab51" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab52" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab53" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab54" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab64" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab65" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab66" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ab67" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ac5b" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ac5c" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ac70" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ac71" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ac8b" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ac8c" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ac9f" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005aca0" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005acb7" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005acb8" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005accb" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005accc" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ace8" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ace9" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005acfc" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005acfd" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ad1c" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ad1d" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ad4f" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ad50" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ad51" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ad52" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ad53" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ad54" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ad55" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ad56" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ad57" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005ad58" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b04b" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b04c" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b08d" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b08e" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b0d4" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b0d5" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b0f9" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b0fa" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b136" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b137" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b162" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b163" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b180" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b181" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b205" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b206" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b247" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b248" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b2a8" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b2a9" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b2b4" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b2b5" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b2c2" />
-      <instance id="497623ef-29a3-4a79-8840-957319190bdb-0005b2c3" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b36f" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b370" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b387" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b388" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b398" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b399" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b3a3" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b3a4" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b3b9" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b3ba" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b3cb" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b3cc" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b3d5" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b3d6" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b3e8" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b3e9" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b3f5" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b3f6" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b403" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b404" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b418" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b419" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b429" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b42a" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b45a" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b45b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b473" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b474" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b486" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b487" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b4b0" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b4b1" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b4c9" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b4ca" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b4dc" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b4dd" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b588" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b589" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b58a" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b58b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b58c" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b58d" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b58e" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b58f" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b590" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b591" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b592" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b593" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b594" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b595" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b596" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b597" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b598" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b599" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b59a" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b59b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b59c" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b59d" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b59e" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b59f" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5a0" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5a1" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5a2" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5a3" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5a4" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5a5" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5a6" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5a7" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5a8" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5a9" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5aa" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5ab" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5ae" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5af" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5b0" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5b1" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5b2" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5b3" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5b4" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5b5" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5b6" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5b7" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5b8" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5b9" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5ba" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5bb" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5bc" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5bd" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5be" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5bf" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5c0" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5c1" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5c2" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5c3" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5c4" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5c5" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5c6" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5c7" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5c8" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5c9" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5ca" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5cb" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5cc" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5cd" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5ce" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5cf" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5d0" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5d1" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5f4" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b5f5" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b60b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b60c" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b61f" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b620" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b62b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b62c" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b640" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b641" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b652" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b653" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b65f" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b660" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b66a" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b66b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b679" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b67a" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b68b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b68c" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b696" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b697" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b7c8" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b7c9" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b7d8" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b7d9" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b807" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b808" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b85b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b85c" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b85d" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b85e" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b85f" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b860" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b861" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b862" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b863" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b864" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b865" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b866" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b867" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b868" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b873" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b874" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b875" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b876" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b879" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b87a" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b87b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b87c" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b87d" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b87e" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b87f" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b880" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b881" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b882" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b889" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b88a" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b88b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b88c" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b891" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b892" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b893" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b894" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b895" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b896" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b897" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b898" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b900" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b901" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b918" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b919" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b92f" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b930" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b942" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b943" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b957" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b958" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b984" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b985" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b9c8" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005b9c9" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005ba1b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005ba1c" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005ba32" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005ba33" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005ba5a" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005ba5b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005ba7b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005ba7c" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005ba92" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005ba93" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005ba9e" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005ba9f" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bab3" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bab4" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bac5" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bac6" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bad2" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bad3" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bae5" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bae6" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bb0c" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bb0d" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bb23" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bb24" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bb49" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bb4a" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bb60" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bb61" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc51" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc52" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc53" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc54" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc55" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc56" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc57" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc58" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc59" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc5a" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc5b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc5c" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc5d" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc5e" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc5f" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc60" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc61" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc62" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc63" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc64" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc65" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc66" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc67" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc68" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc69" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc6a" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc6b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc6c" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc6d" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc6e" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc6f" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc70" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc71" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc72" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc7e" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc7f" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc82" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc83" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc98" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc99" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc9a" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bc9b" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bd06" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bd07" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bd1e" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bd1f" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bd30" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bd31" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bd52" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bd53" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bd71" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bd72" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005be1c" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005be1d" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005be41" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005be42" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bea4" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bea5" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005beb7" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005beb8" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bec6" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bec7" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bed7" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bed8" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bee5" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bee6" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bef5" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bef6" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bf07" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bf08" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bf15" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005bf16" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c035" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c036" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c037" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c038" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c039" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c03a" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c145" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c146" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c158" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c159" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c167" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c168" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c175" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c176" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c185" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c186" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c3c3" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c3c4" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c40e" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c40f" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c44e" />
-      <instance id="17b32ccb-bd71-4ce8-9990-76595532be4e-0005c44f" />
-      <instance id="fee206b7-a1fe-4eb9-a25b-52944988e086-0005d7bc" />
-      <instance id="fee206b7-a1fe-4eb9-a25b-52944988e086-0005d7bd" />
-      <instance id="fee206b7-a1fe-4eb9-a25b-52944988e086-0005d80b" />
-      <instance id="fee206b7-a1fe-4eb9-a25b-52944988e086-0005d80c" />
-      <instance id="fee206b7-a1fe-4eb9-a25b-52944988e086-0005d815" />
-      <instance id="fee206b7-a1fe-4eb9-a25b-52944988e086-0005d816" />
-      <instance id="fee206b7-a1fe-4eb9-a25b-52944988e086-0005d907" />
-      <instance id="fee206b7-a1fe-4eb9-a25b-52944988e086-0005d908" />
-      <instance id="fee206b7-a1fe-4eb9-a25b-52944988e086-0005d913" />
-      <instance id="fee206b7-a1fe-4eb9-a25b-52944988e086-0005d914" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc6d" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc6e" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc6f" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc70" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc71" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc72" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc73" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc74" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc75" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc76" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc77" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc78" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc79" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc7a" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc7b" />
-      <instance id="be09837d-33b1-48ae-ac0d-78634bff4c13-0005dc7c" />
-      <instance id="ecb29ba4-5d67-4732-a7e7-465b1fe0109f-0005e375" />
+    <Dynamo.Nodes.DSModelElementsSelection guid="06482030-8ab6-42d0-9946-14543ac10958" type="Dynamo.Nodes.DSModelElementsSelection" nickname="Select Model Elements" x="214.439394331438" y="242.941829090207" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-00073783" />
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-00073784" />
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-0007378d" />
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-0007378e" />
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-00073796" />
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-00073797" />
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-0007379f" />
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-000737a0" />
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-000737c1" />
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-000737c2" />
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-000737d1" />
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-000737d2" />
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-000737e2" />
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-000737e3" />
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-000737f3" />
+      <instance id="a82bb7de-ae86-44ce-aebe-5ebd888dd22d-000737f4" />
     </Dynamo.Nodes.DSModelElementsSelection>
+    <Dynamo.Nodes.DSFunction guid="bea543d1-cc09-48a9-8a81-1af3bd58b44e" type="Dynamo.Nodes.DSFunction" nickname="SectionProp.Sections" x="496.343876207359" y="648.734865853734" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Definitions.SectionProp.Sections@string" />
+    <Dynamo.Nodes.DSFunction guid="302eeb0c-5289-4afa-bb53-eca17abd901e" type="Dynamo.Nodes.DSFunction" nickname="Element.GetParameterValueByName" x="597.421125430922" y="-134.118355535357" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="RevitNodes.dll" function="Revit.Elements.Element.GetParameterValueByName@string" />
+    <Dynamo.Nodes.CodeBlockNodeModel guid="82158e6e-50c4-4303-b079-c9dfca565714" type="Dynamo.Nodes.CodeBlockNodeModel" nickname="Code Block" x="232.181201494228" y="-101.956455452912" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="&quot;Cross-Section Rotation&quot;;" ShouldFocus="false" />
+    <DSIronPythonNode.PythonNode guid="240464ac-e001-4016-99ec-3ebf3aa14d66" type="DSIronPythonNode.PythonNode" nickname="Python Script" x="936.072098655972" y="-113.382781176964" isVisible="true" isUpstreamVisible="true" lacing="Disabled" inputcount="4">
+      <Script>import clr
+clr.AddReference('RevitAPI')
+from Autodesk.Revit.DB import *
+from Autodesk.Revit.DB import Structure
+
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+
+clr.AddReference("RevitNodes")
+import Revit
+clr.ImportExtensions(Revit.GeometryConversion)
+
+doc = DocumentManager.Instance.CurrentDBDocument
+items = UnwrapElement(IN[0])
+angles = IN[1]
+elements = UnwrapElement(IN[2])
+cat = UnwrapElement(IN[3])
+rotationList = list()
+booleanList = list()
+
+for i in range(0,len(items)):
+	if (items[i] == ""):
+		rotationList.append(angles[i])
+	else:
+		if elements[i].Category.Id==cat.Id:
+			booleanList.append(True)
+		else:
+			booleanList.append(False)
+		
+OUT = (rotationList,booleanList)
+</Script>
+    </DSIronPythonNode.PythonNode>
+    <Dynamo.Nodes.DSFunction guid="ff944dfc-827d-444d-bbfb-6d684b7dd9e5" type="Dynamo.Nodes.DSFunction" nickname="Frame.RevitToSAPRotationMapper" x="1319.50669801596" y="-86.2427311366943" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Structure.Frame.RevitToSAPRotationMapper@double,bool" />
+    <DSRevitNodesUI.Categories guid="5971debe-4f90-4433-ab2f-9bcbb2f6a99f" type="DSRevitNodesUI.Categories" nickname="Categories" x="628.157810623784" y="-2.6957335878547" isVisible="true" isUpstreamVisible="true" lacing="Disabled" index="830:StructuralColumns" />
+    <Dynamo.Nodes.DSFunction guid="3534e2a7-813a-40cb-a590-09a64b667028" type="Dynamo.Nodes.DSFunction" nickname="RotationAngles" x="1136.35241311196" y="-117.318764152807" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DSCoreNodes.dll" function="DSCore.List.FirstItem@var[]..[]" />
+    <Dynamo.Nodes.DSFunction guid="169be186-82b8-40ea-8626-1c00c5e62e27" type="Dynamo.Nodes.DSFunction" nickname="isColumn" x="1136.3750272478" y="-21.088131786216" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DSCoreNodes.dll" function="DSCore.List.LastItem@var[]..[]" />
   </Elements>
   <Connectors>
     <Dynamo.Models.ConnectorModel start="c3ddeb4a-062c-4fb9-8b04-19c6d271866c" start_index="0" end="cafb0ca3-f2d0-4cd2-88b8-26f3b76ce292" end_index="0" portType="0" />
@@ -698,21 +142,35 @@ OUT = mm</Script>
     <Dynamo.Models.ConnectorModel start="5353e72e-0c1b-4ead-b11f-188e2fc5e9a9" start_index="0" end="cafb0ca3-f2d0-4cd2-88b8-26f3b76ce292" end_index="1" portType="0" />
     <Dynamo.Models.ConnectorModel start="46eb90d9-abba-4cb2-8953-789881311af4" start_index="0" end="1a1082a9-e573-4ba9-a28f-b80aef031a42" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="d76dc87b-a247-4178-ba31-fdb7896a487c" start_index="0" end="1a1082a9-e573-4ba9-a28f-b80aef031a42" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="c363d646-a62c-4f31-8e38-e03d81de14e2" start_index="0" end="bea543d1-cc09-48a9-8a81-1af3bd58b44e" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="c363d646-a62c-4f31-8e38-e03d81de14e2" start_index="0" end="5353e72e-0c1b-4ead-b11f-188e2fc5e9a9" end_index="2" portType="0" />
     <Dynamo.Models.ConnectorModel start="c7d07170-9523-4482-9636-341b42d62af3" start_index="0" end="4a82ea0c-d9e1-47f6-a012-4458a508ce34" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="c7d07170-9523-4482-9636-341b42d62af3" start_index="0" end="240464ac-e001-4016-99ec-3ebf3aa14d66" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="4a82ea0c-d9e1-47f6-a012-4458a508ce34" start_index="0" end="5353e72e-0c1b-4ead-b11f-188e2fc5e9a9" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="06482030-8ab6-42d0-9946-14543ac10958" start_index="0" end="c3ddeb4a-062c-4fb9-8b04-19c6d271866c" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="06482030-8ab6-42d0-9946-14543ac10958" start_index="0" end="c7d07170-9523-4482-9636-341b42d62af3" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="06482030-8ab6-42d0-9946-14543ac10958" start_index="0" end="302eeb0c-5289-4afa-bb53-eca17abd901e" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="06482030-8ab6-42d0-9946-14543ac10958" start_index="0" end="240464ac-e001-4016-99ec-3ebf3aa14d66" end_index="2" portType="0" />
+    <Dynamo.Models.ConnectorModel start="302eeb0c-5289-4afa-bb53-eca17abd901e" start_index="0" end="240464ac-e001-4016-99ec-3ebf3aa14d66" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="82158e6e-50c4-4303-b079-c9dfca565714" start_index="0" end="302eeb0c-5289-4afa-bb53-eca17abd901e" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="240464ac-e001-4016-99ec-3ebf3aa14d66" start_index="0" end="3534e2a7-813a-40cb-a590-09a64b667028" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="240464ac-e001-4016-99ec-3ebf3aa14d66" start_index="0" end="169be186-82b8-40ea-8626-1c00c5e62e27" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="ff944dfc-827d-444d-bbfb-6d684b7dd9e5" start_index="0" end="cafb0ca3-f2d0-4cd2-88b8-26f3b76ce292" end_index="3" portType="0" />
+    <Dynamo.Models.ConnectorModel start="5971debe-4f90-4433-ab2f-9bcbb2f6a99f" start_index="0" end="240464ac-e001-4016-99ec-3ebf3aa14d66" end_index="3" portType="0" />
+    <Dynamo.Models.ConnectorModel start="3534e2a7-813a-40cb-a590-09a64b667028" start_index="0" end="ff944dfc-827d-444d-bbfb-6d684b7dd9e5" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="169be186-82b8-40ea-8626-1c00c5e62e27" start_index="0" end="ff944dfc-827d-444d-bbfb-6d684b7dd9e5" end_index="1" portType="0" />
   </Connectors>
   <Notes>
-    <Dynamo.Models.NoteModel text="Select elements and their analytical model" x="210.208558444768" y="-10.811860733475" />
-    <Dynamo.Models.NoteModel text="This will read the analytical model elements" x="895.725687796833" y="-7.44336807504561" />
-    <Dynamo.Models.NoteModel text="Get the section names" x="522.609174220063" y="234.987989906147" />
-    <Dynamo.Models.NoteModel text="Remove empty elements" x="707.310970133402" y="233.051842359273" />
-    <Dynamo.Models.NoteModel text="Select the catalog to get the sections from" x="208.397042907589" y="335.285709766936" />
-    <Dynamo.Models.NoteModel text="Define the sections" x="916.119122238501" y="231.349755910411" />
-    <Dynamo.Models.NoteModel text="Create frame from lines" x="1232.88438322427" y="-9.62860483957438" />
-    <Dynamo.Models.NoteModel text="Create a DYNAMOSAP structural model" x="1527.22471343327" y="-10.4924132977336" />
-    <Dynamo.Models.NoteModel text="Bake to SAP" x="1964.78182564028" y="-10.4433689879995" />
+    <Dynamo.Models.NoteModel guid="c67d3050-2424-42f2-9036-651872627502" text="Select elements and their analytical model" x="215.443971361261" y="179.408141899093" />
+    <Dynamo.Models.NoteModel guid="b4bb22cb-6504-4fe5-ab33-7fd5e491347b" text="This will read the analytical model elements" x="881.375292461875" y="182.776634557523" />
+    <Dynamo.Models.NoteModel guid="f7a7dd31-e166-44f9-8c66-57f8a91065c5" text="Get the section names" x="527.844587136556" y="425.207992538715" />
+    <Dynamo.Models.NoteModel guid="47f3a59e-7a69-4146-a9c5-3d517ef7bbb0" text="Remove empty elements" x="712.546383049895" y="423.271844991841" />
+    <Dynamo.Models.NoteModel guid="393c5c60-feee-4d06-9d6b-663ae4ad8805" text="Select the catalog to get the sections from" x="213.632455824082" y="525.505712399505" />
+    <Dynamo.Models.NoteModel guid="25a8363c-406c-48fa-8d45-de7c4beee92f" text="Define the sections" x="921.354535154994" y="421.569758542979" />
+    <Dynamo.Models.NoteModel guid="691b5286-0925-4212-ab23-d0d7d41a78bf" text="Create frame from lines" x="1573.10271296319" y="168.680894083752" />
+    <Dynamo.Models.NoteModel guid="a44e3366-0af0-426a-be86-a55338843d72" text="Create a DYNAMOSAP structural model" x="1867.44304317219" y="167.817085625593" />
+    <Dynamo.Models.NoteModel guid="b303e72e-617e-4d42-bcdc-80fba60abe34" text="Bake to SAP" x="2305.0001553792" y="167.866129935327" />
+    <Dynamo.Models.NoteModel guid="7216f690-8dc4-4e0a-8c6d-5c2dfa9abb2a" text="Get angles and if the elements are columns" x="912.772080638696" y="-183.368519790151" />
   </Notes>
+  <Annotations />
 </Workspace>

@@ -575,6 +575,63 @@ namespace DynamoSAP.Structure
             return null;
         }
 
+        /// <summary>
+        ///  Rotation mapper from Revit to SAP
+        /// </summary>
+        /// <param name="RevitAngle">Rotation of the Revit Element</param>
+        /// <param name="isColumn">Specify if it's a column or not</param>
+        /// <returns>Returns the rotation angle required in SAP to match the angle in Revit</returns>
+        public static double RevitToSAPRotationMapper(double RevitAngle, bool isColumn)
+        {
+            double SAPAngle = 0;
+
+            if (isColumn)
+            {
+                if (RevitAngle < 360)
+                {
+                    SAPAngle = 90 - RevitAngle;
+                }
+                else if (RevitAngle < 360)
+                {
+                    SAPAngle = 90 - (RevitAngle % 360);
+                }
+            }
+            else
+            {
+                SAPAngle = -RevitAngle;
+            }
+            return SAPAngle;
+        }
+
+        /// <summary>
+        /// Rotation mapper from SAP to Revit
+        /// </summary>
+        /// <param name="SAPAngle">Rotation of the SAP frame</param>
+        /// <param name="isColumn">Determine if it's a column</param>
+        /// <returns>Returns the rotation angle required in Revit to match the angle in SAP</returns>
+        public static double SAPToRevitRotationMapper(double SAPAngle, bool isColumn)
+        {
+            double RevitAngle = 0;
+
+            if (isColumn)
+            {
+                if (SAPAngle < 360)
+                {
+                    RevitAngle = 90 - SAPAngle;
+                }
+                else if (SAPAngle > 360)
+                {
+                    RevitAngle = 90 - (SAPAngle % 360);
+                }
+            }
+            else
+            {
+                RevitAngle = -SAPAngle;
+            }
+
+
+            return RevitAngle;
+        }
 
         // PRIVATE CONSTRUCTORS
         internal Frame() { }
