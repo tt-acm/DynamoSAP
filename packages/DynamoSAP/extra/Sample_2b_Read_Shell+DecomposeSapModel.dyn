@@ -1,34 +1,37 @@
-<Workspace Version="0.7.5.3566" X="96.1818732255612" Y="299.19989368518" zoom="0.530968442320479" Description="" Category="" Name="Home">
+<Workspace Version="0.9.0.3067" X="-566.342315635002" Y="204.624412125917" zoom="0.720631014978255" Name="Home" Description="" RunType="Manual" RunPeriod="1000" HasRunWithoutCrash="True">
+  <NamespaceResolutionMap />
   <Elements>
-    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="c25b6535-8e7c-44f9-a52d-9fb99f309c21" nickname="Boolean" x="0" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    <DSCoreNodesUI.BoolSelector guid="c25b6535-8e7c-44f9-a52d-9fb99f309c21" type="DSCoreNodesUI.BoolSelector" nickname="Boolean" x="0" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True">
       <System.Boolean>True</System.Boolean>
     </DSCoreNodesUI.BoolSelector>
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="966718c2-c618-46b8-b631-c43a54c669ff" nickname="Read.SAPModel" x="310" y="0" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Assembly.Read.SAPModel@bool" />
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="78fd5aef-bfa0-4295-a51b-893dc17d49a7" nickname="Read.SAPModel" x="218.280076065009" y="456.837282265496" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Assembly.Read.SAPModel@string,bool" />
-    <DSCore.File.Filename type="DSCore.File.Filename" guid="2cba2ae6-570d-42e1-9154-23e31257e598" nickname="File Path" x="9.22810394610201" y="447.70259865255" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
-      <System.String>
-      </System.String>
+    <Dynamo.Nodes.DSFunction guid="966718c2-c618-46b8-b631-c43a54c669ff" type="Dynamo.Nodes.DSFunction" nickname="Read.SAPModel" x="310" y="0" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="..\..\..\bin\AnyCPU\Debug\DynamoSAP.dll" function="DynamoSAP.Assembly.Read.SAPModel@bool" />
+    <Dynamo.Nodes.DSFunction guid="78fd5aef-bfa0-4295-a51b-893dc17d49a7" type="Dynamo.Nodes.DSFunction" nickname="Read.SAPModel" x="218.280076065009" y="456.837282265496" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="..\..\..\bin\AnyCPU\Debug\DynamoSAP.dll" function="DynamoSAP.Assembly.Read.SAPModel@string,bool" />
+    <DSCore.File.Filename guid="2cba2ae6-570d-42e1-9154-23e31257e598" type="DSCore.File.Filename" nickname="File Path" x="9.22810394610201" y="447.70259865255" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True">
+      <System.String>No file selected.</System.String>
     </DSCore.File.Filename>
-    <DSCoreNodesUI.BoolSelector type="DSCoreNodesUI.BoolSelector" guid="d16fbe46-4200-400c-afca-7a37bf58f3da" nickname="Boolean" x="9.22810394610201" y="558.70259865255" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    <DSCoreNodesUI.BoolSelector guid="d16fbe46-4200-400c-afca-7a37bf58f3da" type="DSCoreNodesUI.BoolSelector" nickname="Boolean" x="9.22810394610201" y="558.70259865255" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True">
       <System.Boolean>True</System.Boolean>
     </DSCoreNodesUI.BoolSelector>
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="36b32253-13f6-47ab-9bef-69b45c688c5b" nickname="StructuralModel.Decompose" x="600" y="0" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Decompose@DynamoSAP.Assembly.StructuralModel" />
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="c6ec73e3-9413-4464-b827-a4195d68c727" nickname="Shell.Decompose" x="1149" y="26" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Structure.Shell.Decompose@DynamoSAP.Structure.Shell" />
-    <Dynamo.Nodes.CodeBlockNodeModel type="Dynamo.Nodes.CodeBlockNodeModel" guid="309cf3de-433a-4d64-9d92-a534243d21d0" nickname="Code Block" x="945" y="30.2183333333333" isVisible="true" isUpstreamVisible="true" lacing="Disabled" CodeText="x[0];" ShouldFocus="false" />
-    <Dynamo.Nodes.DSFunction type="Dynamo.Nodes.DSFunction" guid="398af6ae-6adc-4f34-83f0-ef85184f37bb" nickname="ShellProp.Decompose" x="1417" y="78" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="DynamoSAP.dll" function="DynamoSAP.Definitions.ShellProp.Decompose@DynamoSAP.Definitions.ShellProp" />
+    <Dynamo.Nodes.DSFunction guid="36b32253-13f6-47ab-9bef-69b45c688c5b" type="Dynamo.Nodes.DSFunction" nickname="StructuralModel.Decompose" x="600" y="0" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="..\..\..\bin\AnyCPU\Debug\DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Decompose@DynamoSAP.Assembly.StructuralModel" />
+    <Dynamo.Nodes.DSFunction guid="c6ec73e3-9413-4464-b827-a4195d68c727" type="Dynamo.Nodes.DSFunction" nickname="Shell.Decompose" x="1149" y="26" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="..\..\..\bin\AnyCPU\Debug\DynamoSAP.dll" function="DynamoSAP.Structure.Shell.Decompose@DynamoSAP.Structure.Shell" />
+    <Dynamo.Nodes.DSFunction guid="398af6ae-6adc-4f34-83f0-ef85184f37bb" type="Dynamo.Nodes.DSFunction" nickname="ShellProp.Decompose" x="1417" y="78" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="..\..\..\bin\AnyCPU\Debug\DynamoSAP.dll" function="DynamoSAP.Definitions.ShellProp.Decompose@DynamoSAP.Definitions.ShellProp" />
   </Elements>
   <Connectors>
     <Dynamo.Models.ConnectorModel start="c25b6535-8e7c-44f9-a52d-9fb99f309c21" start_index="0" end="966718c2-c618-46b8-b631-c43a54c669ff" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="966718c2-c618-46b8-b631-c43a54c669ff" start_index="0" end="36b32253-13f6-47ab-9bef-69b45c688c5b" end_index="0" portType="0" />
-    <Dynamo.Models.ConnectorModel start="36b32253-13f6-47ab-9bef-69b45c688c5b" start_index="1" end="309cf3de-433a-4d64-9d92-a534243d21d0" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="36b32253-13f6-47ab-9bef-69b45c688c5b" start_index="1" end="c6ec73e3-9413-4464-b827-a4195d68c727" end_index="0" portType="0" />
     <Dynamo.Models.ConnectorModel start="c6ec73e3-9413-4464-b827-a4195d68c727" start_index="2" end="398af6ae-6adc-4f34-83f0-ef85184f37bb" end_index="0" portType="0" />
-    <Dynamo.Models.ConnectorModel start="309cf3de-433a-4d64-9d92-a534243d21d0" start_index="0" end="c6ec73e3-9413-4464-b827-a4195d68c727" end_index="0" portType="0" />
   </Connectors>
   <Notes>
-    <Dynamo.Models.NoteModel text="Grabs open SAP instance" x="305.400319803066" y="-112.353144730148" />
-    <Dynamo.Models.NoteModel text="OR Browse existing Simple Shell Structure SAP Model" x="238.340672301377" y="360.491663182563" />
-    <Dynamo.Models.NoteModel text="Decompose Structural Model" x="642.198827388758" y="-112.88654913083" />
-    <Dynamo.Models.NoteModel text="Decompose Shell" x="1151.09788214719" y="-118.582832144488" />
-    <Dynamo.Models.NoteModel text="Decompose Shell Property" x="1419.37695850347" y="-96.65282155769" />
+    <Dynamo.Models.NoteModel guid="bca2f179-cc48-427d-9540-167346f737e5" text="Grabs open SAP instance" x="305.400319803066" y="-112.353144730148" />
+    <Dynamo.Models.NoteModel guid="d9fde80e-45df-46c5-b2f5-890d3759fb6d" text="OR Browse existing Simple Shell Structure SAP Model" x="238.340672301377" y="360.491663182563" />
+    <Dynamo.Models.NoteModel guid="617b525c-6862-4a5b-a5e1-8675a956f0f4" text="Decompose Structural Model" x="642.198827388758" y="-112.88654913083" />
+    <Dynamo.Models.NoteModel guid="954a882e-90f1-4c16-8049-94c48e01b302" text="Decompose Shell" x="1151.09788214719" y="-118.582832144488" />
+    <Dynamo.Models.NoteModel guid="1fe95d6b-03d4-47ba-8740-cd48dad479f2" text="Decompose Shell Property" x="1419.37695850347" y="-96.65282155769" />
   </Notes>
+  <Annotations />
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="-16.7855972058438" eyeY="34.8380239436895" eyeZ="53.4461000621298" lookX="13.1037104639923" lookY="-14.1956863359916" lookZ="-63.3346005759625" upX="0" upY="1" upZ="0" />
+  </Cameras>
 </Workspace>

@@ -74,11 +74,17 @@ namespace DynamoSAP.Structure
         /// <param name="Justification">Justification of the frame</param>
         /// <param name="Rotation">Angle rotation of the frame</param>
         /// <returns>Frame with all the properties set up by the inputs</returns>
+        [RegisterForTrace]
         public static Frame FromLine(Line Line, SectionProp SectionProp, string Justification = "MiddleCenter", double Rotation = 0)
         {
             Frame tFrm;
             FrmID tFrmid = null;
-                //TraceUtils.GetTraceData(TRACE_ID) as FrmID;
+
+            Dictionary<string, ISerializable> getObjs = TraceUtils.GetObjectFromTLS();
+            foreach (var k in getObjs.Keys)
+            {
+                tFrmid = getObjs[k] as FrmID;
+            }
 
             if (tFrmid == null)
             {
@@ -98,7 +104,9 @@ namespace DynamoSAP.Structure
             }
 
             //Set the trace data on the return to be this Frame
-            //TraceUtils.SetTraceData(TRACE_ID, new FrmID { IntID = tFrm.ID });
+            Dictionary<string, ISerializable> objs = new Dictionary<string, ISerializable>();
+            objs.Add(TRACE_ID, new FrmID { IntID = tFrm.ID });
+            TraceUtils.SetObjectToTLS(objs);
 
             return tFrm;
         }
@@ -117,12 +125,8 @@ namespace DynamoSAP.Structure
         {
             Frame tFrm;
             FrmID tFrmid = null;
-                //TraceUtils.GetTraceData(TRACE_ID) as FrmID;
 
             Dictionary<string, ISerializable> getObjs = TraceUtils.GetObjectFromTLS();
-
-            JointID tJointId = null;
-
             foreach (var k in getObjs.Keys)
             {
                 tFrmid = getObjs[k] as FrmID;
@@ -146,8 +150,6 @@ namespace DynamoSAP.Structure
             }
 
             //Set the trace data on the return to be this Frame
-            //TraceUtils.SetTraceData(TRACE_ID, new FrmID { IntID = tFrm.ID });
-
             Dictionary<string, ISerializable> objs = new Dictionary<string, ISerializable>();
             objs.Add(TRACE_ID, new FrmID { IntID = tFrm.ID });
             TraceUtils.SetObjectToTLS(objs);
@@ -161,6 +163,7 @@ namespace DynamoSAP.Structure
         /// <param name="Frame">Frame to set up releases of</param>
         /// <param name="Release">Use the Release node</param>
         /// <returns>The frame with the new releases</returns>
+        [RegisterForTrace]
         public static Frame SetReleases(Frame Frame, Release Release)
         {
             // Create a new Frame using the properties of the input frame
@@ -181,6 +184,7 @@ namespace DynamoSAP.Structure
         /// <param name="Load">Load to apply to the frame</param>
         /// <param name="replaceExisting">Set Boolean to True to replace existing Loads on the Frame</param>
         /// <returns>The frame with the new loads(and the previous ones, if it applies)</returns>
+        [RegisterForTrace]
         public static Frame SetLoad(Frame Frame, Load Load, bool replaceExisting = false)
         {
             // Create a new Frame using the properties of the input frame
@@ -220,6 +224,7 @@ namespace DynamoSAP.Structure
         /// <param name="frame">Frame to display the releases on (if any)</param>
         /// <param name="radius">Radius of the spheres </param>
         /// <returns>Spheres representing the Releases</returns>
+        [RegisterForTrace]
         public static List<Sphere> DisplayReleases(Frame frame, double radius = 10.0)
         {
             List<Sphere> rSpheres = new List<Sphere>();
@@ -245,6 +250,7 @@ namespace DynamoSAP.Structure
         /// <param name="ShowValues">Set Boolean to True to show the tags of the numeric values</param>
         /// <param name="TextSize">Size of the tags</param>
         /// <returns>Arrows and tags representing the loads</returns>
+        [RegisterForTrace]
         public static List<List<Object>> DisplayLoads(StructuralModel StructuralModel, string LPattern = "Show All", double Size = 1.0, bool ShowValues = true, double TextSize = 1.0)
         {
             //List to hold all the load visualization objects
@@ -650,7 +656,6 @@ namespace DynamoSAP.Structure
             return RevitAngle;
         }
 
-        // PRIVATE CONSTRUCTORS
         internal Frame() { }
         internal Frame(Line line, SectionProp secProp, string just, double angle)
         {

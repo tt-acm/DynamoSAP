@@ -73,11 +73,17 @@ namespace DynamoSAP.Structure
         /// <param name="Mesh">Dynamo Mesh</param>
         /// <param name="ShellProp">Shell Property</param>
         /// <returns></returns>
+        [RegisterForTrace]
         public static Shell FromMesh(Mesh Mesh, ShellProp ShellProp)
         {
             Shell tShell;
             ShellID tShellid = null;
             //TraceUtils.GetTraceData(TRACE_ID) as ShellID;
+            Dictionary<string, ISerializable> getObjs = TraceUtils.GetObjectFromTLS();
+            foreach (var k in getObjs.Keys)
+            {
+                tShellid = getObjs[k] as ShellID;
+            }
 
             if (tShellid == null)
             {
@@ -96,6 +102,9 @@ namespace DynamoSAP.Structure
 
             // Set the trace data on the return to be this Shell
             //TraceUtils.SetTraceData(TRACE_ID, new ShellID { IntID = tShell.ID });
+            Dictionary<string, ISerializable> objs = new Dictionary<string, ISerializable>();
+            objs.Add(TRACE_ID, new ShellID { IntID = tShell.ID });
+            TraceUtils.SetObjectToTLS(objs);
 
             return tShell;
         }
@@ -106,13 +115,20 @@ namespace DynamoSAP.Structure
         /// <param name="Surface">Dynamo Surface</param>
         /// <param name="ShellProp">Shell Property </param>
         /// <returns></returns>
+        [RegisterForTrace]
         public static Shell FromSurface(Surface Surface, ShellProp ShellProp)
         {
             // TODO: IsPlanar logic should be added here! HANDLETHE ERROR.
             Shell tShell;
             ShellID tShellid = null;
                 //TraceUtils.GetTraceData(TRACE_ID) as ShellID;
-           
+
+            Dictionary<string, ISerializable> getObjs = TraceUtils.GetObjectFromTLS();
+            foreach (var k in getObjs.Keys)
+            {
+                tShellid = getObjs[k] as ShellID;
+            }
+
             if (tShellid == null)
             {
                 // trace cache log didnoy return an objec, create new one !
@@ -130,6 +146,9 @@ namespace DynamoSAP.Structure
 
             // Set the trace data on the return to be this Shell
             //TraceUtils.SetTraceData(TRACE_ID, new ShellID { IntID = tShell.ID });
+            Dictionary<string, ISerializable> objs = new Dictionary<string, ISerializable>();
+            objs.Add(TRACE_ID, new ShellID { IntID = tShell.ID });
+            TraceUtils.SetObjectToTLS(objs);
 
             return tShell;
         }
