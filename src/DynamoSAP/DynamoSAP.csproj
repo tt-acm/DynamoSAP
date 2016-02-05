@@ -13,8 +13,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DynamoSAP</RootNamespace>
     <AssemblyName>DynamoSAP</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -27,6 +28,7 @@
     <RegisterForComInterop>false</RegisterForComInterop>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>$(OutputPath)\DynamoSAP.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,27 +38,28 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>$(OutputPath)\DynamoSAP.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DynamoServices">
-      <HintPath>$(DYNAMO_API)\DynamoServices.dll</HintPath>
+    <Reference Include="DynamoCore">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.9\DynamoCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DynamoUnits">
-      <HintPath>$(DYNAMO_API)\DynamoUnits.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.9\DynamoUnits.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="ProtoCore">
-      <HintPath>$(DYNAMO_API)\ProtoCore.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.9\ProtoCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ProtoGeometry">
-      <HintPath>$(DYNAMO_API)\ProtoGeometry.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.9\ProtoGeometry.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ProtoInterface">
-      <HintPath>$(DYNAMO_API)\ProtoInterface.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.9\ProtoInterface.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SAP2000v16">
@@ -107,7 +110,7 @@
   <PropertyGroup>
     <PostBuildEvent>copy "$(ProjectDir)\DynamoSAP_DynamoCustomization.xml" "$(TargetDir)\DynamoSAP_DynamoCustomization.xml"</PostBuildEvent>
   </PropertyGroup>
-    <Target Name="AfterBuild">
+  <Target Name="AfterBuild">
     <ItemGroup>
       <Dlls Include="$(OutDir)*.dll" />
       <Pdbs Include="$(OutDir)*.pdb" />

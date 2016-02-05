@@ -7,10 +7,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
-using Dynamo.Models;
+using DSCoreNodesUI;
 using SAP2000v16;
 using Dynamo.Utilities;
-using DSCoreNodesUI;
 using Dynamo.Nodes;
 using ProtoCore.AST.AssociativeAST;
 
@@ -22,6 +21,7 @@ namespace DynamoSAP_UI
     [IsDesignScriptCompatible]
     public class LoadPatternTypes : DSDropDownBase
     {
+        
         public LoadPatternTypes() : base(">") { }
 
         public override void PopulateItems()

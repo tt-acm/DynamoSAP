@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization;
 
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
@@ -17,16 +18,17 @@ using SAP2000v16;
 using SAPConnection;
 using DynamoSAP.Assembly;
 using DynamoSAP.Definitions;
+using ProtoCore.Lang;
 
 namespace DynamoSAP.Structure
 {
-    [DynamoServices.RegisterForTrace]
+   // [RegisterForTrace]
     public class Joint:Element
     {
         //FIELD
         internal Point BasePt { get; set; }
         internal Restraint JointRestraint { get; set; }
-
+        
        
         //QUERY NODES
 
@@ -51,10 +53,20 @@ namespace DynamoSAP.Structure
         /// </summary>
         /// <param name="Point"></param>
         /// <returns></returns>
+        [RegisterForTrace]
         public static Joint FromPoint(Point Point)
         {
             Joint tJoint;
-            JointID tJointId = DynamoServices.TraceUtils.GetTraceData(TRACE_ID) as JointID;
+            //JointID tJointId = TraceUtils.GetTraceData(TRACE_ID) as JointID;
+              
+            Dictionary<string, ISerializable> getObjs= TraceUtils.GetObjectFromTLS();
+
+            JointID tJointId = null;
+
+            foreach (var k in getObjs.Keys)
+            {
+                tJointId = getObjs[k] as JointID;
+            }
 
             if (tJointId == null)
             {
@@ -71,7 +83,10 @@ namespace DynamoSAP.Structure
             }
 
             //Set the trace data on the return to be this Joint
-            DynamoServices.TraceUtils.SetTraceData(TRACE_ID, new JointID { IntID = tJoint.ID });
+
+            Dictionary<string, ISerializable> objs = new Dictionary<string, ISerializable>();
+            objs.Add(TRACE_ID, new JointID { IntID = tJoint.ID });
+            TraceUtils.SetObjectToTLS(objs);
             
             return tJoint;
         }
@@ -92,16 +107,6 @@ namespace DynamoSAP.Structure
             newJoint.JointRestraint = Restraint;
            return newJoint;
         }
-
-        //public static Joint SetJointForce ( Joint Joint, bool replaceExisting = false)
-        //{
-        //    if (replaceExisting)
-        //    {
-                
-        //    }
-
-        //    return Joint;
-        //}
 
         //PRIVATE CONSTRUCTORS
         internal Joint(){}

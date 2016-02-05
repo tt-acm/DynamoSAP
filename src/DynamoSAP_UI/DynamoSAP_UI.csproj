@@ -13,8 +13,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DynamoSAP_UI</RootNamespace>
     <AssemblyName>DynamoSAP_UI</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,18 +34,23 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DSCoreNodesUI">
-      <HintPath>$(DYNAMO_API)\nodes\DSCoreNodesUI.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.9\nodes\DSCoreNodesUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DynamoCore">
-      <HintPath>$(DYNAMO_API)\DynamoCore.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.9\DynamoCore.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DynamoUtilities">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.9\DynamoUtilities.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ProtoCore">
-      <HintPath>$(DYNAMO_API)\ProtoCore.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.9\ProtoCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SAP2000v16">

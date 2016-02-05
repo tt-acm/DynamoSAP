@@ -6,11 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization;
 
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
-
+using ProtoCore.Lang;
 
 //SAP
 using SAP2000v16;
@@ -20,7 +21,7 @@ using DynamoSAP.Definitions;
 
 namespace DynamoSAP.Structure
 {
-    [DynamoServices.RegisterForTrace]
+    //[RegisterForTrace]
     public class Frame : Element
     {
         // FIELDS
@@ -76,7 +77,8 @@ namespace DynamoSAP.Structure
         public static Frame FromLine(Line Line, SectionProp SectionProp, string Justification = "MiddleCenter", double Rotation = 0)
         {
             Frame tFrm;
-            FrmID tFrmid = DynamoServices.TraceUtils.GetTraceData(TRACE_ID) as FrmID;
+            FrmID tFrmid = null;
+                //TraceUtils.GetTraceData(TRACE_ID) as FrmID;
 
             if (tFrmid == null)
             {
@@ -96,7 +98,7 @@ namespace DynamoSAP.Structure
             }
 
             //Set the trace data on the return to be this Frame
-            DynamoServices.TraceUtils.SetTraceData(TRACE_ID, new FrmID { IntID = tFrm.ID });
+            //TraceUtils.SetTraceData(TRACE_ID, new FrmID { IntID = tFrm.ID });
 
             return tFrm;
         }
@@ -110,10 +112,21 @@ namespace DynamoSAP.Structure
         /// <param name="Justification">Justification of the frame</param>
         /// <param name="Rotation">Angle rotation of the frame</param>
         /// <returns>Frame with all the properties set up by the inputs</returns>
+        [RegisterForTrace]
         public static Frame FromEndPoints(Point i, Point j, SectionProp SectionProp, string Justification = "MiddleCenter", double Rotation = 0)
         {
             Frame tFrm;
-            FrmID tFrmid = DynamoServices.TraceUtils.GetTraceData(TRACE_ID) as FrmID;
+            FrmID tFrmid = null;
+                //TraceUtils.GetTraceData(TRACE_ID) as FrmID;
+
+            Dictionary<string, ISerializable> getObjs = TraceUtils.GetObjectFromTLS();
+
+            JointID tJointId = null;
+
+            foreach (var k in getObjs.Keys)
+            {
+                tFrmid = getObjs[k] as FrmID;
+            }
 
             if (tFrmid == null)
             {
@@ -133,7 +146,11 @@ namespace DynamoSAP.Structure
             }
 
             //Set the trace data on the return to be this Frame
-            DynamoServices.TraceUtils.SetTraceData(TRACE_ID, new FrmID { IntID = tFrm.ID });
+            //TraceUtils.SetTraceData(TRACE_ID, new FrmID { IntID = tFrm.ID });
+
+            Dictionary<string, ISerializable> objs = new Dictionary<string, ISerializable>();
+            objs.Add(TRACE_ID, new FrmID { IntID = tFrm.ID });
+            TraceUtils.SetObjectToTLS(objs);
 
             return tFrm;
         }
