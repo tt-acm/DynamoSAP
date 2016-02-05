@@ -310,10 +310,10 @@ namespace DynamoSAP.Assembly
                 }
 
             }
-            else // modify the existing
+           else // modify the existing
             {
-                string id = j.Label;
-                StructureMapper.CreateorUpdateJoint(ref mySapModel, j.BasePt, ref id, true, SF);
+               string id = j.Label;
+               StructureMapper.CreateorUpdateJoint(ref mySapModel, j.BasePt, ref id, true, SF);
             }
 
             // 2. Assigns Restraints to Node
@@ -689,10 +689,13 @@ namespace DynamoSAP.Assembly
 
 
             // refresh View 
-            SAPConnection.StructureMapper.RefreshView(ref mySapModel);
+            //SAPConnection.StructureMapper.RefreshView(ref mySapModel);
 
             // Delete unconnected points at the SAP
             SAPConnection.StructureMapper.DeleteUnconnectedPts(ref mySapModel);
+
+            // refresh View 
+            SAPConnection.StructureMapper.RefreshView(ref mySapModel);
 
             //if can't set to null, will be a hanging process
             mySapModel = null;

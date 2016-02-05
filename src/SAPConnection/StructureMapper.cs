@@ -35,17 +35,53 @@ namespace SAPConnection
             }
             else
             {
-                // update location
+                // update location if coordinates have been changed
                 string startPoint = string.Empty;
                 string endPoint = string.Empty;
-                //long ret = Model.FrameObj.GetPoints(Id, ref startPoint, ref endPoint);
+                long ret = Model.FrameObj.GetPoints(Id, ref startPoint, ref endPoint);
                 //ret = Model.EditPoint.ChangeCoordinates(startPoint, iX, iY, iZ);
                 //ret = Model.EditPoint.ChangeCoordinates(endPoint, jX, jY, jZ);
 
-                long ret = Model.PointObj.AddCartesian(iX, iY, iZ, ref startPoint);
-                ret = Model.PointObj.AddCartesian(jX, jY, jZ, ref endPoint);
-                ret = Model.EditFrame.ChangeConnectivity(Id, startPoint, endPoint);
-                
+                string iPoint = string.Empty;
+                string jPoint = string.Empty;
+
+                // update start point
+                double startX = 0;
+                double startY= 0;
+                double startZ = 0;
+                ret = Model.PointObj.GetCoordCartesian(startPoint, ref startX, ref startY, ref startZ);
+                if (iX != startX || iY!= startY || iZ != startZ)
+                {
+                    ret = Model.PointObj.AddCartesian(iX, iY, iZ, ref iPoint);
+                }
+                else // nothing change  at this end but pass the exsiting point name
+                {
+                    iPoint = startPoint;
+                }
+
+                // update end point
+                double endX = 0;
+                double endY = 0;
+                double endZ = 0;
+                ret = Model.PointObj.GetCoordCartesian(endPoint, ref endX, ref endY, ref endZ);
+                if (jX != endX || jY != endY || jZ != endZ)
+                {
+                    ret = Model.PointObj.AddCartesian(jX, jY, jZ, ref jPoint);
+                }
+                else // nothing change at this end but pass the exsiting point name
+                {
+                    jPoint = endPoint;
+                }
+
+               // ret = Model.PointObj.AddCartesian(iX, iY, iZ, ref startPoint);
+               //ret = Model.PointObj.AddCartesian(jX, jY, jZ, ref endPoint);
+               // ret = Model.EditFrame.ChangeConnectivity(Id, startPoint, endPoint);
+                if (iPoint != startPoint || jPoint != endPoint)
+                {
+                    ret = Model.EditFrame.ChangeConnectivity(Id, iPoint, jPoint);
+                }
+               
+
                 if (ret == 1) error = string.Format("Error updating frame{0}", Id);
 
             }
@@ -249,10 +285,25 @@ namespace SAPConnection
                 string dummy = string.Empty;
                 long ret = Model.PointObj.AddCartesian(pt.X * SF, pt.Y * SF, pt.Z * SF, ref dummy);
                 Id = dummy;
+                ret = Model.PointObj.SetSpecialPoint(Id, true);
             }
             else
-            {
-                long ret = Model.EditPoint.ChangeCoordinates_1(Id, pt.X * SF, pt.Y * SF, pt.Z * SF);
+            {  // get coordinates and compare 
+                double jx = 0;
+                double jy = 0;
+                double jz = 0;
+                long ret = Model.PointObj.GetCoordCartesian(Id, ref jx, ref jy, ref jz);
+                
+                if (pt.X != jx || pt.Y != jy || pt.Z != jz)
+                {
+                    string dummy = string.Empty;
+                    ret = Model.PointObj.AddCartesian(pt.X , pt.Y , pt.Z , ref dummy); // it will return existing if exits
+                    if (dummy != Id)
+                    {
+                        ret = Model.EditPoint.ChangeCoordinates(Id, pt.X, pt.Y , pt.Z); // this does the trick and delete the old one
+                        ret = Model.PointObj.ChangeName(dummy, Id);
+                    }
+                }
             }
         }
 
@@ -536,6 +587,7 @@ namespace SAPConnection
         /// <param name="Label"></param>
         public static void DeleteJoint(ref cSapModel Model, string Label, ref string error)
         {
+            Model.PointObj.SetSpecialPoint(Label, false);
             long ret = Model.PointObj.DeleteSpecialPoint(Label);
             if (ret == 1) error = string.Format("Error deleting joint {0}", Label);
         }
