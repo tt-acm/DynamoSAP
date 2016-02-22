@@ -37,8 +37,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DSCoreNodesUI">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.9\nodes\DSCoreNodesUI.dll</HintPath>
+    <Reference Include="CoreNodeModels">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.9\nodes\CoreNodeModels.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DynamoCore">

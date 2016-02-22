@@ -7,19 +7,19 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
-using DSCoreNodesUI;
+using CoreNodeModels;
 using SAP2000v16;
 using Dynamo.Utilities;
-using Dynamo.Nodes;
+using Dynamo.Graph.Nodes;
 using ProtoCore.AST.AssociativeAST;
 
 namespace DynamoSAP_UI
 {
-	[NodeName("LoadPatternTypes")]
-    [NodeCategory("DynamoSAP.Definitions.LoadPattern")]
-    [NodeDescription("Select Load Pattern type to use with Set Load Pattern node")]
-    [IsDesignScriptCompatible]
-    public class LoadPatternTypes : DSDropDownBase
+    [NodeNameAttribute("LoadPatternTypes")]
+    [NodeCategoryAttribute("DynamoSAP.Definitions.LoadPattern")]
+    [NodeDescriptionAttribute("Select Load Pattern type to use with Set Load Pattern node")]
+    [IsDesignScriptCompatibleAttribute]
+    public class LoadPatternTypes : CoreNodeModels.DSDropDownBase
     {
         
         public LoadPatternTypes() : base(">") { }
