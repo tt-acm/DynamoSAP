@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DynamoCore">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo 0.9\DynamoCore.dll</HintPath>
+      <HintPath>$(DYNAMO_API)\DynamoCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DynamoSAP, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -58,15 +58,15 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitServices">
-      <HintPath>$(DYNAMO_API)\$(REVIT_VERSION)\RevitServices.dll</HintPath>
+      <HintPath>$(DYNAMO_API)\Revit_2015\RevitServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitTestFrameworkTypes">
-      <HintPath>$(DYNAMO_API)\$(REVIT_VERSION)\RevitTestFrameworkTypes.dll</HintPath>
+      <HintPath>$(DYNAMO_API)\Revit_2015\RevitTestFrameworkTypes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitTestServices">
-      <HintPath>$(DYNAMO_API)\$(REVIT_VERSION)\RevitTestServices.dll</HintPath>
+      <HintPath>$(DYNAMO_API)\Revit_2015\RevitTestServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SAP2000v16">

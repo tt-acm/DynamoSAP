@@ -4,8 +4,8 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <OutputPath Condition="'$(OutputPath)' == ''">$(SolutionDir)..\bin\$(Platform)\$(Configuration)</OutputPath>
     <NunitPath Condition="'$(NunitPath)' == ''">$(SolutionDir)..\extern\NUnit</NunitPath>
-    <REVIT_API Condition="'$(REVIT_API)' == ''">C:\Program Files\Autodesk\Revit 2014</REVIT_API>
-    <DYNAMO_API Condition="'$(DYNAMO_API)' == ''">C:\Program Files\Dynamo 0.8</DYNAMO_API>
+    <REVIT_API Condition="'$(REVIT_API)' == ''">C:\Program Files\Autodesk\Revit 2015</REVIT_API>
+    <DYNAMO_API Condition="'$(DYNAMO_API)' == ''">C:\Program Files\Dynamo 0.9</DYNAMO_API>
     <SAP2000v16_API Condition="'$(SAP2000v16_API)' == ''">C:\Program Files (x86)\Computers and Structures\SAP2000 16</SAP2000v16_API>
     <REVIT_VERSION>Revit_2014</REVIT_VERSION>
     <BaseIntermediateOutputPath>$(OutputPath)\int\</BaseIntermediateOutputPath>
@@ -20,8 +20,8 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <OutputPath Condition="'$(OutputPath)' == ''">$(SolutionDir)..\bin\$(Platform)\$(Configuration)</OutputPath>
     <NunitPath Condition="'$(NunitPath)' == ''">$(SolutionDir)..\extern\NUnit</NunitPath>
-    <REVIT_API Condition="'$(REVIT_API)' == ''">C:\Program Files\Autodesk\Revit 2014</REVIT_API>
-    <DYNAMO_API Condition="'$(DYNAMO_API)' == ''">C:\Program Files\Dynamo 0.8</DYNAMO_API>
+    <REVIT_API Condition="'$(REVIT_API)' == ''">C:\Program Files\Autodesk\Revit 2015</REVIT_API>
+    <DYNAMO_API Condition="'$(DYNAMO_API)' == ''">C:\Program Files\Dynamo 0.9</DYNAMO_API>
     <SAP2000v16_API Condition="'$(SAP2000v16_API)' == ''">C:\Program Files (x86)\Computers and Structures\SAP2000 16</SAP2000v16_API>
     <REVIT_VERSION>Revit_2014</REVIT_VERSION>
     <BaseIntermediateOutputPath>$(OutputPath)\int\</BaseIntermediateOutputPath>
