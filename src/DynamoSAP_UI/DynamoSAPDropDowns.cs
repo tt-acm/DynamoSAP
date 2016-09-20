@@ -1,17 +1,19 @@
 ﻿/// Developed by Thornton Tomasetti's CORE Studio for Autodesk
 /// http://core.thorntontomasetti.com
-/// CORE Developers: Elcin Ertugrul and Ana Garcia Puyol
+/// COREstudio Developers: Elcin Ertugrul and Ana Garcia Puyol
 
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
-using CoreNodeModels;
+
+//using CoreNodeModels;
 using SAP2000v16;
 using Dynamo.Utilities;
 using Dynamo.Graph.Nodes;
 using ProtoCore.AST.AssociativeAST;
+using CoreNodeModels;
 
 namespace DynamoSAP_UI
 {
@@ -19,12 +21,12 @@ namespace DynamoSAP_UI
     [NodeCategoryAttribute("DynamoSAP.Definitions.LoadPattern")]
     [NodeDescriptionAttribute("Select Load Pattern type to use with Set Load Pattern node")]
     [IsDesignScriptCompatibleAttribute]
-    public class LoadPatternTypes : CoreNodeModels.DSDropDownBase
+    public class LoadPatternTypes : DSDropDownBase
     {
         
         public LoadPatternTypes() : base(">") { }
 
-        public override void PopulateItems()
+        protected override SelectionState PopulateItemsCore(string currentSelection)
         {
             //clear items
             Items.Clear();
@@ -39,6 +41,7 @@ namespace DynamoSAP_UI
 
             //set the selected index to 0
             SelectedIndex = 0;
+            return SelectionState.Done;
         }
         public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
         {
@@ -59,7 +62,7 @@ namespace DynamoSAP_UI
     {
         public LoadCaseTypes() : base(">") { }
 
-        public override void PopulateItems()
+        protected override SelectionState PopulateItemsCore(string currentSelection)
         {
             //clear items
             Items.Clear();
@@ -74,6 +77,7 @@ namespace DynamoSAP_UI
 
             //set the selected index to 0
             SelectedIndex = 0;
+            return SelectionState.Done;
         }
         public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
         {
@@ -94,7 +98,7 @@ namespace DynamoSAP_UI
     {
        public LoadComboTypes() : base(">") { }
 
-        public override void PopulateItems()
+       protected override SelectionState PopulateItemsCore(string currentSelection)
         {
             //clear items
             Items.Clear();
@@ -109,6 +113,7 @@ namespace DynamoSAP_UI
 
             //set the selected index to 0
             SelectedIndex = 0;
+            return SelectionState.Done;
         }
         public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
         {
@@ -129,7 +134,7 @@ namespace DynamoSAP_UI
     {
        public CoordinateSystem() : base(">") { }
 
-        public override void PopulateItems()
+       protected override SelectionState PopulateItemsCore(string currentSelection)
         {
             //clear items
             Items.Clear();
@@ -144,6 +149,7 @@ namespace DynamoSAP_UI
 
             //set the selected index to 0
             SelectedIndex = 0;
+            return SelectionState.Done;
         }
         public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
         {
@@ -165,7 +171,7 @@ namespace DynamoSAP_UI
     {
        public LoadDirection() : base(">") { }
 
-        public override void PopulateItems()
+       protected override SelectionState PopulateItemsCore(string currentSelection)
         {
             //clear items
             Items.Clear();
@@ -180,6 +186,7 @@ namespace DynamoSAP_UI
 
             //set the selected index to 0
             SelectedIndex = 0;
+            return SelectionState.Done;
         }
         public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
         {
@@ -201,7 +208,7 @@ namespace DynamoSAP_UI
     {
        public LoadType() : base(">") { }
 
-        public override void PopulateItems()
+       protected override SelectionState PopulateItemsCore(string currentSelection)
         {
             //clear items
             Items.Clear();
@@ -216,6 +223,7 @@ namespace DynamoSAP_UI
 
             //set the selected index to 0
             SelectedIndex = 0;
+            return SelectionState.Done;
         }
         public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
         {
@@ -236,7 +244,7 @@ namespace DynamoSAP_UI
     {
         public JustificationTypes() : base(">") { }
 
-        public override void PopulateItems()
+        protected override SelectionState PopulateItemsCore(string currentSelection)
         {
             //clear items
             Items.Clear();
@@ -251,6 +259,7 @@ namespace DynamoSAP_UI
 
             //set the selected index to 0
             SelectedIndex = 0;
+            return SelectionState.Done;
         }
         public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
         {
@@ -312,7 +321,7 @@ namespace DynamoSAP_UI
     {
         public ForceTypes() : base(">") { }
 
-        public override void PopulateItems()
+        protected override SelectionState PopulateItemsCore(string currentSelection)
         {
             //clear items
             Items.Clear();
@@ -327,6 +336,7 @@ namespace DynamoSAP_UI
 
             //set the selected index to 0
             SelectedIndex = 0;
+            return SelectionState.Done;
         }
         public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
         {
@@ -358,7 +368,7 @@ namespace DynamoSAP_UI
     {
        public SectionCatalogs() : base(">") { }
 
-        public override void PopulateItems()
+       protected override SelectionState PopulateItemsCore(string currentSelection)
         {
             //clear items
             Items.Clear();
@@ -373,6 +383,7 @@ namespace DynamoSAP_UI
 
             //set the selected index to 0
             SelectedIndex = 0;
+            return SelectionState.Done;
         }
         public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
         {
@@ -420,7 +431,7 @@ namespace DynamoSAP_UI
     {
         public Materials() : base(">") { }
 
-        public override void PopulateItems()
+        protected override SelectionState PopulateItemsCore(string currentSelection)
         {
             //clear items
             Items.Clear();
@@ -435,6 +446,7 @@ namespace DynamoSAP_UI
 
             //set the selected index to 0
             SelectedIndex = 0;
+            return SelectionState.Done;
         }
         public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
         {
@@ -468,7 +480,7 @@ namespace DynamoSAP_UI
     {
         public Units() : base(">") { }
 
-        public override void PopulateItems()
+        protected override SelectionState PopulateItemsCore(string currentSelection)
         {
             //clear items
             Items.Clear();
@@ -483,6 +495,7 @@ namespace DynamoSAP_UI
 
             //set the selected index to 0
             SelectedIndex = 0;
+            return SelectionState.Done;
         }
         public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
         {
@@ -503,7 +516,7 @@ namespace DynamoSAP_UI
     {
         public ShellTypes() : base(">") { }
 
-        public override void PopulateItems()
+        protected override SelectionState PopulateItemsCore(string currentSelection)
         {
             //clear items
             Items.Clear();
@@ -518,6 +531,7 @@ namespace DynamoSAP_UI
 
             //set the selected index to 0
             SelectedIndex = 0;
+            return SelectionState.Done;
         }
         public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
         {

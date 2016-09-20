@@ -1,6 +1,6 @@
 ﻿/// Developed by Thornton Tomasetti's CORE Studio for Autodesk
 /// http://core.thorntontomasetti.com
-/// CORE Developers: Elcin Ertugrul and Ana Garcia Puyol
+/// COREstudio Developers: Elcin Ertugrul and Ana Garcia Puyol
 
 using System;
 using System.Collections.Generic;
@@ -9,16 +9,17 @@ using System.Text;
 using System.Runtime.Serialization;
 
 //DYNAMO
+using DynamoSAP.Assembly;
+using DynamoSAP.Definitions;
+using ProtoCore.Lang;
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
-
+using DynamoServices;
 
 //SAP
 using SAP2000v16;
 using SAPConnection;
-using DynamoSAP.Assembly;
-using DynamoSAP.Definitions;
-using ProtoCore.Lang;
+
 
 namespace DynamoSAP.Structure
 {
@@ -59,7 +60,7 @@ namespace DynamoSAP.Structure
             Joint tJoint;
             //JointID tJointId = TraceUtils.GetTraceData(TRACE_ID) as JointID;
               
-            Dictionary<string, ISerializable> getObjs= TraceUtils.GetObjectFromTLS();
+            Dictionary<string, ISerializable> getObjs= ProtoCore.Lang.TraceUtils.GetObjectFromTLS();
 
             JointID tJointId = null;
 
@@ -86,7 +87,7 @@ namespace DynamoSAP.Structure
 
             Dictionary<string, ISerializable> objs = new Dictionary<string, ISerializable>();
             objs.Add(TRACE_ID, new JointID { IntID = tJoint.ID });
-            TraceUtils.SetObjectToTLS(objs);
+            ProtoCore.Lang.TraceUtils.SetObjectToTLS(objs);
             
             return tJoint;
         }

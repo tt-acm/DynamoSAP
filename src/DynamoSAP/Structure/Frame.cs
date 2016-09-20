@@ -1,6 +1,6 @@
 ﻿/// Developed by Thornton Tomasetti's CORE Studio for Autodesk
 /// http://core.thorntontomasetti.com
-/// CORE Developers: Elcin Ertugrul and Ana Garcia Puyol
+/// COREstudio Developers: Elcin Ertugrul and Ana Garcia Puyol
 
 using System;
 using System.Collections.Generic;
@@ -11,13 +11,15 @@ using System.Runtime.Serialization;
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
+using DynamoSAP.Assembly;
+using DynamoSAP.Definitions;
 using ProtoCore.Lang;
+using DynamoServices;
 
 //SAP
 using SAP2000v16;
 using SAPConnection;
-using DynamoSAP.Assembly;
-using DynamoSAP.Definitions;
+
 
 namespace DynamoSAP.Structure
 {
@@ -80,7 +82,7 @@ namespace DynamoSAP.Structure
             Frame tFrm;
             FrmID tFrmid = null;
 
-            Dictionary<string, ISerializable> getObjs = TraceUtils.GetObjectFromTLS();
+            Dictionary<string, ISerializable> getObjs = ProtoCore.Lang.TraceUtils.GetObjectFromTLS();
             foreach (var k in getObjs.Keys)
             {
                 tFrmid = getObjs[k] as FrmID;
@@ -106,7 +108,7 @@ namespace DynamoSAP.Structure
             //Set the trace data on the return to be this Frame
             Dictionary<string, ISerializable> objs = new Dictionary<string, ISerializable>();
             objs.Add(TRACE_ID, new FrmID { IntID = tFrm.ID });
-            TraceUtils.SetObjectToTLS(objs);
+            ProtoCore.Lang.TraceUtils.SetObjectToTLS(objs);
 
             return tFrm;
         }
@@ -126,7 +128,7 @@ namespace DynamoSAP.Structure
             Frame tFrm;
             FrmID tFrmid = null;
 
-            Dictionary<string, ISerializable> getObjs = TraceUtils.GetObjectFromTLS();
+            Dictionary<string, ISerializable> getObjs = ProtoCore.Lang.TraceUtils.GetObjectFromTLS();
             foreach (var k in getObjs.Keys)
             {
                 tFrmid = getObjs[k] as FrmID;
@@ -152,7 +154,7 @@ namespace DynamoSAP.Structure
             //Set the trace data on the return to be this Frame
             Dictionary<string, ISerializable> objs = new Dictionary<string, ISerializable>();
             objs.Add(TRACE_ID, new FrmID { IntID = tFrm.ID });
-            TraceUtils.SetObjectToTLS(objs);
+            ProtoCore.Lang.TraceUtils.SetObjectToTLS(objs);
 
             return tFrm;
         }

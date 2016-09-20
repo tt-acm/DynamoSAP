@@ -1,6 +1,6 @@
 ﻿/// Developed by Thornton Tomasetti's CORE Studio for Autodesk
 /// http://core.thorntontomasetti.com
-/// CORE Developers: Elcin Ertugrul and Ana Garcia Puyol
+/// COREsudio Developers: Elcin Ertugrul and Ana Garcia Puyol
 
 using System;
 using System.Collections.Generic;
@@ -11,13 +11,15 @@ using System.Runtime.Serialization;
 //DYNAMO
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
+using DynamoSAP.Assembly;
+using DynamoSAP.Definitions;
 using ProtoCore.Lang;
+using DynamoServices;
 
 //SAP
 using SAP2000v16;
 using SAPConnection;
-using DynamoSAP.Assembly;
-using DynamoSAP.Definitions;
+
 
 namespace DynamoSAP.Structure
 {
@@ -79,7 +81,7 @@ namespace DynamoSAP.Structure
             Shell tShell;
             ShellID tShellid = null;
             //TraceUtils.GetTraceData(TRACE_ID) as ShellID;
-            Dictionary<string, ISerializable> getObjs = TraceUtils.GetObjectFromTLS();
+            Dictionary<string, ISerializable> getObjs = ProtoCore.Lang.TraceUtils.GetObjectFromTLS();
             foreach (var k in getObjs.Keys)
             {
                 tShellid = getObjs[k] as ShellID;
@@ -104,7 +106,7 @@ namespace DynamoSAP.Structure
             //TraceUtils.SetTraceData(TRACE_ID, new ShellID { IntID = tShell.ID });
             Dictionary<string, ISerializable> objs = new Dictionary<string, ISerializable>();
             objs.Add(TRACE_ID, new ShellID { IntID = tShell.ID });
-            TraceUtils.SetObjectToTLS(objs);
+            ProtoCore.Lang.TraceUtils.SetObjectToTLS(objs);
 
             return tShell;
         }
@@ -123,7 +125,7 @@ namespace DynamoSAP.Structure
             ShellID tShellid = null;
                 //TraceUtils.GetTraceData(TRACE_ID) as ShellID;
 
-            Dictionary<string, ISerializable> getObjs = TraceUtils.GetObjectFromTLS();
+            Dictionary<string, ISerializable> getObjs = ProtoCore.Lang.TraceUtils.GetObjectFromTLS();
             foreach (var k in getObjs.Keys)
             {
                 tShellid = getObjs[k] as ShellID;
@@ -148,7 +150,7 @@ namespace DynamoSAP.Structure
             //TraceUtils.SetTraceData(TRACE_ID, new ShellID { IntID = tShell.ID });
             Dictionary<string, ISerializable> objs = new Dictionary<string, ISerializable>();
             objs.Add(TRACE_ID, new ShellID { IntID = tShell.ID });
-            TraceUtils.SetObjectToTLS(objs);
+            ProtoCore.Lang.TraceUtils.SetObjectToTLS(objs);
 
             return tShell;
         }
