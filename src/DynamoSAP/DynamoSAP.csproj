@@ -42,28 +42,28 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DSCoreNodes">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.1\DSCoreNodes.dll</HintPath>
+      <HintPath>$(DYNAMO_API)\DSCoreNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DynamoCore">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.1\DynamoCore.dll</HintPath>
+      <HintPath>$(DYNAMO_API)\DynamoCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DynamoServices">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.1\DynamoServices.dll</HintPath>
+      <HintPath>$(DYNAMO_API)\DynamoServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DynamoUnits">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.1\DynamoUnits.dll</HintPath>
+      <HintPath>$(DYNAMO_API)\DynamoUnits.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="ProtoCore">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.1\ProtoCore.dll</HintPath>
+      <HintPath>$(DYNAMO_API)\ProtoCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ProtoGeometry">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.1\ProtoGeometry.dll</HintPath>
+      <HintPath>$(DYNAMO_API)\ProtoGeometry.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SAP2000v16">
@@ -128,7 +128,7 @@
     <MakeDir Directories="$(SolutionDir)..\packages\DynamoSAP\dyf" />
     <MakeDir Directories="$(SolutionDir)..\packages\DynamoSAP\extra" />
   </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

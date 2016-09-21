@@ -38,27 +38,27 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CoreNodeModels">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.1\nodes\CoreNodeModels.dll</HintPath>
+      <HintPath>$(DYNAMO_API)\nodes\CoreNodeModels.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DynamoCore, Version=1.1.0.2094, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.1\DynamoCore.dll</HintPath>
+      <HintPath>$(DYNAMO_API)\DynamoCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DynamoServices, Version=1.1.0.2094, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.1\DynamoServices.dll</HintPath>
+      <HintPath>$(DYNAMO_API)\DynamoServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DynamoUtilities, Version=1.1.0.2094, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.1\DynamoUtilities.dll</HintPath>
+      <HintPath>$(DYNAMO_API)\DynamoUtilities.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ProtoCore, Version=1.1.0.2094, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.1\ProtoCore.dll</HintPath>
+      <HintPath>$(DYNAMO_API)\ProtoCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SAP2000v16">
@@ -78,7 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
