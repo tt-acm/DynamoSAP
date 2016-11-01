@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using SAP2000v16;
+using SAP2000v18;
 // interop.COM services for SAP
 using System.Runtime.InteropServices;
 
@@ -35,7 +35,6 @@ namespace SAPConnection
 
             if (DMat.Contains("A36"))
             {
-
                 return "A36";
             }
             else if (DMat.Contains("A53"))
@@ -79,7 +78,7 @@ namespace SAPConnection
         {
             long ret = 0;
             eFramePropType PropType = new eFramePropType();
-            ret = Model.PropFrame.GetType(SecName, ref PropType);
+            ret = Model.PropFrame.GetTypeOAPI(SecName, ref PropType);
 
             string nameinfile = string.Empty; // If the section property was imported from a property file, this is the name of that file. If the section property was not imported, this item is blank.
             int color = 0;
@@ -87,35 +86,35 @@ namespace SAPConnection
             string Guid = string.Empty;
             double t2 = 0; double t3 = 0; double TW = 0; double TF = 0; double t2b = 0; double t3b = 0;
 
-            if (PropType == eFramePropType.SECTION_RECTANGULAR)
+            if (PropType == eFramePropType.Rectangular)
             {
                 ret = Model.PropFrame.GetRectangle(SecName, ref filename, ref MatProp, ref t3, ref t2, ref color, ref notes, ref Guid);
             }
-            else if (PropType == eFramePropType.SECTION_PIPE)
+            else if (PropType == eFramePropType.Pipe)
             {
                 ret = Model.PropFrame.GetPipe(SecName, ref filename, ref MatProp, ref t3, ref TW, ref color, ref notes, ref Guid);
             }
-            else if (PropType == eFramePropType.SECTION_CIRCLE)
+            else if (PropType == eFramePropType.Circle)
             {
                 ret = Model.PropFrame.GetCircle(SecName, ref filename, ref MatProp, ref t3, ref color, ref notes, ref Guid);
             }
-            else if (PropType == eFramePropType.SECTION_BOX)
+            else if (PropType == eFramePropType.Box)
             {
                 ret = Model.PropFrame.GetTube(SecName, ref filename, ref MatProp, ref t3, ref t2, ref TF, ref TW, ref color, ref notes, ref Guid);
             }
-            else if (PropType == eFramePropType.SECTION_I)
+            else if (PropType == eFramePropType.I)
             {
                 ret = Model.PropFrame.GetISection(SecName, ref filename, ref MatProp, ref t3, ref t2, ref TF, ref TW, ref t2b, ref t3b, ref color, ref notes, ref Guid);
             }
-            else if (PropType == eFramePropType.SECTION_CHANNEL)
+            else if (PropType == eFramePropType.Channel)
             {
                 ret = Model.PropFrame.GetChannel(SecName, ref filename, ref MatProp, ref t3, ref t2, ref TF, ref TW, ref color, ref notes, ref Guid);
             }
-            else if (PropType == eFramePropType.SECTION_T)
+            else if (PropType == eFramePropType.T)
             {
                 ret = Model.PropFrame.GetTee(SecName, ref filename, ref MatProp, ref t3, ref t2, ref TF, ref TW, ref color, ref notes, ref Guid);
             }
-            else if (PropType == eFramePropType.SECTION_ANGLE)
+            else if (PropType == eFramePropType.Angle)
             {
                 ret = Model.PropFrame.GetAngle(SecName, ref filename, ref MatProp, ref t3, ref t2, ref TF, ref TW, ref color, ref notes, ref Guid);
             }

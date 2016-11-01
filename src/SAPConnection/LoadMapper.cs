@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using SAP2000v16;
+using SAP2000v18;
 // interop.COM services for SAP
 using System.Runtime.InteropServices;
 
@@ -31,12 +31,12 @@ namespace SAPConnection
         public static void AddLoadCase(ref cSapModel Model, string Name, int LoadCount, ref string[] LoadType, ref string[] LoadName, ref double[] SF, string LCType)
         {
 
-            if (LCType == eLoadCaseType.CASE_LINEAR_STATIC.ToString())
+            if (LCType == eLoadCaseType.LinearStatic.ToString())
             {
                 int ret = Model.LoadCases.StaticLinear.SetCase(Name);
                 ret = Model.LoadCases.StaticLinear.SetLoads(Name, LoadCount, ref LoadType, ref LoadName, ref SF);
             }
-            else if (LCType == eLoadCaseType.CASE_NONLINEAR_STATIC.ToString())
+            else if (LCType == eLoadCaseType.NonlinearStatic.ToString())
             {
                 int ret = Model.LoadCases.StaticNonlinear.SetCase(Name);
                 ret = Model.LoadCases.StaticNonlinear.SetLoads(Name, LoadCount, ref LoadType, ref LoadName, ref SF);
@@ -46,7 +46,7 @@ namespace SAPConnection
                 //must implement stageData methods
 
             }
-            else if (LCType == eLoadCaseType.CASE_MODAL.ToString())
+            else if (LCType == eLoadCaseType.Modal.ToString())
             {
                 //throw new Exception("Load Case Type not supported");
 
@@ -60,7 +60,7 @@ namespace SAPConnection
                 //ret = SapModel.LoadCases.ModalRitz.SetLoads(Name, LoadCount, ref LoadType, ref LoadName, MyRitzMaxCyc, MyTargetPar);
 
             }
-            else if (LCType == eLoadCaseType.CASE_RESPONSE_SPECTRUM.ToString())
+            else if (LCType == eLoadCaseType.ResponseSpectrum.ToString())
             {
                 throw new Exception("Load Case Type not supported");
 
@@ -70,7 +70,7 @@ namespace SAPConnection
                 //ret = SapModel.LoadCases.ResponseSpectrum.SetLoads(Name, LoadCount, ref LoadName, MyFunc, ref SF, MyCSys, MyAng);
 
             }
-            else if (LCType == eLoadCaseType.CASE_LINEAR_HISTORY.ToString())
+            else if (LCType == eLoadCaseType.LinearHistory.ToString())
             {
                 throw new Exception("Load Case Type not supported");
 
@@ -82,7 +82,7 @@ namespace SAPConnection
                 //this needs to pass the motion type, transient or periodic
 
             }
-            else if (LCType == eLoadCaseType.CASE_NONLINEAR_HISTORY.ToString())
+            else if (LCType == eLoadCaseType.NonlinearHistory.ToString())
             {
                 throw new Exception("Load Case Type not supported");
 
@@ -91,7 +91,7 @@ namespace SAPConnection
                 //ret = Model.LoadCases.ModHistNonlinear.SetLoads(Name, LoadCount, ref LoadType, ref LoadName, MyFunc, ref SF, MyTF, MyAT, MyCSys, MyAng)
 
             }
-            else if (LCType == eLoadCaseType.CASE_LINEAR_DYNAMIC.ToString())
+            else if (LCType == eLoadCaseType.LinearDynamic.ToString())
             {
                 throw new Exception("Load Case Type not supported");
 
@@ -99,12 +99,12 @@ namespace SAPConnection
                 //this needs more inputs
                 //ret = Model.LoadCases.DirHistLinear.SetLoads(Name, LoadCount, ref LoadType, ref LoadName, MyFunc, ref SF, MyTF, MyAT, MyCSys, MyAng);
             }
-            else if (LCType == eLoadCaseType.CASE_NONLINEAR_DYNAMIC.ToString())
+            else if (LCType == eLoadCaseType.NonlinearDynamic.ToString())
             {
                 int ret = Model.LoadCases.StaticNonlinear.SetCase(Name);
                 ret = Model.LoadCases.StaticNonlinear.SetLoads(Name, LoadCount, ref LoadType, ref LoadName, ref SF);
             }
-            else if (LCType == eLoadCaseType.CASE_MOVING_LOAD.ToString())
+            else if (LCType == eLoadCaseType.MovingLoad.ToString())
             {
                 throw new Exception("Load Case Type not supported");
                 //int ret = Model.LoadCases.Moving.SetCase(Name);
@@ -113,12 +113,12 @@ namespace SAPConnection
                 //ret = Model.LoadCases.Moving.SetLoads(Name, LoadCount, MyMyClass, ref SF, MyMin, MyMax);
 
             }
-            else if (LCType == eLoadCaseType.CASE_BUCKLING.ToString())
+            else if (LCType == eLoadCaseType.Buckling.ToString())
             {
                 int ret = Model.LoadCases.Buckling.SetCase(Name);
                 ret = Model.LoadCases.Buckling.SetLoads(Name, 2, ref LoadType, ref LoadName, ref SF);
             }
-            else if (LCType == eLoadCaseType.CASE_STEADY_STATE.ToString())
+            else if (LCType == eLoadCaseType.SteadyState.ToString())
             {
                 throw new Exception("Load Case Type not supported");
                // int ret = Model.LoadCases.SteadyState.SetCase(Name);
@@ -126,19 +126,19 @@ namespace SAPConnection
                 //ret = Model.LoadCases.SteadyState.SetLoads(Name, LoadCount, ref LoadType, ref LoadName, MyFunc, ref SF, MyPhaseAngle, MyCSys, MyAng);
 
             }
-            else if (LCType == eLoadCaseType.CASE_POWER_SPECTRAL_DENSITY.ToString())
+            else if (LCType == eLoadCaseType.PowerSpectralDensity.ToString())
             {
                 throw new Exception("Load Case Type not supported");
                 //int ret = Model.LoadCases.PSD.SetCase(Name);
                 //this needs more inputs
                 //ret = Model.LoadCases.PSD.SetLoads(Name, LoadCount, ref LoadType, ref LoadName, MyFunc, ref SF, MyPhaseAngle, MyCSys, MyAng);
             }
-            else if (LCType == eLoadCaseType.CASE_LINEAR_STATIC_MULTISTEP.ToString())
+            else if (LCType == eLoadCaseType.LinearStaticMultiStep.ToString())
             {
                 int ret = Model.LoadCases.StaticLinearMultistep.SetCase(Name);
                 ret = Model.LoadCases.StaticLinearMultistep.SetLoads(Name, LoadCount, ref LoadType, ref LoadName, ref SF);
             }
-            else if (LCType == eLoadCaseType.CASE_HYPERSTATIC.ToString())
+            else if (LCType == eLoadCaseType.HyperStatic.ToString())
             {
                 int ret = Model.LoadCases.HyperStatic.SetCase(Name);
 
@@ -161,10 +161,9 @@ namespace SAPConnection
             {
                 int pos = Array.IndexOf(CName, def);
                 //get the type of the definition
-                eCType type = (eCType)Enum.Parse(typeof(eCType), Types.ElementAt(pos));
+                eCNameType type = (eCNameType)Enum.Parse(typeof(eCNameType), Types.ElementAt(pos));
                 //set the type of the combination
                 ret = Model.RespCombo.SetCaseList(Name, ref type, def, SF.ElementAt(pos));
-
             }
 
         }
@@ -180,7 +179,7 @@ namespace SAPConnection
 
         public static void SetLoadForcetoJoint(ref cSapModel Model, string JointId, string LoadPat, double[] Values, bool Replace)
         {
-            int ret = Model.PointObj.SetLoadForce(JointId, LoadPat, Values, Replace);
+            int ret = Model.PointObj.SetLoadForce(JointId, LoadPat, ref Values, Replace);
         }
 
         // READ LOAD METHODS

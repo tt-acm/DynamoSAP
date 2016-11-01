@@ -46,8 +46,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>$(DYNAMO_API)\nunit.framework.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>$(NunitPath)\net-4.5\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="RevitAPI">
       <HintPath>$(REVIT_API)\RevitAPI.dll</HintPath>
@@ -58,8 +57,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitServices">
-      <HintPath>$(DYNAMO_API)\Revit_2015\RevitServices.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Revit\1.1\Revit_2015\RevitServices.dll</HintPath>
     </Reference>
     <Reference Include="RevitTestFrameworkTypes">
       <HintPath>$(DYNAMO_API)\Revit_2015\RevitTestFrameworkTypes.dll</HintPath>
@@ -68,10 +66,6 @@
     <Reference Include="RevitTestServices">
       <HintPath>$(DYNAMO_API)\Revit_2015\RevitTestServices.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="SAP2000v16">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Computers and Structures\SAP2000 16\SAP2000v16.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="SAPConnection, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

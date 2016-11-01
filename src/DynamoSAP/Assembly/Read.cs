@@ -16,7 +16,7 @@ using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
 
 using SAPConnection;
-using SAP2000v16;
+using SAP2000v18;
 
 namespace DynamoSAP.Assembly
 {

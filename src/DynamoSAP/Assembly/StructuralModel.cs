@@ -193,7 +193,10 @@ namespace DynamoSAP.Assembly
         {
             CheckDuplicates(StructuralElements);
             CheckDuplicateDefinitions(Definitions);
-            return new StructuralModel(StructuralElements,Definitions);
+            StructuralModel mySt = new StructuralModel();
+            mySt.StructuralElements = StructuralElements;
+            mySt.ModelDefinitions = Definitions;
+            return mySt;
         }
 
         /// <summary>

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using SAP2000v16;
+using SAP2000v18;
 using DynamoSAP_UI;
 
 // interop.COM services for SAP
@@ -386,7 +386,7 @@ namespace SAPConnection
             foreach (string lpname in LoadPatternNames)
             {
                 double mult = 0;
-                eLoadPatternType type = eLoadPatternType.LTYPE_DEAD;
+                eLoadPatternType type = eLoadPatternType.Dead;
                 int pos = Array.IndexOf(LoadPatternNames, lpname);
                 Model.LoadPatterns.GetLoadType(lpname, ref type);
 
@@ -413,15 +413,14 @@ namespace SAPConnection
 
                 //Parameters that we need to get
                 //dummy eLoadCaseType
-                eLoadCaseType cType = eLoadCaseType.CASE_LINEAR_STATIC;
+                eLoadCaseType cType = eLoadCaseType.LinearStatic;
                 int subType = 0;
 
                 int pos = Array.IndexOf(LoadCaseNames, lcname);
 
                 //get the load case type
-                ret = Model.LoadCases.GetType(lcname, ref cType, ref subType);
+                ret = Model.LoadCases.GetTypeOAPI(lcname, ref cType, ref subType);
                 LoadCaseTypes[pos] = cType.ToString();
-
             }
         }
 
@@ -443,7 +442,7 @@ namespace SAPConnection
 
 
                     int numberItems = 0;
-                    eCType[] cType = null;
+                    eCNameType[] cType = null;
                     string[] cName = null;
                     double[] sf = null;
                     ret = Model.RespCombo.GetCaseList(lc, ref numberItems, ref cType, ref cName, ref sf);

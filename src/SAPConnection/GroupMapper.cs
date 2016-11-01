@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using SAP2000v16;
+using SAP2000v18;
 using DynamoSAP;
 using DynamoSAP_UI;
 

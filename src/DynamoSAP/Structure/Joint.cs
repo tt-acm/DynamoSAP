@@ -17,7 +17,7 @@ using Autodesk.DesignScript.Runtime;
 using DynamoServices;
 
 //SAP
-using SAP2000v16;
+using SAP2000v18;
 using SAPConnection;
 
 

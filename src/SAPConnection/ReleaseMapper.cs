@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using SAP2000v16;
+using SAP2000v18;
 // interop.COM services for SAP
 using System.Runtime.InteropServices;
 
@@ -28,7 +28,7 @@ namespace SAPConnection
             double[] EndPFixityVValues = new double[6];
 
             
-            int ret = Model.FrameObj.SetReleases(name, ireleases, jreleases, StartPFixityValues, EndPFixityVValues,eItemType.Object);
+            int ret = Model.FrameObj.SetReleases(name, ref ireleases,ref jreleases, ref StartPFixityValues, ref EndPFixityVValues,eItemType.Objects);
 
             if (ret == 1) error=string.Format("Error setting the release for frame {0}. Try changing the conditions",name);
 

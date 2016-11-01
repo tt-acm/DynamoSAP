@@ -61,9 +61,8 @@
       <HintPath>$(DYNAMO_API)\ProtoCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="SAP2000v16">
-      <HintPath>$(SAP2000v16_API)\SAP2000v16.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+    <Reference Include="SAP2000v18">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Computers and Structures\SAP2000 18\SAP2000v18.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

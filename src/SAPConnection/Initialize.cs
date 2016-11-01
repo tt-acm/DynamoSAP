@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using SAP2000v16;
+using SAP2000v18;
 // interop.COM services for SAP
 using System.Runtime.InteropServices;
 
@@ -22,30 +22,27 @@ namespace SAPConnection
     [SupressImportIntoVM]
     public class Initialize
     {
-        public static void InitializeSapModel(ref SapObject mySAPObject, ref cSapModel mySapModel, string units)
+        public static void InitializeSapModel(ref cSapModel mySapModel, string units)
         {
-
-            long ret = 0;
-
-            //TO DO: Grab open Instance if already open!!! 
-
-            //Create SAP2000 Object
-            mySAPObject = new SAP2000v16.SapObject();
+            // Create SAP Object
+            SAP2000v18.cHelper helper = new SAP2000v18.Helper();
+            SAP2000v18.cOAPI applicationObject;
+            applicationObject = helper.CreateObject("CSI.SAP2000.API.SapObject");
 
             // get enum from Units
             eUnits Units = (eUnits)Enum.Parse(typeof(eUnits), units);
 
-            //Start Application
-            mySAPObject.ApplicationStart(Units, true);
+            //Start application
+            applicationObject.ApplicationStart(Units, true);
 
-            //Create SapModel object
-            mySapModel = mySAPObject.SapModel;
+            //Get a reference to cSapModel to access all OAPI classes and functions 
+            mySapModel = applicationObject.SapModel;
 
-            //initialize the model
-            ret = mySapModel.InitializeNewModel(Units);
+            //Initialize model
+            mySapModel.InitializeNewModel(Units);
 
-            //create new blank model
-            ret = mySapModel.File.NewBlank();
+            // Create new Model
+            mySapModel.File.NewBlank();
 
             //SET UP ... SET UP ... SET UP ... SET UP
             DefineMaterials(ref mySapModel);
@@ -59,82 +56,119 @@ namespace SAPConnection
 
         public static void OpenSAPModel(string filePath, ref cSapModel mySapModel, ref string units)
         {
-            long ret = 0;
-            //Create SAP2000 Object
-            SapObject mySAPObject = new SAP2000v16.SapObject();
-            //Start Application
-            mySAPObject.ApplicationStart();
-            //Create SapModel object
-            mySapModel = mySAPObject.SapModel;
-            ret = mySapModel.InitializeNewModel();
-            ret = mySapModel.File.OpenFile(filePath);
+            ////Dynamically load SAP2000.exe assembly from the program installation folder 
+            //string pathToSAPEXE = System.IO.Path.Combine(System.Environment.GetEnvironmentVariable("ProgramFiles(x86)"), "Computers and Structures", "SAP2000 18", "SAP2000.exe");
+            //System.Reflection.Assembly SAPAssembly = System.Reflection.Assembly.LoadFrom(pathToSAPEXE);
+
+            ////Create an instance of SAPObject and get a reference to cOAPI interface 
+            //cOAPI applicationObject = (cOAPI)SAPAssembly.CreateInstance("CSI.SAP2000.API.SapObject");
+
+            // Create SAP Object
+            SAP2000v18.cHelper helper = new SAP2000v18.Helper();
+            SAP2000v18.cOAPI applicationObject;
+            applicationObject = helper.CreateObject("CSI.SAP2000.API.SapObject");
+
+            //Start application
+            applicationObject.ApplicationStart();
+
+            //Get a reference to cSapModel to access all OAPI classes and functions 
+            mySapModel = applicationObject.SapModel;
+
+            //Initialize model
+            mySapModel.InitializeNewModel();
+
+            // Open existing Etabs File 
+            mySapModel.File.OpenFile(filePath);
+
+            // Get Units
             units = mySapModel.GetPresentUnits().ToString();
         }
 
-        public static void GrabOpenSAP(ref cSapModel mySapModel, ref string ModelUnits, string DynInputUnits = "kip_ft_F")
+        public static void GrabOpenSAP(ref cSapModel ActiveModel, ref string ModelUnits, string DynInputUnits = "kip_ft_F")
         {
-            Process[] SapInstances = Process.GetProcessesByName("SAP2000");
+            //Process[] SapInstances = Process.GetProcessesByName("SAP2000");
 
-            //http://docs.csiamerica.com/help-files/sap2000-oapi/SAP2000_API_Fuctions/General_Functions/SetAsActiveObject.htm
-            if (SapInstances.LongLength >= 1)
+            ////http://docs.csiamerica.com/help-files/sap2000-oapi/SAP2000_API_Fuctions/General_Functions/SetAsActiveObject.htm
+            //if (SapInstances.LongLength >= 1)
+            //{
+            //    SapObject Obj;
+            //    object getObj = ROTHelper.GetActiveObject("SAP2000v18.SapObject");
+            //    if (getObj == null)
+            //    {
+            //        Obj = new SapObject();
+            //        getObj = ROTHelper.GetActiveObject("SAP2000v18.SapObject");
+            //    }
+            //    if (getObj != null)
+            //    {
+            //        Obj = (SapObject)getObj;
+            //        mySapModel = Obj.SapModel;
+            //        // get enum from Units & Set to model
+            //        if (! String.IsNullOrEmpty(DynInputUnits))
+            //        {
+            //            eUnits Units = (eUnits)Enum.Parse(typeof(eUnits), DynInputUnits);
+            //            try
+            //            {
+            //                int ret = mySapModel.SetPresentUnits(Units);
+            //            }
+            //            catch(Exception ex) {
+            //                string message = ex.Message;
+            //            }
+
+            //        }
+            //        ModelUnits = mySapModel.GetPresentUnits().ToString();
+            //    }
+
+
+            //OAPI SAP 2000 v18 Attaching to a Manually Started Instance of SAP2000
+ 
+            SAP2000v18.cHelper helper = new SAP2000v18.Helper();
+            SAP2000v18.cOAPI applicationObject;
+            applicationObject = helper.GetObject("CSI.SAP2000.API.SapObject");
+
+            if (applicationObject == null)
             {
-                SapObject Obj;
-                object getObj = ROTHelper.GetActiveObject("SAP2000v16.SapObject");
-                if (getObj == null)
+               // return false;
+            }
+            if (applicationObject != null)
+            {
+                ActiveModel = applicationObject.SapModel;
+                string path = ActiveModel.GetModelFilename(true);
+
+                // get enum from Units & Set to model
+                if (!String.IsNullOrEmpty(DynInputUnits))
                 {
-                    Obj = new SapObject();
-                    getObj = ROTHelper.GetActiveObject("SAP2000v16.SapObject");
-                }
-                if (getObj != null)
-                {
-                    Obj = (SapObject)getObj;
-                    mySapModel = Obj.SapModel;
-                    // get enum from Units & Set to model
-                    if (! String.IsNullOrEmpty(DynInputUnits))
-                    {
-                        eUnits Units = (eUnits)Enum.Parse(typeof(eUnits), DynInputUnits);
-                        try
-                        {
-                            int ret = mySapModel.SetPresentUnits(Units);
-                        }
-                        catch(Exception ex) {
-                            string message = ex.Message;
-                        }
-                       
-                    }
-                    ModelUnits = mySapModel.GetPresentUnits().ToString();
+                   eUnits Units = (eUnits)Enum.Parse(typeof(eUnits), DynInputUnits);
+                   int ret = ActiveModel.SetPresentUnits(Units);
                 }
 
-                //SET UP ... SET UP ... SET UP ... SET UP
-                try
+                ModelUnits = ActiveModel.GetPresentUnits().ToString();
+
+                //return true;
+            }
+
+            //SET UP ... SET UP ... SET UP ... SET UP
+            try
                 {
-                    DefineMaterials(ref mySapModel);
+                    DefineMaterials(ref ActiveModel);
                 }
                 catch { }
-            }
-
         }
 
-        public static void Release(ref SapObject SAP, ref cSapModel Model)
+    public static void Release(ref cSapModel Model)
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+
+        if (Model != null)
         {
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-
-            if (SAP != null)
-            {
-                Marshal.FinalReleaseComObject(SAP);
-            }
-
-            if (Model != null)
-            {
-                Marshal.FinalReleaseComObject(Model);
-            }
-
+            Marshal.FinalReleaseComObject(Model);
         }
 
-        // METHODS FOR SAP SET UP
-        // Add Most Common Materials to SAP
-        public static bool DefineMaterials(ref cSapModel SapModel)
+    }
+
+    // METHODS FOR SAP SET UP
+    // Add Most Common Materials to SAP
+    public static bool DefineMaterials(ref cSapModel SapModel)
         {
             // Add Most Common Standard Materials to SAP Model // call this before or during Create Structure 
 
@@ -149,62 +183,46 @@ namespace SAPConnection
             {
                 if (!MatNames.Contains("A36"))
                 {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A36);
-                    
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A36);
                 }
                 if (!MatNames.Contains("A53GrB"))
                 {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A53GrB);
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A53GrB);
                 }
                 if (!MatNames.Contains("A500GrB42"))
                 {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A500GrB_Fy42);
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A500GrB_Fy42);
                 }
                 if (!MatNames.Contains("A500GrB46"))
                 {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A500GrB_Fy46);
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A500GrB_Fy46);
                 }
                 if (!MatNames.Contains("A572Gr50"))
                 {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A572Gr50);
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A572Gr50);
                 }
                 if (!MatNames.Contains("A913Gr50"))
                 {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A913Gr50);
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A913Gr50);
                 }
                 if (!MatNames.Contains("A992Fy50"))
                 {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A992_Fy50);
-
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A992_Fy50);
                 }
                 if (!MatNames.Contains("4000Psi"))
                 {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_CONCRETE, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A992_Fy50, eMatTypeConcrete.MATERIAL_CONCRETE_SUBTYPE_FC4000_NORMALWEIGHT);
+                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Concrete, eMatTypeSteel.ASTM_A913Gr50, eMatTypeConcrete.FC4000_NormalWeight);
                 } 
             }
             else
             {
-                
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A36);
-                
-              
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A53GrB);
-               
-              
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A500GrB_Fy42);
-                
-              
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A500GrB_Fy46);
-               
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A572Gr50);
-                
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A913Gr50);
-                
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_STEEL, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A992_Fy50);
-
-               
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.MATERIAL_CONCRETE, eMatTypeSteel.MATERIAL_STEEL_SUBTYPE_ASTM_A992_Fy50, eMatTypeConcrete.MATERIAL_CONCRETE_SUBTYPE_FC4000_NORMALWEIGHT);
-               
+                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A36);
+                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A53GrB);
+                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A500GrB_Fy42);
+                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A500GrB_Fy46);
+                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A572Gr50);
+                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A913Gr50);
+                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Concrete, eMatTypeSteel.ASTM_A913Gr50, eMatTypeConcrete.FC4000_NormalWeight);
             }
 
             return true;

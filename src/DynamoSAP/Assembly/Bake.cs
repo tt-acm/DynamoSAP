@@ -22,7 +22,7 @@ using Autodesk.DesignScript.Runtime;
 using DynamoUnits;
 
 //SAP 
-using SAP2000v16;
+using SAP2000v18;
 
 namespace DynamoSAP.Assembly
 {
@@ -396,7 +396,7 @@ namespace DynamoSAP.Assembly
             //1. INSTANTIATE NEW OR GRAB OPEN SAPMODEL 
 
             // check if any SAP file is open, grab 
-            SAP2000v16.SapObject mySapObject = null;
+            //SAP2000v18.SapObject mySapObject = null;
             string ModelUnits = string.Empty;
 
             // Open & instantiate SAP file
@@ -407,11 +407,11 @@ namespace DynamoSAP.Assembly
                 // Open a blank SAP Model
                 try
                 {
-                    SAPConnection.Initialize.InitializeSapModel(ref mySapObject, ref mySapModel, Units);
+                    SAPConnection.Initialize.InitializeSapModel(ref mySapModel, Units);
                 }
                 catch (Exception)
                 {
-                    SAPConnection.Initialize.Release(ref mySapObject, ref mySapModel);
+                    SAPConnection.Initialize.Release (ref mySapModel);
                 };
             }
 
@@ -699,7 +699,6 @@ namespace DynamoSAP.Assembly
 
             //if can't set to null, will be a hanging process
             mySapModel = null;
-            mySapObject = null;
         }
 
         #endregion
