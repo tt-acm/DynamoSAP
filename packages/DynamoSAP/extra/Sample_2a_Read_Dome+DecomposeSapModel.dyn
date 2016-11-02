@@ -1,32 +1,38 @@
-<Workspace Version="0.8.0.950" X="11.9652613936259" Y="51.3570802896145" zoom="0.545344812523986" Name="Home" RunType="Manual" RunPeriod="100" HasRunWithoutCrash="False">
+<Workspace Version="1.1.0.2094" X="12.622478964476" Y="299.316005413561" zoom="0.652053237270791" Name="Home" Description="" RunType="Manual" RunPeriod="100" HasRunWithoutCrash="True">
   <NamespaceResolutionMap />
   <Elements>
-    <DSCoreNodesUI.BoolSelector guid="c25b6535-8e7c-44f9-a52d-9fb99f309c21" type="DSCoreNodesUI.BoolSelector" nickname="Boolean" x="0" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    <CoreNodeModels.Input.BoolSelector guid="c25b6535-8e7c-44f9-a52d-9fb99f309c21" type="CoreNodeModels.Input.BoolSelector" nickname="Boolean" x="0" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
       <System.Boolean>True</System.Boolean>
-    </DSCoreNodesUI.BoolSelector>
-    <Dynamo.Nodes.DSFunction guid="966718c2-c618-46b8-b631-c43a54c669ff" type="Dynamo.Nodes.DSFunction" nickname="Read.SAPModel" x="310" y="0" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.Read.SAPModel@bool" />
-    <Dynamo.Nodes.DSFunction guid="78fd5aef-bfa0-4295-a51b-893dc17d49a7" type="Dynamo.Nodes.DSFunction" nickname="Read.SAPModel" x="218.280076065009" y="456.837282265496" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.Read.SAPModel@string,bool" />
-    <DSCore.File.Filename guid="2cba2ae6-570d-42e1-9154-23e31257e598" type="DSCore.File.Filename" nickname="File Path" x="9.22810394610201" y="447.70259865255" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+    </CoreNodeModels.Input.BoolSelector>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="966718c2-c618-46b8-b631-c43a54c669ff" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Read.SAPModel" x="310" y="0" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="..\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.Read.SAPModel@bool" />
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="78fd5aef-bfa0-4295-a51b-893dc17d49a7" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Read.SAPModel" x="218.280076065009" y="455.954102940704" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="..\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.Read.SAPModel@string,bool" />
+    <CoreNodeModels.Input.Filename guid="2cba2ae6-570d-42e1-9154-23e31257e598" type="CoreNodeModels.Input.Filename" nickname="File Path" x="9.22810394610201" y="447.70259865255" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
       <System.String>No file selected.</System.String>
-    </DSCore.File.Filename>
-    <DSCoreNodesUI.BoolSelector guid="d16fbe46-4200-400c-afca-7a37bf58f3da" type="DSCoreNodesUI.BoolSelector" nickname="Boolean" x="9.22810394610201" y="558.70259865255" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <HintPath>C:\Users\eertugrul\AppData\Roaming\Dynamo\Dynamo Revit\1.1\packages\DynamoSAP\extra\No file selected</HintPath>
+    </CoreNodeModels.Input.Filename>
+    <CoreNodeModels.Input.BoolSelector guid="d16fbe46-4200-400c-afca-7a37bf58f3da" type="CoreNodeModels.Input.BoolSelector" nickname="Boolean" x="9.22810394610201" y="558.70259865255" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
       <System.Boolean>True</System.Boolean>
-    </DSCoreNodesUI.BoolSelector>
-    <Dynamo.Nodes.DSFunction guid="36b32253-13f6-47ab-9bef-69b45c688c5b" type="Dynamo.Nodes.DSFunction" nickname="StructuralModel.Decompose" x="600" y="0" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Decompose@DynamoSAP.Assembly.StructuralModel" />
-    <Dynamo.Nodes.DSFunction guid="6bdba7f9-4de1-475e-8868-815d93b99bf6" type="Dynamo.Nodes.DSFunction" nickname="SectionProp.Decompose" x="1408.63468134389" y="49.3276146169446" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Definitions.SectionProp.Decompose@DynamoSAP.Definitions.SectionProp" />
-    <Dynamo.Nodes.DSFunction guid="b5e32685-6c44-443b-bc6c-c91a051cc541" type="Dynamo.Nodes.DSFunction" nickname="Frame.Decompose" x="1145.98464357691" y="25.186544206436" isVisible="true" isUpstreamVisible="true" lacing="Shortest" assembly="..\..\..\..\..\..\AppData\Roaming\Dynamo\0.8\packages\DynamoSAP\bin\DynamoSAP.dll" function="DynamoSAP.Structure.Frame.Decompose@DynamoSAP.Structure.Frame" />
+    </CoreNodeModels.Input.BoolSelector>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="36b32253-13f6-47ab-9bef-69b45c688c5b" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="StructuralModel.Decompose" x="600" y="0" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="..\bin\DynamoSAP.dll" function="DynamoSAP.Assembly.StructuralModel.Decompose@DynamoSAP.Assembly.StructuralModel" />
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="6bdba7f9-4de1-475e-8868-815d93b99bf6" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="SectionProp.Decompose" x="1408.63468134389" y="49.3276146169446" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="..\bin\DynamoSAP.dll" function="DynamoSAP.Definitions.SectionProp.Decompose@DynamoSAP.Definitions.SectionProp" />
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="b5e32685-6c44-443b-bc6c-c91a051cc541" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Frame.Decompose" x="1145.98464357691" y="25.186544206436" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="..\bin\DynamoSAP.dll" function="DynamoSAP.Structure.Frame.Decompose@DynamoSAP.Structure.Frame" />
   </Elements>
   <Connectors>
-    <Dynamo.Models.ConnectorModel start="c25b6535-8e7c-44f9-a52d-9fb99f309c21" start_index="0" end="966718c2-c618-46b8-b631-c43a54c669ff" end_index="0" portType="0" />
-    <Dynamo.Models.ConnectorModel start="966718c2-c618-46b8-b631-c43a54c669ff" start_index="0" end="36b32253-13f6-47ab-9bef-69b45c688c5b" end_index="0" portType="0" />
-    <Dynamo.Models.ConnectorModel start="36b32253-13f6-47ab-9bef-69b45c688c5b" start_index="0" end="b5e32685-6c44-443b-bc6c-c91a051cc541" end_index="0" portType="0" />
-    <Dynamo.Models.ConnectorModel start="b5e32685-6c44-443b-bc6c-c91a051cc541" start_index="1" end="6bdba7f9-4de1-475e-8868-815d93b99bf6" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="c25b6535-8e7c-44f9-a52d-9fb99f309c21" start_index="0" end="966718c2-c618-46b8-b631-c43a54c669ff" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="966718c2-c618-46b8-b631-c43a54c669ff" start_index="0" end="36b32253-13f6-47ab-9bef-69b45c688c5b" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="36b32253-13f6-47ab-9bef-69b45c688c5b" start_index="0" end="b5e32685-6c44-443b-bc6c-c91a051cc541" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="b5e32685-6c44-443b-bc6c-c91a051cc541" start_index="1" end="6bdba7f9-4de1-475e-8868-815d93b99bf6" end_index="0" portType="0" />
   </Connectors>
   <Notes>
-    <Dynamo.Models.NoteModel text="Grabs open SAP instance" x="305.400319803066" y="-112.353144730148" />
-    <Dynamo.Models.NoteModel text="OR Browse existing Simple Shell Structure SAP Model" x="238.340672301377" y="360.491663182563" />
-    <Dynamo.Models.NoteModel text="Decompose Structural Model" x="642.198827388758" y="-112.88654913083" />
-    <Dynamo.Models.NoteModel text="Decompose Frame" x="1151.09788214719" y="-118.582832144488" />
-    <Dynamo.Models.NoteModel text="Decompose Section Property" x="1417.01603778327" y="-119.081568399597" />
+    <Dynamo.Graph.Notes.NoteModel guid="95ef86ce-5d5c-45eb-b2cf-0faf10321d11" text="Grabs open SAP instance" x="317.99862867002" y="-112.353144730148" />
+    <Dynamo.Graph.Notes.NoteModel guid="b1f71d57-646f-4261-97f7-6fc734639d83" text="OR Browse existing Simple Shell Structure SAP Model" x="238.340672301377" y="360.491663182563" />
+    <Dynamo.Graph.Notes.NoteModel guid="dcaf6696-3ae3-4982-bd2e-645b961e002d" text="Decompose Structural Model" x="642.198827388758" y="-112.88654913083" />
+    <Dynamo.Graph.Notes.NoteModel guid="c8da6845-2970-4a84-97be-ca9f90df61c8" text="Decompose Frame" x="1151.09788214719" y="-118.582832144488" />
+    <Dynamo.Graph.Notes.NoteModel guid="89dd225d-d26f-41e3-a8c2-54f4aefca551" text="Decompose Section Property" x="1417.01603778327" y="-119.081568399597" />
   </Notes>
+  <Annotations />
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
 </Workspace>

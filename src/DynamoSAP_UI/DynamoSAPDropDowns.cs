@@ -468,7 +468,10 @@ namespace DynamoSAP_UI
         A572Gr50,
         A913Gr50,
         A992Fy50,
-        Concrete_4000Psi
+        Concrete_3000Psi,
+        Concrete_4000Psi,
+        Concrete_5000Psi,
+        Concrete_6000Psi
     }
 
 

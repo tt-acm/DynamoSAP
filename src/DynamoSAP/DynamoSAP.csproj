@@ -68,6 +68,7 @@
     </Reference>
     <Reference Include="SAP2000v18">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Computers and Structures\SAP2000 18\SAP2000v18.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SAPConnection">
       <HintPath>..\SAPConnection\bin\SAPConnection.dll</HintPath>

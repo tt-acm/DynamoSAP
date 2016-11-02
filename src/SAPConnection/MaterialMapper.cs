@@ -30,6 +30,10 @@ namespace SAPConnection
             }
             else if (DMat == null || DMat.ToLower().Contains("concrete") || DMat.ToLower().Contains("conc"))
             {
+                if (DMat.Contains("3000")) return "3000Psi";
+                if (DMat.Contains("4000")) return "4000Psi";
+                if (DMat.Contains("5000")) return "5000Psi";
+                if (DMat.Contains("6000")) return "6000Psi";
                 return "4000Psi";
             }
 

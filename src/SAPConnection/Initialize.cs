@@ -171,59 +171,23 @@ namespace SAPConnection
     public static bool DefineMaterials(ref cSapModel SapModel)
         {
             // Add Most Common Standard Materials to SAP Model // call this before or during Create Structure 
-
-            long ret = 0;
-            string MatName = string.Empty;
-
-            int number = 0;
-            string[] MatNames = null;
-            ret = SapModel.PropMaterial.GetNameList(ref number, ref MatNames);
-
-            if (MatNames!=null)
-            {
-                if (!MatNames.Contains("A36"))
-                {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A36);
-                }
-                if (!MatNames.Contains("A53GrB"))
-                {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A53GrB);
-                }
-                if (!MatNames.Contains("A500GrB42"))
-                {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A500GrB_Fy42);
-                }
-                if (!MatNames.Contains("A500GrB46"))
-                {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A500GrB_Fy46);
-                }
-                if (!MatNames.Contains("A572Gr50"))
-                {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A572Gr50);
-                }
-                if (!MatNames.Contains("A913Gr50"))
-                {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A913Gr50);
-                }
-                if (!MatNames.Contains("A992Fy50"))
-                {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A992_Fy50);
-                }
-                if (!MatNames.Contains("4000Psi"))
-                {
-                    ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Concrete, eMatTypeSteel.ASTM_A913Gr50, eMatTypeConcrete.FC4000_NormalWeight);
-                } 
-            }
-            else
-            {
-                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A36);
-                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A53GrB);
-                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A500GrB_Fy42);
-                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A500GrB_Fy46);
-                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A572Gr50);
-                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Steel, eMatTypeSteel.ASTM_A913Gr50);
-                ret = SapModel.PropMaterial.AddQuick(ref MatName, eMatType.Concrete, eMatTypeSteel.ASTM_A913Gr50, eMatTypeConcrete.FC4000_NormalWeight);
-            }
+            string addmaterial = string.Empty;
+            //US Steel
+            SapModel.PropMaterial.AddMaterial(ref addmaterial, eMatType.Steel, "United States", "ASTM A36", "Grade 36");
+            SapModel.PropMaterial.AddMaterial(ref addmaterial, eMatType.Steel, "United States", "ASTM A53", "Grade B");
+            SapModel.PropMaterial.AddMaterial(ref addmaterial, eMatType.Steel, "United States", "ASTM A500", "Grade B, Fy 42 (HSS Round)");
+            SapModel.PropMaterial.AddMaterial(ref addmaterial, eMatType.Steel, "United States", "ASTM A500", "Grade B, Fy 46 (HSS Rect.)");
+            SapModel.PropMaterial.AddMaterial(ref addmaterial, eMatType.Steel, "United States", "ASTM A572", "Grade 50");
+            SapModel.PropMaterial.AddMaterial(ref addmaterial, eMatType.Steel, "United States", "ASTM A913", "Grade 50");
+            SapModel.PropMaterial.AddMaterial(ref addmaterial, eMatType.Steel, "United States", "ASTM A992", "Grade 50");
+            
+            //US Concrete
+            SapModel.PropMaterial.AddMaterial(ref addmaterial, eMatType.Concrete, "United States", "Customary", "f'c 3000 psi");
+            SapModel.PropMaterial.AddMaterial(ref addmaterial, eMatType.Concrete, "United States", "Customary", "f'c 4000 psi");
+            SapModel.PropMaterial.AddMaterial(ref addmaterial, eMatType.Concrete, "United States", "Customary", "f'c 5000 psi");
+            SapModel.PropMaterial.AddMaterial(ref addmaterial, eMatType.Concrete, "United States", "Customary", "f'c 6000 psi");
+            
+            // TODO: more materials? or add materials on the go !
 
             return true;
         }
