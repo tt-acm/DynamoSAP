@@ -42,28 +42,28 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DSCoreNodes">
-      <HintPath>$(DYNAMO_API)\DSCoreNodes.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.2\DSCoreNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DynamoCore">
-      <HintPath>$(DYNAMO_API)\DynamoCore.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.2\DynamoCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DynamoServices">
-      <HintPath>$(DYNAMO_API)\DynamoServices.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.2\DynamoServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DynamoUnits">
-      <HintPath>$(DYNAMO_API)\DynamoUnits.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.2\DynamoUnits.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="ProtoCore">
-      <HintPath>$(DYNAMO_API)\ProtoCore.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.2\ProtoCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ProtoGeometry">
-      <HintPath>$(DYNAMO_API)\ProtoGeometry.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.2\ProtoGeometry.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SAP2000v18">

@@ -38,27 +38,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CoreNodeModels">
-      <HintPath>$(DYNAMO_API)\nodes\CoreNodeModels.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.2\nodes\CoreNodeModels.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DynamoCore, Version=1.1.0.2094, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(DYNAMO_API)\DynamoCore.dll</HintPath>
+    <Reference Include="DynamoCore">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.2\DynamoCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DynamoServices, Version=1.1.0.2094, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(DYNAMO_API)\DynamoServices.dll</HintPath>
+    <Reference Include="DynamoServices">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.2\DynamoServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DynamoUtilities, Version=1.1.0.2094, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(DYNAMO_API)\DynamoUtilities.dll</HintPath>
+    <Reference Include="DynamoUtilities">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.2\DynamoUtilities.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ProtoCore, Version=1.1.0.2094, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(DYNAMO_API)\ProtoCore.dll</HintPath>
+    <Reference Include="ProtoCore">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.2\ProtoCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SAP2000v18">
