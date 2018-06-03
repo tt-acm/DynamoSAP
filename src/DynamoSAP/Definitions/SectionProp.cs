@@ -12,7 +12,7 @@ using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
 
 //SAP
-using SAP2000v16;
+using SAP2000v20;
 using SAPConnection;
 
 namespace DynamoSAP.Definitions
