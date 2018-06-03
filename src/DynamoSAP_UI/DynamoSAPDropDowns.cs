@@ -9,7 +9,7 @@ using System.Linq;
 using System.Xml;
 
 //using CoreNodeModels;
-using SAP2000v16;
+using SAP2000v20;
 using Dynamo.Utilities;
 using Dynamo.Graph.Nodes;
 using ProtoCore.AST.AssociativeAST;
@@ -105,7 +105,7 @@ namespace DynamoSAP_UI
 
             //set up the collection
             var newItems = new List<DynamoDropDownItem>();
-            foreach (var j in Enum.GetValues(new eCType().GetType())) 
+            foreach (var j in Enum.GetValues(new eCNameType().GetType())) 
             {
                 newItems.Add(new DynamoDropDownItem(j.ToString(), j.ToString()));
             }

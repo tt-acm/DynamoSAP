@@ -9,7 +9,7 @@ using Autodesk.Revit.DB.Analysis;
 using System.Collections.Generic;
 
 using DynamoSAP;
-using SAP2000v16;
+using SAP2000v20;
 using System;
 
 namespace DynamoSAPTests
@@ -34,7 +34,7 @@ namespace DynamoSAPTests
         [Test, TestModel(@".\TestModel.rvt")]
         public void SpaceStructure()
         { 
-            // Launch SAP2000v16 and Open a blank model
+            // Launch SAP2000v20 and Open a blank model
             SapObject mySapObject = null;
             cSapModel mySapModel = null;
             SAPConnection.Initialize.InitializeSapModel(ref mySapObject, ref mySapModel, "kip_ft_F");
@@ -101,7 +101,7 @@ namespace DynamoSAPTests
         [Test, TestModel(@".\TestModel.rvt")]
         public void SpaceStructurewLoads()
         {
-            // Launch SAP2000v16 and Open a blank model
+            // Launch SAP2000v20 and Open a blank model
             SapObject mySapObject = null;
             cSapModel mySapModel = null;
             SAPConnection.Initialize.InitializeSapModel(ref mySapObject, ref mySapModel, "kip_ft_F");
@@ -182,7 +182,7 @@ namespace DynamoSAPTests
         [Test, TestModel(@".\TestModel.rvt")]
         public void ShellStructure()
         {
-            // Launch SAP2000v16 and Open a blank model
+            // Launch SAP2000v20 and Open a blank model
             SapObject mySapObject = null;
             cSapModel mySapModel = null;
             SAPConnection.Initialize.InitializeSapModel(ref mySapObject, ref mySapModel, "kip_ft_F");
@@ -242,11 +242,11 @@ namespace DynamoSAPTests
         [Test, TestModel(@".\TestModel.rvt")]
         public void ReadStructure_Frame()
         {
-            // Launch SAP2000v16 and Open a blank model
+            // Launch SAP2000v20 and Open a blank model
 
             string filePath = @"C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\2a_Dome.sdb";
             //Create SAP2000 Object
-            SapObject mySapObject = new SAP2000v16.SapObject();
+            SapObject mySapObject = new SAP2000v20.SapObject();
             //Start Application
             mySapObject.ApplicationStart();
             //Create SapModel object
@@ -306,10 +306,10 @@ namespace DynamoSAPTests
         [Test, TestModel(@".\TestModel.rvt")]
         public void ReadStructure_Shell()
         {
-            // Launch SAP2000v16 and Open a blank model
+            // Launch SAP2000v20 and Open a blank model
             string filePath = @"C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\2b_SimpleShellStructure.sdb";
             //Create SAP2000 Object
-            SapObject mySapObject = new SAP2000v16.SapObject();
+            SapObject mySapObject = new SAP2000v20.SapObject();
             //Start Application
             mySapObject.ApplicationStart();
             //Create SapModel object
@@ -369,10 +369,10 @@ namespace DynamoSAPTests
         [Test, TestModel(@".\TestModel.rvt")]
         public void RunAnalysis()
         {
-            // Launch SAP2000v16 and Open a blank model
+            // Launch SAP2000v20 and Open a blank model
             string filePath = @"C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\3a_RunAnalysis.sdb";
             //Create SAP2000 Object
-            SapObject mySapObject = new SAP2000v16.SapObject();
+            SapObject mySapObject = new SAP2000v20.SapObject();
             //Start Application
             mySapObject.ApplicationStart();
             //Create SapModel object
@@ -447,11 +447,11 @@ namespace DynamoSAPTests
         [Test, TestModel(@".\TestModel.rvt")]
         public void Edit_AddGroup()
         {
-            // Launch SAP2000v16 and Open a blank model
+            // Launch SAP2000v20 and Open a blank model
 
             string filePath = @"C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\2a_Dome.sdb";
             //Create SAP2000 Object
-            SapObject mySapObject = new SAP2000v16.SapObject();
+            SapObject mySapObject = new SAP2000v20.SapObject();
             //Start Application
             mySapObject.ApplicationStart();
             //Create SapModel object
@@ -489,11 +489,11 @@ namespace DynamoSAPTests
         [Test, TestModel(@".\TestModel.rvt")]
         public void Edit_AddLoadCase()
         {
-            // Launch SAP2000v16 and Open a blank model
+            // Launch SAP2000v20 and Open a blank model
 
             string filePath = @"C:\Users\eertugrul\Documents\GitHub\DynamoSAP\packages\DynamoSAP\extra\2a_Dome.sdb";
             //Create SAP2000 Object
-            SapObject mySapObject = new SAP2000v16.SapObject();
+            SapObject mySapObject = new SAP2000v20.SapObject();
             //Start Application
             mySapObject.ApplicationStart();
             //Create SapModel object

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using SAP2000v16;
+using SAP2000v20;
 // interop.COM services for SAP
 using System.Runtime.InteropServices;
 //DYNAMO
@@ -88,7 +88,7 @@ namespace SAPConnection
                 ret = mySapModel.Results.Setup.DeselectAllCasesAndCombosForOutput();
 
                 int ComboType = -1;
-                ret = mySapModel.RespCombo.GetType(patter_case_combo, ref ComboType); // 0 = Linear Additive 1 = Envelope 2 = Absolute Additive 3 = SRSS 4 = Range Additive
+                ret = mySapModel.RespCombo.GetTypeOAPI(patter_case_combo, ref ComboType); // 0 = Linear Additive 1 = Envelope 2 = Absolute Additive 3 = SRSS 4 = Range Additive
 
                 if (ret != 0)//if it is not a load combo
                 {
@@ -103,7 +103,7 @@ namespace SAPConnection
                 }
 
                 //get frame forces for frame objects      
-                ret = mySapModel.Results.FrameForce(frameid, eItemTypeElm.ObjectElm, ref NumberResults, ref Obj, ref ObjSta, ref Elm, ref ElmSta, ref LoadCase, ref StepType, StepNum, ref P, ref V2, ref V3, ref T, ref M2, ref M3);
+                ret = mySapModel.Results.FrameForce(frameid, eItemTypeElm.ObjectElm, ref NumberResults, ref Obj, ref ObjSta, ref Elm, ref ElmSta, ref LoadCase, ref StepType, ref StepNum, ref P, ref V2, ref V3, ref T, ref M2, ref M3);
 
 
                 int index = 0;

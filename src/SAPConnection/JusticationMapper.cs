@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using SAP2000v16;
+using SAP2000v20;
 // interop.COM services for SAP
 using System.Runtime.InteropServices;
 

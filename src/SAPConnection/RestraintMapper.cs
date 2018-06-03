@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using SAP2000v16;
+using SAP2000v20;
 // interop.COM services for SAP
 using System.Runtime.InteropServices;
 
@@ -23,7 +23,7 @@ namespace SAPConnection
         // Dynamo To SAP
         public static void Set(ref cSapModel Model, string Id, bool[] restaints)
         { 
-           long ret = Model.PointObj.SetRestraint(Id, restaints);
+           long ret = Model.PointObj.SetRestraint(Id, ref restaints);
         }
 
         // SAP to Dynamo
@@ -43,12 +43,13 @@ namespace SAPConnection
         public static void GetSupportedPts(ref cSapModel Model, ref List<string> PtIds)
         {
             Model.SelectObj.ClearSelection();
-            List<bool> dof = new List<bool>();
-            for (int i = 0; i < 6; i++)
-            {
-                dof.Add(true);
-            }
-            int ret = Model.SelectObj.SupportedPoints(dof.ToArray(), "GLOBAL", false, true, false, false, false, false, false); // Select the Points objects
+			//List<bool> dof = new List<bool>();
+			//for (int i = 0; i < 6; i++)
+			//{
+			//    dof.Add(true);
+			//}
+			bool[] dof = { true, true, true, true, true, true };
+			int ret = Model.SelectObj.SupportedPoints(ref dof, "GLOBAL", false, true, false, false, false, false, false); // Select the Points objects
 
             // Get selection
             int num = 0;
